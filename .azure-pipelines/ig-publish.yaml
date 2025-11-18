@@ -3,9 +3,10 @@ trigger: none
 resources:
   repositories:
     - repository: PublishTemplate
-      name: servicewell.fhir.landingzone
+      name: swts/servicewell.fhir.landingzone
       type: git
       ref: main
+      endpoint: cross-project-connection
 
 pool:
   name: 'Implementation Guide Build Pool'
