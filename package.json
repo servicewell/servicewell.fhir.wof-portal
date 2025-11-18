@@ -1,0 +1,23 @@
+{
+    "name": "servicewell.fhir.wof-portal",
+    "version": "0.1.0",
+    "type": "IG",
+    "canonical": "http://canonical.fhir.link/servicewell/wof-portal",
+    "url": "http://canonical.fhir.link/servicewell/wof-portal/ImplementationGuide/servicewell.fhir.wof-portal",
+    "title": "WOF Portal Implementation Guide",
+    "description": "Implementation Guide for WOF Portal made by Service Well.",
+    "fhirVersions": [ "4.0.1" ],
+    "dependencies": {},
+    "keywords": [
+        "wof",
+        "portal"
+    ],
+    "author": "Service Well AB",
+    "maintainers": [
+      {
+        "name": "Service Well",
+        "email": "support@servicewell.se" 
+      }
+    ],
+    "license": "CC0-1.0"
+  }
