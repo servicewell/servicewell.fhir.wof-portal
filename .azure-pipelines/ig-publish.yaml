@@ -18,6 +18,7 @@ jobs:
         persistCredentials: true
 
       - script: |
+          ls /azp/_work/1/s
           ORG=$(yq '.id' /azp/_work/1/s/sushi-config.yaml | cut -d'.' -f1)
           echo "##vso[task.setvariable variable=org]$ORG"
         displayName: Detect organization from sushi-config
