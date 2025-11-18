@@ -5,7 +5,7 @@ resources:
     - repository: PublishTemplate
       name: swts/servicewell.fhir.landingzone
       type: git
-      ref: main
+      ref: refs/heads/task/el/build-agent
       endpoint: cross-project-connection
 
 pool:
