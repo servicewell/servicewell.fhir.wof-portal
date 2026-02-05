@@ -1,4 +1,5 @@
 Profile: BillingOrganizationPortal
+Parent: Parameters
 Id: billing-organization-portal
 Title: "BillingOrganizationModel"
 Description: """
@@ -27,4 +28,6 @@ Description: """
 </ul>
 
 <p><b>Important:</b> BillingOrganization represents financial responsibility only. It does <b>not</b> describe where care is performed.</p>
+
+<p><b>Current name in Backoffice:</b> OpusEconomy</p>
 """

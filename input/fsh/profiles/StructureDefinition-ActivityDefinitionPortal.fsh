@@ -32,4 +32,7 @@ Description: """
 </ul>
 
 <p>Those context-specific details are provided through <b>Offer</b> and related context resources.</p>
+
+
+<p><b>Current name in Backoffice:</b> Service</p>
 """

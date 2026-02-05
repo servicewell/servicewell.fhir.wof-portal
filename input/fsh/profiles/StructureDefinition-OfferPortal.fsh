@@ -31,3 +31,53 @@ Description: """
 
 <p>OfferPortal is a context/read model intended to support fast, “chatty” consumption. It is not a replacement for scheduling or billing workflows.</p>
 """
+
+// -------------------- SLICE: parameter by name --------------------
+* parameter ^slicing.discriminator[0].type = #value
+* parameter ^slicing.discriminator[0].path = "name"
+* parameter ^slicing.rules = #open
+
+* parameter contains offering 1..1
+
+* parameter[offering].name = "offering" (exactly)
+
+// -------------------- SLICE: offering.part by name --------------------
+* parameter[offering].part ^slicing.discriminator[0].type = #value
+* parameter[offering].part ^slicing.discriminator[0].path = "name"
+* parameter[offering].part ^slicing.rules = #open
+
+* parameter[offering].part contains
+    activityDefinition 1..1 and
+    healthcareService 1..1 and
+    practitionerRole 1..1 and
+    duration 0..1 and
+    price 0..1 and
+    bookingUrl 0..1
+
+// ---- activityDefinition ----
+* parameter[offering].part[activityDefinition].name = "activityDefinition" (exactly)
+* parameter[offering].part[activityDefinition].value[x] only Reference
+// If you want to constrain to the portal profile:
+* parameter[offering].part[activityDefinition].valueReference ^type.profile = Canonical(ActivityDefinitionPortal)
+
+// ---- healthcareService ----
+* parameter[offering].part[healthcareService].name = "healthcareService" (exactly)
+* parameter[offering].part[healthcareService].value[x] only Reference
+* parameter[offering].part[healthcareService].valueReference ^type.profile = Canonical(HealthcareServicePortal)
+
+// ---- practitionerRole ----
+* parameter[offering].part[practitionerRole].name = "practitionerRole" (exactly)
+* parameter[offering].part[practitionerRole].value[x] only Reference
+* parameter[offering].part[practitionerRole].valueReference ^type.profile = Canonical(PractitionerRolePortal)
+
+// ---- duration (free-text) ----
+* parameter[offering].part[duration].name = "duration" (exactly)
+* parameter[offering].part[duration].value[x] only string
+
+// ---- price (free-text) ----
+* parameter[offering].part[price].name = "price" (exactly)
+* parameter[offering].part[price].value[x] only string
+
+// ---- bookingUrl ----
+* parameter[offering].part[bookingUrl].name = "bookingUrl" (exactly)
+* parameter[offering].part[bookingUrl].value[x] only url

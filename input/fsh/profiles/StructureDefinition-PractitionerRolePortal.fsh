@@ -1,4 +1,5 @@
 Profile: PractitionerRolePortal
+Parent: PractitionerRole
 Id: practitioner-role-portal
 Title: "PractitionerRolePortal  "
 Description: """
@@ -29,4 +30,6 @@ Description: """
 </ul>
 
 <p><b>Important:</b> PractitionerRolePortal is intentionally used to separate the person from the context in which services are delivered and billed.</p>
+
+<p><b>Current name in Backoffice:</b> Practitioner</p>
 """
