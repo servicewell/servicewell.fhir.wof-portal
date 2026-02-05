@@ -15,4 +15,8 @@ Description: """
 </ul>
 
 <p><b>Important:</b> HealthcareService is an operational concept. Financial and invoicing responsibility is modeled separately.</p>
+
+
+<p><b>Current name in Backoffice:</b> Clinic</p>
+
 """
