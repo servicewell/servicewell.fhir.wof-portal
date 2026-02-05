@@ -41,7 +41,7 @@
             }
           },
           "200": {
-            "description": "the capbility statement",
+            "description": "the capability statement",
             "content": {
               "application/fhir+json": {
                 "schema": {
