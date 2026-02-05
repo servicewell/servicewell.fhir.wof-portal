@@ -679,7 +679,7 @@
       "format": {
         "name": "_format",
         "in": "query",
-        "description": "Specify alternative response formats by their MIME-types (when a client is unable acccess accept: header)",
+        "description": "Specify alternative response formats by their MIME-types (when a client is unable access accept: header)",
         "allowEmptyValue": true,
         "style": "form",
         "schema": {

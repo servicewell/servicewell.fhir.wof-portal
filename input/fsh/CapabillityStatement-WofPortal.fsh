@@ -126,7 +126,7 @@ It does not expand or modify the formal FHIR conformance rules.</p>
 * rest.resource[=].interaction[+].code = #search-type
 * rest.resource[=].searchParam[+].name = "identifier"
 * rest.resource[=].searchParam[=].type = #token
-* rest.resource[=].searchParam[=].documentation = "Use system fro,m se base profile Http://"
+* rest.resource[=].searchParam[=].documentation = "Use the identifier system defined in the applicable base profile."
 
 
 * rest.resource[+].type = #Organization

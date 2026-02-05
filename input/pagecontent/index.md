@@ -14,7 +14,7 @@ It provides a single, consistent integration point between internal clinical sys
 
 Large healthcare groups and chains typically face the same challenges:
 
-- Differnt PMS / EHR systems in parallel
+- Different PMS / EHR systems in parallel
 - Multiple PMS / EHR instances systems in parallel
 - Inconsistent APIs and data models
 - High integration costs per system
