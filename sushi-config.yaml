@@ -78,6 +78,7 @@ dependencies:
 menu:
   Home: index.html
   Artifacts: artifacts.html
+  OpenAPI: /openapi/swagger.html?spec=../output/WOFPortalCapabilityStatement.openapi.json
 
 # ╭───────────────────────────Less Common Implementation Guide Properties──────────────────────────╮
 # │  Uncomment the properties below to configure additional properties on the ImplementationGuide  │

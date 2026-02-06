@@ -1,33 +1,30 @@
 Profile: BillingOrganizationPortal
 Parent: Parameters
 Id: billing-organization-portal
-Title: "BillingOrganizationModel"
-Description: """
-<p><b>BillingOrganization</b> represents the entity that is financially responsible for healthcare services.</p>
+Title: "BillingOrganizationPortal"
+Description: "BillingOrganization represents the entity that is financially responsible for healthcare services."
+* ^purpose = """
+**BillingOrganization** represents the entity that is financially responsible for healthcare services.
 
-<p>It answers the question: <i>“Who owns invoicing, customer accounts, and statutory reporting for a performed service?”</i></p>
+It answers the question: *“Who owns invoicing, customer accounts, and statutory reporting for a performed service?”*
 
-<ul>
-  <li>Owns the invoice number series used for billing.</li>
-  <li>Owns the customer accounts (accounts receivable).</li>
-  <li>Is responsible for statutory and reimbursement reporting to external authorities.</li>
-  <li>Receives payment for performed services.</li>
-</ul>
+- Owns the invoice number series used for billing.
+- Owns the customer accounts (accounts receivable).
+- Is responsible for statutory and reimbursement reporting to external authorities.
+- Receives payment for performed services.
 
-<p>A BillingOrganization is <b>independent of service location</b>:</p>
+A BillingOrganization is **independent of service location**:
 
-<ul>
-  <li>A BillingOrganization may offer its services at <b>multiple HealthcareServices</b>.</li>
-  <li>A HealthcareService may be associated with <b>multiple BillingOrganizations</b>.</li>
-</ul>
+- A BillingOrganization may offer its services at **multiple HealthcareServices**.
+- A HealthcareService may be associated with **multiple BillingOrganizations**.
 
-<p>This supports scenarios where:</p>
-<ul>
-  <li>Multiple practitioners with separate financial responsibility work at the same service location.</li>
-  <li>A single practitioner or billing entity provides services at several locations.</li>
-</ul>
+This supports scenarios where:
 
-<p><b>Important:</b> BillingOrganization represents financial responsibility only. It does <b>not</b> describe where care is performed.</p>
+- Multiple practitioners with separate financial responsibility work at the same service location.
+- A single practitioner or billing entity provides services at several locations.
 
-<p><b>Current name in Backoffice:</b> OpusEconomy</p>
+**Important:** BillingOrganization represents financial responsibility only. It does **not** describe where care is performed.
+
+**Current name in Backoffice:** OpusEconomy
+
 """

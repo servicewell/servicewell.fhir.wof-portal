@@ -3,36 +3,30 @@ Parent: ActivityDefinition
 Id: activity-definition-portal
 Title: "ActivityDefinitionPortal"
 Description: """
-<p><b>ActivityDefinition</b> represents what can be offered and booked as a service.</p>
+**ActivityDefinition** represents what can be offered and booked as a service.
 
-<p>It answers the question: <i>“What service is the patient booking?”</i></p>
+It answers the question: *“What service is the patient booking?”*
 
-<ul>
-  <li>Defines the <b>type of service</b> (e.g., examination, consultation, treatment).</li>
-  <li>Contains a <b>booking activity code</b> that uniquely identifies the service concept.</li>
-  <li>Provides stable metadata such as title and description for presentation and search.</li>
-</ul>
+- Defines the **type of service** (e.g., examination, consultation, treatment).
+- Contains a **booking activity code** that uniquely identifies the service concept.
+- Provides stable metadata such as title and description for presentation and search.
 
-<p><b>Booking and interoperability principle:</b></p>
+**Booking and interoperability principle:**
 
-<ul>
-  <li>Booking is performed using the <b>activity code</b>, not the resource id.</li>
-  <li>This follows the approach used in IHE Scheduling profiles.</li>
-  <li>The code represents a <b>shared service concept</b> that can be reused across installations and systems.</li>
-</ul>
+- Booking is performed using the **activity code**, not the resource id.
+- This follows the approach used in IHE Scheduling profiles.
+- The code represents a **shared service concept** that can be reused across installations and systems.
 
-<p><b>Important:</b> The resource <code>id</code> is a technical identifier local to a FHIR server. It MUST NOT be used as a booking key.</p>
+**Important:** The resource `id` is a technical identifier local to a FHIR server. It MUST NOT be used as a booking key.
 
-<p>ActivityDefinitionPortal describes the service concept only. It does <b>not</b> define:</p>
-<ul>
-  <li>which locations offer the service</li>
-  <li>which practitioners perform it</li>
-  <li>context-specific price or duration</li>
-  <li>availability, schedules, or bookable time slots</li>
-</ul>
+ActivityDefinitionPortal describes the service concept only. It does **not** define:
 
-<p>Those context-specific details are provided through <b>Offer</b> and related context resources.</p>
+- which locations offer the service
+- which practitioners perform it
+- context-specific price or duration
+- availability, schedules, or bookable time slots
 
+Those context-specific details are provided through **Offer** and related context resources.
 
-<p><b>Current name in Backoffice:</b> Service</p>
+**Current name in Backoffice:** Service
 """

@@ -56,19 +56,15 @@ Description: """
 
 // ---- activityDefinition ----
 * parameter[offering].part[activityDefinition].name = "activityDefinition" (exactly)
-* parameter[offering].part[activityDefinition].value[x] only Reference
-// If you want to constrain to the portal profile:
-* parameter[offering].part[activityDefinition].valueReference ^type.profile = Canonical(ActivityDefinitionPortal)
+* parameter[offering].part[activityDefinition].value[x] only Reference(ActivityDefinitionPortal)
 
 // ---- healthcareService ----
 * parameter[offering].part[healthcareService].name = "healthcareService" (exactly)
-* parameter[offering].part[healthcareService].value[x] only Reference
-* parameter[offering].part[healthcareService].valueReference ^type.profile = Canonical(HealthcareServicePortal)
+* parameter[offering].part[healthcareService].value[x] only Reference(HealthcareServicePortal)
 
 // ---- practitionerRole ----
 * parameter[offering].part[practitionerRole].name = "practitionerRole" (exactly)
-* parameter[offering].part[practitionerRole].value[x] only Reference
-* parameter[offering].part[practitionerRole].valueReference ^type.profile = Canonical(PractitionerRolePortal)
+* parameter[offering].part[practitionerRole].value[x] only Reference(PractitionerRolePortal)
 
 // ---- duration (free-text) ----
 * parameter[offering].part[duration].name = "duration" (exactly)
