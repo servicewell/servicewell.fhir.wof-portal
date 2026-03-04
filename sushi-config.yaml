@@ -55,20 +55,6 @@ publisher:
 pages:
   index.md:
     title: Home
-  overview.md:
-    title: Overview
-  getting-started.md:
-    title: Getting Started
-  authentication-and-security.md:
-    title: Authentication & Security
-  api-reference.md:
-    title: API Reference
-  cross-cutting-concerns.md:
-    title: Cross-cutting Concerns
-  operations-and-trust.md:
-    title: Operations & Trust
-  use-cases.md:
-    title: Use Cases
   itb.md:
     title: ITB
   infowell.md:
@@ -77,6 +63,20 @@ pages:
     title: Kundnöjdhet
   varva-en-van.md:
     title: Värva en vän
+  #overview.md:
+  #  title: Overview
+  #getting-started.md:
+  #  title: Getting Started
+  #authentication-and-security.md:
+  #  title: Authentication & Security
+  #api-reference.md:
+  #  title: API Reference
+  #cross-cutting-concerns.md:
+  #  title: Cross-cutting Concerns
+  #operations-and-trust.md:
+  #  title: Operations & Trust
+  #use-cases.md:
+  #  title: Use Cases
 #
 # The parameters property represents IG.definition.parameter. Rather
 # than a list of code/value pairs (as in the ImplementationGuide
@@ -101,19 +101,19 @@ pages:
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
   Home: index.html
-  Overview: overview.html
   Products:
     ITB: itb.html
     Infowell: infowell.html
     Kundnöjdhet: kundnojdhet.html
     Värva en vän: varva-en-van.html
-  Getting Started: getting-started.html
-  Auth & Security: authentication-and-security.html
-  API Reference: api-reference.html
-  Cross-cutting: cross-cutting-concerns.html
-  Operations: operations-and-trust.html
-  Use Cases: use-cases.html
   Artifacts: artifacts.html
+  #Overview: overview.html
+  #Getting Started: getting-started.html
+  #Auth & Security: authentication-and-security.html
+  #API Reference: api-reference.html
+  #Cross-cutting: cross-cutting-concerns.html
+  #Operations: operations-and-trust.html
+  #Use Cases: use-cases.html
 
 # ╭───────────────────────────Less Common Implementation Guide Properties──────────────────────────╮
 # │  Uncomment the properties below to configure additional properties on the ImplementationGuide  │
