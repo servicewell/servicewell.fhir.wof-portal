@@ -134,7 +134,7 @@ It does not expand or modify the formal FHIR conformance rules.
 
 * rest.resource[+].type = #Patient
 * rest.resource[=].supportedProfile[+] = "http://hl7.se/fhir/ig/base/StructureDefinition/SEBasePatient"
-* rest.resource[=].documentation = ""
+* rest.resource[=].documentation = "Represents patients within the WOF Portal, conforming to the Swedish base patient profile."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
 * rest.resource[=].searchParam[+].name = "identifier"
