@@ -18,8 +18,7 @@ releaseLabel: ci-build [WIP]
 publisher:
   name: Service Well AB
   url: https://servicewell.se
-  # email: test@example.org
-
+  email: info@servicewell.se
 # The dependencies property corresponds to IG.dependsOn. The key is the
 # package id and the value is the version (or dev/current). For advanced
 # use cases, the value can be an object with keys for id, uri, and version.
