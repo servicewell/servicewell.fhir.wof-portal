@@ -55,13 +55,11 @@ ___
 
 		<p><strong>7. My bookings</strong><br/>In the patient portal under My bookings, the patient sees an overview of upcoming (and often previous) appointments. The patient can also manage bookings (e.g., reschedule/cancel) when allowed under the clinic’s rules.</p>
 	</div>
-  <div style="flex:0 0 auto; min-width:0;">
-    <a href="#itb-journey-fullscreen" title="Click to enlarge" style="display:inline-block;">
-      <div style="--s:0.8; width: calc(551px * var(--s)); height: calc(862px * var(--s)); overflow:hidden; cursor:zoom-in; line-height:0;">
-        <div style="transform: scale(var(--s)); transform-origin: top left;">
+   <div style="flex:1 1 0; min-width:0;">
+     <a href="#itb-journey-fullscreen" title="Click to enlarge" style="display:block"> 
+      <div class="itb-journey-thumb" style="height:612px; padding-left:40px;">
 				{% include itbpatientjourney.svg %}
 			</div>
-            </div>
 		</a>
 	</div>
 </div>
@@ -69,6 +67,17 @@ ___
 <!-- Fullscreen overlay (pure CSS lightbox) -->
 <!-- får ligga här sålänge tills vi uppat templatet -->
 <style>
+.itb-journey-thumb {
+  cursor: zoom-in;
+  line-height: 0;
+}
+.itb-journey-thumb svg{
+  display:block;
+  width:auto !important;
+  height:100%;     
+  max-width:100%;
+  max-height:100%;
+}
 #itb-journey-fullscreen {
 	display:none;
 	position:fixed; top:0; left:0; width:100vw; height:100vh;
@@ -86,6 +95,12 @@ ___
 	background:#fff;
 	padding:1rem;
 	border-radius:6px;
+}
+#itb-journey-fullscreen .lightbox-content svg {
+	width:100%;
+	height:auto;
+	max-width:1200px;
+	display:block;
 }
 </style>
 <div id="itb-journey-fullscreen" onclick="window.location.hash='';">
