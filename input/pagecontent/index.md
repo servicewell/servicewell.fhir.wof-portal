@@ -33,6 +33,6 @@ This guide describes the WOF Portal API — its capabilities, authentication mod
 
 
 ### Technical framework & design
-Wof Portal is built on FHIR R4 (v4.0.1) and tailored to our needs through constraints and extensions. It therefore uses the standard FHIR RESTful API protocol for integration and data exchange.
+Wof Portal is built on FHIR R4 (v4.0.1) and tailored to dental care needs, informed by 15+ years of dental domain experience and implemented through FHIR constraints and extensions. It uses the standard FHIR RESTful API for integration and data exchange.
 
 ### Deployment & SLA
