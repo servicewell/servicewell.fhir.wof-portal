@@ -6,13 +6,13 @@
 id: servicewell.fhir.wof-portal
 canonical: https://canonical.fhir.link/servicewell/wof-portal
 name: Wof Portal IG
-# title: Example Title
-# description: Example Implementation Guide for getting started with SUSHI
+title: Wof Portal
+description: Service Well's Wof portal - A Practical Blueprint for Upgrading Dental Care
 status: draft # draft | active | retired | unknown
 version: 0.1.0
 fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 copyrightYear: 2025+
-releaseLabel: ci-build
+releaseLabel: ci-build [WIP]
 # license: CC0-1.0 # https://www.hl7.org/fhir/valueset-spdx-license.html
 # jurisdiction: urn:iso:std:iso:3166#US "United States of America" # https://www.hl7.org/fhir/valueset-jurisdiction.html
 publisher:
@@ -52,6 +52,31 @@ publisher:
 #     simpleExamples.xml:
 #     complexExamples.xml:
 #
+pages:
+  index.md:
+    title: Home
+  overview.md:
+    title: Overview
+  getting-started.md:
+    title: Getting Started
+  authentication-and-security.md:
+    title: Authentication & Security
+  api-reference.md:
+    title: API Reference
+  cross-cutting-concerns.md:
+    title: Cross-cutting Concerns
+  operations-and-trust.md:
+    title: Operations & Trust
+  use-cases.md:
+    title: Use Cases
+  itb.md:
+    title: ITB
+  infowell.md:
+    title: Infowell
+  kundnojdhet.md:
+    title: Kundnöjdhet
+  varva-en-van.md:
+    title: Värva en vän
 #
 # The parameters property represents IG.definition.parameter. Rather
 # than a list of code/value pairs (as in the ImplementationGuide
@@ -76,6 +101,18 @@ publisher:
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
   Home: index.html
+  Overview: overview.html
+  Products:
+    ITB: itb.html
+    Infowell: infowell.html
+    Kundnöjdhet: kundnojdhet.html
+    Värva en vän: varva-en-van.html
+  Getting Started: getting-started.html
+  Auth & Security: authentication-and-security.html
+  API Reference: api-reference.html
+  Cross-cutting: cross-cutting-concerns.html
+  Operations: operations-and-trust.html
+  Use Cases: use-cases.html
   Artifacts: artifacts.html
 
 # ╭───────────────────────────Less Common Implementation Guide Properties──────────────────────────╮

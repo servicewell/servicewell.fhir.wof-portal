@@ -1,0 +1,36 @@
+trigger:
+  branches:
+    include:
+      - development
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+resources:
+  repositories:
+    - repository: PublishTemplate
+      name: swts/servicewell.fhir.landingzone
+      type: git
+      ref: refs/heads/main
+      endpoint: cross-project-connection
+
+
+variables:
+  - group: 'FHIR IG Secrets'
+  - name: GH_REPO_URL
+    value: 'github.com/servicewell/$(packageId).git'
+  - name: GH_BRANCH
+    value: 'main'
+
+steps:
+  - checkout: self
+    persistCredentials: true
+    
+  - script: |
+      set -euo pipefail
+      PACKAGE_ID=$(yq e -r '.id' "$(Build.SourcesDirectory)/sushi-config.yaml")
+      echo "##vso[task.setvariable variable=packageId]$PACKAGE_ID"
+      echo "Detected packageId=$PACKAGE_ID"
+    displayName: Detect packageId from sushi-config
+
+  - template: ".azure-pipelines/ig-templates/github-mirror-template.yaml@PublishTemplate"
