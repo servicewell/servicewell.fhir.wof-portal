@@ -1,7 +1,7 @@
 Profile: PractitionerRolePortal
 Parent: PractitionerRole
 Id: practitioner-role-portal
-Title: "PractitionerRolePortal  "
+Title: "PractitionerRolePortal"
 Description: """
 **PractitionerRolePortal** represents a practitioner acting in a specific operational and financial context.
 
