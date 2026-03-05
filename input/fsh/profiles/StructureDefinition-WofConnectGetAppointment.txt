@@ -1,5 +1,5 @@
 Profile: WofConnectGetAppointment
-Parent: ihe-sched-appt
+Parent: Appointment
 Id: wof-connect-appointment
 Title: "WOF Connect GetAppointment"
 Description: "GetAppointment resource as exposed by WOF Connect integrations for search and display purposes."
