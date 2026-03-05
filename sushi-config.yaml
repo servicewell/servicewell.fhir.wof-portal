@@ -26,6 +26,7 @@ publisher:
 #
 dependencies:
   ihe.iti.scheduling: 1.0.0
+  servicewell.fhir.wof-connect: current
 #   hl7.fhir.us.core: 3.1.0
 #   hl7.fhir.us.mcode:
 #     id: mcode
@@ -52,7 +53,6 @@ dependencies:
 #     title: Examples Overview
 #     simpleExamples.xml:
 #     complexExamples.xml:
-#
 #
 # The parameters property represents IG.definition.parameter. Rather
 # than a list of code/value pairs (as in the ImplementationGuide
