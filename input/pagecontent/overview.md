@@ -1,48 +1,104 @@
-# Overview
+### What is Service Well Portal?
 
-This page introduces the WOF Portal API, explains its purpose, and helps you decide whether it fits your integration needs.
+**Service Well Portal** is a unified API designed for healthcare organizations operating with **multiple Patient Management Systems (PMS / EHRs)**.
 
-### Why use this API
+It provides a single, consistent integration point between internal clinical systems and **consumer-facing digital services**, without requiring those services to know which journal system is used behind the scenes.
 
-The WOF Portal API provides a standardised, FHIR-compliant interface for interacting with the WOF Portal platform. It enables systems to exchange data in a well-defined, interoperable way — reducing custom point-to-point integrations and lowering long-term maintenance costs.
+👉 One API. Many systems. Many Instances. One consistent experience.
 
-Key reasons to adopt the API:
+---
 
-* **Standardisation** – Built on HL7 FHIR R4 ensuring broad ecosystem compatibility.
-* **Automation** – Replace manual workflows with reliable, programmatic data exchange.
-* **Future-proof** – A versioned, specification-driven contract that evolves predictably.
+### The Problem We Solve
 
-### Target audience
+Large healthcare groups and chains typically face the same challenges:
 
-This implementation guide is intended for:
+- Differnt PMS / EHR systems in parallel
+- Multiple PMS / EHR instances systems in parallel
+- Inconsistent APIs and data models
+- High integration costs per system
+- Long lead times for new digital services
+- Fragmented patient and customer experiences
 
-* **Integration developers** building systems that consume or produce data through the WOF Portal.
-* **Solution architects** evaluating the API's fit within a larger system landscape.
-* **Technical project managers** planning integration work and estimating effort.
+Each new web service, booking client, or partner integration often becomes a **custom project per journal system**.
 
-### Key capabilities
+---
 
-| Capability | Description |
-|---|---|
-| FHIR R4 resources | Read and write FHIR resources exposed by the portal |
-| Search & filtering | Query resources with standard FHIR search parameters |
-| Authentication | OAuth 2.0 / OpenID Connect token-based access |
-| Audit & traceability | All operations are logged and traceable |
+### The Solution: A Common API Layer
 
-### Value proposition
+Service Well Portal provides a **shared API layer** that:
 
-By integrating with the WOF Portal API you benefit from:
+- Abstracts differences between journal systems
+- Centralizes mapping, routing, and business rules
+- Exposes a stable contract to external consumers
+- Scales to new PMS systems without breaking existing integrations
 
-1. **Reduced development time** — well-documented contracts and standard tooling.
-2. **Improved data quality** — server-side validation against published profiles.
-3. **Operational transparency** — built-in monitoring, SLA targets, and incident processes.
-4. **Security by design** — scoped tokens, short lifetimes, and best-practice guidance.
+External consumers integrate **once**, not once per system.
 
-### Quick links
+---
 
-* [Getting Started](getting-started.html) — Base URL, first API call, required headers.
-* [Authentication & Security](authentication-and-security.html) — Token flow and scopes.
-* [API Reference](api-reference.html) — Full resource and parameter documentation.
-* [Cross-cutting Concerns](cross-cutting-concerns.html) — Error handling, pagination, rate limits.
-* [Operations & Trust](operations-and-trust.html) — SLA, monitoring, incident handling.
-* [Use Cases](use-cases.html) — Worked end-to-end examples.
+### Typical API Consumers
+
+Service Well Portal is built for consumer-facing and business-critical use cases such as:
+
+- **Patient forwarding and patient flow services**
+- **Web agencies and digital partners**
+- **Online booking clients**
+- **Mobile applications**
+- **Contact center and call center systems**
+- **Partner and ecosystem services**
+
+All consumers interact with the **same API**, regardless of provider, clinic, or underlying PMS.
+
+---
+
+### Business Value
+
+With Service Well Portal, organizations gain:
+
+- 🚀 Faster time-to-market for digital services  
+- 🔁 Reusable integrations across the entire organization  
+- 🔌 Reduced vendor lock-in  
+- 📉 Lower integration and maintenance costs  
+- 🎯 A consistent patient and customer experience  
+
+---
+
+### Architecture at a Glance
+
+Service Well Portal acts as:
+
+- A **canonical API layer**
+- A **stable integration point** for external consumers
+- A **protective layer** shielding consumers from PMS changes
+- A foundation for future consolidation and modernization
+
+PMS systems can be added, replaced, or coexist — without impacting consumers.
+
+---
+
+### Standards-Based, Business-Driven
+
+While Service Well Portal is built on open healthcare standards,  
+**consumers do not need to understand those standards** to use the API.
+
+The focus is on:
+- Clear contracts
+- Predictable behavior
+- Long-term stability
+- Business-driven integration
+
+---
+
+### Built for Growth
+
+Service Well Portal is designed to support:
+
+- Multi-brand healthcare organizations
+- Rapid expansion and acquisitions
+- New digital channels and partners
+- Future regulatory and interoperability requirements
+
+It enables healthcare organizations to innovate at the edge —  
+without rewriting integrations at the core.
+
+---
