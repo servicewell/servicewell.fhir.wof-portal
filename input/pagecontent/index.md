@@ -1,16 +1,34 @@
-# Service Well Portal – The Common Unified API for Healthcare Organizations
+---
+title: Wof Portal
+--- 
 
-## What is Service Well Portal?
+<small> Welcome to the **WOF Portal** FHIR Implementation Guide published by [Service Well AB](https://servicewell.se). </small>
 
-**Service Well Portal** is a unified API designed for healthcare organizations operating with **multiple Patient Management Systems (PMS / EHRs)**.
+Most dental care chains grow through acquisitions — but end up stuck with different patient record systems, manual reporting, and a fragmented patient journey.
 
-It provides a single, consistent integration point between internal clinical systems and **consumer-facing digital services**, without requiring those services to know which journal system is used behind the scenes.
+Service Well is the shared foundation that turns a group of clinics into a true chain. We create a common platform for booking, follow-up, customer satisfaction, and growth — regardless of which patient record systems the clinics use.
+
+That means shared KPIs, a consistent patient journey, and rapid integration of new clinics, without system replacements and without loss of production.
+
+With Service Well, you can grow faster — and manage the business as one cohesive operation.
+
+---
+
+This guide describes the WOF Portal API — its capabilities, authentication model, data schemas, and operational considerations — so that integrators and developers can build reliable, secure integrations.
+
+--- 
+
+###  What is Service Well Portal?
+
+**Service Well Portal** is a unified API designed for healthcare organizations operating with **multiple Patient Management Systems (PMS / EHRs).**
+
+It provides a single, consistent integration point between internal clinical systems and **consumer-facing digital services,** without requiring those services to know which journal system is used behind the scenes.
 
 👉 One API. Many systems. Many Instances. One consistent experience.
 
 ---
 
-## The Problem We Solve
+<span style="font-size:1.4em;font-weight;">The Problem We Solve</span>
 
 Large healthcare groups and chains typically face the same challenges:
 
@@ -20,12 +38,11 @@ Large healthcare groups and chains typically face the same challenges:
 - High integration costs per system
 - Long lead times for new digital services
 - Fragmented patient and customer experiences
-
-Each new web service, booking client, or partner integration often becomes a **custom project per journal system**.
+Each new web service, booking client, or partner integration often becomes a custom project per journal system.
 
 ---
 
-## The Solution: A Common API Layer
+<span style="font-size:1.4em;font-weight;">The Solution: A Common API Layer</span>
 
 Service Well Portal provides a **shared API layer** that:
 
@@ -38,80 +55,33 @@ External consumers integrate **once**, not once per system.
 
 ---
 
-## Typical API Consumers
-
-Service Well Portal is built for consumer-facing and business-critical use cases such as:
-
-- **Patient forwarding and patient flow services**
-- **Web agencies and digital partners**
-- **Online booking clients**
-- **Mobile applications**
-- **Contact center and call center systems**
-- **Partner and ecosystem services**
-
-All consumers interact with the **same API**, regardless of provider, clinic, or underlying PMS.
-
----
-
-## Business Value
-
+### Our value proposition
 With Service Well Portal, organizations gain:
 
-- 🚀 Faster time-to-market for digital services  
-- 🔁 Reusable integrations across the entire organization  
-- 🔌 Reduced vendor lock-in  
-- 📉 Lower integration and maintenance costs  
-- 🎯 A consistent patient and customer experience  
+- 🚀 Faster time-to-market for digital services
+- 🔁 Reusable integrations across the entire organization
+- 🔌 Reduced vendor lock-in
+- 📉 Lower integration and maintenance costs
+- 🎯 A consistent patient and customer experience
 
 ---
 
-## Architecture at a Glance
+<span style="font-size:1.3em;">[Read more](./overview.html)</span> or <span style="font-size:1.3em;">👉[get started right away!]()</span>
 
-Service Well Portal acts as:
+### Our products:
+* **[WofPortal ITB](itb.html)** -  is the web/online booking solution ("Internet appointment booking") in the WofPortal ecosystem.
+  > <small> It lets patients book (and often also reschedule or cancel) appointments via mobile or computer. The bookings are synced with the electronic health record (EHR) system so that clinicians always see the correct appointments. </small>
 
-- A **canonical API layer**
-- A **stable integration point** for external consumers
-- A **protective layer** shielding consumers from PMS changes
-- A foundation for future consolidation and modernization
+* **[Infowell](infowell.html)** -  short description
+  > <small> long description </small>
 
-PMS systems can be added, replaced, or coexist — without impacting consumers.
+* **[Kundnöjdhet](kundnojdhet.html)** -  short description.
+  > <small> long description </small>
 
----
+* **[Värva en vän](varva-en-van.html)** -  short description
+  > <small> long description </small>
 
-## Standards-Based, Business-Driven
 
-While Service Well Portal is built on open healthcare standards,  
-**consumers do not need to understand those standards** to use the API.
+### Technical framework & design
+Wof Portal is built on FHIR R4 (v4.0.1) and tailored to dental care needs, informed by 15+ years of dental domain experience and implemented through FHIR constraints and extensions. It uses the standard FHIR RESTful API for integration and data exchange.
 
-The focus is on:
-- Clear contracts
-- Predictable behavior
-- Long-term stability
-- Business-driven integration
-
----
-
-## Built for Growth
-
-Service Well Portal is designed to support:
-
-- Multi-brand healthcare organizations
-- Rapid expansion and acquisitions
-- New digital channels and partners
-- Future regulatory and interoperability requirements
-
-It enables healthcare organizations to innovate at the edge —  
-without rewriting integrations at the core.
-
----
-
-## Get Started
-
-This Implementation Guide describes:
-
-- The API contract exposed by Service Well Portal
-- Available resources and operations
-- Integration patterns and examples
-- Versioning and compatibility rules
-
-Use this guide to integrate once — and scale across many systems.
