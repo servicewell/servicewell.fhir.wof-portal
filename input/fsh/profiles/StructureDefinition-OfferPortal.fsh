@@ -29,7 +29,9 @@ It answers the question: _“Which service can be booked, by whom, and where —
     practitionerRole 1..1 and
     duration 0..1 and
     price 0..1 and
-    bookingUrl 0..1
+    bookingUrl 0..1 and
+    isOnline 1..1 and
+    offlineReason 1..1
 
 // ---- activityDefinition ----
 * parameter[offering].part[activityDefinition].name = "activityDefinition" (exactly)
@@ -54,3 +56,11 @@ It answers the question: _“Which service can be booked, by whom, and where —
 // ---- bookingUrl ----
 * parameter[offering].part[bookingUrl].name = "bookingUrl" (exactly)
 * parameter[offering].part[bookingUrl].value[x] only url
+
+//------ endpoint status -----
+* parameter[offering].part[isOnline].name = "isOnline" (exactly)
+* parameter[offering].part[isOnline].value[x] only boolean
+
+//------ offline status reason -----
+* parameter[offering].part[offlineReason].name = "offlineReason" (exactly)
+* parameter[offering].part[offlineReason].value[x] only string
