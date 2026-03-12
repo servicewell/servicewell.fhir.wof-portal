@@ -23,7 +23,9 @@ publisher:
 # package id and the value is the version (or dev/current). For advanced
 # use cases, the value can be an object with keys for id, uri, and version.
 #
-# dependencies:
+dependencies:
+  ihe.iti.scheduling: 1.0.0
+  servicewell.fhir.wof-connect: current
 #   hl7.fhir.us.core: 3.1.0
 #   hl7.fhir.us.mcode:
 #     id: mcode
@@ -106,13 +108,7 @@ menu:
     Kundnöjdhet: kundnojdhet.html
     Värva en vän: varva-en-van.html
   Artifacts: artifacts.html
-  #Overview: overview.html
-  #Getting Started: getting-started.html
-  #Auth & Security: authentication-and-security.html
-  #API Reference: api-reference.html
-  #Cross-cutting: cross-cutting-concerns.html
-  #Operations: operations-and-trust.html
-  #Use Cases: use-cases.html
+  OpenAPI: /openapi/swagger.html?spec=../output/WOFPortalCapabilityStatement.openapi.json
 
 # ╭───────────────────────────Less Common Implementation Guide Properties──────────────────────────╮
 # │  Uncomment the properties below to configure additional properties on the ImplementationGuide  │
