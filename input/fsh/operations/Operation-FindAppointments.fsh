@@ -84,7 +84,7 @@ typically carries a WOF Connect service-type identifier (e.g., [system]|[code] w
 * parameter[=].min = 0
 * parameter[=].max = "1"
 * parameter[=].type = #Reference
-* parameter[=].targetProfile = Canonical(WofConnectHealthcareService)
+* parameter[=].targetProfile = Canonical(HealthcareServicePortal)
 * parameter[=].documentation = """
 Restrict the search to a specific healthcareService. In this implementation, healthcareService
 typically carries a WOF Connect healthcareService identifier.
@@ -96,7 +96,7 @@ typically carries a WOF Connect healthcareService identifier.
 * parameter[=].min = 0
 * parameter[=].max = "1"
 * parameter[=].type = #Reference
-* parameter[=].targetProfile = Canonical(WofConnectPractitionerRole)
+* parameter[=].targetProfile = Canonical(PractitionerRolePortal)
 * parameter[=].documentation = """
 Restrict the search to a specific practitionerRole. In this implementation, practitionerRole
 typically carries a WOF Connect practitionerRole identifier.
@@ -118,4 +118,3 @@ On success, returns a Bundle that SHALL conform to ihe-sched-avail-bundle, conta
 
 If the operation fails, an OperationOutcome is returned instead of this parameter.
 """
-
