@@ -1,0 +1,163 @@
+{
+  "resourceType": "Bundle",
+  "id": "119d41e8-a9f6-41f1-8841-0c4a50c136ff",
+  "meta":{
+    "profile": [
+      "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/offer-portal"
+    ]
+  },
+  "type": "searchset",
+  "total": 8,
+  "entry": [
+    {
+      "fullUrl": "[[baseurl]]/portal/fhir/Parameters/6673fcbc-b928-48db-9ccc-1a1f84883c86",
+      "resource": {
+        "resourceType": "Parameters",
+        "id": "6673fcbc-b928-48db-9ccc-1a1f84883c86",
+        "parameter": [
+          {
+            "name": "offering",
+            "part": [
+              {
+                "name": "activityDefinition",
+                "valueReference": {
+                  "reference": "ActivityDefinition/50490e09-f308-4368-a64d-5df12661c48c",
+                  "display": "Akut tandvård"
+                }
+              },
+              {
+                "name": "healthcareService",
+                "valueReference": {
+                  "reference": "HealthcareService/b4108577-c8d2-4198-948e-c23e7937f752",
+                  "display": "OpusSatra"
+                }
+              },
+              {
+                "name": "practitionerRole",
+                "valueReference": {
+                  "reference": "PractitionerRole/ea716976-8fbe-4026-8d26-60d8ec3f7ef4",
+                  "display": "Tandhygienist Samer Salman"
+                }
+              },
+              {
+                "name": "duration",
+                "valueString": "20"
+              },
+              {
+                "name": "price",
+                "valueString": "2000"
+              },
+              {
+                "name": "isOnline",
+                "valueBoolean": true
+              }
+            ]
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "[[baseurl]]/portal/fhir/Parameters/cca56ca1-0c89-492a-9caf-793936361609",
+      "resource": {
+        "resourceType": "Parameters",
+        "id": "cca56ca1-0c89-492a-9caf-793936361609",
+        "parameter": [
+          {
+            "name": "offering",
+            "part": [
+              {
+                "name": "activityDefinition",
+                "valueReference": {
+                  "reference": "ActivityDefinition/b1ac81a6-6142-4ef8-ae1f-6f3fea7ed37f",
+                  "display": "Tandhygienist"
+                }
+              },
+              {
+                "name": "healthcareService",
+                "valueReference": {
+                  "reference": "HealthcareService/b4108577-c8d2-4198-948e-c23e7937f752",
+                  "display": "OpusSatra"
+                }
+              },
+              {
+                "name": "practitionerRole",
+                "valueReference": {
+                  "reference": "PractitionerRole/ea716976-8fbe-4026-8d26-60d8ec3f7ef4",
+                  "display": "Tandhygienist Samer Salman"
+                }
+              },
+              {
+                "name": "duration",
+                "valueString": "40"
+              },
+              {
+                "name": "price",
+                "valueString": "1900"
+              },
+              {
+                "name": "isOnline",
+                "valueBoolean": true
+              }
+            ]
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "[[baseurl]]/portal/fhir/Parameters/9184a5d4-fb69-4b0b-8eee-608e6359a6d9",
+      "resource": {
+        "resourceType": "Parameters",
+        "id": "9184a5d4-fb69-4b0b-8eee-608e6359a6d9",
+        "parameter": [
+          {
+            "name": "offering",
+            "part": [
+              {
+                "name": "activityDefinition",
+                "valueReference": {
+                  "reference": "ActivityDefinition/3c40a78c-e0b5-4000-9feb-96fc2fe9ba8a",
+                  "display": "Undersökning"
+                }
+              },
+              {
+                "name": "healthcareService",
+                "valueReference": {
+                  "reference": "HealthcareService/b4108577-c8d2-4198-948e-c23e7937f752",
+                  "display": "OpusSatra"
+                }
+              },
+              {
+                "name": "practitionerRole",
+                "valueReference": {
+                  "reference": "PractitionerRole/ea716976-8fbe-4026-8d26-60d8ec3f7ef4",
+                  "display": "Tandhygienist Samer Salman"
+                }
+              },
+              {
+                "name": "duration",
+                "valueString": "30"
+              },
+              {
+                "name": "price",
+                "valueString": "500"
+              },
+              {
+                "name": "isOnline",
+                "valueBoolean": true
+              }
+            ]
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    }
+  ]
+}

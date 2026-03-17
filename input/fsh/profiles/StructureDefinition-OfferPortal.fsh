@@ -3,35 +3,12 @@ Parent: Parameters
 Id: offer-portal
 Title: "OfferPortal"
 Description: """
-<p><b>OfferPortal</b> represents a bookable offering in a specific context.</p>
+**OfferPortal** represents a bookable offering in a specific context.
 
-<p>It answers the question: <i>“Which service can be booked, by whom, and where — and what are the booking-facing settings in that context?”</i></p>
+It answers the question: _“Which service can be booked, by whom, and where — and what are the booking-facing settings in that context?”_
 
-<ul>
-  <li>Connects an <b>ActivityDefinitionPortal</b> (what) with a <b>HealthcareServicePortal</b> (where) and a <b>PractitionerRolePortal</b> (who).</li>
-  <li>Represents the <b>context-specific</b> configuration for booking content.</li>
-  <li>Is intended as a lightweight object for frontends to render booking options quickly.</li>
-</ul>
-
-<p>An OfferPortal contains references to:</p>
-<ul>
-  <li><b>activityDefinition</b> — Reference(ActivityDefinitionPortal)</li>
-  <li><b>healthcareService</b> — Reference(HealthcareServicePortal)</li>
-  <li><b>practitionerRole</b> — Reference(PractitionerRolePortal)</li>
-</ul>
-
-<p>OfferPortal may include booking-facing settings such as:</p>
-<ul>
-  <li><b>duration</b> — free-text (presentation value)</li>
-  <li><b>price</b> — free-text (presentation value)</li>
-  <li><b>bookingUrl</b> — deeplink for booking</li>
-</ul>
-
-<p><b>Important:</b> OfferPortal does <b>not</b> represent real-time availability. It does not include schedules, working hours, or bookable time slots.</p>
-
-<p>OfferPortal is a context/read model intended to support fast, “chatty” consumption. It is not a replacement for scheduling or billing workflows.</p>
 """
-
+* obeys offer-portal-offline-reason
 // -------------------- SLICE: parameter by name --------------------
 * parameter ^slicing.discriminator[0].type = #value
 * parameter ^slicing.discriminator[0].path = "name"
@@ -52,23 +29,21 @@ Description: """
     practitionerRole 1..1 and
     duration 0..1 and
     price 0..1 and
-    bookingUrl 0..1
+    bookingUrl 0..1 and
+    isOnline 1..1 and
+    offlineReason 0..1
 
 // ---- activityDefinition ----
 * parameter[offering].part[activityDefinition].name = "activityDefinition" (exactly)
-* parameter[offering].part[activityDefinition].value[x] only Reference
-// If you want to constrain to the portal profile:
-* parameter[offering].part[activityDefinition].valueReference ^type.profile = Canonical(ActivityDefinitionPortal)
+* parameter[offering].part[activityDefinition].value[x] only Reference(ActivityDefinitionPortal)
 
 // ---- healthcareService ----
 * parameter[offering].part[healthcareService].name = "healthcareService" (exactly)
-* parameter[offering].part[healthcareService].value[x] only Reference
-* parameter[offering].part[healthcareService].valueReference ^type.profile = Canonical(HealthcareServicePortal)
+* parameter[offering].part[healthcareService].value[x] only Reference(HealthcareServicePortal)
 
 // ---- practitionerRole ----
 * parameter[offering].part[practitionerRole].name = "practitionerRole" (exactly)
-* parameter[offering].part[practitionerRole].value[x] only Reference
-* parameter[offering].part[practitionerRole].valueReference ^type.profile = Canonical(PractitionerRolePortal)
+* parameter[offering].part[practitionerRole].value[x] only Reference(PractitionerRolePortal)
 
 // ---- duration (free-text) ----
 * parameter[offering].part[duration].name = "duration" (exactly)
@@ -81,3 +56,17 @@ Description: """
 // ---- bookingUrl ----
 * parameter[offering].part[bookingUrl].name = "bookingUrl" (exactly)
 * parameter[offering].part[bookingUrl].value[x] only url
+
+//------ endpoint status -----
+* parameter[offering].part[isOnline].name = "isOnline" (exactly)
+* parameter[offering].part[isOnline].value[x] only boolean
+
+//------ offline status reason -----
+* parameter[offering].part[offlineReason].name = "offlineReason" (exactly)
+* parameter[offering].part[offlineReason].value[x] only string
+
+// -------------------- INVARIANTS --------------------
+Invariant: offer-portal-offline-reason
+Description: "If isOnline is false, offlineReason must have a value."
+Severity: #error
+Expression: "parameter.where(name='offering').all(part.where(name='isOnline').valueBoolean = false implies (part.where(name='offlineReason').exists() and part.where(name='offlineReason').value.exists()))"

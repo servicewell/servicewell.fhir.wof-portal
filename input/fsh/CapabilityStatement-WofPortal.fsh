@@ -7,87 +7,96 @@ Usage: #definition
 * name = "WOFPortalCapabilityStatement"
 * title = "WOF Portal Capability Statement"
 * date = "2026-02-02T12:00:00+00:00"
-* description = """
-<p>This CapabilityStatement defines the canonical domain model and API principles of the <b>WOF Portal</b>,
-owned and operated by Service Well.</p>
+* description = "This CapabilityStatement defines the canonical domain model and API principles of the **WOF Portal**"
+* purpose = """
+This CapabilityStatement defines the canonical domain model and API principles of the **WOF Portal**,
+owned and operated by Service Well.
 
-<p><b>IHE Scheduling:</b> This server instantiates IHE.Scheduling.server (v1.0.0).</p>
+**IHE Scheduling:** This server instantiates *IHE.Scheduling.server* (v1.0.0).
 
-<p><b>Layering principle:</b></p>
-<ul>
-  <li><b>WOF Connect</b> defines vendor-facing interoperability contracts.</li>
-  <li><b>WOF Portal</b> builds on WOF Connect to provide a single, enriched, canonical API.</li>
-</ul>
+## Layering principle
+- **WOF Connect** defines vendor-facing interoperability contracts.
+- **WOF Portal** builds on WOF Connect to provide a single, enriched, canonical API.
 
-<p><b>Domain separation principles:</b></p>
-<ul>
-  <li><b>ActivityDefinition</b> represents a shared service concept and SHALL be identified by code, not by resource id.</li>
-  <li><b>HealthcareService</b> represents where care is performed.</li>
-  <li><b>BillingOrganization</b> represents financial responsibility and is independent of service location.</li>
-  <li><b>PractitionerRole</b> represents a practitioner acting in a specific operational and financial context.</li>
-</ul>
+## Domain separation principles
+- **ActivityDefinition** represents a shared service concept and SHALL be identified by code, not by resource id.
+- **HealthcareService** represents where care is performed.
+- **BillingOrganization** represents financial responsibility and is independent of service location.
+- **PractitionerRole** represents a practitioner acting in a specific operational and financial context.
 
-<p><b>Many-to-many relationships are intentional:</b></p>
-<ul>
-  <li>A HealthcareService MAY be associated with multiple BillingOrganizations.</li>
-  <li>A BillingOrganization MAY provide services at multiple HealthcareServices.</li>
-  <li>A Practitioner MAY have multiple PractitionerRoles across services and billing contexts.</li>
-</ul>
+## Many-to-many relationships are intentional
+- A HealthcareService MAY be associated with multiple BillingOrganizations.
+- A BillingOrganization MAY provide services at multiple HealthcareServices.
+- A Practitioner MAY have multiple PractitionerRoles across services and billing contexts.
 
-<p><b>Offer and availability principles:</b></p>
-<ul>
-  <li><b>Offer</b> represents a computed, context-specific view combining ActivityDefinition,
-      HealthcareService, and PractitionerRole.</li>
-  <li>Offer is intended for presentation and selection, not for scheduling.</li>
-  <li><b>Schedule</b> represents planned working time and SHALL NOT be treated as bookable availability.</li>
-  <li>Actual bookability requires downstream slot or availability checks.</li>
-</ul>
+## Offer and availability principles
+- **Offer** represents a computed, context-specific view combining ActivityDefinition,
+  HealthcareService, and PractitionerRole.
+- Offer is intended for presentation and selection, not for scheduling.
+- **Schedule** represents planned working time and SHALL NOT be treated as bookable availability.
+- Actual bookability requires downstream slot or availability checks.
 
-<p><b>Integration principle:</b></p>
-<ul>
-  <li>External systems integrate with the platform by implementing <b>WOF Connect</b>.</li>
-  <li>WOF Portal APIs MAY return enriched and aggregated views not available in WOF Connect.</li>
-</ul>
+## Integration principle
+- External systems integrate with the platform by implementing **WOF Connect**.
+- WOF Portal APIs MAY return enriched and aggregated views not available in WOF Connect.
 
-<p>This CapabilityStatement documents the canonical behavior of the WOF Portal API.</p>
+This CapabilityStatement documents the canonical behavior of the WOF Portal API.
 
-<p><b>Client interaction overview:</b></p>
+## Client interaction overview
+The following diagram illustrates outbound API calls from a patient-facing client
+to the WOF Portal Proxy. It represents actual usage patterns and supported interactions.
 
-<p>The following diagram illustrates outbound API calls from a patient-facing client
-to the WOF Portal Proxy. It represents actual usage patterns and supported interactions.</p>
 
-<pre>
-WOF.Portal.Patient.Client.Frenda - Outbound API calls (Razor components → services)
+Client → WOF-PORTAL:
 
-Client → Proxy:
-- GET portal/fhir/Organization
-- GET portal/fhir/Organization/{id}?_summary={true|false}
-- GET portal/fhir/Organization?identifier={tenantIdentifier}&amp;_summary={true|false}
+<style>
+  .mermaid {
+    min-height: 600px;
+  }
+</style>
 
-- GET {endpointId}/fhir/Patient
+```mermaid
+sequenceDiagram
+    participant Client as Patient Client
+    participant Portal as WOF Portal Proxy
+    participant Endpoint as Tenant Endpoint
 
-- GET portal/fhir/Appointment
-- GET {endpointId}/fhir/Appointment/{id}
-- GET {endpointId}/fhir/Appointment?actor=HealthcareService/{healthcareServiceId}
+    %% Organization (ServiceProvider / Care context)
+    Client ->> Portal: GET portal/fhir/Organization
+    Client ->> Portal: GET portal/fhir/Organization/{id}?_summary={true|false}
+    Client ->> Portal: GET portal/fhir/Organization?identifier={tenantIdentifier}&_summary={true|false}
 
-- GET {endpointId}/fhir/Appointment/$find
-- POST {endpointId}/fhir/Appointment/$book
+    %% Patient (endpoint-scoped)
+    Client ->> Endpoint: GET {endpointId}/fhir/Patient
 
-- GET portal/fhir/HealthcareService
-- GET portal/fhir/HealthcareService/{id}
+    %% Appointment (portal + endpoint)
+    Client ->> Portal: GET portal/fhir/Appointment
+    Client ->> Endpoint: GET {endpointId}/fhir/Appointment/{id}
+    Client ->> Endpoint: GET {endpointId}/fhir/Appointment?actor=HealthcareService/{healthcareServiceId}
 
-- GET portal/fhir/Location?physicalType={AreaLiteral}
+    %% IHE Scheduling
+    Client ->> Endpoint: GET {endpointId}/fhir/Appointment/$find
+    Client ->> Endpoint: POST {endpointId}/fhir/Appointment/$book
 
-- GET portal/fhir/PractitionerRole
-- GET portal/fhir/PractitionerRole?service=HealthcareService/{healthcareServiceId}
-- GET portal/fhir/PractitionerRole/{practitionerRoleId}
+    %% HealthcareService (portal-scoped)
+    Client ->> Portal: GET portal/fhir/HealthcareService
+    Client ->> Portal: GET portal/fhir/HealthcareService/{id}
 
-- GET portal/fhir/ActivityDefinition
-- GET portal/fhir/ActivityDefinition/{id}
-</pre>
+    %% Location (Areas)
+    Client ->> Portal: GET portal/fhir/Location?physicalType={AreaLiteral}
 
-<p>This diagram is informational and documents expected client usage.
-It does not expand or modify the formal FHIR conformance rules.</p>
+    %% PractitionerRole (portal-scoped)
+    Client ->> Portal: GET portal/fhir/PractitionerRole
+    Client ->> Portal: GET portal/fhir/PractitionerRole?service=HealthcareService/{healthcareServiceId}
+    Client ->> Portal: GET portal/fhir/PractitionerRole/{practitionerRoleId}
+
+    %% ActivityDefinition (portal-scoped)
+    Client ->> Portal: GET portal/fhir/ActivityDefinition
+    Client ->> Portal: GET portal/fhir/ActivityDefinition/{id}
+```
+
+This diagram is informational and documents expected client usage.
+It does not expand or modify the formal FHIR conformance rules.
 """
 
 * kind = #capability
@@ -102,16 +111,20 @@ It does not expand or modify the formal FHIR conformance rules.</p>
 * rest.mode = #server
 
 * rest.resource[+].type = #ActivityDefinition
+* rest.resource[=].profile = Canonical(ActivityDefinitionPortal)
+* rest.resource[=].supportedProfile[+] = Canonical(ActivityDefinitionPortal)
 * rest.resource[=].documentation = "Represents shared service concepts identified by code."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
 
 * rest.resource[+].type = #HealthcareService
+* rest.resource[=].profile = Canonical(HealthcareServicePortal)
 * rest.resource[=].documentation = "Represents where healthcare services are performed."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
 
 * rest.resource[+].type = #PractitionerRole
+* rest.resource[=].profile = Canonical(PractitionerRolePortal)
 * rest.resource[=].documentation = "Represents practitioners acting in specific operational and financial contexts."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
@@ -121,7 +134,8 @@ It does not expand or modify the formal FHIR conformance rules.</p>
 
 
 * rest.resource[+].type = #Patient
-* rest.resource[=].documentation = "Represents practitioners acting in specific operational and financial contexts."
+* rest.resource[=].supportedProfile[+] = "http://hl7.se/fhir/ig/base/StructureDefinition/SEBasePatient"
+* rest.resource[=].documentation = "Represents patients within the WOF Portal, conforming to the Swedish base patient profile."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
 * rest.resource[=].searchParam[+].name = "identifier"
@@ -130,12 +144,23 @@ It does not expand or modify the formal FHIR conformance rules.</p>
 
 
 * rest.resource[+].type = #Organization
-* rest.resource[=].documentation = """
-Organizations MAY conform to multiple profiles in WOF Portal.
-BillingOrganization is represented as Organization constrained by the OrganizationBilling profile.
-Clients MAY filter by profile when needed (e.g. using _profile), but searches by id and identifier are supported without profile constraints.
-"""
+* rest.resource[=].supportedProfile[+] = Canonical(ServiceProviderPortal)
 * rest.resource[=].supportedProfile[+] = Canonical(BillingOrganizationPortal)
+* rest.resource[=].documentation = """
+Organizations in WOF Portal MAY conform to multiple profiles, representing different organizational roles.
+
+ServiceProvider represents the top-level owning organization (tenant) within the platform.
+BillingOrganization represents financial responsibility and ownership of invoicing and reporting.
+
+Organizations are not exposed as searchable catalogs.
+They are resolved using stable identifiers only:
+- resource id
+- organization number (identifier)
+
+Clients MAY filter by profile when needed (e.g. using _profile),
+but profile-based filtering is not required for lookup by id or identifier.
+"""
+
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
 

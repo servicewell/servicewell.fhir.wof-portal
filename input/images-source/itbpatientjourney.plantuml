@@ -1,0 +1,39 @@
+@startuml
+title Patient booking journey
+
+actor Patient
+boundary ITB
+control Auth
+database "EHR" as JS
+boundary "Patientportal" as Portal
+
+Patient -> ITB : Choose clinic
+ITB -> JS : Get treatments & availability
+JS --> ITB : Treatments + availability
+
+opt Optional campaign code
+  Patient -> ITB : Enter campaign code
+  ITB -> JS : Validate campaign code
+  JS --> ITB : OK / Invalid
+end
+
+Patient -> ITB : Choose treatment
+ITB -> JS : Get practitioners & times
+JS --> ITB : Practitioners + times
+
+Patient -> ITB : Choose practitioner & time
+
+Patient -> ITB : Confirm booking (log in)
+ITB -> Auth : Authenticate
+Auth --> ITB : Auth OK
+
+ITB -> JS : Create booking
+JS --> ITB : Booking saved
+ITB --> Patient : Booking confirmed
+
+Patient -> Portal : Open "My bookings"
+Portal -> JS : Get bookings
+JS --> Portal : Bookings
+Portal --> Patient : Show booking
+
+@enduml

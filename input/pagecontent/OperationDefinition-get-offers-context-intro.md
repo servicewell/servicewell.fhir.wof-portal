@@ -1,19 +1,3 @@
-# `$getOffersContext` — Booking Content Context (FHIR)
-
-## Purpose
-`$getOffersContext` is a **read-oriented** FHIR operation designed to let a frontend **quickly populate booking content** so a patient can choose *what* to book and *with whom/where* — without needing multiple round-trips.
-
-This operation returns a **profiled Bundle** that may include:
-
-- `ActivityDefinitionPortal` (what is being offered)
-- `HealthcareServicePortal` (where / which clinic service offers it)
-- `PractitionerRolePortal` (who can perform it)
-- **Offer** resources (a lightweight “relation + settings” object)
-
-The response is intentionally shaped for **fast content rendering**, not for scheduling.
-
----
-
 ## What this operation is NOT
 `$getOffersContext` does **not** answer:
 - Whether a practitioner is working right now
@@ -27,12 +11,16 @@ In other words:
 
 Those concerns belong to downstream availability/slot endpoints.
 
----
+<span style="font-size:1.3em;font-weight;"> Non-goals / exclusions<span>
+- No scheduling, working hours, or shift logic
+- No real-time availability
+- No Slot calculation
+- No guarantee that all returned practitioners are currently working
+
 
 ## Operation name
 - Operation: **`$getOffersContext`**
 
----
 
 ## Endpoints
 The operation can be exposed at (at least) the following levels:
@@ -51,20 +39,19 @@ The operation can be exposed at (at least) the following levels:
 
 > The server may return different subsets depending on the endpoint and/or query parameters, but the response is always a Bundle.
 
----
 
 ## Response
-### Resource type
+<span style="font-size:1.3em;font-weight;">Resource type</span>
 - **Bundle** (profiled)
 
-### Included resources (depending on inputs)
+<span style="font-size:1.3em;font-weight;">resources (depending on inputs)</span>
 The response Bundle MAY include any combination of:
 - `ActivityDefinitionPortal`
 - `HealthcareServicePortal`
 - `PractitionerRolePortal`
 - `OfferPortal` (custom resource/profile)
 
----
+
 
 ## The `OfferPortal` resource (custom, profiled)
 `OfferPortal` is the compact “join object” used by clients to connect:
@@ -84,7 +71,6 @@ An `Offer` contains:
 
 > Note: duration and price are intended for booking/marketing presentation. They are not required to be machine-parseable.
 
----
 
 ## Why Bundle (instead of Parameters)
 We use a profiled Bundle so that:
@@ -92,7 +78,6 @@ We use a profiled Bundle so that:
 - Resources can be included once and referenced from multiple offers
 - The payload remains efficient for “chatty” consumers
 
----
 
 ## Typical client usage
 1. Call `$getOffersContext` for a scope (e.g. an ActivityDefinition).
@@ -107,18 +92,12 @@ We use a profiled Bundle so that:
    - show the selected activity (ActivityDefinition)
    - show offer-specific settings (duration/price/deeplink)
 
----
 
-## Non-goals / exclusions
-- No scheduling, working hours, or shift logic
-- No real-time availability
-- No Slot calculation
-- No guarantee that all returned practitioners are currently working
-
----
 
 ## Glossary
 - **ActivityDefinition**: what can be booked (e.g., “Examination”)
 - **HealthcareService**: a clinic/service unit offering the activity
 - **PractitionerRole**: a practitioner in a role relevant for booking
 - **Offer**: the relationship + settings that ties the above together
+
+---

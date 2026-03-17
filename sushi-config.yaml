@@ -6,26 +6,27 @@
 id: servicewell.fhir.wof-portal
 canonical: https://canonical.fhir.link/servicewell/wof-portal
 name: Wof Portal IG
-# title: Example Title
-# description: Example Implementation Guide for getting started with SUSHI
+title: Wof Portal
+description: Service Well's Wof portal - A Practical Blueprint for Upgrading Dental Care
 status: draft # draft | active | retired | unknown
 version: 0.1.0
 fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
+language: en-US
 copyrightYear: 2025+
-releaseLabel: ci-build
+releaseLabel: ci-build [WIP]
 # license: CC0-1.0 # https://www.hl7.org/fhir/valueset-spdx-license.html
 # jurisdiction: urn:iso:std:iso:3166#US "United States of America" # https://www.hl7.org/fhir/valueset-jurisdiction.html
 publisher:
   name: Service Well AB
   url: https://servicewell.se
-  # email: test@example.org
-
+  email: info@servicewell.se
 # The dependencies property corresponds to IG.dependsOn. The key is the
 # package id and the value is the version (or dev/current). For advanced
 # use cases, the value can be an object with keys for id, uri, and version.
 #
 dependencies:
   ihe.iti.scheduling: 1.0.0
+  servicewell.fhir.wof-connect: current
 #   hl7.fhir.us.core: 3.1.0
 #   hl7.fhir.us.mcode:
 #     id: mcode
@@ -53,6 +54,31 @@ dependencies:
 #     simpleExamples.xml:
 #     complexExamples.xml:
 #
+pages:
+  index.md:
+    title: Home
+  itb.md:
+    title: ITB
+  infowell.md:
+    title: Infowell
+  kundnojdhet.md:
+    title: Kundnöjdhet
+  varva-en-van.md:
+    title: Värva en vän
+  #overview.md:
+  #  title: Overview
+  #getting-started.md:
+  #  title: Getting Started
+  #authentication-and-security.md:
+  #  title: Authentication & Security
+  #api-reference.md:
+  #  title: API Reference
+  #cross-cutting-concerns.md:
+  #  title: Cross-cutting Concerns
+  #operations-and-trust.md:
+  #  title: Operations & Trust
+  #use-cases.md:
+  #  title: Use Cases
 #
 # The parameters property represents IG.definition.parameter. Rather
 # than a list of code/value pairs (as in the ImplementationGuide
@@ -77,7 +103,13 @@ dependencies:
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
   Home: index.html
+  Products:
+    ITB: itb.html
+    Infowell: infowell.html
+    Kundnöjdhet: kundnojdhet.html
+    Värva en vän: varva-en-van.html
   Artifacts: artifacts.html
+  OpenAPI: /openapi/swagger.html?spec=../output/WOFPortalCapabilityStatement.openapi.json
 
 # ╭───────────────────────────Less Common Implementation Guide Properties──────────────────────────╮
 # │  Uncomment the properties below to configure additional properties on the ImplementationGuide  │
@@ -128,7 +160,14 @@ menu:
 #     better option (see below).
 # The following are simple examples to demonstrate what this might
 # look like:
-#
+
+resources:
+  Bundle/119d41e8-a9f6-41f1-8841-0c4a50c136ff:
+    name: GetOfferingsResponse — only references
+    description: Example of the GetOfferingsResponseBundle without entries for referenced resources
+    exampleCanonical: https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/offer-portal
+
+
 # resources:
 #   Patient/my-example-patient:
 #     name: My Example Patient
