@@ -129,3 +129,16 @@ It answers the question: _“What service is the patient booking?”_
 * observationResultRequirement 0..0
 * transform 0..0
 * dynamicValue 0..0
+
+
+* extension contains SortKey named sortKey 0..1
+* extension contains Campaigns named campaigns 0..1
+
+Extension: Campaigns
+Id: ext-campaigns
+Title: "Campaigns"
+Description: "Campaign identifiers encoded as JSON."
+
+* ^status = #active
+* ^context.type = #element
+* ^context.expression = "ActivityDefinition"
