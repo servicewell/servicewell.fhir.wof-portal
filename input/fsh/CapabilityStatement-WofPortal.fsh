@@ -112,6 +112,7 @@ It does not expand or modify the formal FHIR conformance rules.
 
 * rest.resource[+].type = #ActivityDefinition
 * rest.resource[=].profile = Canonical(ActivityDefinitionPortal)
+* rest.resource[=].supportedProfile[+] = Canonical(ActivityDefinitionPortal)
 * rest.resource[=].documentation = "Represents shared service concepts identified by code."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
