@@ -8,7 +8,7 @@ Description: """
 It answers the question: _“Which service can be booked, by whom, and where — and what are the booking-facing settings in that context?”_
 
 """
-
+* obeys offer-portal-offline-reason
 // -------------------- SLICE: parameter by name --------------------
 * parameter ^slicing.discriminator[0].type = #value
 * parameter ^slicing.discriminator[0].path = "name"
@@ -31,7 +31,7 @@ It answers the question: _“Which service can be booked, by whom, and where —
     price 0..1 and
     bookingUrl 0..1 and
     isOnline 1..1 and
-    offlineReason 1..1
+    offlineReason 0..1
 
 // ---- activityDefinition ----
 * parameter[offering].part[activityDefinition].name = "activityDefinition" (exactly)
@@ -64,3 +64,9 @@ It answers the question: _“Which service can be booked, by whom, and where —
 //------ offline status reason -----
 * parameter[offering].part[offlineReason].name = "offlineReason" (exactly)
 * parameter[offering].part[offlineReason].value[x] only string
+
+// -------------------- INVARIANTS --------------------
+Invariant: offer-portal-offline-reason
+Description: "If isOnline is false, offlineReason must have a value."
+Severity: #error
+Expression: "parameter.where(name='offering').all(part.where(name='isOnline').valueBoolean = false implies (part.where(name='offlineReason').exists() and part.where(name='offlineReason').value.exists()))"
