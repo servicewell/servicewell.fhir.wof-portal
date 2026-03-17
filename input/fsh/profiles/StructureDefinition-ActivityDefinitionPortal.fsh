@@ -88,7 +88,7 @@ It answers the question: _“What service is the patient booking?”_
 
 * implicitRules 0..0
 * language 0..0
-* text 0..0
+* text 0..1
 * contained 0..0
 * modifierExtension 0..0
 * url 0..0
