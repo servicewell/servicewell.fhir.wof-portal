@@ -55,6 +55,10 @@ This parameter is mandatory as per IHE ITI Scheduling $find.
 * parameter[=].documentation = """
 Restrict the search to Appointments where a specific Practitioner is the performer.
 If multiple values are supplied, the server MAY treat them as an OR or AND filter as documented by the implementation.
+
+**Format:** `Practitioner/{id}`  
+
+**Example:** `?practitioner=Practitioner/1234`
 """
 
 // IHE: organization 0..* Reference(Organization)
@@ -66,6 +70,10 @@ If multiple values are supplied, the server MAY treat them as an OR or AND filte
 * parameter[=].targetProfile = Canonical(BillingOrganizationPortal)
 * parameter[=].documentation = """
 Restrict the search to Appointments associated with a specific Organization (e.g., business/clinic owner).
+
+**Format:** `Organization/{id}`  
+
+**Example:** `?organization=Organization/1234`
 """
 // IHE: visit-type 0..* string (token)
 * parameter[+].name = #visit-type
@@ -86,8 +94,11 @@ typically carries a WOF Connect service-type identifier (e.g., [system]|[code] w
 * parameter[=].type = #Reference
 * parameter[=].targetProfile = Canonical(HealthcareServicePortal)
 * parameter[=].documentation = """
-Restrict the search to a specific healthcareService. In this implementation, healthcareService
-typically carries a WOF Connect healthcareService identifier.
+Restrict the search to a specific HealthcareService.
+
+**Format:** `HealthcareService/{id}`  
+
+**Example:** `?healthcareService=HealthcareService/1234`
 """
 
 // Portal: PractitionerRole 0..* string (token)
@@ -98,8 +109,11 @@ typically carries a WOF Connect healthcareService identifier.
 * parameter[=].type = #Reference
 * parameter[=].targetProfile = Canonical(PractitionerRolePortal)
 * parameter[=].documentation = """
-Restrict the search to a specific practitionerRole. In this implementation, practitionerRole
-typically carries a WOF Connect practitionerRole identifier.
+Restrict the search to a specific PractitionerRole.
+
+**Format:** `PractitionerRole/{id}`  
+
+**Example:** `?practitionerRole=PractitionerRole/1234`
 """
 
 
