@@ -8,7 +8,7 @@ Usage: #definition
 * kind = #operation
 * code = #getOffersContext
 * system = true
-* type = true
+* type = false
 * instance = true
 * description = """
 `$getOffersContext` is a **read-oriented** FHIR operation designed to let a frontend **quickly populate booking content** so a patient can choose *what* to book and *with whom/where* — without needing multiple round-trips.  

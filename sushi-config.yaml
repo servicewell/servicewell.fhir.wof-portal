@@ -159,7 +159,14 @@ menu:
 #     better option (see below).
 # The following are simple examples to demonstrate what this might
 # look like:
-#
+
+resources:
+  Bundle/119d41e8-a9f6-41f1-8841-0c4a50c136ff:
+    name: GetOfferingsResponse — only references
+    description: Example of the GetOfferingsResponseBundle without entries for referenced resources
+    exampleCanonical: https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/offer-portal
+
+
 # resources:
 #   Patient/my-example-patient:
 #     name: My Example Patient
