@@ -108,7 +108,7 @@ menu:
     Kundnöjdhet: kundnojdhet.html
     Värva en vän: varva-en-van.html
   Artifacts: artifacts.html
-  OpenAPI: /openapi/swagger.html?spec=../output/WOFPortalCapabilityStatement.openapi.json
+  OpenAPI: swagger.html?spec=WOFPortalCapabilityStatement.openapi.json
 
 # ╭───────────────────────────Less Common Implementation Guide Properties──────────────────────────╮
 # │  Uncomment the properties below to configure additional properties on the ImplementationGuide  │
