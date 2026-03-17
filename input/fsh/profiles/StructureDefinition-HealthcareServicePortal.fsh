@@ -73,9 +73,9 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * extension[clinicInfo] ^short = "Grouped clinic presentation information"
 * extension[clinicInfo] ^definition = "Portal-specific clinic information such as URL placeholder, directions, parking, about text, spoken languages, and booking summary information text."
 
-* extension contains HealthcareServiceAttachments named attachments 0..1
-* extension[attachments] ^short = "Grouped booking-related attachments"
-* extension[attachments] ^definition = "Container for attachment payloads related to booking rules and other portal-specific healthcare service attachments."
+* extension contains BookingRules named bookingRules 0..1
+* extension[bookingRules] ^short = "Grouped booking-related attachments"
+* extension[bookingRules] ^definition = "Container for healthcare-service-specific supporting payloads, including reusable booking-rules configuration."
 
 * implicitRules 0..0
 * language 0..0
