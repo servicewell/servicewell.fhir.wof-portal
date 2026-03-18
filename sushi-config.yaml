@@ -65,8 +65,8 @@ pages:
     title: Kundnöjdhet
   varva-en-van.md:
     title: Värva en vän
-  #overview.md:
-  #  title: Overview
+  overview.md:
+    title: Overview
   #getting-started.md:
   #  title: Getting Started
   #authentication-and-security.md:
@@ -103,13 +103,11 @@ pages:
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
   Home: index.html
-  Products:
-    ITB: itb.html
-    Infowell: infowell.html
-    Kundnöjdhet: kundnojdhet.html
-    Värva en vän: varva-en-van.html
-  Artifacts: artifacts.html
-  OpenAPI: /openapi/swagger.html?spec=../output/WOFPortalCapabilityStatement.openapi.json
+  ITB: itb.html
+  Infowell: infowell.html
+  Kundnöjdhet: kundnojdhet.html
+  Värva en vän: varva-en-van.html
+#  OpenAPI: /openapi/swagger.html?spec=../output/WOFPortalCapabilityStatement.openapi.json
 
 # ╭───────────────────────────Less Common Implementation Guide Properties──────────────────────────╮
 # │  Uncomment the properties below to configure additional properties on the ImplementationGuide  │

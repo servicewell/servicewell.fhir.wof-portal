@@ -1,14 +1,28 @@
-### What is Service Well Portal?
+Most dental care chains grow through acquisitions — but end up stuck with different patient record systems, manual reporting, and a fragmented patient journey.
 
-**Service Well Portal** is a unified API designed for healthcare organizations operating with **multiple Patient Management Systems (PMS / EHRs)**.
+Service Well is the shared foundation that turns a group of clinics into a true chain. We create a common platform for booking, follow-up, customer satisfaction, and growth — regardless of which patient record systems the clinics use.
 
-It provides a single, consistent integration point between internal clinical systems and **consumer-facing digital services**, without requiring those services to know which journal system is used behind the scenes.
+That means shared KPIs, a consistent patient journey, and rapid integration of new clinics, without system replacements and without loss of production.
+
+With Service Well, you can grow faster — and manage the business as one cohesive operation.
+
+---
+
+This guide describes the WOF Portal API — its capabilities, authentication model, data schemas, and operational considerations — so that integrators and developers can build reliable, secure integrations.
+
+--- 
+
+###  What is Service Well Portal?
+
+**Service Well Portal** is a unified API designed for healthcare organizations operating with **multiple Patient Management Systems (PMS / EHRs).**
+
+It provides a single, consistent integration point between internal clinical systems and **consumer-facing digital services,** without requiring those services to know which journal system is used behind the scenes.
 
 👉 One API. Many systems. Many Instances. One consistent experience.
 
 ---
 
-### The Problem We Solve
+<span style="font-size:1.4em;font-weight;">The Problem We Solve</span>
 
 Large healthcare groups and chains typically face the same challenges:
 
@@ -18,12 +32,11 @@ Large healthcare groups and chains typically face the same challenges:
 - High integration costs per system
 - Long lead times for new digital services
 - Fragmented patient and customer experiences
-
-Each new web service, booking client, or partner integration often becomes a **custom project per journal system**.
+Each new web service, booking client, or partner integration often becomes a custom project per journal system.
 
 ---
 
-### The Solution: A Common API Layer
+<span style="font-size:1.4em;font-weight;">The Solution: A Common API Layer</span>
 
 Service Well Portal provides a **shared API layer** that:
 
@@ -33,6 +46,18 @@ Service Well Portal provides a **shared API layer** that:
 - Scales to new PMS systems without breaking existing integrations
 
 External consumers integrate **once**, not once per system.
+
+---
+
+### Our value proposition
+
+With Service Well Portal, organizations gain:
+
+- 🚀 Faster time-to-market for digital services  
+- 🔁 Reusable integrations across the entire organization  
+- 🔌 Reduced vendor lock-in  
+- 📉 Lower integration and maintenance costs  
+- 🎯 A consistent patient and customer experience  
 
 ---
 
@@ -48,18 +73,6 @@ Service Well Portal is built for consumer-facing and business-critical use cases
 - **Partner and ecosystem services**
 
 All consumers interact with the **same API**, regardless of provider, clinic, or underlying PMS.
-
----
-
-### Business Value
-
-With Service Well Portal, organizations gain:
-
-- 🚀 Faster time-to-market for digital services  
-- 🔁 Reusable integrations across the entire organization  
-- 🔌 Reduced vendor lock-in  
-- 📉 Lower integration and maintenance costs  
-- 🎯 A consistent patient and customer experience  
 
 ---
 

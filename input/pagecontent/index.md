@@ -66,7 +66,7 @@ With Service Well Portal, organizations gain:
 
 ---
 
-<span style="font-size:1.3em;">[Read more](./overview.html)</span> or <span style="font-size:1.3em;">👉[get started right away!]()</span>
+<span style="font-size:1.3em;">[Read more](./overview.html#our-value-proposition.html)</span> or <span style="font-size:1.3em;">👉[get started right away!]()</span>
 
 ### Our products:
 * **[WofPortal ITB](itb.html)** -  is the web/online booking solution ("Internet appointment booking") in the WofPortal ecosystem.
