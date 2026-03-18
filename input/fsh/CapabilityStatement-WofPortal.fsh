@@ -62,15 +62,15 @@ sequenceDiagram
     participant Endpoint as Tenant Endpoint
 
     %% Organization (ServiceProvider / Care context)
-    Client ->> Portal: GET portal/fhir/Organization
-    Client ->> Portal: GET portal/fhir/Organization/{id}?_summary={true|false}
-    Client ->> Portal: GET portal/fhir/Organization?identifier={tenantIdentifier}&_summary={true|false}
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/Organization
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/Organization/{id}?_summary={true|false}
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/Organization?identifier={tenantIdentifier}&_summary={true|false}
 
     %% Patient (endpoint-scoped)
     Client ->> Endpoint: GET {endpointId}/fhir/Patient
 
     %% Appointment (portal + endpoint)
-    Client ->> Portal: GET portal/fhir/Appointment
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/Appointment
     Client ->> Endpoint: GET {endpointId}/fhir/Appointment/{id}
     Client ->> Endpoint: GET {endpointId}/fhir/Appointment?actor=HealthcareService/{healthcareServiceId}
 
@@ -79,20 +79,20 @@ sequenceDiagram
     Client ->> Endpoint: POST {endpointId}/fhir/Appointment/$book
 
     %% HealthcareService (portal-scoped)
-    Client ->> Portal: GET portal/fhir/HealthcareService
-    Client ->> Portal: GET portal/fhir/HealthcareService/{id}
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/HealthcareService
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/HealthcareService/{id}
 
     %% Location (Areas)
-    Client ->> Portal: GET portal/fhir/Location?physicalType={AreaLiteral}
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/Location?physicalType={AreaLiteral}
 
     %% PractitionerRole (portal-scoped)
-    Client ->> Portal: GET portal/fhir/PractitionerRole
-    Client ->> Portal: GET portal/fhir/PractitionerRole?service=HealthcareService/{healthcareServiceId}
-    Client ->> Portal: GET portal/fhir/PractitionerRole/{practitionerRoleId}
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/PractitionerRole
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/PractitionerRole?service=HealthcareService/{healthcareServiceId}
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/PractitionerRole/{practitionerRoleId}
 
     %% ActivityDefinition (portal-scoped)
-    Client ->> Portal: GET portal/fhir/ActivityDefinition
-    Client ->> Portal: GET portal/fhir/ActivityDefinition/{id}
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/ActivityDefinition
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/ActivityDefinition/{id}
 ```
 
 This diagram is informational and documents expected client usage.
