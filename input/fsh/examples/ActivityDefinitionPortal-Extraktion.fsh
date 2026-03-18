@@ -1,15 +1,19 @@
 Instance: ActivityDefinitionPortalExtraktionExample
 InstanceOf: ActivityDefinitionPortal
 Usage: #example
-Title: "Example ActivityDefinitionPortal Extraktion"
-Description: "Example ActivityDefinitionPortal resource for the service concept Extraktion."
+Title: "Example ActivityDefinitionPortal Dental Examination"
+Description: "Example ActivityDefinitionPortal resource for the patient-facing service concept Dental Examination."
 * meta.profile[+] = Canonical(ActivityDefinitionPortal)
 * meta.versionId = "1"
-* name = "Extraktion"
-* title = "Extraktion"
+* name = "DentalExamination"
+* title = "Dental Examination"
 * status = #active
 * date = "2026-01-29"
-* description = "Extraktion"
+* description = "Dental examination"
 * kind = #ServiceRequest
-* code = $service-type-id#b358da0c-19e8-4c21-b534-e21133c700ce "Extraktion"
-* code.text = "Extraktion"
+* extension[sortKey].valueInteger = 10
+* extension[campaigns].extension[campaign][0].valueCode = #CHRISTMAS_CHECKUP
+* extension[campaigns].extension[campaign][+].valueCode = #SPRING_CHECKUP
+* extension[campaigns].extension[campaign][+].valueCode = #SUMMER_CHECKUP
+* code.coding.system = $service-type-id
+* code.coding.code = #DENTALEX

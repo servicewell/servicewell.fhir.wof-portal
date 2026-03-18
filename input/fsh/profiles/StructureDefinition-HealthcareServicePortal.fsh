@@ -7,9 +7,11 @@ Description: """
 
 It answers the question: _“Where can the patient receive a service?”_
 
-The profile is used to present bookable care locations in the portal, including the responsible organization, contact information, location references, technical endpoint, and portal-specific clinic information.
+The profile is used to present bookable care locations in the portal, including the responsible organization, contact information, location references, and portal-specific clinic information.
 
 Portal-specific presentation details are grouped in the `clinicInfo` extension, while booking-related attachment payloads are grouped in the `attachments` extension.
+
+This profile intentionally constrains base FHIR to define a stable and testable API contract for WOF Portal.
 
 """
 
@@ -50,23 +52,14 @@ Portal-specific presentation details are grouped in the `clinicInfo` extension, 
 * telecom.rank ^short = "Priority order of contact points"
 * telecom.rank ^definition = "Specifies the preferred order in which the listed contact points should be used."
 
-* location 1..*
-* location ^short = "Physical location where the service is delivered"
-* location ^definition = "Reference to one or more locations where the patient can receive the healthcare service."
-
-* endpoint 1..1
-* endpoint ^short = "Technical endpoint for integration"
-* endpoint ^definition = "Reference to the endpoint associated with this healthcare service for technical integration purposes."
-* endpoint.reference 0..1
-* endpoint.reference ^short = "Reference to the endpoint resource"
-* endpoint.reference ^definition = "Literal reference to the endpoint resource representing the technical integration endpoint."
-* endpoint.display 0..1
-* endpoint.display ^short = "Human-readable label for the endpoint"
-* endpoint.display ^definition = "Display text used when presenting the endpoint reference."
+* location 1..1
+* location only Reference(HealthcareServiceLocation)
+* location ^short = "Contained address for the healthcare service"
+* location ^definition = "Reference to the single contained HealthcareServiceLocation instance that holds the clinic address for this healthcare service."
 
 * availableTime 0..*
-* availableTime ^short = "Published availability information"
-* availableTime ^definition = "Availability details for the healthcare service when such scheduling context is exposed in the portal."
+* availableTime ^short = "Opening hours and availability windows"
+* availableTime ^definition = "Opening hours and other published availability windows for when the healthcare service is available in the portal."
 
 * photo 0..1
 * photo ^short = "Image representing the healthcare service"
@@ -80,9 +73,9 @@ Portal-specific presentation details are grouped in the `clinicInfo` extension, 
 * extension[clinicInfo] ^short = "Grouped clinic presentation information"
 * extension[clinicInfo] ^definition = "Portal-specific clinic information such as URL placeholder, directions, parking, about text, spoken languages, and booking summary information text."
 
-* extension contains HealthcareServiceAttachments named attachments 0..1
-* extension[attachments] ^short = "Grouped booking-related attachments"
-* extension[attachments] ^definition = "Container for attachment payloads related to booking rules and other portal-specific healthcare service attachments."
+* extension contains BookingRules named bookingRules 0..1
+* extension[bookingRules] ^short = "Grouped booking-related attachments"
+* extension[bookingRules] ^definition = "Container for healthcare-service-specific supporting payloads, including reusable booking-rules configuration."
 
 * implicitRules 0..0
 * language 0..0
@@ -100,6 +93,7 @@ Portal-specific presentation details are grouped in the `clinicInfo` extension, 
 * communication 0..0
 * referralMethod 0..0
 * appointmentRequired 0..0
+* endpoint 0..0
 * notAvailable 0..0
 * availabilityExceptions 0..0
 * extraDetails 0..0

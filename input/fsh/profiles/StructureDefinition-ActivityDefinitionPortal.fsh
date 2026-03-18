@@ -11,50 +11,41 @@ It answers the question: _“What service is the patient booking?”_
 
 - **WofPortalClient** only needs to populate `code.coding.code` when submitting a known service type code.
 - **WofPortalServer** populates the full representation, including `meta`, presentation fields, `kind`, and the complete `code` structure.
+
+This profile intentionally constrains base FHIR to define a stable and testable API contract for WOF Portal.
 """
 
 // Allowed root elements first
 * meta 1..1
 * meta.profile 1..*
-* meta.profile MS
 * meta.profile ^short = "Profile declaration for this portal resource"
 * meta.profile ^definition = "Identifies that the resource conforms to ActivityDefinitionPortal so clients can safely process it as the WOF Portal service concept profile."
 * meta.profile insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* meta.profile insert Obligation($wof-portal-client-actor, #SHALL:handle)
 * meta.versionId 1..1
 * meta.versionId MS
 * meta.versionId ^short = "Server-managed resource version"
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific ActivityDefinitionPortal instance."
 * meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* meta.versionId insert Obligation($wof-portal-client-actor, #SHALL:handle)
 * name 1..1
-* name MS
 * name ^short = "Machine-friendly name for the service concept"
 * name ^definition = "A stable, machine-friendly name for the service concept represented by this ActivityDefinitionPortal."
 * name insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* name insert Obligation($wof-portal-client-actor, #SHALL:handle)
 * title 1..1
-* title MS
 * title ^short = "Human-readable title for the service"
 * title ^definition = "The user-facing title used to present the service concept in search results, booking flows, and other portal views."
 * title insert Obligation($wof-portal-server-actor, #SHALL:populate)
 * title insert Obligation($wof-portal-client-actor, #SHALL:handle)
 * status 1..1
-* status MS
 * status ^short = "Publication status of the service concept"
 * status ^definition = "The lifecycle status of the ActivityDefinitionPortal definition, for example whether the service concept is active."
 * status insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* status insert Obligation($wof-portal-client-actor, #SHALL:handle)
 * date 1..1
-* date MS
 * date ^short = "Business version date for the definition"
 * date ^definition = "The publication or business version date for this service definition. Clients may use it to understand when the definition was last updated by the publisher."
 * date insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* date insert Obligation($wof-portal-client-actor, #SHALL:handle)
 * description 1..1
-* description MS
 * description ^short = "Presentation description of the service"
-* description ^definition = "A human-readable description of the service concept intended for presentation, discovery, and search."
+* description ^definition = "A human-readable description of the service concept intended for presentation"
 * description insert Obligation($wof-portal-server-actor, #SHALL:populate)
 * description insert Obligation($wof-portal-client-actor, #SHALL:handle)
 * kind 1..1
@@ -79,19 +70,22 @@ It answers the question: _“What service is the patient booking?”_
 * code.coding.code ^short = "Service type identifier"
 * code.coding.code ^definition = "The code value that uniquely identifies the shared service concept within the WOF Connect service-type-id code system. This is the only coded value the client is required to populate."
 * code.coding.code insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* code.coding.code insert Obligation($wof-portal-client-actor, #SHALL:populate)
-* code.text ^short = "Display label for the service code"
-* code.text ^definition = "A human-readable rendering of the coded service concept, typically aligned with the portal title."
+* code.coding.code insert Obligation($wof-portal-client-actor, #SHALL:handle)
+* code.coding.display 0..0
+* code.text 0..0
 * code insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* code insert Obligation($wof-portal-client-actor, #SHALL:handle)
 
+* extension contains SortKey named sortKey 0..1
+* extension[sortKey] ^short = "Portal-specific sort key"
+* extension[sortKey] ^definition = "Sort key used to order the service concept consistently in portal presentation."
+* extension contains Campaigns named campaigns 0..1
+* extension[campaigns] ^short = "Campaign identifiers for the service"
+* extension[campaigns] ^definition = "Campaign identifiers associated with the service concept, represented as repeated campaign codes."
 
 * implicitRules 0..0
 * language 0..0
-* text 0..1
 * contained 0..0
 * modifierExtension 0..0
-* url 0..0
 * identifier 0..0
 * version 0..0
 * subtitle 0..0
@@ -130,15 +124,14 @@ It answers the question: _“What service is the patient booking?”_
 * transform 0..0
 * dynamicValue 0..0
 
-
-* extension contains SortKey named sortKey 0..1
-* extension contains Campaigns named campaigns 0..1
-
 Extension: Campaigns
 Id: ext-campaigns
 Title: "Campaigns"
-Description: "Campaign identifiers encoded as JSON."
+Description: "Container extension for repeated campaign identifiers."
 
 * ^status = #active
 * ^context.type = #element
 * ^context.expression = "ActivityDefinition"
+* extension contains campaign 0..*
+* extension[campaign].value[x] only code
+* value[x] 0..0

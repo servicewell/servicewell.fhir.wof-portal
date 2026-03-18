@@ -25,21 +25,3 @@ Description: "Container extension for clinic information shown in the portal."
 
 * value[x] 0..0
 
-
-Extension: HealthcareServiceAttachments
-Id: ext-healthcare-service-attachments
-Title: "HealthcareService Attachments"
-Description: "Attachment container extension for booking rules."
-
-* ^status = #active
-* ^context.type = #element
-* ^context.expression = "HealthcareService"
-
-* extension contains
-    healthcareServiceBookingRules 0..1 and
-    careProviderBookingRules 0..1
-
-* extension[healthcareServiceBookingRules].value[x] only Attachment
-* extension[careProviderBookingRules].value[x] only Attachment
-
-* value[x] 0..0
