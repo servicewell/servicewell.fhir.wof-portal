@@ -61,43 +61,38 @@ sequenceDiagram
     participant Portal as WOF Portal Proxy
     participant Endpoint as Tenant Endpoint
 
-    %% Booking content context (enriched, aggregated)
-    Client ->> Portal: GET portal/fhir/ActivityDefinition/$getOffersContext
-    Client ->> Portal: GET portal/fhir/HealthcareService/$getOffersContext
-    Client ->> Portal: GET portal/fhir/PractitionerRole/$getOffersContext
-
-    %% ActivityDefinition (portal-scoped)
-    Client ->> Portal: GET portal/fhir/ActivityDefinition
-    Client ->> Portal: GET portal/fhir/ActivityDefinition/{id}
-
-    %% HealthcareService (portal-scoped)
-    Client ->> Portal: GET portal/fhir/HealthcareService
-    Client ->> Portal: GET portal/fhir/HealthcareService/{id}
-
-    %% PractitionerRole (portal-scoped)
-    Client ->> Portal: GET portal/fhir/PractitionerRole
-    Client ->> Portal: GET portal/fhir/PractitionerRole?service=HealthcareService/{healthcareServiceId}
-    Client ->> Portal: GET portal/fhir/PractitionerRole/{practitionerRoleId}
-
-    %% Organization (ServiceProvider / BillingOrganization)
-    Client ->> Portal: GET portal/fhir/Organization/{id}
-    Client ->> Portal: GET portal/fhir/Organization?identifier={system}|{value}
-    Client ->> Portal: GET portal/fhir/Organization?_id={id}
-
-    %% Location (Areas)
-    Client ->> Portal: GET portal/fhir/Location?physical-type={AreaCode}
+    %% Organization (ServiceProvider / Care context)
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/Organization
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/Organization/{id}?_summary={true|false}
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/Organization?identifier={tenantIdentifier}&_summary={true|false}
 
     %% Patient (endpoint-scoped)
     Client ->> Endpoint: GET {endpointId}/fhir/Patient
-    Client ->> Endpoint: GET {endpointId}/fhir/Patient?identifier={system}|{value}
 
-    %% Appointment (endpoint-scoped)
+    %% Appointment (portal + endpoint)
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/Appointment
     Client ->> Endpoint: GET {endpointId}/fhir/Appointment/{id}
     Client ->> Endpoint: GET {endpointId}/fhir/Appointment?actor=HealthcareService/{healthcareServiceId}
 
-    %% IHE Scheduling (endpoint-scoped, via WOF Connect)
+    %% IHE Scheduling
     Client ->> Endpoint: GET {endpointId}/fhir/Appointment/$find
     Client ->> Endpoint: POST {endpointId}/fhir/Appointment/$book
+
+    %% HealthcareService (portal-scoped)
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/HealthcareService
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/HealthcareService/{id}
+
+    %% Location (Areas)
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/Location?physicalType={AreaLiteral}
+
+    %% PractitionerRole (portal-scoped)
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/PractitionerRole
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/PractitionerRole?service=HealthcareService/{healthcareServiceId}
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/PractitionerRole/{practitionerRoleId}
+
+    %% ActivityDefinition (portal-scoped)
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/ActivityDefinition
+    Client ->> Portal: GET {{domain}}/{{tenant}}/1.0/R4/fhir/ActivityDefinition/{id}
 ```
 
 This diagram is informational and documents expected client usage.
