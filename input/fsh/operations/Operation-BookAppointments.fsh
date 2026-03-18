@@ -46,7 +46,7 @@ The Appointment to be created, modified, or cancelled.
   - Appointment.status is 'cancelled'
 """
 // in: appointment reference (alternative to full resource for create/modify/cancel) - IHE ITI
-* parameter[0].name = #appointment-reference
+* parameter[+].name = #appointment-reference
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "1"
