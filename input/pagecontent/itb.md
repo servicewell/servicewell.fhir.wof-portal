@@ -121,4 +121,29 @@ For patient login, we're using OIDC (OpenID Connect).
 
 ### FHIR interactions
 
+Simple flow explanation:
+
+1. Get booking context (`$getOffersContext`)  
+Scheduling client loads what can be booked, where it can be booked, and which practitioner roles are available.
+
+2. Find available times (`$find`)  
+The scheduling client asks for available appointment options in a given time range and receives proposed appointments.
+
+3. Book an appointment (`$book` create)  
+When the patient selects a time, the scheduling client sends a booking request and receives a booked appointment.
+
+4. Modify an appointment (`$book` modify)  
+If details are changed (for example time or practitioner), scheduling client sends an update for the existing appointment.
+
+5. Cancel an appointment (`$book` cancel)  
+If the patient cancels, the scheduling client sends a cancellation request and receives the cancelled appointment.
+
+6. Error handling  
+If something fails in `$find` or `$book`, the API returns an `OperationOutcome` with error details.
+
+{% include scheduling-flow.svg %}
+
+
+
 ### ITB Conformance resources
+
