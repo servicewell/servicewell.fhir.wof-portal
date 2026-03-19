@@ -31,7 +31,7 @@ Usage: #definition
 * parameter[=].min = 1
 * parameter[=].max = "1"
 * parameter[=].type = #Appointment
-* parameter[=].targetProfile = Canonical(WofConnectAppointment) // IHE ITI Appointment Profile
+* parameter[=].targetProfile = Canonical(AppointmentPortal) // IHE ITI Appointment Profile
 * parameter[=].documentation = """
 The Appointment to be created, modified, or cancelled.
 
@@ -52,7 +52,7 @@ The Appointment to be created, modified, or cancelled.
 * parameter[=].max = "1"
 * parameter[=].documentation = "A resource id for one of proposed Appointments returned by a prior $find operation (e.g., Resource/1234).  References can be to an absolute URL, but servers only perform this operation on their own appointments."
 * parameter[=].type = #Reference
-* parameter[=].targetProfile = Canonical(WofConnectAppointment) 
+* parameter[=].targetProfile = Canonical(AppointmentPortal) 
 
 // in: patient resource- IHE ITI
 * parameter[+].name = #patient-resource
