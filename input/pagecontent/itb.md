@@ -111,13 +111,29 @@ ___
 
 ---
 
-### Authentication
+### API Authentication
 
-#### API authentication
-For API access, standard API keys apply.
+For API access, standard API keys apply.  
 Contact servicewell support for api-keys
+
+The API endpoints are divided into two categories:  
+**system-authenticated endpoints,** which require a valid system token,  
+**patient-authenticated endpoints,** which require a patient token for authentication.
+
+---
+
+#### System authentication
+
+POST {% raw %}`{{baseUrl}}/{{tenant}}/1.0/R4/auth/system-token`{% endraw %} with header `X-ApiKey` and your api-key to get your system token. 
+
+Now you're able to access the rest of the [system-authenticated endpoints](file:///C:/Repos/SW/ImplementationGuides/servicewell.fhir.wof-portal/servicewell.fhir.wof-portal/output/CapabilityStatement-WOFPortalCapabilityStatement.html#client-interaction-overview)
+
+---
+
 #### Patient authentication
 For patient login, we're using OIDC (OpenID Connect).
+
+--- 
 
 ### FHIR interactions
 
