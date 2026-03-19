@@ -33,10 +33,11 @@ It answers the question: _“In which role, at which service location, and under
 
 * practitioner 1..1
   * ^short = "The individual practitioner"
-  * ^definition = "Reference to the Practitioner (person) performing services in this role. A single practitioner may have multiple PractitionerRolePortals across different service locations and billing contexts."
-* practitioner.reference 0..1
-  * ^short = "Literal reference to the Practitioner resource"
-  * ^definition = "A relative or absolute URL to the Practitioner resource."
+  * ^definition = "Identifier-based binding to the Practitioner logical model performing services in this role. Practitioner is not exposed as a standalone API resource in WOF Portal. Identifier systems are governed under the WofPortalIdentifierSystemRoot namespace."
+* practitioner.reference 0..0
+* practitioner.identifier 1..1
+  * ^short = "Identifier for the practitioner"
+  * ^definition = "Identifier-based reference to the Practitioner concept in the source system. See EndpointIdentifierSystemForPractitioner for expected identifier.system values."
 * practitioner.display 1..1
   * ^short = "Display name of the practitioner"
   * ^definition = "The human-readable name of the practitioner, used for display purposes."
@@ -52,17 +53,16 @@ It answers the question: _“In which role, at which service location, and under
   * ^definition = "The human-readable name of the service location, used for display purposes."
 
 * organization 1..1
-  * ^short = "Financially responsible organization"
-  * ^definition = "Reference to the BillingOrganizationPortal that is financially responsible for services performed in this role. Defines who owns invoicing, customer accounts, and statutory reporting."
-* organization.reference 0..1
-  * ^short = "Literal reference to the Organization resource"
-  * ^definition = "A relative or absolute URL to the BillingOrganization resource."
-* organization.display 1..1
+  * ^short = "Binding to the billing organization"
+  * ^definition = "Identifier-based binding to the BillingOrganization logical model that is financially responsible for services performed in this role. BillingOrganization is not exposed as a standalone API resource in WOF Portal. Identifier systems are governed under the WofPortalIdentifierSystemRoot namespace."
+* organization.reference 0..0
+* organization.identifier 1..1
+  * ^short = "Identifier for the billing organization"
+  * ^definition = "Identifier-based reference to the BillingOrganization concept in the source system. See EndpointIdentifierSystemForBillingOrganization for expected identifier.system values."
+* organization.display 0..1
   * ^short = "Display name of the billing organization"
   * ^definition = "The human-readable name of the billing organization, used for display purposes."
-* organization.type 0..1
-  * ^short = "Type qualifier for the organization reference"
-  * ^definition = "Optional type qualifier indicating the kind of organization being referenced."
+* organization.type 0..0
 
 * extension contains PractitionerRoleDescription named description 0..1
 * extension contains BinaryReference named binaryReference 0..1

@@ -17,17 +17,17 @@ are governed by this root.
 * uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system"
 
 
-Instance: EndpointForPractitionerIdentifierSystem
+Instance: EndpointIdentifierSystemForPractitioner
 InstanceOf: NamingSystem
 Usage: #definition
-* name = "EndpointForPractitionerIdentifierSystem"
+* name = "EndpointIdentifierSystemForPractitioner"
 * status = #active
 * kind = #root
 * description = """
 Root identifier namespace for Practitioner source-system primary keys per endpoint.
 
 Pattern:
-`https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-for-practitioner/{endpointId}`
+`https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner/{endpointId}`
 
 The `{endpointId}` part is the WOF Portal FHIR Endpoint id. If the source system needs to be identified, resolve the endpoint using:
 `fhir/Endpoint/[id]`
@@ -36,19 +36,19 @@ These identifiers are used for traceability to source records that do not exist 
 """
 * uniqueId[0].type = #uri
 * uniqueId[0].preferred = true
-* uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-for-practitioner"
+* uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner"
 
-Instance: EndpointForBillingOrganizationIdentifierSystem
+Instance: EndpointIdentifierSystemForBillingOrganization
 InstanceOf: NamingSystem
 Usage: #definition
-* name = "EndpointForBillingOrganizationIdentifierSystem"
+* name = "EndpointIdentifierSystemForBillingOrganization"
 * status = #active
 * kind = #root
 * description = """
 Root identifier namespace for billing-organization source-system primary keys per endpoint.
 
 Pattern:
-`https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-for-billingorganization/{endpointId}`
+`https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-billingorganization/{endpointId}`
 
 The `{endpointId}` part is the WOF Portal FHIR Endpoint id. If the source system needs to be identified, resolve the endpoint using:
 `fhir/Endpoint/[id]`
@@ -57,20 +57,20 @@ These identifiers are used for traceability to source records that do not exist 
 """
 * uniqueId[0].type = #uri
 * uniqueId[0].preferred = true
-* uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-for-billingorganization"
+* uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-billingorganization"
 
 
-Instance: EndpointForAppointmentIdentifierSystem
+Instance: EndpointIdentifierSystemForAppointment
 InstanceOf: NamingSystem
 Usage: #definition
-* name = "EndpointForAppointmentIdentifierSystem"
+* name = "EndpointIdentifierSystemForAppointment"
 * status = #active
 * kind = #root
 * description = """
 Root identifier namespace for Appointment source-system primary keys per endpoint.
 
 Pattern:
-`https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-for-appointment/{endpointId}`
+`https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment/{endpointId}`
 
 The `{endpointId}` part is the WOF Portal FHIR Endpoint id. If the source system needs to be identified, resolve the endpoint using:
 `fhir/Endpoint/[id]`
@@ -81,4 +81,4 @@ These identifiers are used for traceability to source records that do not exist 
 """
 * uniqueId[0].type = #uri
 * uniqueId[0].preferred = true
-* uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-for-appointment"
+* uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment"
