@@ -57,7 +57,7 @@ The Appointment to be created, modified, or cancelled.
 // in: patient resource- IHE ITI
 * parameter[+].name = #patient-resource
 * parameter[=].use = #in
-* parameter[=].min = 0
+* parameter[=].min = 1
 * parameter[=].max = "*"
 * parameter[=].documentation = "The Patient resource type is used to provide the patient information as known to the Scheduling client at the time of booking of the appointment."
 * parameter[=].type = #Patient
