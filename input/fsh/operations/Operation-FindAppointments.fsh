@@ -17,7 +17,7 @@ Usage: #definition
 * type = true
 * instance = false          // Not an instance-level operation
 * affectsState = false      // Read-only
-* base = "https://profiles.ihe.net/ITI/Scheduling/OperationDefinition/appointment-find"
+* base = Canonical(appointment-find) // from iti-findAppointment-operation
 
 * outputProfile = Canonical(WofConnectFindAppointment) // IHE ITI Scheduling Bundle Profile
 
@@ -59,6 +59,21 @@ If multiple values are supplied, the server MAY treat them as an OR or AND filte
 **Format:** `Practitioner/{id}`  
 
 **Example:** `?practitioner=Practitioner/1234`
+"""
+
+// IHE: location 0..* Reference(location)
+* parameter[+].name = #location
+* parameter[=].use = #in
+* parameter[=].min = 0
+* parameter[=].max = "*"
+* parameter[=].type = #Reference
+* parameter[=].targetProfile = Canonical(LocationArea)
+* parameter[=].documentation = """
+Restrict the search to Appointments at a specific location.
+
+**Format:** `Location/{id}`  
+
+**Example:** `?location=Location/1234`
 """
 
 // IHE: organization 0..* Reference(Organization)
