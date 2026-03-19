@@ -4,6 +4,7 @@ Usage: #definition
 * name = "WofPortalIdentifierSystemRoot"
 * status = #active
 * kind = #root
+* date = "2026-03-19"
 * description = """
 Root identifier namespace for all identifier systems defined within Service Well WOF Portal.
 
@@ -23,6 +24,7 @@ Usage: #definition
 * name = "EndpointIdentifierSystemForPractitioner"
 * status = #active
 * kind = #root
+* date = "2026-03-19"
 * description = """
 Root identifier namespace for Practitioner source-system primary keys per endpoint.
 
@@ -44,6 +46,7 @@ Usage: #definition
 * name = "EndpointIdentifierSystemForBillingOrganization"
 * status = #active
 * kind = #root
+* date = "2026-03-19"
 * description = """
 Root identifier namespace for billing-organization source-system primary keys per endpoint.
 
@@ -66,6 +69,7 @@ Usage: #definition
 * name = "EndpointIdentifierSystemForAppointment"
 * status = #active
 * kind = #root
+* date = "2026-03-19"
 * description = """
 Root identifier namespace for Appointment source-system primary keys per endpoint.
 

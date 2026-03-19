@@ -16,4 +16,4 @@ This logical model is referenced from `PractitionerRolePortal` using `organizati
 * ^status = #active
 
 * sourceIdentifier 1..1 Identifier "Source identifier" "Identifier-based traceability key for the billing organization in the source system. The identifier.system is expected to be rooted under the WofPortalIdentifierSystemRoot namespace and may be suffixed with a WOF Portal Endpoint id to distinguish source-system namespaces per endpoint."
-* display 0..1 string "Display name" "Human-readable display text for the billing organization. Mapped from source system""
+* display 0..1 string "Display name" "Human-readable display text for the billing organization. Mapped from source system"
