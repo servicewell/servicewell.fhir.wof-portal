@@ -38,7 +38,7 @@ WofPortal ITB provides a **shared booking layer** that:
 Patients and integrators interact with **one booking API** — not one per system.
 
 ---
-
+ 
 ### Our value proposition
 With WofPortal ITB, organizations gain:
 
