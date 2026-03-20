@@ -17,7 +17,7 @@ note over Client,Server
   what to book, with whom, and where, avoiding multiple round trips
 end note
 
-Client -> Server : POST [base]/ActivityDefinition/{id}/$getOffersContext\n(includeActivityDefinitionPortal, includeHealthcareServicePortal, includePractitionerRolePortal)
+Client -> Server : POST [base]/ActivityDefinition/{id}/$get-offers-context\n(includeActivityDefinitionPortal, includeHealthcareServicePortal, includePractitionerRolePortal)
 Server --> Client : 200 OK — **BundleOffersContextPortal** (searchset)\n ├─ ActivityDefinitionPortal  (what is being booked)\n ├─ HealthcareServicePortal    (where)\n ├─ PractitionerRolePortal     (who)\n └─ OfferPortal                (combination + booking rules)
 
 Patient <-- Client : Displays treatments, clinics, practitioners
