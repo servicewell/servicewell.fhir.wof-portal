@@ -126,7 +126,7 @@ The API endpoints are divided into two categories:
 
 POST {% raw %}`{{baseUrl}}/{{tenant}}/1.0/R4/auth/system-token`{% endraw %} with header `X-ApiKey` and your api-key to get your system token. 
 
-Now you're able to access the rest of the [system-authenticated endpoints](file:///C:/Repos/SW/ImplementationGuides/servicewell.fhir.wof-portal/servicewell.fhir.wof-portal/output/CapabilityStatement-WOFPortalCapabilityStatement.html#client-interaction-overview)
+Now you're able to access the rest of the [system-authenticated endpoints](./CapabilityStatement-WOFPortalCapabilityStatement.html#client-interaction-overview)
 
 ---
 

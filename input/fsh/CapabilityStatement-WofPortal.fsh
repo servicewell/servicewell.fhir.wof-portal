@@ -46,6 +46,15 @@ This CapabilityStatement documents the canonical behavior of the WOF Portal API.
 The following diagram illustrates outbound API calls from a patient-facing client
 to the WOF Portal Proxy. It represents actual usage patterns and supported interactions.
 
+Theres currently two domains for our dev-api:  
+- api.wellonfhir.se/{{tenant}}/1.0/R4/fhir      - Swedish developmnent environment
+- api-no.wellonfhir.se/{{tenant}}/1.0/R4/fhir   - Norwegian development environment
+
+<small> tenant is a stable identifier for the organization</small>
+
+Both Requires [authentication](./itb.html#api-authentication)
+
+
 Client → WOF-PORTAL:
 
 <style>
