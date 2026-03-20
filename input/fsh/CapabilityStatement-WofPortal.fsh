@@ -52,7 +52,7 @@ Theres currently two domains for our dev-api:
 
 <small> tenant is a stable identifier for the organization</small>
 
-Both Requires [authentication](./itb.html#api-authentication)
+Both Requires [authentication](./index.html#api-authentication)
 
 
 Client → WOF-PORTAL:
