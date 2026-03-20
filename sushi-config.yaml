@@ -5,9 +5,9 @@
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 id: servicewell.fhir.wof-portal
 canonical: https://canonical.fhir.link/servicewell/wof-portal
-name: Wof Portal IG
-title: Wof Portal
-description: Service Well's Wof portal - A Practical Blueprint for Upgrading Dental Care
+name: Wof Portal ITB 
+title: ITB - Online appointment booking service 
+description: Service Well's online appointment booking service - A Practical Blueprint for Upgrading Dental Care
 status: draft # draft | active | retired | unknown
 version: 0.8.1
 fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
@@ -57,14 +57,14 @@ dependencies:
 pages:
   index.md:
     title: Home
-  itb.md:
-    title: ITB
-  infowell.md:
-    title: Infowell
-  kundnojdhet.md:
-    title: Kundnöjdhet
-  varva-en-van.md:
-    title: Värva en vän
+#  itb.md:
+#    title: ITB
+#  infowell.md:
+#    title: Infowell
+#  kundnojdhet.md:
+#    title: Kundnöjdhet
+#  varva-en-van.md:
+#    title: Värva en vän
   #overview.md:
   #  title: Overview
   #getting-started.md:
@@ -103,13 +103,12 @@ pages:
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
   Home: index.html
-  Products:
-    ITB: itb.html
-    Infowell: infowell.html
-    Kundnöjdhet: kundnojdhet.html
-    Värva en vän: varva-en-van.html
+#  ITB: itb.html
+#  Infowell: infowell.html
+#  Kundnöjdhet: kundnojdhet.html
+#  Värva en vän: varva-en-van.html
   Artifacts: artifacts.html
-  OpenAPI: /openapi/swagger.html?spec=../output/WOFPortalCapabilityStatement.openapi.json
+#  OpenAPI: /openapi/swagger.html?spec=../output/WOFPortalCapabilityStatement.openapi.json
 
 # ╭───────────────────────────Less Common Implementation Guide Properties──────────────────────────╮
 # │  Uncomment the properties below to configure additional properties on the ImplementationGuide  │
