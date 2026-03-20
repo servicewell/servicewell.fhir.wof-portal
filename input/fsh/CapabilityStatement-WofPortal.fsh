@@ -152,7 +152,6 @@ It does not expand or modify the formal FHIR conformance rules.
 
 * rest.resource[+].type = #Organization
 * rest.resource[=].supportedProfile[+] = Canonical(ServiceProviderPortal)
-* rest.resource[=].supportedProfile[+] = Canonical(BillingOrganizationPortal)
 * rest.resource[=].documentation = """
 Organizations in WOF Portal MAY conform to multiple profiles, representing different organizational roles.
 

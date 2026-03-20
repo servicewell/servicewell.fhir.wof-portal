@@ -1,7 +1,7 @@
 {
    "package-id" : "servicewell.fhir.wof-portal",
-   "version" : "0.1.0",
-   "path" : "http://canonical.fhir.link/servicewell/wof-portal/0.1.0",
+   "version" : "0.8.1",
+   "path" : "http://canonical.fhir.link/servicewell/wof-portal/0.8.1",
    "mode" : "milestone",
    "status" : "draft",
    "sequence" : "Pre-Release",
