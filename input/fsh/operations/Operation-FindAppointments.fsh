@@ -17,7 +17,7 @@ Usage: #definition
 * type = true
 * instance = false          // Not an instance-level operation
 * affectsState = false      // Read-only
-* base = "https://profiles.ihe.net/ITI/Scheduling/OperationDefinition/appointment-find"
+* base = Canonical(appointment-find) // from iti-findAppointment-operation
 
 * outputProfile = Canonical(WofConnectFindAppointment) // IHE ITI Scheduling Bundle Profile
 
@@ -51,29 +51,49 @@ This parameter is mandatory as per IHE ITI Scheduling $find.
 * parameter[=].min = 0
 * parameter[=].max = "*"
 * parameter[=].type = #Reference
-* parameter[=].targetProfile = Canonical(WofConnectPractitioner)
 * parameter[=].documentation = """
 Restrict the search to Appointments where a specific Practitioner is the performer.
-If multiple values are supplied, the server MAY treat them as an OR or AND filter as documented by the implementation.
 
-**Format:** `Practitioner/{id}`  
+Practitioner is not exposed as a standalone API resource in WOF Portal. This parameter therefore uses a `Reference` with `identifier` populated for the logical Practitioner concept, instead of a resolvable FHIR resource reference.
 
-**Example:** `?practitioner=Practitioner/1234`
+This follows the IHE ITI-style parameter pattern where the parameter type remains `Reference`, but the logical target is carried using `Reference.identifier`.
+
+**Reference.identifier.system:** `https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner/{endpointId}`
+
+**Reference.identifier.value:** source-system primary key for the practitioner
 """
 
-// IHE: organization 0..* Reference(Organization)
+// IHE: location 0..* Reference(location)
+* parameter[+].name = #location
+* parameter[=].use = #in
+* parameter[=].min = 0
+* parameter[=].max = "*"
+* parameter[=].type = #Reference
+* parameter[=].targetProfile = Canonical(LocationArea)
+* parameter[=].documentation = """
+Restrict the search to Appointments at a specific location.
+
+**Format:** `Location/{id}`  
+
+**Example:** `?location=Location/1234`
+"""
+
+// Portal: organization 0..* Reference with identifier
 * parameter[+].name = #organization
 * parameter[=].use = #in
 * parameter[=].min = 0
 * parameter[=].max = "*"
 * parameter[=].type = #Reference
-* parameter[=].targetProfile = Canonical(BillingOrganizationPortal)
 * parameter[=].documentation = """
-Restrict the search to Appointments associated with a specific Organization (e.g., business/clinic owner).
+Restrict the search to Appointments associated with a specific billing organization.
 
-**Format:** `Organization/{id}`  
+BillingOrganization is not exposed as a standalone API resource in WOF Portal. This parameter therefore uses a `Reference` with `identifier` populated for the logical BillingOrganization concept, instead of a resolvable FHIR resource reference.
 
-**Example:** `?organization=Organization/1234`
+This follows the IHE ITI -style parameter pattern where the parameter type remains `Reference`, but the logical target is carried using `Reference.identifier`.
+
+**Reference.identifier.system:** `https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-billingorganization/{endpointId}`
+
+**Reference.identifier.value:** source-system primary key for the billing organization
 """
 // IHE: visit-type 0..* string (token)
 * parameter[+].name = #visit-type

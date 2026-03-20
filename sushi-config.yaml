@@ -9,7 +9,7 @@ name: Wof Portal ITB
 title: ITB - Online appointment booking service 
 description: Service Well's online appointment booking service - A Practical Blueprint for Upgrading Dental Care
 status: draft # draft | active | retired | unknown
-version: 0.1.0
+version: 0.8.1
 fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 language: en-US
 copyrightYear: 2025+

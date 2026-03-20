@@ -31,7 +31,7 @@ owned and operated by Service Well.
 
 ## Offer and availability principles
 - **Offer** represents a computed, context-specific view combining ActivityDefinition,
-  HealthcareService, and PractitionerRole.
+    HealthcareService, and PractitionerRole.
 - Offer is intended for presentation and selection, not for scheduling.
 - **Schedule** represents planned working time and SHALL NOT be treated as bookable availability.
 - Actual bookability requires downstream slot or availability checks.
@@ -46,53 +46,69 @@ This CapabilityStatement documents the canonical behavior of the WOF Portal API.
 The following diagram illustrates outbound API calls from a patient-facing client
 to the WOF Portal Proxy. It represents actual usage patterns and supported interactions.
 
+Theres currently two domains for our dev-api:  
+- api.wellonfhir.se/{{tenant}}/1.0/R4/fhir      - Swedish developmnent environment
+- api-no.wellonfhir.se/{{tenant}}/1.0/R4/fhir   - Norwegian development environment
+
+<small> tenant is a stable identifier for the organization</small>
+
+Both Requires [authentication](./itb.html#api-authentication)
+
 
 Client → WOF-PORTAL:
 
 <style>
-  .mermaid {
-    min-height: 600px;
-  }
+    .mermaid {
+        min-height: 640px;
+        width: 100%;
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+
+    .mermaid svg {
+        width: 100%;
+        height: auto;
+    }
 </style>
 
 ```mermaid
-sequenceDiagram
-    participant Client as Patient Client
-    participant Portal as WOF Portal Proxy
-    participant Endpoint as Tenant Endpoint
+%%{init: {'theme':'neutral','securityLevel':'loose','fontFamily':'Inter, Arial, sans-serif','sequence': {'diagramMarginX': 30, 'diagramMarginY': 20, 'actorMargin': 220, 'width': 180, 'messageMargin': 32, 'mirrorActors': false, 'wrap': true}}}%%sequenceDiagram
+    participant Client as Scheduling Client
+    participant Auth as Auth Endpoint
+    participant Portal as WOF Portal API
 
-    %% Organization (ServiceProvider / Care context)
-    Client ->> Portal: GET portal/fhir/Organization
-    Client ->> Portal: GET portal/fhir/Organization/{id}?_summary={true|false}
-    Client ->> Portal: GET portal/fhir/Organization?identifier={tenantIdentifier}&_summary={true|false}
+    Note over Client,Portal: basePath = {{baseUrl}}/{{tenant}}/{{apiVersion}}/R4/fhir
 
-    %% Patient (endpoint-scoped)
-    Client ->> Endpoint: GET {endpointId}/fhir/Patient
+    %% System token (from DemoOris.rest)
+    Client ->> Auth: POST {{basePath}}/auth/system-token
+    Note over Client,Auth: Header: X-ApiKey {{apiKey}}
+    Auth -->> Client: access_token
 
-    %% Appointment (portal + endpoint)
-    Client ->> Portal: GET portal/fhir/Appointment
-    Client ->> Endpoint: GET {endpointId}/fhir/Appointment/{id}
-    Client ->> Endpoint: GET {endpointId}/fhir/Appointment?actor=HealthcareService/{healthcareServiceId}
+    %% HealthcareService
+    Client ->> Portal: GET {{basePath}}/HealthcareService
+    Client ->> Portal: GET {{basePath}}/HealthcareService/{{healthcareServiceId}}
+    Client ->> Portal: GET {{basePath}}/HealthcareService/{{healthcareServiceId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includePractitionerRolePortal={{includePR}}
 
-    %% IHE Scheduling
-    Client ->> Endpoint: GET {endpointId}/fhir/Appointment/$find
-    Client ->> Endpoint: POST {endpointId}/fhir/Appointment/$book
+    %% Root operation
+    Client ->> Portal: GET {{basePath}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includeHealthcareServicePortal={{includeHS}}<br/>&includePractitionerRolePortal={{includePR}}
 
-    %% HealthcareService (portal-scoped)
-    Client ->> Portal: GET portal/fhir/HealthcareService
-    Client ->> Portal: GET portal/fhir/HealthcareService/{id}
+    %% ActivityDefinition
+    Client ->> Portal: GET {{basePath}}/ActivityDefinition
+    Client ->> Portal: GET {{basePath}}/ActivityDefinition/{{activityDefinitionId}}
+    Client ->> Portal: GET {{basePath}}/ActivityDefinition/{{activityDefinitionId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includeHealthcareServicePortal={{includeHS}}<br/>&includePractitionerRolePortal={{includePR}}
+    Client ->> Portal: GET {{basePath}}/ActivityDefinition/{{activityDefinitionId}}/$get-offers-context
 
-    %% Location (Areas)
-    Client ->> Portal: GET portal/fhir/Location?physicalType={AreaLiteral}
+    %% PractitionerRole
+    Client ->> Portal: GET {{basePath}}/PractitionerRole
+    Client ->> Portal: GET {{basePath}}/PractitionerRole/{{practitionerRoleId}}
+    Client ->> Portal: GET {{basePath}}/PractitionerRole/{{practitionerRoleId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includeHealthcareServicePortal={{includeHS}}<br/>&includePractitionerRolePortal={{includePR}}
 
-    %% PractitionerRole (portal-scoped)
-    Client ->> Portal: GET portal/fhir/PractitionerRole
-    Client ->> Portal: GET portal/fhir/PractitionerRole?service=HealthcareService/{healthcareServiceId}
-    Client ->> Portal: GET portal/fhir/PractitionerRole/{practitionerRoleId}
+    %% Catalog resources
+    Client ->> Portal: GET {{basePath}}/Location
+    Client ->> Portal: GET {{basePath}}/Organization
 
-    %% ActivityDefinition (portal-scoped)
-    Client ->> Portal: GET portal/fhir/ActivityDefinition
-    Client ->> Portal: GET portal/fhir/ActivityDefinition/{id}
+    %% IHE Scheduling find
+    Client ->> Portal: GET {{basePath}}/Appointment/$find<br/>?start={{find_start}}&end={{find_end}}<br/>&visit-type={{visitTypeSystem}}|{{visitTypeCode}}<br/>&healthcareService=HealthcareService/{{healthcareServiceId}}<br/>&practitionerRole=PractitionerRole/{{practitionerRoleId}}
 ```
 
 This diagram is informational and documents expected client usage.
@@ -145,7 +161,6 @@ It does not expand or modify the formal FHIR conformance rules.
 
 * rest.resource[+].type = #Organization
 * rest.resource[=].supportedProfile[+] = Canonical(ServiceProviderPortal)
-* rest.resource[=].supportedProfile[+] = Canonical(BillingOrganizationPortal)
 * rest.resource[=].documentation = """
 Organizations in WOF Portal MAY conform to multiple profiles, representing different organizational roles.
 

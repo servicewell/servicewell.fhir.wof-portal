@@ -67,8 +67,3 @@ Usage: #inline
 * name = "OSLO Mellansverige"
 * physicalType = urn:oid:2.16.840.1.113883.4.642.3.328#si
 * physicalType.text = "Area"
-
-Instance: ServiceProviderPortalExample
-InstanceOf: ServiceProviderPortal
-Usage: #inline
-* name = "Service-O"
