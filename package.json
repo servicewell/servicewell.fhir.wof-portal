@@ -1,6 +1,6 @@
 {
     "name": "servicewell.fhir.wof-portal",
-    "version": "0.1.0",
+    "version": "0.8.1",
     "type": "IG",
     "canonical": "http://canonical.fhir.link/servicewell/wof-portal",
     "url": "http://canonical.fhir.link/servicewell/wof-portal/ImplementationGuide/servicewell.fhir.wof-portal",
