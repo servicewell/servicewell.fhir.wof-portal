@@ -2,13 +2,8 @@
    "package-id" : "servicewell.fhir.wof-portal",
    "version" : "0.8.1",
    "path" : "http://canonical.fhir.link/servicewell/wof-portal/0.8.1",
-   "mode" : "milestone",
+   "mode" : "technical-correction",
    "status" : "draft",
    "sequence" : "Pre-Release",
-   "desc" : "Initial pre-release of WOF Portal IG.",
-   "first" : true,
-   "title" : "WOF Portal Implementation Guide",
-   "ci-build" : "https://build.fhir.org/ig/servicewell/servicewell.fhir.wof-portal",
-   "category" : "Infrastructure",
-   "introduction" : "Implementation Guide for WOF Portal made by Service Well."
+   "desc" : "Initial pre-release of WOF Portal IG."
 }
