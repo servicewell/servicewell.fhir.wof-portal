@@ -9,8 +9,7 @@ Usage: #definition
 * date = "2026-02-02T12:00:00+00:00"
 * description = "This CapabilityStatement defines the canonical domain model and API principles of the **WOF Portal**"
 * purpose = """
-This CapabilityStatement defines the canonical domain model and API principles of the **WOF Portal**,
-owned and operated by Service Well.
+This CapabilityStatement defines the canonical domain model and API principles of the **WOF Portal**, owned and operated by Service Well.
 
 **IHE Scheduling:** This server instantiates *IHE.Scheduling.server* (v1.0.0).
 

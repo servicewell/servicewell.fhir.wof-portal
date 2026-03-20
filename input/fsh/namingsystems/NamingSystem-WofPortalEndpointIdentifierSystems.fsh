@@ -86,3 +86,26 @@ These identifiers are used for traceability to source records that do not exist 
 * uniqueId[0].type = #uri
 * uniqueId[0].preferred = true
 * uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment"
+
+
+Instance: EndpointIdentifierSystemForPatient
+InstanceOf: NamingSystem
+Usage: #definition
+* name = "EndpointIdentifierSystemForPatient"
+* status = #active
+* kind = #root
+* date = "2026-03-19"
+* description = """
+Root identifier namespace for Patient source-system primary keys per endpoint.
+
+Pattern:
+`https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-patient/{endpointId}`
+
+The `{endpointId}` part is the WOF Portal FHIR Endpoint id. If the source system needs to be identified, resolve the endpoint using:
+`fhir/Endpoint/[id]`
+
+These identifiers are used for traceability to source records that do not exist as standalone FHIR instances in WOF Portal, and are therefore referenced using identifier-based references rather than FHIR references.
+"""
+* uniqueId[0].type = #uri
+* uniqueId[0].preferred = true
+* uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-patient"

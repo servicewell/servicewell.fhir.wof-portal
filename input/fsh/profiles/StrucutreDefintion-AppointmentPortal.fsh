@@ -4,7 +4,7 @@ Id: appointment-portal
 Title: "Appointment Portal"
 Description: "Appointment representation of a booked visit. Inherits IHE Scheduling Appointment."
 
-* participant 2..2
+* participant 3..3
 
 * participant ^slicing.discriminator.type = #profile
 * participant ^slicing.discriminator.path = "actor.resolve()"
@@ -16,4 +16,8 @@ Description: "Appointment representation of a booked visit. Inherits IHE Schedul
 
 * participant[healthcareService].actor only Reference(HealthcareServicePortal)
 * participant[practitionerRole].actor only Reference(PractitionerRolePortal)
-* participant[patient].actor only Reference(Patient)
+* participant[patient].actor.identifier 1..1
+* participant[patient].actor.identifier
+* participant[patient].actor.identifier ^short = "Patient identifier"
+* participant[patient].actor.identifier ^definition = "Identifier-based reference to the Patient in the source system. See EndpointIdentifierSystemForPatient for expected identifier.system values."
+* participant[patient].actor.reference 0..0

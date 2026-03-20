@@ -26,7 +26,7 @@ publisher:
 #
 dependencies:
   ihe.iti.scheduling: 1.0.0
-  servicewell.fhir.wof-connect: 0.1.1
+  servicewell.fhir.wof-connect: 0.1.2
 #   hl7.fhir.us.core: 3.1.0
 #   hl7.fhir.us.mcode:
 #     id: mcode
@@ -57,8 +57,8 @@ dependencies:
 pages:
   index.md:
     title: Home
-#  itb.md:
-#    title: ITB
+  get-started.md:
+    title: Getting Started - Using the WOF Portal FHIR API
 #  infowell.md:
 #    title: Infowell
 #  kundnojdhet.md:
@@ -103,7 +103,7 @@ pages:
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
   Home: index.html
-#  ITB: itb.html
+  Get Started: get-started.html
 #  Infowell: infowell.html
 #  Kundnöjdhet: kundnojdhet.html
 #  Värva en vän: varva-en-van.html
