@@ -69,4 +69,4 @@ It answers the question: _“Which service can be booked, by whom, and where —
 Invariant: offer-portal-offline-reason
 Description: "If isOnline is false, offlineReason must have a value."
 Severity: #error
-Expression: "parameter.where(name='offering').all(part.where(name='isOnline').valueBoolean = false implies (part.where(name='offlineReason').exists() and part.where(name='offlineReason').value.exists()))"
+Expression: "parameter.where(name='offering').all(part.where(name='isOnline').value.ofType(boolean) = false implies (part.where(name='offlineReason').exists() and part.where(name='offlineReason').value.exists()))"

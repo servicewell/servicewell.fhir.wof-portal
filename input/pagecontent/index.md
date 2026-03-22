@@ -73,4 +73,4 @@ In the backoffice you can, among other things:
 * Configure booking rules (e.g. age, minimum advance notice, rules for rescheduling/cancellation).
 * Control price display, images/banner, and various information/text fields shown in the patient interface.
 
-[Get startet](./get-started.html)
+[Get started](./get-started.html)

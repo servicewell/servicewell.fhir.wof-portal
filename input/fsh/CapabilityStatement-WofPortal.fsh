@@ -115,6 +115,7 @@ It does not expand or modify the formal FHIR conformance rules.
 """
 
 * kind = #capability
+* software.name = "WOF Portal"
 * fhirVersion = #4.0.1
 * format[+] = #json
 * format[+] = #xml

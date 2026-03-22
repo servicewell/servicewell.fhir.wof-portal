@@ -73,8 +73,6 @@ It answers the question: _“In which role, at which service location, and under
 
 // ---- Explicitly prohibited elements (not used in this profile) ----
 * implicitRules 0..0
-* language 0..0
-* text 0..0
 * modifierExtension 0..0
 * identifier 0..0
 * period 0..0

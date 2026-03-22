@@ -78,7 +78,6 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * extension[bookingRules] ^definition = "Container for healthcare-service-specific supporting payloads, including reusable booking-rules configuration."
 
 * implicitRules 0..0
-* language 0..0
 * text 0..1
 * modifierExtension 0..0
 * identifier 0..0
