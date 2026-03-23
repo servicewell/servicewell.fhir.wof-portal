@@ -1,39 +1,67 @@
-
-<br>
-
 This guide is written for **customers/partners** who want to integrate with the **WOF Portal ITB**, which exposes a **FHIR-based API**.
 
-
-<br>
-
-<br>
-
 ### Scope & user journey
+This section describes an **example booking journey** for a consumer-facing application using the Public API. The exact user interface, data-loading strategy, and order of steps are determined by the implementer.
 
+For example, some consumers may load clinics, treatments, and practitioners progressively as the patient makes selections, while others may preload this information using available API operations such as $get-offer-context. The API supports different implementation patterns.
 <div style="display:flex; gap:2rem; align-items:flex-start;">
   <div style="flex:1; min-width:0;">
-    <p><strong>1. Select clinic</strong><br/>The patient starts the booking by selecting a clinic. Clinics are shown in an overview (e.g., name, address, map), and the patient clicks the clinic they want to book with.</p>
+    <p><strong>1. Select clinic and/or treatment</strong><br/>The booking journey typically starts with the patient selecting a clinic, a treatment, or both. Clinics and treatments can be used as filters for each other, and the order in which they are presented is up to the implementer.</p>
 
-    <p><strong>2. Optional promo code</strong><br/>If the booking is made through a campaign, the patient enters a promo code in the designated field. If the code is valid, the campaign content is activated (e.g., certain clinics/treatments become available). If the code is invalid, an error message is displayed.</p>
-
-    <p><strong>3. Select treatment</strong><br/>After choosing a clinic, the patient sees the treatments available for online booking at that clinic, usually including the treatment name, duration, and a short description. The patient selects a treatment by clicking it.</p>
-
-    <p><strong>4. Select practitioner and time</strong><br/>The patient chooses a practitioner (or leaves it open to see availability for all practitioners) and then views available dates and times. When the patient selects a time slot, the selection is summarized and saved by proceeding to the next step.</p>
-
-    <p><strong>5. Confirm booking</strong><br/>The patient reviews a summary of their selections and confirms the booking by:</p>
+    <p>A consumer may, for example:</p>
     <ul>
-      <li>accepting the terms and conditions (checkbox/link to read them),</li>
-      <li>optionally choosing confirmation by SMS,</li>
-      <li>clicking Book appointment and identifying themselves with BankID.</li>
+      <li>present clinics first and then filter available treatments,</li>
+      <li>present treatments first and then filter available clinics,</li>
+      <li>allow the patient to refine both selections gradually.</li>
+    </ul>
+
+    <p>The patient should be able to view enough information to make a choice, such as clinic name and address, or treatment name, duration, and description.</p>
+
+    <p><strong>2. Optional promo or campaign code</strong><br/>If the booking flow supports campaign or promo codes, the implementer may use such a code to filter, highlight, or preselect relevant clinics or treatments.</p>
+
+    <p>How the code is handled in the user interface is implementation-specific. For example, it may be:</p>
+    <ul>
+      <li>entered manually by the patient,</li>
+      <li>provided through a campaign link,</li>
+      <li>applied automatically by the consumer system.</li>
+    </ul>
+
+    <p>If an invalid code is used, the consumer should present an appropriate error message or fallback behavior.</p>
+
+    <p><strong>3. Select practitioner</strong><br/>Before searching for available appointment slots, the consumer needs to have practitioner information available for the selected clinic and treatment combination. This information may already have been loaded earlier in the flow (for example through <code>$get-offers-context</code>), or it may be loaded at this stage.</p>
+
+    <p>In the current API version, practitioner selection is required when retrieving availability through <code>$find</code>. This means that if the consumer wants to show available slots across multiple practitioners, the consumer currently needs to query availability separately for each relevant practitioner.</p>
+
+    <p><strong>4. Select date and time</strong><br/>Available dates and time slots are retrieved based on the selected clinic, treatment, and practitioner.</p>
+
+    <p>Because availability is currently fetched per practitioner, consumers who want to present a broader availability view across multiple practitioners need to collect the results from multiple practitioner-specific queries and present them in a suitable way.</p>
+
+    <p>For example, a consumer may:</p>
+    <ul>
+      <li>show available time slots grouped by practitioner, allowing the patient to select from each practitioner's availability, or</li>
+      <li>combine the returned results into a list of unique time slots and then let the patient choose among the practitioners available at that time.</li>
+    </ul>
+
+    <p>The exact presentation is implementation-specific.</p>
+
+    <p><strong>5. Review and confirm booking</strong><br/>Before creating the booking, it is advisable to present the patient with a summary of the selected booking details, such as clinic, treatment, practitioner, and appointment time.</p>
+
+    <p>The exact confirmation flow is implementation-specific, but may include actions such as:</p>
+    <ul>
+      <li>accepting terms and conditions,</li>
+      <li>choosing whether to receive a confirmation message, if supported,</li>
+      <li>identifying the patient using BankID or another supported authentication method.</li>
     </ul>
 
     <p><strong>6. Booking confirmation</strong><br/>After the booking is completed, a confirmation page is shown. If the patient selected SMS confirmation, a message is sent to the phone number registered with the clinic. From the confirmation page, the patient can continue to My bookings.</p>
 
-    <p><strong>7. My bookings</strong><br/>In the patient portal under My bookings, the patient sees an overview of upcoming (and often previous) appointments. The patient can also manage bookings (e.g., reschedule/cancel) when allowed under the clinic’s rules.</p>
+    <p><strong>7. View and manage bookings</strong><br/>Viewing and managing bookings is a separate flow from the booking creation journey. A consumer may provide a view such as "My bookings", where the patient can see existing or upcoming appointments.</p>
+
+    <p>Depending on the implementation and the clinic's rules, the patient may also be allowed to reschedule or cancel an existing booking.</p>
   </div>
    <div style="flex:1 1 0; min-width:0;">
      <a href="#itb-journey-fullscreen" title="Click to enlarge" style="display:block"> 
-      <div class="itb-journey-thumb" style="height:612px; padding-left:40px;">
+      <div class="itb-journey-thumb">
         {% include itbpatientjourney.svg %}
       </div>
     </a>
@@ -46,13 +74,14 @@ This guide is written for **customers/partners** who want to integrate with the 
 .itb-journey-thumb {
   cursor: zoom-in;
   line-height: 0;
+  width: 100%;
+  min-height: 520px;
 }
 .itb-journey-thumb svg{
   display:block;
-  width:auto !important;
-  height:100%;     
-  max-width:100%;
-  max-height:100%;
+  width: 100% !important;
+  height: auto !important;
+  max-width: none;
 }
 #itb-journey-fullscreen {
   display:none;
@@ -66,6 +95,7 @@ This guide is written for **customers/partners** who want to integrate with the 
   display:flex;
 }
 #itb-journey-fullscreen .lightbox-content {
+  width: min(92vw, 1400px);
   max-width:90vw; max-height:90vh;
   overflow:auto;
   background:#fff;
@@ -73,9 +103,9 @@ This guide is written for **customers/partners** who want to integrate with the 
   border-radius:6px;
 }
 #itb-journey-fullscreen .lightbox-content svg {
-  width:100%;
-  height:auto;
-  max-width:1200px;
+  width: 100% !important;
+  height: auto !important;
+  max-width: none;
   display:block;
 }
 </style>
@@ -89,7 +119,7 @@ This guide is written for **customers/partners** who want to integrate with the 
 
 ### API Authentication/Security
 
-* **FHIR Base URL** (sandbox + production)
+* **BasePath URL** (sandbox + production)
 * **API key** (sandbox + production)
 * Any network/security constraints (e.g., IP allowlisting), if applicable
   
@@ -136,39 +166,49 @@ Typical header:
 
 
 ### FHIR interactions
+<table class="grid">
+  <thead>
+    <tr>
+      <th>OperationDefinition</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% include table-operationdefinitions.xhtml %}
+  </tbody>
+</table>
 
-Simple flow explanation:
+Simple (unordered)flow explanation:
 
-1. Get booking context (`$getOffersContext`)  
-Scheduling client loads what can be booked, where it can be booked, and which practitioner roles are available.
+* Get booking context (`$getOffersContext`)  <br>Scheduling client loads what can be booked, where it can be booked, and which practitioner roles are available.
 
-2. Find available times (`$find`)  
-The scheduling client asks for available appointment options in a given time range and receives proposed appointments.
+* Find available times (`$find`)  <br>The scheduling client asks for available appointment options in a given time range and receives proposed appointments.
 
-3. Book an appointment (`$book` create)  
-When the patient selects a time, the scheduling client sends a booking request and receives a booked appointment.
+* Book an appointment (`$book` create)  <br>When the patient selects a time, the scheduling client sends a booking request and receives a booked appointment.
 
-4. Modify an appointment (`$book` modify)  
-If details are changed (for example time or practitioner), scheduling client sends an update for the existing appointment.
+* Modify an appointment (`$book` modify)  <br>If details are changed (for example time or practitioner), scheduling client sends an update for the existing appointment.
 
-5. Cancel an appointment (`$book` cancel)  
-If the patient cancels, the scheduling client sends a cancellation request and receives the cancelled appointment.
+* Cancel an appointment (`$book` cancel)  <br>If the patient cancels, the scheduling client sends a cancellation request and receives the cancelled appointment.
 
-6. Error handling  
-If something fails in `$find` or `$book`, the API returns an `OperationOutcome` with error details.
+* Error handling  <br>If something fails in `$find` or `$book`, the API returns an `OperationOutcome` with error details.
 
-{% include scheduling-flow.svg %}
+<div id="itb-journey-fullscreen" onclick="window.location.hash='';">
+  <div class="lightbox-content" onclick="event.stopPropagation();">
+  {% include scheduling-flow.svg %}
+  </div>
+</div>
 
+---
 
 ### Step-by-step
 #### Step 1 — Verify API connectivity (API key)
 
-1. Configure your client with the **sandbox FHIR Base URL**.
-2. Call a standard FHIR endpoint using your API key.
+1. Configure your client with the **sandbox BasePath URL**.
+2. Call an endpoint using your API key.
 
 A common first call is:
-
-* `GET /metadata` (FHIR CapabilityStatement)
+ 
+* `GET [basepath]/metadata{?_format=[mime-type]}` to see the servers CapabilityStatement
 
 **Expected result:**
 
@@ -181,9 +221,9 @@ If you receive:
 
 ---
 
-#### Step 2 — Discover supported FHIR capabilities (`/metadata`)
+#### Step 2 — Discover supported FHIR capabilities 
 
-The `GET /metadata` response tells you:
+The `GET [basepath]/metadata` response tells you:
 
 * which FHIR resources are supported (e.g., Patient, Observation, etc.)
 * which interactions are supported (read/search/create/…)
@@ -216,21 +256,7 @@ You should support:
 
 #### Step 4 — Obtain patient context (patient identity / linkage)
 
-After sign-in you must determine *which patient* the access token applies to.
 
-This is typically done in one of two ways (follow the WOF setup you are given):
-
-##### Option A: Patient identifier is included in token claims
-
-You extract the patient identifier from a token claim such as:
-
-* `patient_id` (example), or
-* `sub` (if mapped to the patient identity), or
-* another agreed claim
-
-##### Option B: Retrieve the patient identifier via a “me” endpoint
-
-You call a dedicated endpoint using the access token to obtain the linked `Patient/{id}`.
 
 ---
 
@@ -238,8 +264,7 @@ You call a dedicated endpoint using the access token to obtain the linked `Patie
 
 Once you have a valid access token (and, if needed, a patient id), try:
 
-* `GET /Patient/{id}`
-* `GET /Observation?patient={id}`
+* `GET /Appointment?patient={id}`
 
 **Expected results:**
 
@@ -256,6 +281,25 @@ Once you have a valid access token (and, if needed, a patient id), try:
 
 ---
 
-
 ### ITB Conformance resources
+This section describes the contract model behind the API and how to use it when building an online booking website.
+
+Recommended way to read and use them:
+
+1. Start with [CapabilityStatement](./artifacts.html#behavior-capability-statements) to understand what is supported in this environment (interactions, search capabilities, and published operations).
+2. Continue with [OperationDefinitions](./artifacts.html#behavior-operation-definitions) to implement operation workflows correctly, including request parameters, response shape, and error outcomes.
+3. Use [profile](./artifacts.html#structures-resource-profiles) and extension artifacts as your payload rulebook for request/response validation and UI mapping.
+4. Use [logical models](./artifacts.html#structures-logical-models) as semantic guidance when mapping business concepts in your frontend/backend.
+5. Use [NamingSystem](./artifacts.html#terminology-naming-systems) to handle identifiers correctly (`system|value`) in search, filtering, and matching.
+6. Use [examples](./artifacts.html#example-example-instances) as implementation guidance and test fixtures, not as the source of truth.
+
+How to interpret priority:
+
+* **Treat `CapabilityStatement` + `OperationDefinition` as runtime truth.**
+* **Treat `StructureDefinition` as data truth.**
+* **Treat examples as guidance.**
+
+---
+
+You can find the complete resource list in the [Artifacts section](./artifacts.html)
 
