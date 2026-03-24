@@ -180,17 +180,20 @@ Typical header:
 
 Simple (unordered)flow explanation:
 
-* Get booking context (`$getOffersContext`)  <br>Scheduling client loads what can be booked, where it can be booked, and which practitioner roles are available.
+* Get booking context (`$getOffersContext`)  <br>Consumer  client loads the booking context needed to drive the bookingflow. The request can be altered to include services, where it can be booked, by which practitioner and the relationship between them.
 
-* Find available times (`$find`)  <br>The scheduling client asks for available appointment options in a given time range and receives proposed appointments.
+* Find available times (`$find`)  <br>The consumer client request available appointments whithin the specified search criterias and time frame options in a given time range and receives proposed appointments. In the current API version, availability is retrieved per practitioner, so practitioner information must be available before calling $find. This is aligned with the IHE "Find Potential Appointments" interaction.
 
-* Book an appointment (`$book` create)  <br>When the patient selects a time, the scheduling client sends a booking request and receives a booked appointment.
+* Book an appointment (`$book` create)  <br>After the patient selects a proposed time (appointment), the consumer application submits a $book request to create the booking. In this implementation, the request must always contain the full Appointment resource representing the appointment to be booked.
 
-* Modify an appointment (`$book` modify)  <br>If details are changed (for example time or practitioner), scheduling client sends an update for the existing appointment.
+* Modify an appointment (`$book` modify)  <br>The same `$book` operation is also used to modify an existing appointment. In this case, the consumer application submits the full Appointment resource for the existing booking, updated with the intended changes, such as a new time or practitioner. On success, the API returns the updated appointment. This matches the IHE model where $book can be triggered to modify an already booked appointment.
 
-* Cancel an appointment (`$book` cancel)  <br>If the patient cancels, the scheduling client sends a cancellation request and receives the cancelled appointment.
+* Cancel an appointment (`$book` cancel)  <br>If the patient cancels an appointment, the same $book operation is also used to cancel an existing appointment. To cancel a booking, the consumer application submits the full Appointment resource for the existing booking with the appropriate cancellation status set. On success, the API returns the cancelled appointment. In IHE Scheduling, cancellation is one of the defined trigger cases for $book, rather than a separate operation.
 
-* Error handling  <br>If something fails in `$find` or `$book`, the API returns an `OperationOutcome` with error details.
+* Error handling  <br>If something fails in `$find` or `$book` and a request cannot be fullfilled, the API returns an `OperationOutcome` with error details.
+
+**NOTE***
+For `$book`, a successful response returns a Bundle containing a single Appointment resource and may also include an OperationOutcome with supplemental information. An unsuccessful `$book` response returns only an OperationOutcome in the response Bundle.
 
 <div id="itb-journey-fullscreen" onclick="window.location.hash='';">
   <div class="lightbox-content" onclick="event.stopPropagation();">

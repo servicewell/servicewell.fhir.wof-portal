@@ -58,7 +58,7 @@ pages:
   index.md:
     title: Home
   get-started.md:
-    title: Getting Started - Using the WOF Portal FHIR API
+    title: Getting Started - Using the WOF Portal ITB FHIR API
 #  infowell.md:
 #    title: Infowell
 #  kundnojdhet.md:
