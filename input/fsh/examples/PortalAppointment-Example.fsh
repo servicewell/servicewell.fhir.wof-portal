@@ -1,0 +1,33 @@
+Instance: PortalAppointmentExample
+InstanceOf: PortalAppointment
+Usage: #example
+Title: "Example PortalAppointment"
+Description: "Example portal appointment with healthcare service, practitioner role, and patient participants."
+
+* id = "portal-appointment-1"
+* meta.source = "https://api.servicewell.se/wof-portal"
+* meta.profile[+] = Canonical(PortalAppointment)
+* status = #booked
+* extension[characteristic].extension[workflow].extension[deviceBookingAvailable].valueBoolean = true
+* extension[appointmentUpdate].extension[canBeRescheduled].valueBoolean = true
+* extension[appointmentUpdate].extension[canBeCancelled].valueBoolean = true
+* serviceType.coding.system = $service-type-id
+* serviceType.coding.code = #DENTALEX
+* serviceType.coding.display = "Dental Examination"
+* start = "2026-04-15T09:00:00+01:00"
+* end = "2026-04-15T09:30:00+01:00"
+* requestedPeriod.start = "2026-04-15T09:00:00+01:00"
+* requestedPeriod.end = "2026-04-15T09:30:00+01:00"
+
+* participant[healthcareService].actor.reference = "HealthcareService/19392e14-dea6-48eb-a7fb-08374ea5ffae"
+* participant[healthcareService].actor.display = "Tandvård City"
+* participant[healthcareService].status = #accepted
+
+* participant[practitionerRole].actor.reference = "PractitionerRole/practitioner-role-1"
+* participant[practitionerRole].actor.display = "Anna Andersson"
+* participant[practitionerRole].status = #accepted
+
+* participant[patient].actor.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-patient/550e8400-e29b-41d4-a716-446655440000"
+* participant[patient].actor.identifier.value = "1001"
+* participant[patient].actor.display = "Erik Svensson"
+* participant[patient].status = #accepted

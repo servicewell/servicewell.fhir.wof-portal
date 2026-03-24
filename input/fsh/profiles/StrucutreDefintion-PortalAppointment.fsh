@@ -1,12 +1,13 @@
-Profile: AppointmentPortal
+Profile: PortalAppointment
 Parent: WofConnectBookingAppointment
-Id: appointment-portal
+Id: portal-appointment
 Title: "Appointment Portal"
-Description: "Appointment representation of a booked visit. Inherits IHE Scheduling Appointment."
+Description: """ Appointment representation of a booked visit. Inherits IHE Scheduling Appointment.  
+The public API model for 'Portal Appointment"""
 
 * participant 3..3
 
-* participant ^slicing.discriminator.type = #profile
+* participant ^slicing.discriminator.type = #type
 * participant ^slicing.discriminator.path = "actor.resolve()"
 * participant ^slicing.rules = #open
 * participant ^slicing.description = ""
@@ -20,4 +21,5 @@ Description: "Appointment representation of a booked visit. Inherits IHE Schedul
 * participant[patient].actor.identifier
 * participant[patient].actor.identifier ^short = "Patient identifier"
 * participant[patient].actor.identifier ^definition = "Identifier-based reference to the Patient in the source system. See EndpointIdentifierSystemForPatient for expected identifier.system values."
-* participant[patient].actor.reference 0..0
+* participant[patient].actor.reference 0..0 MS
+
