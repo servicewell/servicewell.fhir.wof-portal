@@ -14,11 +14,11 @@ Description: "Representation of a patient in Wof-portal public API system."
 * identifier ^slicing.rules = #open
 * identifier contains personalNumber 1..1 MS and endpointId 1..1 MS
 * identifier[personalNumber].system 1..1 MS
-* identifier[personalNumber].system = Canonical(PersonalNumberIdentifierSystemForPatient) (exactly)
-* identifier[personalNumber].system obeys portal-personalnumber-system
+* identifier[personalNumber].system ^short = "Personal number identifier" 
+* identifier[personalNumber].system ^definition = "The namespace that identifies the type of personal identifier used to reference the patient. SHALL be a national patient identifier system appropriate for the patient's country of origin, such as a national person number or coordination number system. This aligns with the identifier systems accepted by the [PortalPatient](StructureDefinition-portal-patient.html) profile."
 * identifier[personalNumber].value 1..1 MS
 * identifier[personalNumber].value ^short = "Main identifier for the patient, typically a personalnumber but not limited to"
-* identifier[endpointId].system = Canonical(EndpointIdentifierSystemForPatient) (exactly)
+* identifier[endpointId].system ^short = "Identifier-based reference to the patient concept in the source system. See [EndpointIdentifierSystemForPatient](./EndpointIdentifierSystemForPatient.html) for expected identifier.system values."
 * identifier[endpointId].value 1..1 MS
 * identifier[endpointId].value ^short = "Source system identifier for the patient"
 
@@ -58,11 +58,6 @@ Description: "Patient consent to marketing communication."
 * ^url = "http://portal.wof.purified.link/fhir/StructureDefinition/extConsentToMarketing"
 * value[x] only boolean
 * valueBoolean 1..1 MS
-
-Invariant: portal-personalnumber-system
-Description: "Allowed identifier systems for personal number."
-Severity: #error
-Expression: "$this = 'urn:oid:2.16.578.1.12.4.1.4.1' or $this = 'urn:oid:2.16.578.1.12.4.1.4.2' or $this = 'urn:oid:2.16.578.1.12.4.1.4.3' or $this = 'urn:oid:2.16.578.1.12.4.1.4.4' or $this = 'urn:oid:2.16.578.1.12.4.1.4.5' or $this = 'urn:oid:1.2.752.129.2.1.3.1' or $this = 'urn:oid:1.2.752.129.2.1.3.3' or $this = 'http://electronichealth.se/identifier/personnummer'"
 
 Invariant: portal-mobile-or-empty-use
 Description: "Mobile phone use must be 'mobile' or not set."

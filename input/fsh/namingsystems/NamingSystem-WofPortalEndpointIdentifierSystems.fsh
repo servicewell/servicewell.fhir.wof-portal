@@ -65,17 +65,3 @@ Pattern: `https://canonical.fhir.link/servicewell/wof-portal/identifier-system/e
 * uniqueId[0].preferred = true
 * uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-patient"
 
-
-
-Instance: PersonalNumberIdentifierSystemForPatient
-InstanceOf: NamingSystem
-Usage: #definition
-* name = "PersonalNumberIdentifierSystemForPatient"
-* status = #active
-* kind = #root
-* date = "2026-03-19"
-* description = """Root identifier namespace for Patient source-system primary keys per endpoint.  
-Pattern: `https://canonical.fhir.link/servicewell/wof-portal/identifier-system/personal-number-identifier-system-for-patient/{pnrId}`"""
-* uniqueId[0].type = #uri
-* uniqueId[0].preferred = true
-* uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/personal-number-identifier-system-for-patient"

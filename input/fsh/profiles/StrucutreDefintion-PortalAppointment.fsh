@@ -5,6 +5,17 @@ Title: "Appointment Portal"
 Description: """ Appointment representation of a booked visit. Inherits IHE Scheduling Appointment.  
 The public API model for 'Portal Appointment"""
 
+* identifier ^slicing.discriminator.type = #value
+* identifier ^slicing.discriminator.path = "system"
+* identifier ^slicing.rules = #open
+* identifier ^slicing.description = ""
+* identifier ^slicing.ordered = false
+
+* identifier contains endpointId 1..1 MS
+* identifier[endpointId].system 1..1 
+* identifier[endpointId].system ^short = "Identifier-based reference to the Appointment concept in the source system. See [EndpointIdentifierSystemForAppointment](./EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
+* identifier[endpointId].value 1..1 MS
+
 * participant 3..3
 
 * participant ^slicing.discriminator.type = #type
@@ -18,8 +29,12 @@ The public API model for 'Portal Appointment"""
 * participant[healthcareService].actor only Reference(HealthcareServicePortal)
 * participant[practitionerRole].actor only Reference(PractitionerRolePortal)
 * participant[patient].actor.identifier 1..1
-* participant[patient].actor.identifier
-* participant[patient].actor.identifier ^short = "Patient identifier"
-* participant[patient].actor.identifier ^definition = "Identifier-based reference to the Patient in the source system. See EndpointIdentifierSystemForPatient for expected identifier.system values."
+* participant[patient].actor.identifier.value 1..1 MS
+* participant[patient].actor.identifier.value ^short = "personalnumber as reference to the Patient"
+* participant[patient].actor.identifier.system 1..1 MS
+* participant[patient].actor.identifier.system ^short = "Patient pnr identifier system | SHOULD be an identifier system from a national Patient profile."
+* participant[patient].actor.identifier.system ^definition = "The namespace that identifies the type of personal identifier used to reference the patient. SHALL be a national patient identifier system appropriate for the patient's country of origin, such as a national person number or coordination number system. This aligns with the identifier systems accepted by the [PortalPatient](StructureDefinition-portal-patient.html) profile."
+
+
 * participant[patient].actor.reference 0..0 MS
 
