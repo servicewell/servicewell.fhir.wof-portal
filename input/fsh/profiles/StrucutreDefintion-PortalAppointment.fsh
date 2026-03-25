@@ -34,8 +34,8 @@ Appointment representation of a booked visit or an available appointment. Appoin
 * participant[patient].actor.identifier.value 1..1 MS
 * participant[patient].actor.identifier.value ^short = "personalnumber as reference to the Patient"
 * participant[patient].actor.identifier.system 1..1 MS
-* participant[patient].actor.identifier.system ^short = "Patient pnr identifier system | SHOULD be an identifier system from a national Patient profile."
-* participant[patient].actor.identifier.system ^definition = "The namespace that identifies the type of personal identifier used to reference the patient. SHALL be a national patient identifier system appropriate for the patient's country of origin, such as a national person number or coordination number system. This aligns with the identifier systems accepted by the [PortalPatient](StructureDefinition-portal-patient.html) profile."
+* participant[patient].actor.identifier.system ^short = "Patient pnr identifier system | SHOULD be an identifier system from a national FHIR Patient profile."
+* participant[patient].actor.identifier.system ^definition = "The namespace that identifies the type of personal identifier used to reference the patient. Should be a identifier system from the patient's country of origin FHIR Patient profile, such as a national person number or coordination number system."
 
 
 * participant[patient].actor.reference 0..0 MS

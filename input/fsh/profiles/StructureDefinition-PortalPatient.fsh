@@ -15,7 +15,7 @@ Description: "Representation of a patient in Wof-portal public API system."
 * identifier contains personalNumber 1..1 MS and endpointId 1..1 MS
 * identifier[personalNumber].system 1..1 MS
 * identifier[personalNumber].system ^short = "Personal number identifier" 
-* identifier[personalNumber].system ^definition = "The namespace that identifies the type of personal identifier used to reference the patient. SHALL be a national patient identifier system appropriate for the patient's country of origin, such as a national person number or coordination number system. This aligns with the identifier systems accepted by the [PortalPatient](StructureDefinition-portal-patient.html) profile."
+* identifier[personalNumber].system ^definition = "The namespace that identifies the type of personal identifier used to reference the patient. Should be a identifier system from the patient's country of origin FHIR Patient profile, such as a national person number or coordination number system."
 * identifier[personalNumber].value 1..1 MS
 * identifier[personalNumber].value ^short = "Main identifier for the patient, typically a personalnumber but not limited to"
 * identifier[endpointId].system ^short = "Identifier-based reference to the patient concept in the source system. See [EndpointIdentifierSystemForPatient](./EndpointIdentifierSystemForPatient.html) for expected identifier.system values."
