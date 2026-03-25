@@ -8,6 +8,7 @@ Appointment representation of an available appointment.
 """
 
 * identifier 1..* MS
+* identifier.type insert Obligation($wof-portal-client-actor, #SHOULD:ignore)
 * identifier ^slicing.discriminator[0].type = #value
 * identifier ^slicing.discriminator[0].path = "type"
 * identifier ^slicing.rules = #open

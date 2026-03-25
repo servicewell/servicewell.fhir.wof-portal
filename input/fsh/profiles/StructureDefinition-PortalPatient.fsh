@@ -9,6 +9,7 @@ Description: "Representation of a patient in Wof-portal public API system."
 
 // Corresponds to PersonalNumber + PersonalNumberSystem
 * identifier 0..*
+* identifier.type insert Obligation($wof-portal-client-actor, #SHOULD:ignore)
 * identifier ^slicing.discriminator[0].type = #value
 * identifier ^slicing.discriminator[0].path = "type"
 * identifier ^slicing.rules = #open
