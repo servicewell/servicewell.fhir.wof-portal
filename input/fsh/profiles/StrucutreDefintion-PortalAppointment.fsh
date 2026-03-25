@@ -2,8 +2,10 @@ Profile: PortalAppointment
 Parent: WofConnectBookingAppointment
 Id: portal-appointment
 Title: "Appointment Portal"
-Description: """ Appointment representation of a booked visit. Inherits IHE Scheduling Appointment.  
-The public API model for 'Portal Appointment"""
+Description: """The public API model for 'Portal Appointment  
+Appointment representation of a booked visit or an available appointment. Appointment.status explains the context.  
+ Inherits IHE Scheduling Appointment.  
+"""
 
 * identifier ^slicing.discriminator.type = #value
 * identifier ^slicing.discriminator.path = "system"
