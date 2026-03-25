@@ -42,9 +42,9 @@ It answers the question: _“In which role, at which service location, and under
   * ^short = "Display name of the practitioner"
   * ^definition = "The human-readable name of the practitioner, used for display purposes."
 
-* healthcareService 1..*
+* healthcareService 1..1
   * ^short = "Service location where this role is performed"
-  * ^definition = "Reference to the HealthcareServicePortal where this practitioner performs services in this role. A practitioner may work at multiple HealthcareServicePortals."
+  * ^definition = "Reference to the HealthcareServicePortal where this practitioner performs services in this role. A practitioner may work at multiple HealthcareServicePortals but each practitioner-healthcareservice relation makes the practitionerrole unique."
 * healthcareService.reference 0..1
   * ^short = "Literal reference to the HealthcareService resource"
   * ^definition = "A relative or absolute URL to the HealthcareService resource."

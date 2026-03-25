@@ -58,7 +58,7 @@ pages:
   index.md:
     title: Home
   get-started.md:
-    title: Getting Started - Using the WOF Portal FHIR API
+    title: Getting Started - Using the WOF Portal ITB FHIR API
 #  infowell.md:
 #    title: Infowell
 #  kundnojdhet.md:
@@ -89,8 +89,8 @@ pages:
 # For parameters defined by the FHIR Tools IG see:
 # http://build.fhir.org/ig/FHIR/fhir-tools-ig/branches/master/CodeSystem-ig-parameters.html
 #
-# parameters:
-#   excludettl: true
+parameters:
+  excludettl: true
 #   validation: [allow-any-extensions, no-broken-links]
 #
 # ╭────────────────────────────────────────────menu.xml────────────────────────────────────────────╮
@@ -119,12 +119,12 @@ menu:
 # contact directly and follow the format outlined in the ImplementationGuide resource and
 # ContactDetail.
 #
-# contact:
-#   - name: Bob Smith
-#     telecom:
-#       - system: email # phone | fax | email | pager | url | sms | other
-#         value: bobsmith@example.org
-#         use: work
+contact:
+   - name: Service well
+     telecom:
+       - system: email # phone | fax | email | pager | url | sms | other
+         value: info@servicewell.se
+         use: work
 #
 #
 # The global property corresponds to the IG.global property, but it

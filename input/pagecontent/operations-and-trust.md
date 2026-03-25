@@ -31,23 +31,5 @@ The following service-level objectives (SLO) apply to the production environment
 * **Uptime dashboard** — An external status page is available for real-time and historical availability data. URL is provided during onboarding.
 * **Alerts** — The operations team monitors error rates, latency, and resource utilisation around the clock. Automated alerts trigger the incident process described below.
 
-### Incident handling
-
-Incidents are classified and handled according to the following severity levels:
-
-| Severity | Definition | Response time | Resolution target |
-|---|---|---|---|
-| **Critical** | Service unavailable or data integrity at risk | 15 min | 4 h |
-| **High** | Major functionality degraded | 30 min | 8 h |
-| **Medium** | Minor functionality degraded | 2 h | 24 h |
-| **Low** | Cosmetic or documentation issue | 1 business day | Best effort |
-
-**Incident workflow:**
-
-1. **Detection** — Automated monitoring or customer report.
-2. **Triage** — On-call engineer classifies severity.
-3. **Communication** — Affected parties are notified via status page and email.
-4. **Resolution** — Root cause is identified and a fix is deployed.
-5. **Post-mortem** — A written review is published for Critical and High incidents.
 
 To report an issue, contact the Service Well support team through the channel provided during onboarding.
