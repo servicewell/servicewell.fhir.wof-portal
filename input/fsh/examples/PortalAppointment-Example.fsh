@@ -7,6 +7,8 @@ Description: "Example portal appointment with healthcare service, practitioner r
 * id = "portal-appointment-1"
 * meta.source = "https://api.servicewell.se/wof-portal"
 * meta.profile[+] = Canonical(PortalAppointment)
+* identifier[endpointId].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment/550e8400-e29b-41d4-a716-446655440000"
+* identifier[endpointId].value = "apt-001"
 * status = #booked
 * extension[characteristic].extension[workflow].extension[deviceBookingAvailable].valueBoolean = true
 * extension[appointmentUpdate].extension[canBeRescheduled].valueBoolean = true
