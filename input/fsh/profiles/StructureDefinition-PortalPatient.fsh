@@ -10,17 +10,20 @@ Description: "Representation of a patient in Wof-portal public API system."
 // Corresponds to PersonalNumber + PersonalNumberSystem
 * identifier 0..*
 * identifier ^slicing.discriminator[0].type = #value
-* identifier ^slicing.discriminator[0].path = "system"
+* identifier ^slicing.discriminator[0].path = "type"
 * identifier ^slicing.rules = #open
-* identifier contains personalNumber 1..1 MS and endpointId 1..1 MS
+* identifier contains personalNumber 1..1 MS and endpointId 0..1 MS
 * identifier[personalNumber].system 1..1 MS
+* identifier[personalNumber].type.text = "National Personal identifier"
 * identifier[personalNumber].system ^short = "Personal number identifier" 
 * identifier[personalNumber].system ^definition = "The namespace that identifies the type of personal identifier used to reference the patient. Should be a identifier system from the patient's country of origin FHIR Patient profile, such as a national person number or coordination number system."
 * identifier[personalNumber].value 1..1 MS
 * identifier[personalNumber].value ^short = "Main identifier for the patient, typically a personalnumber but not limited to"
-* identifier[endpointId].system ^short = "Identifier-based reference to the patient concept in the source system. See [EndpointIdentifierSystemForPatient](./EndpointIdentifierSystemForPatient.html) for expected identifier.system values."
-* identifier[endpointId].value 1..1 MS
-* identifier[endpointId].value ^short = "Source system identifier for the patient"
+* identifier[endpointId].type.text = "source systems patient concept"
+* identifier[endpointId].system 1..1 MS
+* identifier[endpointId].system ^short = "Identifier-based reference to the Patient concept in the source system."
+* identifier[endpointId].system ^definition = "See [EndpointIdentifierSystemForPatient](./NamingSystem-EndpointIdentifierSystemForPatient.html) for expected identifier.system values."
+* identifier[endpointId].value ^short = "Source systems identifier for the patient"
 
 
 // Corresponds to Name, NameGiven, NameFamily

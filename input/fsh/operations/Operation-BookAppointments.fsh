@@ -59,7 +59,7 @@ The Appointment to be created, modified, or cancelled.
 * parameter[=].use = #in
 * parameter[=].min = 1
 * parameter[=].max = "*"
-* parameter[=].documentation = """The Patient is identified by their personal number.  System according to [PersonalNumberIdentifierSystemForPatient](NamingSystem-PersonalNumberIdentifierSystemForPatient.html) """
+* parameter[=].documentation = """The Patient is identified by their personal number.  | SHOULD be an identifier system from a national FHIR Patient profile. """
 * parameter[=].type = #Identifier
 
 

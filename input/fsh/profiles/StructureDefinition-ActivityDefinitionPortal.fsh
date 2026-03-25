@@ -87,12 +87,9 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * contained 0..0
 * modifierExtension 0..0
 * identifier 0..0
-* version 0..0
 * subtitle 0..0
 * experimental 0..0
 * subject[x] 0..0
-* publisher 0..0
-* contact 0..0
 * useContext 0..0
 * jurisdiction 0..0
 * purpose 0..0

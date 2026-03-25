@@ -3,33 +3,42 @@ Parent: WofConnectBookingAppointment
 Id: portal-appointment
 Title: "Appointment Portal"
 Description: """The public API model for 'Portal Appointment  
-Appointment representation of a booked visit or an available appointment. Appointment.status explains the context.  
+Appointment representation of a booked visit.
  Inherits IHE Scheduling Appointment.  
+
+ This profile is to be used in a patient context and where the appointment status is anything other than '#proposed'.
+
 """
 
-* identifier ^slicing.discriminator.type = #value
-* identifier ^slicing.discriminator.path = "system"
+* identifier 1..* MS
+* identifier ^slicing.discriminator[0].type = #value
+* identifier ^slicing.discriminator[0].path = "type"
 * identifier ^slicing.rules = #open
-* identifier ^slicing.description = ""
-* identifier ^slicing.ordered = false
-
 * identifier contains endpointId 1..1 MS
-* identifier[endpointId].system 1..1 
-* identifier[endpointId].system ^short = "Identifier-based reference to the Appointment concept in the source system. See [EndpointIdentifierSystemForAppointment](./EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
+* identifier[endpointId].type.text = "source systems appointment concept"
+* identifier[endpointId].system 1..1 MS
+* identifier[endpointId].system ^short = "Identifier-based reference to the Appointment concept in the source system."
+* identifier[endpointId].system ^definition = "See [EndpointIdentifierSystemForAppointment](./NamingSystem-EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
 * identifier[endpointId].value 1..1 MS
+* identifier[endpointId].value ^short = "Source systems identifier for the appointment"
 
 * participant 3..3
 
-* participant ^slicing.discriminator.type = #type
-* participant ^slicing.discriminator.path = "actor.resolve()"
+* participant ^slicing.discriminator.type = #value
+* participant ^slicing.discriminator.path = "actor.type"
 * participant ^slicing.rules = #open
 * participant ^slicing.description = ""
 * participant ^slicing.ordered = false
 
 * participant contains healthcareService 0..1 and practitionerRole 0..1 and patient 1..1
 
+* participant[healthcareService].actor.type = #HealthcareService
 * participant[healthcareService].actor only Reference(HealthcareServicePortal)
+
+* participant[practitionerRole].actor.type = #PractitionerRole
 * participant[practitionerRole].actor only Reference(PractitionerRolePortal)
+
+* participant[patient].actor.type = #Patient
 * participant[patient].actor.identifier 1..1
 * participant[patient].actor.identifier.value 1..1 MS
 * participant[patient].actor.identifier.value ^short = "personalnumber as reference to the Patient"

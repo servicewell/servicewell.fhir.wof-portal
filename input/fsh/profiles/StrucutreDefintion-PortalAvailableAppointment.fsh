@@ -7,20 +7,22 @@ Appointment representation of an available appointment.
  Inherits IHE Scheduling Appointment.  
 """
 
-* identifier ^slicing.discriminator.type = #value
-* identifier ^slicing.discriminator.path = "system"
+* identifier 1..* MS
+* identifier ^slicing.discriminator[0].type = #value
+* identifier ^slicing.discriminator[0].path = "type"
 * identifier ^slicing.rules = #open
-* identifier ^slicing.description = ""
-* identifier ^slicing.ordered = false
-
 * identifier contains endpointId 1..1 MS
-* identifier[endpointId].system 1..1 
-* identifier[endpointId].system ^short = "Identifier-based reference to the Appointment concept in the source system. See [EndpointIdentifierSystemForAppointment](./EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
+* identifier[endpointId].type.text = "source systems appointment concept"
+* identifier[endpointId].system 1..1 MS
+* identifier[endpointId].system ^short = "Identifier-based reference to the Appointment concept in the source system."
+* identifier[endpointId].system ^definition = "See [EndpointIdentifierSystemForAppointment](./NamingSystem-EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
 * identifier[endpointId].value 1..1 MS
+* identifier[endpointId].value ^short = "Source systems identifier for the appointment"
+
 
 
 * participant ^slicing.discriminator.type = #type
-* participant ^slicing.discriminator.path = "actor.resolve()"
+* participant ^slicing.discriminator.path = "actor"
 * participant ^slicing.rules = #open
 * participant ^slicing.description = ""
 * participant ^slicing.ordered = false

@@ -51,7 +51,7 @@ Theres currently two domains for our dev-api:
 
 <small> tenant is a stable identifier for the organization</small>
 
-Both Requires [authentication](./index.html#api-authentication)
+Both Requires [authentication](./get-started.html#authentication-and-security)
 
 
 Client → WOF-PORTAL:

@@ -91,6 +91,9 @@ pages:
 #
 parameters:
   excludettl: true
+  special-url:
+    - http://portal.wof.purified.link/fhir/StructureDefinition/LocationArea
+    - http://portal.wof.purified.link/fhir/StructureDefinition/extConsentToMarketing
 #   validation: [allow-any-extensions, no-broken-links]
 #
 # ╭────────────────────────────────────────────menu.xml────────────────────────────────────────────╮

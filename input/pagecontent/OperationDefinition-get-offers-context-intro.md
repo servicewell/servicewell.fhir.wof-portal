@@ -27,11 +27,6 @@ Those concerns belong to downstream availability/slot endpoints.
 - No Slot calculation
 - No guarantee that all returned practitioners are currently working
 
-
-## Operation name
-
-
-
 ## Endpoints
 The operation can be exposed at (at least) the following levels:
 

@@ -7,7 +7,7 @@ Description: "Example portal appointment with healthcare service, practitioner r
 * id = "portal-appointment-1"
 * meta.source = "https://api.servicewell.se/wof-portal"
 * meta.profile[+] = Canonical(PortalAppointment)
-* identifier[endpointId].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment/550e8400-e29b-41d4-a716-446655440000"
+* identifier[endpointId].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment/88883"
 * identifier[endpointId].value = "apt-001"
 * status = #booked
 * extension[characteristic].extension[workflow].extension[deviceBookingAvailable].valueBoolean = true
@@ -29,7 +29,7 @@ Description: "Example portal appointment with healthcare service, practitioner r
 * participant[practitionerRole].actor.display = "Anna Andersson"
 * participant[practitionerRole].status = #accepted
 
-* participant[patient].actor.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-patient/550e8400-e29b-41d4-a716-446655440000"
+* participant[patient].actor.identifier.system = "urn:oid:1.2.752.129.2.1.3.1"
 * participant[patient].actor.identifier.value = "1001"
 * participant[patient].actor.display = "Erik Svensson"
 * participant[patient].status = #accepted
