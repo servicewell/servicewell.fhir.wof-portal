@@ -13,15 +13,15 @@ Appointment representation of a booked visit.
 * identifier 1..* MS
 * identifier.type insert Obligation($wof-portal-client-actor, #SHOULD:ignore)
 * identifier ^slicing.discriminator[0].type = #value
-* identifier ^slicing.discriminator[0].path = "type"
+* identifier ^slicing.discriminator[0].path = "type.text"
 * identifier ^slicing.rules = #open
-* identifier contains endpointId 1..1 MS
-* identifier[endpointId].type.text = "source systems appointment concept"
-* identifier[endpointId].system 1..1 MS
-* identifier[endpointId].system ^short = "Identifier-based reference to the Appointment concept in the source system."
-* identifier[endpointId].system ^definition = "See [EndpointIdentifierSystemForAppointment](./NamingSystem-EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
-* identifier[endpointId].value 1..1 MS
-* identifier[endpointId].value ^short = "Source systems identifier for the appointment"
+* identifier contains sourceSystemIdentifier 1..1 MS
+* identifier[sourceSystemIdentifier].type.text = "source systems appointment concept"
+* identifier[sourceSystemIdentifier].system 1..1 MS
+* identifier[sourceSystemIdentifier].system ^short = "Identifier-based reference to the Appointment concept in the source system."
+* identifier[sourceSystemIdentifier].system ^definition = "See [EndpointIdentifierSystemForAppointment](./NamingSystem-EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
+* identifier[sourceSystemIdentifier].value 1..1 MS
+* identifier[sourceSystemIdentifier].value ^short = "Source systems identifier for the appointment"
 
 * participant 3..3
 
