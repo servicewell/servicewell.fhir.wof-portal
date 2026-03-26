@@ -26,7 +26,7 @@ publisher:
 #
 dependencies:
   ihe.iti.scheduling: 1.0.0
-  servicewell.fhir.wof-connect: current
+  servicewell.fhir.wof-connect: dev
 #   hl7.fhir.us.core: 3.1.0
 #   hl7.fhir.us.mcode:
 #     id: mcode

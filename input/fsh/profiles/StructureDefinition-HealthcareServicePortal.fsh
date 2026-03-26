@@ -20,16 +20,16 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * id 1..1 MS
 * id ^short = "Stable logical identifier for the healthcare service"
 * id ^definition = "The logical id of this HealthcareServicePortal resource. It identifies the specific care offering location instance within the portal."
-* meta.profile 0..*
 * meta.profile ^short = "Declared conformance to HealthcareServicePortal"
 * meta.profile ^definition = "Identifies that the resource conforms to the HealthcareServicePortal profile."
+* meta.profile MS
 
-* providedBy 1..1
 * providedBy only Reference(ServiceProviderPortal)
 * providedBy ^short = "Organization responsible for the healthcare service"
 * providedBy ^definition = "Reference to the top-level owning ServiceProviderPortal organization that owns the configuration, endpoints, and service structure for the customer, and is responsible for the healthcare service shown in the portal."
+* providedBy MS
 
-* name 1..1
+* name MS
 * name ^short = "Display name of the healthcare service"
 * name ^definition = "The human-readable name used to present the healthcare service in the portal."
 * active 1..1

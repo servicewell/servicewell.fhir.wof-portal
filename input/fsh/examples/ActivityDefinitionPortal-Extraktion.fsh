@@ -5,6 +5,7 @@ Title: "Example ActivityDefinitionPortal Dental Examination"
 Description: "Example ActivityDefinitionPortal resource for the patient-facing service concept Dental Examination."
 * meta.profile[+] = Canonical(ActivityDefinitionPortal)
 * meta.versionId = "1"
+* meta.tag.code = #serviceO
 * name = "DentalExamination"
 * title = "Dental Examination"
 * status = #active
@@ -15,5 +16,4 @@ Description: "Example ActivityDefinitionPortal resource for the patient-facing s
 * extension[campaigns].extension[campaign][0].valueCode = #CHRISTMAS_CHECKUP
 * extension[campaigns].extension[campaign][+].valueCode = #SPRING_CHECKUP
 * extension[campaigns].extension[campaign][+].valueCode = #SUMMER_CHECKUP
-* code.coding.system = $service-type-id
 * code.coding.code = #DENTALEX
