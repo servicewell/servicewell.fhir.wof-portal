@@ -1,5 +1,5 @@
 Profile: PractitionerRolePortal
-Parent: PractitionerRole
+Parent: WofConnectPractitionerRole
 Id: practitioner-role-portal
 Title: "PractitionerRolePortal"
 Description: """
@@ -15,7 +15,7 @@ It answers the question: _“In which role, at which service location, and under
   * ^short = "Resource identifier"
   * ^definition = "Unique identifier for this PractitionerRolePortal resource instance."
 
-* meta.profile 0..*
+* meta.profile
   * ^short = "Profile conformance declarations"
   * ^definition = "Asserts the profile(s) this resource conforms to."
 

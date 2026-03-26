@@ -1,5 +1,5 @@
 Profile: HealthcareServicePortal
-Parent: HealthcareService
+Parent: WofConnectHealthcareService
 Id: healthcare-service-portal
 Title: "HealthcareServicePortal"  
 Description: """
@@ -17,7 +17,6 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 
 * ^status = #active
 
-* id 1..1 MS
 * id ^short = "Stable logical identifier for the healthcare service"
 * id ^definition = "The logical id of this HealthcareServicePortal resource. It identifies the specific care offering location instance within the portal."
 * meta.profile ^short = "Declared conformance to HealthcareServicePortal"
@@ -80,7 +79,6 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * implicitRules 0..0
 * text 0..1
 * modifierExtension 0..0
-* identifier 0..0
 * category 0..0
 * type 0..0
 * specialty 0..0

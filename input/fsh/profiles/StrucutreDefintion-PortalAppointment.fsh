@@ -10,6 +10,7 @@ Appointment representation of a booked visit.
 
 """
 
+
 * identifier 1..* MS
 * identifier.type insert Obligation($wof-portal-client-actor, #SHOULD:ignore)
 * identifier ^slicing.discriminator[0].type = #value
@@ -39,14 +40,38 @@ Appointment representation of a booked visit.
 * participant[practitionerRole].actor.type = #PractitionerRole
 * participant[practitionerRole].actor only Reference(PractitionerRolePortal)
 
-* participant[patient].actor.type = #Patient
 * participant[patient].actor.identifier 1..1
 * participant[patient].actor.identifier.value 1..1 MS
 * participant[patient].actor.identifier.value ^short = "personalnumber as reference to the Patient"
 * participant[patient].actor.identifier.system 1..1 MS
 * participant[patient].actor.identifier.system ^short = "Patient pnr identifier system | SHOULD be an identifier system from a national FHIR Patient profile."
 * participant[patient].actor.identifier.system ^definition = "The namespace that identifies the type of personal identifier used to reference the patient. Should be a identifier system from the patient's country of origin FHIR Patient profile, such as a national person number or coordination number system."
+* participant[patient].status = #accepted
 
-
+* participant[patient].actor.type = #Patient
+* participant[patient].actor only Reference(PortalPatient)
 * participant[patient].actor.reference 0..0 MS
+
+* comment 0..1 MS
+
+
+// ---- Explicitly prohibited elements (not used in this profile) ----
+* implicitRules 0..0
+* modifierExtension 0..0
+* text 0..0
+* contained 0..0
+* cancelationReason 0..0
+* serviceCategory 0..0
+* specialty 0..0
+* appointmentType 0..0
+* reasonCode 0..0
+* reasonReference 0..0
+* priority 0..0
+* description 0..0
+* supportingInformation 0..0
+* minutesDuration 0..0
+* slot 0..0
+* created 0..0
+* patientInstruction 0..0
+* basedOn 0..0
 

@@ -32,4 +32,25 @@ Appointment representation of an available appointment.
 * participant[healthcareService].actor only Reference(HealthcareServicePortal)
 * participant[practitionerRole].actor only Reference(PractitionerRolePortal)
 
+// ---- Explicitly prohibited elements (not used in this profile) ----
+* implicitRules 0..0
+* modifierExtension 0..0
+* text 0..0
+* contained 0..0
+* cancelationReason 0..0
+* serviceCategory 0..0
+* specialty 0..0
+* appointmentType 0..0
+* reasonCode 0..0
+* reasonReference 0..0
+* priority 0..0
+* description 0..0
+* supportingInformation 0..0
+* minutesDuration 0..0
+* slot 0..0
+* created 0..0
+* comment 0..0
+* patientInstruction 0..0
+* basedOn 0..0
+
 
