@@ -117,50 +117,113 @@ For example, some consumers may load clinics, treatments, and practitioners prog
 
 ---
 
-### API Authentication/Security
+### Authentication and security
 
-* **BasePath URL** (sandbox + production)
-* **API key** (sandbox + production)
-* Any network/security constraints (e.g., IP allowlisting), if applicable
-  
-For API access, standard API keys apply.  
-Contact servicewell support for api-keys
+To use the Public API, the consumer must be provided with the relevant environment-specific connection and security details, such as:
 
-The API endpoints are divided into two categories:  
-**system-authenticated endpoints,** which require a valid system token,  
-**patient-authenticated endpoints,** which require a patient token for authentication.
+- FHIR Base URL for sandbox and production
+- API key for sandbox and production
+- any applicable network or security constraints, such as IP allowlisting (not currently needed)
 
----
+For API key provisioning and related access information, contact Service Well support.
+
+The API supports two authorization contexts:
+
+- **system-authenticated access**, where the consumer integration acts on its own behalf
+- **patient-authenticated access**, where the consumer acts on behalf of an authenticated patient
+
+Accordingly, API endpoints are divided into two categories:
+
+- **system-authenticated endpoints**, which require system-level authorization
+- **patient-authenticated endpoints**, which require patient authentication and patient context
+
+System tokens and patient tokens are separate access tokens issued through different authentication flows and representing different identities:
+
+- a **system token** represents the consumer integration
+- a **patient token** represents the authenticated patient
+
+At the same time, endpoint access is governed by granted scopes. Depending on the scopes granted during patient authentication, a patient token may also authorize operations that are otherwise available with a system token. For this reason, some endpoints may be callable with either token, provided that the required scopes are present.
+
+Even so, the recommended token choice remains scenario-dependent:
+
+- use a **system token** for integration-level access when no patient context is needed
+- use a **patient token** when acting on behalf of an authenticated patient
+
+System tokens may also be preferable for non-interactive backend usage, for example because they typically have a longer lifetime than patient tokens.
+
+Each endpoint must be called with an access token that provides the required scopes and, where applicable, patient context.
 
 #### System authentication
 
-POST {% raw %}`{{baseUrl}}/{{tenant}}/1.0/R4/auth/system-token`{% endraw %} with header `X-ApiKey` and your api-key to get your system token. 
+System authentication is used for API operations where the consumer integration accesses the API on its own behalf.
 
-Now you're able to access the rest of the [system-authenticated endpoints](./CapabilityStatement-WOFPortalCapabilityStatement.html#client-interaction-overview)
+To obtain a system token, call the system token endpoint using the assigned API key:
 
----
+```http
+POST {{baseUrl}}/{{tenant}}/1.0/R4/auth/system-token
+X-ApiKey: <API_KEY>
+```
+
+If the request is successful, the API returns a system token. This token is then used when calling system-authenticated endpoints.
+
+Example:
+
+```http
+Authorization: Bearer <SYSTEM_ACCESS_TOKEN>
+```
+
+The system token represents the consumer integration and is intended for integration-level access where patient context is not required.
 
 #### Patient authentication
-For patient login, we're using OIDC (OpenID Connect).
 
-**OIDC patient sign-in**
+Patient authentication is based on OpenID Connect (OIDC).
 
-* **OIDC Issuer URL** (identity provider base URL)
-* `client_id` (and possibly `client_secret`, depending on client type)
-* Registered/allowed `redirect_uri` values (you provide these to us)
-* Required **scopes** you should request
-* How **patient context** is provided (e.g., patient id in token claims vs. a “me” endpoint)
+For endpoints that require patient authentication, the consumer must authenticate the patient through the configured OIDC flow and obtain a patient access token from the identity provider.
 
+To support patient sign-in, the consumer must be configured with the required OIDC settings, including:
 
-##### Patient-authorized calls (OIDC access token)
+- OIDC issuer URL
+- `client_id`
+- `client_secret`, where applicable for confidential clients
+- registered `redirect_uri` values, provided by the consumer and registered by Service Well
+- required scopes to request during authentication (LÄNK TILL GILTIGA SCOPES KANSKE?)
 
-When a patient signs in via OIDC, you obtain an **access token**. Use it to call the FHIR API for patient-specific data.
+The consumer must also understand how patient context is established after authentication. Depending on the implementation, this may be provided either:
 
-Typical header:
+- directly in token claims, such as a patient identifier
+- through a dedicated endpoint, for example a `patient`-style endpoint (in development)
 
-* `Authorization: Bearer <ACCESS_TOKEN>`
+Although the same client configuration may support both system authentication and patient authentication, these flows produce different tokens for different authorization contexts.
 
-> In short: **API key = your integration identity**. **OIDC token = the patient’s authorized session**.
+##### Patient-authorized calls
+
+When a patient signs in successfully through OIDC, the consumer receives a patient access token representing the authenticated patient.
+
+This token is used when calling patient-authenticated API endpoints.
+
+Example:
+
+```http
+Authorization: Bearer <PATIENT_ACCESS_TOKEN>
+```
+
+The patient token authorizes access to patient-specific data and operations. Depending on the scopes granted during login, it may also authorize certain operations that are otherwise available using a system token.
+
+#### Summary
+
+In summary:
+
+- the **API key** is used to obtain a system token for the consumer integration
+- the **system token** represents the consumer integration and is typically used for system-authenticated endpoints
+- the **patient token** is obtained through OIDC login and represents the authenticated patient
+- endpoint access depends on the scopes granted to the presented token
+- a **patient token** can, if granted sufficient scopes, also be accepted for operations that do not require a system context
+
+The recommended usage is therefore:
+
+- use a **system token** for integration-level access without patient context
+- use a **patient token** when acting on behalf of a signed-in patient
+
 
 --- 
 
