@@ -26,7 +26,7 @@ publisher:
 #
 dependencies:
   ihe.iti.scheduling: 1.0.0
-  servicewell.fhir.wof-connect: 0.1.2
+  servicewell.fhir.wof-connect: dev
 #   hl7.fhir.us.core: 3.1.0
 #   hl7.fhir.us.mcode:
 #     id: mcode
@@ -91,6 +91,9 @@ pages:
 #
 parameters:
   excludettl: true
+  special-url:
+    - http://portal.wof.purified.link/fhir/StructureDefinition/LocationArea
+    - http://portal.wof.purified.link/fhir/StructureDefinition/extConsentToMarketing
 #   validation: [allow-any-extensions, no-broken-links]
 #
 # ╭────────────────────────────────────────────menu.xml────────────────────────────────────────────╮

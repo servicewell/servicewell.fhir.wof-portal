@@ -1,5 +1,5 @@
 Profile: ActivityDefinitionPortal
-Parent: ActivityDefinition
+Parent: WofConnectActivityDefinition
 Id: activity-definition-portal
 Title: "ActivityDefinitionPortal"
 Description: """
@@ -17,7 +17,7 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 
 // Allowed root elements first
 * meta 1..1
-* meta.profile 1..*
+* meta.profile 1..* MS
 * meta.profile ^short = "Profile declaration for this portal resource"
 * meta.profile ^definition = "Identifies that the resource conforms to ActivityDefinitionPortal so clients can safely process it as the WOF Portal service concept profile."
 * meta.profile insert Obligation($wof-portal-server-actor, #SHALL:populate)
@@ -26,24 +26,24 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * meta.versionId ^short = "Server-managed resource version"
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific ActivityDefinitionPortal instance."
 * meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* name 1..1
+* name 1..1 MS
 * name ^short = "Machine-friendly name for the service concept"
 * name ^definition = "A stable, machine-friendly name for the service concept represented by this ActivityDefinitionPortal."
 * name insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* title 1..1
+* title 1..1 MS
 * title ^short = "Human-readable title for the service"
 * title ^definition = "The user-facing title used to present the service concept in search results, booking flows, and other portal views."
 * title insert Obligation($wof-portal-server-actor, #SHALL:populate)
 * title insert Obligation($wof-portal-client-actor, #SHALL:handle)
-* status 1..1
+* status 1..1 MS
 * status ^short = "Publication status of the service concept"
 * status ^definition = "The lifecycle status of the ActivityDefinitionPortal definition, for example whether the service concept is active."
 * status insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* date 1..1
+* date 1..1 MS
 * date ^short = "Business version date for the definition"
 * date ^definition = "The publication or business version date for this service definition. Clients may use it to understand when the definition was last updated by the publisher."
 * date insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* description 1..1
+* description 1..1 MS
 * description ^short = "Presentation description of the service"
 * description ^definition = "A human-readable description of the service concept intended for presentation"
 * description insert Obligation($wof-portal-server-actor, #SHALL:populate)
@@ -59,14 +59,11 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * code MS
 * code ^short = "Booking activity code for the service"
 * code ^definition = "The business code that uniquely identifies the shared service concept. Booking and interoperability use this code rather than the FHIR resource id."
-* code.coding 1..1
+* code.coding 1..1 MS
 * code.coding ^short = "Coded representation of the service concept"
 * code.coding ^definition = "The coding that carries the booking activity code for the service concept."
-* code.coding.system 1..1
-* code.coding.system = $service-type-id (exactly)
 * code.coding.system ^short = "WOF Connect service type code system"
 * code.coding.system ^definition = "The coding system for the booking activity code. The server SHALL populate this with the WOF Connect service-type-id code system."
-* code.coding.code 1..1
 * code.coding.code ^short = "Service type identifier"
 * code.coding.code ^definition = "The code value that uniquely identifies the shared service concept within the WOF Connect service-type-id code system. This is the only coded value the client is required to populate."
 * code.coding.code insert Obligation($wof-portal-server-actor, #SHALL:populate)
@@ -87,12 +84,9 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * contained 0..0
 * modifierExtension 0..0
 * identifier 0..0
-* version 0..0
 * subtitle 0..0
 * experimental 0..0
 * subject[x] 0..0
-* publisher 0..0
-* contact 0..0
 * useContext 0..0
 * jurisdiction 0..0
 * purpose 0..0

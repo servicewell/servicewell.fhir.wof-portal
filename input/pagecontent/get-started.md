@@ -186,12 +186,31 @@ To support patient sign-in, the consumer must be configured with the required OI
 - `client_id`
 - `client_secret`, where applicable for confidential clients
 - registered `redirect_uri` values, provided by the consumer and registered by Service Well
-- required scopes to request during authentication (LÄNK TILL GILTIGA SCOPES KANSKE?)
+- required scopes to request during authentication.
+
+**Available scopes:**
+ - patient/Patient.read
+ - patient/Appointment.read
+ - patient/Appointment.write
+ - patient/$book.write
+ - system/Organization.read
+ - system/HealthcareService.read
+ - system/PractitionerRole.read
+ - system/ActivityDefinition.read
+ - system/$find.read
+ - system/$get-offers-context.read 
+
+**Requied scopes:**
+ - openid
+ - wof-profile
+ - PortalAccess
+
+---
 
 The consumer must also understand how patient context is established after authentication. Depending on the implementation, this may be provided either:
 
 - directly in token claims, such as a patient identifier
-- through a dedicated endpoint, for example a `patient`-style endpoint (in development)
+- through a dedicated endpoint, for example a `patient`-style endpoint
 
 Although the same client configuration may support both system authentication and patient authentication, these flows produce different tokens for different authorization contexts.
 

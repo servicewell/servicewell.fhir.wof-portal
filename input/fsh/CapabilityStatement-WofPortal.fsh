@@ -51,7 +51,7 @@ Theres currently two domains for our dev-api:
 
 <small> tenant is a stable identifier for the organization</small>
 
-Both Requires [authentication](./index.html#api-authentication)
+Both Requires [authentication](./get-started.html#authentication-and-security)
 
 
 Client → WOF-PORTAL:
@@ -150,13 +150,14 @@ It does not expand or modify the formal FHIR conformance rules.
 
 
 * rest.resource[+].type = #Patient
+* rest.resource[=].profile[+] = Canonical(PortalPatient)
 * rest.resource[=].supportedProfile[+] = "http://hl7.se/fhir/ig/base/StructureDefinition/SEBasePatient"
-* rest.resource[=].documentation = "Represents patients within the WOF Portal, conforming to the Swedish base patient profile."
+* rest.resource[=].documentation = "Represents patients within the WOF Portal, conforming to the PortalPatient profile."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
 * rest.resource[=].searchParam[+].name = "identifier"
 * rest.resource[=].searchParam[=].type = #token
-* rest.resource[=].searchParam[=].documentation = "Use system fro,m se base profile Http://"
+* rest.resource[=].searchParam[=].documentation = "Search by personal number using system|value."
 
 
 * rest.resource[+].type = #Organization
@@ -186,8 +187,28 @@ but profile-based filtering is not required for lookup by id or identifier.
 * rest.resource[=].searchParam[=].type = #token
 * rest.resource[=].searchParam[=].documentation = "Search by organization number using system|value."
 
-* rest.resource[+].type = #Schedule
-* rest.resource[=].documentation = "Represents planned working time, not bookable availability."
+* rest.resource[+].type = #Appointment
+* rest.resource[=].supportedProfile[+] = Canonical(PortalAppointment)
+* rest.resource[=].supportedProfile[+] = Canonical(PortalAvailableAppointment)
+* rest.resource[=].documentation = """
+Appointment access in WOF Portal.
+
+- `PortalAppointment` — represents a booked appointment in a patient context.
+- `PortalAvailableAppointment` — represents an available appointment returned by `$find`.
+
+Supports filtering by actor (e.g., HealthcareService/{id}) and IHE Scheduling operations.
+"""
+* rest.resource[=].interaction[+].code = #read
+* rest.resource[=].interaction[+].code = #search-type
+* rest.resource[=].searchParam[+].name = "actor"
+* rest.resource[=].searchParam[=].type = #reference
+* rest.resource[=].searchParam[=].documentation = "Filter appointments by participant actor (e.g., HealthcareService/{id})."
+* rest.resource[=].operation[+].name = "find"
+* rest.resource[=].operation[=].definition = Canonical(FindAppointments)
+* rest.resource[=].operation[=].documentation = "Search for available appointment opportunities using $find (IHE ITI Scheduling)."
+* rest.resource[=].operation[+].name = "book"
+* rest.resource[=].operation[=].definition = Canonical(BookAppointment)
+* rest.resource[=].operation[=].documentation = "Create, modify, or cancel an appointment using $book (IHE ITI Scheduling)."
 
 * rest.resource[+].type = #Location
 * rest.resource[=].documentation = "Portal-scoped locations used as areas. Supported interaction: search."

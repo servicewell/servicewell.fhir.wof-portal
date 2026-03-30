@@ -145,10 +145,13 @@ Restrict the search to a specific PractitionerRole.
 * parameter[=].min = 0
 * parameter[=].max = "1"
 * parameter[=].type = #Bundle
-* parameter[=].targetProfile = Canonical(wof-connect-find-appointment)
 * parameter[=].documentation = """
 On success, returns a Bundle that SHALL conform to ihe-sched-avail-bundle, containing the resulting Appointment:
 - status 'proposed' for available appointment opportunities (slots)
 
+Bundels conforming to ihe-sched-avail-bundle:
+- [wof-connect-find-appointment](http://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-find-appointment)
+- [ihe-sched-avail-bundle](https://profiles.ihe.net/ITI/Scheduling/StructureDefinition/ihe-sched-avail-bundle)
+- [portal-find-appointment-bundle](./StructureDefinition-portal-find-appointment-bundle.html)  
 If the operation fails, an OperationOutcome is returned instead of this parameter.
 """

@@ -4,9 +4,13 @@ Usage: #example
 Title: "Example HealthcareServicePortal"
 Description: "Example HealthcareServicePortal resource with clinic information and booking attachments."
 * meta.profile[+] = Canonical(HealthcareServicePortal)
+* meta.tag.code = #serviceO
+* identifier[businessIdentifier].system = "http://canonical.fhir.link/servicewell/wof-connect/CodeSystem/pms-system"
+* identifier[businessIdentifier].value = "12345"
 * contained[+] = adressId
 * contained[+] = AreaLocationExample
 * contained[+] = ServiceProviderPortalExample
+* contained[=].
 * extension[clinicInfo].extension[urlPlaceholder].valueString = "test"
 * extension[clinicInfo].extension[directions].valueString = "Directions to the clinic."
 * extension[clinicInfo].extension[parking].valueString = "Parking information."

@@ -8,7 +8,7 @@ Description: "Example PractitionerRolePortal representing a dentist acting under
 * meta.profile[+] = Canonical(PractitionerRolePortal)
 * active = true
 * code[+] = http://snomed.info/sct#106289002 "Dentist"
-* specialty[+] = http://snomed.info/sct#394812008 "Dental medicine"
+* specialty[+] = http://snomed.info/sct#394812008 "Dental medicine specialties"
 * practitioner.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner/550e8400-e29b-41d4-a716-446655440000"
 * practitioner.identifier.value = "1"
 * practitioner.display = "Anna Andersson"

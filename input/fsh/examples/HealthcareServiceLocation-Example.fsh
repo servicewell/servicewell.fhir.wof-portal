@@ -13,4 +13,4 @@ Description: "Example contained location payload for a HealthcareServicePortal r
 * physicalType.text = "Site"
 * position.longitude = 18.068457
 * position.latitude = 59.327026
-* partOf = Reference(Location/LocationAreaExample)
+* partOf = Reference(AreaLocationExample)
