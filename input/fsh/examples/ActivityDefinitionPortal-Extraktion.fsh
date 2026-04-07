@@ -12,6 +12,7 @@ Description: "Example ActivityDefinitionPortal resource for the patient-facing s
 * date = "2026-01-29"
 * description = "Dental examination"
 * kind = #ServiceRequest
+* code.coding[serviceTypeId].code = #akut
 * extension[sortKey].valueInteger = 10
 * extension[campaigns].extension[campaign][0].valueCode = #CHRISTMAS_CHECKUP
 * extension[campaigns].extension[campaign][+].valueCode = #SPRING_CHECKUP
