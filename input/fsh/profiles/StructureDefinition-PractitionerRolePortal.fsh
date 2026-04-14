@@ -1,5 +1,5 @@
 Profile: PractitionerRolePortal
-Parent: WofConnectPractitionerRole
+Parent: WofBasePractitionerRole
 Id: practitioner-role-portal
 Title: "PractitionerRolePortal"
 Description: """
@@ -27,7 +27,7 @@ It answers the question: _“In which role, at which service location, and under
   * ^short = "Role code"
   * ^definition = "The role(s) the practitioner performs in this context, e.g., the type of clinical or administrative function."
 
-* specialty 1..*
+* specialty 0..*
   * ^short = "Clinical specialty"
   * ^definition = "The clinical specialty of the practitioner in this role, used to categorize the type of care delivered."
 
@@ -64,8 +64,7 @@ It answers the question: _“In which role, at which service location, and under
   * ^definition = "The human-readable name of the billing organization, used for display purposes."
 * organization.type 0..0
 
-* extension contains PractitionerRoleDescription named description 0..1
-* extension contains BinaryReference named binaryReference 0..1
+
 
 * contained 0..*
   * ^short = "Contained Binary resources"
@@ -82,29 +81,3 @@ It answers the question: _“In which role, at which service location, and under
 * notAvailable 0..0
 * availabilityExceptions 0..0
 * endpoint 0..0
-
-Extension: PractitionerRoleDescription
-Id: ext-practitionerrole-description
-Title: "PractitionerRole Description"
-Description: "Description of the practitioner role."
-
-* ^status = #active
-* ^context.type = #element
-* ^context.expression = "PractitionerRole"
-
-* value[x] only string
-  * ^short = "Description text"
-  * ^definition = "A human-readable description of the practitioner role, providing additional context about the services or specialties offered in this role. Displayed to patients in booking and offer flows."
-
-Extension: BinaryReference
-Id: ext-binary-reference
-Title: "Binary Reference"
-Description: "Reference to a contained Binary resource."
-
-* ^status = #active
-* ^context.type = #element
-* ^context.expression = "PractitionerRole"
-
-* value[x] only Reference(Binary)
-  * ^short = "Reference to a contained Binary"
-  * ^definition = "A reference to a Binary resource contained inline in this PractitionerRole, typically carrying image data such as a practitioner photo."

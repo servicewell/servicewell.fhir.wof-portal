@@ -1,5 +1,5 @@
 Profile: HealthcareServicePortal
-Parent: WofConnectHealthcareService
+Parent: WofBaseHealthcareService
 Id: healthcare-service-portal
 Title: "HealthcareServicePortal"  
 Description: """
@@ -68,13 +68,15 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * contained ^short = "Contained resources used by the healthcare service"
 * contained ^definition = "Inline resources, such as a location, that are packaged together with the healthcare service example or representation."
 
-* extension contains ClinicInfo named clinicInfo 0..1
-* extension[clinicInfo] ^short = "Grouped clinic presentation information"
-* extension[clinicInfo] ^definition = "Portal-specific clinic information such as URL placeholder, directions, parking, about text, spoken languages, and booking summary information text."
+* identifier ^slicing.discriminator.type = #value
+* identifier ^slicing.discriminator.path = "system"
+* identifier ^slicing.rules = #open
 
-* extension contains BookingRules named bookingRules 0..1
-* extension[bookingRules] ^short = "Grouped booking-related attachments"
-* extension[bookingRules] ^definition = "Container for healthcare-service-specific supporting payloads, including reusable booking-rules configuration."
+* identifier contains businessIdentifier 0..1 MS
+* identifier[businessIdentifier].type.coding.code = #RI
+* identifier[businessIdentifier].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+
+
 
 * implicitRules 0..0
 * text 0..1

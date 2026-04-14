@@ -1,5 +1,5 @@
 Profile: PortalAppointment
-Parent: WofConnectBookingAppointment
+Parent: WofBaseAppointment
 Id: portal-appointment
 Title: "Appointment Portal"
 Description: """The public API model for 'Portal Appointment  
@@ -54,6 +54,11 @@ Appointment representation of a booked visit.
 
 * comment 0..1 MS
 
+* extension contains WofConnectCharacteristic named characteristic 0..1
+* extension contains WofConnectAppointmentUpdate named appointmentUpdate 0..1
+
+
+
 
 // ---- Explicitly prohibited elements (not used in this profile) ----
 * implicitRules 0..0
@@ -74,4 +79,20 @@ Appointment representation of a booked visit.
 * created 0..0
 * patientInstruction 0..0
 * basedOn 0..0
+
+* extension contains PortalConsentToMarketing named consentToMarketing 0..1 MS
+* extension[consentToMarketing] insert Obligation($wof-portal-server-actor, #SHOULD:populate)
+
+
+Extension: PortalConsentToMarketing
+Id: ext-consent-to-marketing
+Title: "Portal Consent To Marketing"
+Description: "Patient consent to marketing communication."
+* ^status = #draft
+* ^context[0].type = #element
+* ^context[0].expression = "Patient"
+* ^url = "http://portal.wof.purified.link/fhir/StructureDefinition/extConsentToMarketing"
+* value[x] only boolean
+* valueBoolean 1..1 MS
+
 

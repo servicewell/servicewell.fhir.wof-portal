@@ -1,5 +1,5 @@
 Profile: ActivityDefinitionPortal
-Parent: WofConnectActivityDefinition
+Parent: WofBaseActivityDefinition
 Id: activity-definition-portal
 Title: "ActivityDefinitionPortal"
 Description: """
@@ -26,10 +26,7 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * meta.versionId ^short = "Server-managed resource version"
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific ActivityDefinitionPortal instance."
 * meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* name 1..1 MS
-* name ^short = "Machine-friendly name for the service concept"
-* name ^definition = "A stable, machine-friendly name for the service concept represented by this ActivityDefinitionPortal."
-* name insert Obligation($wof-portal-server-actor, #SHALL:populate)
+
 * title 1..1 MS
 * title ^short = "Human-readable title for the service"
 * title ^definition = "The user-facing title used to present the service concept in search results, booking flows, and other portal views."
@@ -39,17 +36,17 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * status ^short = "Publication status of the service concept"
 * status ^definition = "The lifecycle status of the ActivityDefinitionPortal definition, for example whether the service concept is active."
 * status insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* date 1..1 MS
+* date 1..1 MS //bort?
 * date ^short = "Business version date for the definition"
 * date ^definition = "The publication or business version date for this service definition. Clients may use it to understand when the definition was last updated by the publisher."
 * date insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* description 1..1 MS
+* description 0..1 MS
 * description ^short = "Presentation description of the service"
 * description ^definition = "A human-readable description of the service concept intended for presentation"
 * description insert Obligation($wof-portal-server-actor, #SHALL:populate)
 * description insert Obligation($wof-portal-client-actor, #SHALL:handle)
 * kind 1..1
-* kind MS
+* kind MS //bort?
 * kind ^short = "Target request type for the service"
 * kind ^definition = "The request resource type represented by this service concept. In WOF Portal this is fixed to ServiceRequest."
 * kind = #ServiceRequest
@@ -65,24 +62,28 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * code.coding.system ^short = "WOF Connect service type code system"
 * code.coding.system ^definition = "The coding system for the booking activity code. The server SHALL populate this with the WOF Connect service-type-id code system."
 * code.coding.code ^short = "Service type identifier"
+
+* code.coding ^slicing.discriminator.type = #pattern
+* code.coding ^slicing.discriminator.path = "system"
+* code.coding ^slicing.rules = #open
+* code.coding ^slicing.description = ""
+* code.coding ^slicing.ordered = false
+
+* code.coding contains serviceTypeId 1..1
+
+
+* code.coding[serviceTypeId].code
+* code.coding[serviceTypeId].system = "http://canonical.fhir.link/servicewell/wof-connect/identifiercodesystem/service-type-id"
 * code.coding.code ^definition = "The code value that uniquely identifies the shared service concept within the WOF Connect service-type-id code system. This is the only coded value the client is required to populate."
 * code.coding.code insert Obligation($wof-portal-server-actor, #SHALL:populate)
 * code.coding.code insert Obligation($wof-portal-client-actor, #SHALL:handle)
 * code.coding.display 0..0
-* code.text 0..0
+* code.text 0..1
 * code insert Obligation($wof-portal-server-actor, #SHALL:populate)
 
-* extension contains SortKey named sortKey 0..1
-* extension[sortKey] ^short = "Portal-specific sort key"
-* extension[sortKey] ^definition = "Sort key used to order the service concept consistently in portal presentation."
-* extension contains Campaigns named campaigns 0..1
-* extension[campaigns] ^short = "Campaign identifiers for the service"
-* extension[campaigns] ^definition = "Campaign identifiers associated with the service concept, represented as repeated campaign codes."
 
 * implicitRules 0..0
 * language 0..0
-* contained 0..0
-* modifierExtension 0..0
 * identifier 0..0
 * subtitle 0..0
 * experimental 0..0
