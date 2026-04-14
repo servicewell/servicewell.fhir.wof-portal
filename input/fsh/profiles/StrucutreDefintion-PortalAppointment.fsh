@@ -56,7 +56,7 @@ Appointment representation of a booked visit.
 
 * extension contains WofConnectCharacteristic named characteristic 0..1
 * extension contains WofConnectAppointmentUpdate named appointmentUpdate 0..1
-
+* extension contains ActivityDefinitionReference named activityDefinitionReference 0..1
 
 
 

@@ -45,9 +45,14 @@ Appointment representation of an available appointment.
 * participant ^slicing.description = ""
 * participant ^slicing.ordered = false
 
-* participant contains healthcareService 0..1 and practitionerRole 0..1 and ad 0..1
+* participant contains healthcareService 0..1 and practitionerRole 0..1
 * participant[healthcareService].actor only Reference(HealthcareServicePortal)
 * participant[practitionerRole].actor only Reference(PractitionerRolePortal)
+
+* extension contains ActivityDefinitionReference named activityDefinitionReference 1..1
+
+
+
 
 // ---- Explicitly prohibited elements (not used in this profile) ----
 * implicitRules 0..0
