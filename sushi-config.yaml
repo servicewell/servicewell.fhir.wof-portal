@@ -9,7 +9,7 @@ name: Wof Portal ITB
 title: ITB - Online appointment booking service 
 description: Service Well's online appointment booking service - A Practical Blueprint for Upgrading Dental Care
 status: draft # draft | active | retired | unknown
-version: 0.8.1
+version: 0.9.0
 fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 language: en-US
 copyrightYear: 2025+
@@ -26,7 +26,6 @@ publisher:
 #
 dependencies:
   ihe.iti.scheduling: 1.0.0
-  servicewell.fhir.wof-connect: 0.1.3
 #   hl7.fhir.us.core: 3.1.0
 #   hl7.fhir.us.mcode:
 #     id: mcode
@@ -94,6 +93,22 @@ parameters:
   special-url:
     - http://portal.wof.purified.link/fhir/StructureDefinition/LocationArea
     - http://portal.wof.purified.link/fhir/StructureDefinition/extConsentToMarketing
+    - http://canonical.fhir.link/servicewell/wof-base/CodeSystem/cs-service-type
+    - http://canonical.fhir.link/servicewell/wof-base/ValueSet/vs-service-type
+    - http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wc-characteristic
+    - http://canonical.fhir.link/servicewell/wof-base/ValueSet/wc-characteristic-schedule
+    - http://canonical.fhir.link/servicewell/wof-base/ValueSet/wc-characteristic-sms
+    - http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wof-personal-number-system
+    - http://canonical.fhir.link/servicewell/wof-base/ValueSet/wof-personal-number-system-vs
+    - http://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-appointment-update
+    - http://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-appointment-characteristic
+    - http://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-list-reference
+    - https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-activity-definition
+    - https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-appointment
+    - https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-healthcare-service
+    - https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-patient
+    - https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-practitioner-role
+
 #   validation: [allow-any-extensions, no-broken-links]
 #
 # ╭────────────────────────────────────────────menu.xml────────────────────────────────────────────╮
@@ -168,7 +183,6 @@ resources:
     name: GetOfferingsResponse — only references
     description: Example of the GetOfferingsResponseBundle without entries for referenced resources
     exampleCanonical: https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/offer-portal
-
 
 # resources:
 #   Patient/my-example-patient:

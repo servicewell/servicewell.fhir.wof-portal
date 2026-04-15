@@ -19,7 +19,7 @@ Usage: #definition
 * affectsState = false      // Read-only
 * base = Canonical(appointment-find) // from iti-findAppointment-operation
 
-* outputProfile = Canonical(WofConnectFindAppointment) // IHE ITI Scheduling Bundle Profile
+* outputProfile = Canonical(portal-available-appointment) // IHE ITI Scheduling Bundle Profile
 
 // ---- Input parameters ----
 

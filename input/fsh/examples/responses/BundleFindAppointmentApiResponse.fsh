@@ -16,6 +16,7 @@ Instance: 001-2026-04-14T161500-B578-E505-R37
 InstanceOf: PortalAvailableAppointment
 Usage: #inline
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/portal-available-appointment"
+* extension[activityDefinitionReference].valueReference = Reference(ActivityDefinition/348eeb27-0e1a-4337-9f21-4e84dc5a3fd9) "Tannrens"
 * identifier[0].system = "http://canonical.fhir.link/servicewell/wof-connect/identifiercodesystem/slot-id"
 * identifier[=].value = "001-2026-04-14T16:15:00-B578-E505-R37"
 * identifier[+].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment/"
@@ -36,6 +37,7 @@ Instance: 001-2026-04-14T164500-B578-E505-R37
 InstanceOf: PortalAvailableAppointment
 Usage: #inline
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/portal-available-appointment"
+* extension[activityDefinitionReference].valueReference = Reference(ActivityDefinition/348eeb27-0e1a-4337-9f21-4e84dc5a3fd9) "Tannrens"
 * identifier[0].system = "http://canonical.fhir.link/servicewell/wof-connect/identifiercodesystem/slot-id"
 * identifier[=].value = "001-2026-04-14T16:45:00-B578-E505-R37"
 * identifier[+].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment/"
