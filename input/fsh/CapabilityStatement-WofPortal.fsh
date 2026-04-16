@@ -7,9 +7,8 @@ Usage: #definition
 * name = "WOFPortalCapabilityStatement"
 * title = "WOF Portal Capability Statement"
 * date = "2026-02-02T12:00:00+00:00"
-* description = "This CapabilityStatement defines the canonical domain model and API principles of the **WOF Portal**"
+* description = "This CapabilityStatement defines the canonical domain model and API principles of the **WOF Portal** owned and operated by Service Well AB."
 * purpose = """
-This CapabilityStatement defines the canonical domain model and API principles of the **WOF Portal**, owned and operated by Service Well.
 
 **IHE Scheduling:** This server instantiates *IHE.Scheduling.server* (v1.0.0).
 
@@ -32,7 +31,6 @@ This CapabilityStatement defines the canonical domain model and API principles o
 - **Offer** represents a computed, context-specific view combining ActivityDefinition,
     HealthcareService, and PractitionerRole.
 - Offer is intended for presentation and selection, not for scheduling.
-- **Schedule** represents planned working time and SHALL NOT be treated as bookable availability.
 - Actual bookability requires downstream slot or availability checks.
 
 ## Integration principle
@@ -46,8 +44,8 @@ The following diagram illustrates outbound API calls from a patient-facing clien
 to the WOF Portal Proxy. It represents actual usage patterns and supported interactions.
 
 Theres currently two domains for our dev-api:  
-- api.wellonfhir.se/{{tenant}}/1.0/R4/fhir      - Swedish developmnent environment
-- api-no.wellonfhir.se/{{tenant}}/1.0/R4/fhir   - Norwegian development environment
+- api.wellonfhir.se/{{tenant}}/1.0/R4      - Swedish developmnent environment
+- api-no.wellonfhir.se/{{tenant}}/1.0/R4   - Norwegian development environment
 
 <small> tenant is a stable identifier for the organization</small>
 
@@ -76,38 +74,38 @@ Client → WOF-PORTAL:
     participant Auth as Auth Endpoint
     participant Portal as WOF Portal API
 
-    Note over Client,Portal: basePath = {{baseUrl}}/{{tenant}}/{{apiVersion}}/R4/fhir
+    Note over Client,Portal: base = {{baseUrl}}/{{tenant}}/{{apiVersion}}/R4
 
     %% System token (from DemoOris.rest)
-    Client ->> Auth: POST {{basePath}}/auth/system-token
+    Client ->> Auth: POST {{base}}/auth/system-token
     Note over Client,Auth: Header: X-ApiKey {{apiKey}}
-    Auth -->> Client: access_token
+    Auth -->> Client: access_token (system)
 
     %% HealthcareService
-    Client ->> Portal: GET {{basePath}}/HealthcareService
-    Client ->> Portal: GET {{basePath}}/HealthcareService/{{healthcareServiceId}}
-    Client ->> Portal: GET {{basePath}}/HealthcareService/{{healthcareServiceId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includePractitionerRolePortal={{includePR}}
+    Client ->> Portal: GET {{base}}/fhir/HealthcareService
+    Client ->> Portal: GET {{base}}/fhir/HealthcareService/{{healthcareServiceId}}
+    Client ->> Portal: GET {{base}}/fhir/HealthcareService/{{healthcareServiceId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includePractitionerRolePortal={{includePR}}
 
     %% Root operation
-    Client ->> Portal: GET {{basePath}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includeHealthcareServicePortal={{includeHS}}<br/>&includePractitionerRolePortal={{includePR}}
+    Client ->> Portal: GET {{base}}/fhir/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includeHealthcareServicePortal={{includeHS}}<br/>&includePractitionerRolePortal={{includePR}}
 
     %% ActivityDefinition
-    Client ->> Portal: GET {{basePath}}/ActivityDefinition
-    Client ->> Portal: GET {{basePath}}/ActivityDefinition/{{activityDefinitionId}}
-    Client ->> Portal: GET {{basePath}}/ActivityDefinition/{{activityDefinitionId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includeHealthcareServicePortal={{includeHS}}<br/>&includePractitionerRolePortal={{includePR}}
-    Client ->> Portal: GET {{basePath}}/ActivityDefinition/{{activityDefinitionId}}/$get-offers-context
+    Client ->> Portal: GET {{base}}/fhir/ActivityDefinition
+    Client ->> Portal: GET {{base}}/fhir/ActivityDefinition/{{activityDefinitionId}}
+    Client ->> Portal: GET {{base}}/fhir/ActivityDefinition/{{activityDefinitionId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includeHealthcareServicePortal={{includeHS}}<br/>&includePractitionerRolePortal={{includePR}}
+    Client ->> Portal: GET {{base}}/fhir/ActivityDefinition/{{activityDefinitionId}}/$get-offers-context
 
     %% PractitionerRole
-    Client ->> Portal: GET {{basePath}}/PractitionerRole
-    Client ->> Portal: GET {{basePath}}/PractitionerRole/{{practitionerRoleId}}
-    Client ->> Portal: GET {{basePath}}/PractitionerRole/{{practitionerRoleId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includeHealthcareServicePortal={{includeHS}}<br/>&includePractitionerRolePortal={{includePR}}
+    Client ->> Portal: GET {{base}}/fhir/PractitionerRole
+    Client ->> Portal: GET {{base}}/fhir/PractitionerRole/{{practitionerRoleId}}
+    Client ->> Portal: GET {{base}}/fhir/PractitionerRole/{{practitionerRoleId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includeHealthcareServicePortal={{includeHS}}<br/>&includePractitionerRolePortal={{includePR}}
 
     %% Catalog resources
-    Client ->> Portal: GET {{basePath}}/Location
-    Client ->> Portal: GET {{basePath}}/Organization
+    Client ->> Portal: GET {{base}}/fhir/Location
+    Client ->> Portal: GET {{base}}/fhir/Organization
 
-    %% IHE Scheduling find
-    Client ->> Portal: GET {{basePath}}/Appointment/$find<br/>?start={{find_start}}&end={{find_end}}<br/>&visit-type={{visitTypeSystem}}|{{visitTypeCode}}<br/>&healthcareService=HealthcareService/{{healthcareServiceId}}<br/>&practitionerRole=PractitionerRole/{{practitionerRoleId}}
+    %% IHE Scheduling find 
+    Client ->> Portal: GET {{base}}/fhir/Appointment/$find<br/>?start={{find_start}}&end={{find_end}}<br/>&visit-type={{visitTypeSystem}}|{{visitTypeCode}}<br/>&healthcareService=HealthcareService/{{healthcareServiceId}}<br/>&practitionerRole=PractitionerRole/{{practitionerRoleId}}
 ```
 
 This diagram is informational and documents expected client usage.
