@@ -8,6 +8,18 @@ Description: """
 It answers the question: _“Which service can be booked, by whom, and where — and what are the booking-facing settings in that context?”_
 
 """
+
+
+* meta.profile 1..* MS
+* meta.profile ^short = "Profile declaration for this portal resource"
+* meta.profile ^definition = "Identifies that the resource conforms to OfferPortal so clients can safely process it as the WOF Portal service concept profile."
+* meta.profile insert Obligation($wof-portal-server-actor, #SHALL:populate)
+* meta.versionId 0..1
+* meta.versionId MS
+* meta.versionId ^short = "Server-managed resource version"
+* meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific OfferPortal instance."
+* meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
+
 * obeys offer-portal-offline-reason
 // -------------------- SLICE: parameter by name --------------------
 * parameter ^slicing.discriminator[0].type = #value

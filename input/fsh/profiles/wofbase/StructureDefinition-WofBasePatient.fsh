@@ -10,6 +10,17 @@ Description: "Base profile of wof Patient"
 * id MS
 * id ^short = "Internal identifier"
 
+* meta.profile 1..* MS
+* meta.profile ^short = "Profile declaration for this portal resource"
+* meta.profile ^definition = "Identifies that the resource conforms to WofBasePatient so clients can safely process it as the WOF Portal service concept profile."
+* meta.profile insert Obligation($wof-portal-server-actor, #SHALL:populate)
+* meta.versionId 0..1
+* meta.versionId MS
+* meta.versionId ^short = "Server-managed resource version"
+* meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific WofBasePatient instance."
+* meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
+
+
 // Corresponds to PersonalNumber + PersonalNumberSystem
 
 * identifier ^slicing.discriminator[0].type = #value

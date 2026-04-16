@@ -21,7 +21,7 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * meta.profile ^short = "Profile declaration for this portal resource"
 * meta.profile ^definition = "Identifies that the resource conforms to ActivityDefinitionPortal so clients can safely process it as the WOF Portal service concept profile."
 * meta.profile insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* meta.versionId 1..1
+* meta.versionId 0..1
 * meta.versionId MS
 * meta.versionId ^short = "Server-managed resource version"
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific ActivityDefinitionPortal instance."

@@ -11,6 +11,8 @@ It answers the question: _“In which role, at which service location, and under
 
 * ^status = #active
 
+
+
 * id 1..1
   * ^short = "Resource identifier"
   * ^definition = "Unique identifier for this PractitionerRolePortal resource instance."
@@ -18,6 +20,9 @@ It answers the question: _“In which role, at which service location, and under
 * meta.profile
   * ^short = "Profile conformance declarations"
   * ^definition = "Asserts the profile(s) this resource conforms to."
+
+* meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific PractitionerRolePortal instance."
+
 
 * active 1..1
   * ^short = "Whether this practitioner role is active"

@@ -9,6 +9,8 @@ Appointment representation of a booked visit.
  This profile is to be used in a patient context and where the appointment status is anything other than '#proposed'.
 
 """
+* meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific PortalAppointment instance."
+* meta.profile ^definition = "Identifies that the resource conforms to PortalAppointment so clients can safely process it as the WOF Portal service concept profile."
 
 
 * identifier 1..* MS

@@ -11,10 +11,16 @@ Description: "Base profile of wof HealthcareService"
 * ^status = #active
 
 * id ^short = "Stable logical identifier for the healthcare service"
-* id ^definition = "The logical id of this HealthcareServicePortal resource. It identifies the specific care offering location instance within the portal."
-* meta.profile ^short = "Declared conformance to HealthcareServicePortal"
-* meta.profile ^definition = "Identifies that the resource conforms to the HealthcareServicePortal profile."
-* meta.profile MS
+* id ^definition = "The logical id of this WofBaseHealthcareService resource. It identifies the specific care offering location instance within the portal."
+* meta.profile 1..* MS
+* meta.profile ^short = "Profile declaration for this portal resource"
+* meta.profile ^definition = "Identifies that the resource conforms to WofBaseHealthcareService so clients can safely process it as the WOF Portal service concept profile."
+* meta.profile insert Obligation($wof-portal-server-actor, #SHALL:populate)
+* meta.versionId 0..1
+* meta.versionId MS
+* meta.versionId ^short = "Server-managed resource version"
+* meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific WofBaseHealthcareService instance."
+* meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
 
 * providedBy ^short = "Organization responsible for the healthcare service"
 * providedBy ^definition = "Reference to the top-level owning ServiceProviderPortal organization that owns the configuration, endpoints, and service structure for the customer, and is responsible for the healthcare service shown in the portal."

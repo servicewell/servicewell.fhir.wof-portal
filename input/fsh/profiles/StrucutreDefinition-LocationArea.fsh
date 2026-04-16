@@ -15,9 +15,16 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * ^url = "http://portal.wof.purified.link/fhir/StructureDefinition/LocationArea"
 * ^status = #active
 
-* meta.profile 0..*
-* meta.profile ^short = "Declared conformance to LocationArea"
-* meta.profile ^definition = "Identifies that the resource conforms to the LocationArea profile."
+
+* meta.profile 1..* MS
+* meta.profile ^short = "Profile declaration for this portal resource"
+* meta.profile ^definition = "Identifies that the resource conforms to LocationArea so clients can safely process it as the WOF Portal service concept profile."
+* meta.profile insert Obligation($wof-portal-server-actor, #SHALL:populate)
+* meta.versionId 0..1
+* meta.versionId MS
+* meta.versionId ^short = "Server-managed resource version"
+* meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific LocationArea instance."
+* meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
 
 * id 1..1
 * id ^short = "Stable logical identifier for the area"

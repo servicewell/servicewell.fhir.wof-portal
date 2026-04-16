@@ -11,12 +11,12 @@ Description: "Base profile of wof ActivityDefinition"
 * meta 1..1
 * meta.profile 1..* MS
 * meta.profile ^short = "Profile declaration for this portal resource"
-* meta.profile ^definition = "Identifies that the resource conforms to ActivityDefinitionPortal so clients can safely process it as the WOF Portal service concept profile."
+* meta.profile ^definition = "Identifies that the resource conforms to WofBaseActivityDefinition so clients can safely process it as the WOF Portal service concept profile."
 * meta.profile insert Obligation($wof-portal-server-actor, #SHALL:populate)
-* meta.versionId 1..1
+* meta.versionId 0..1
 * meta.versionId MS
 * meta.versionId ^short = "Server-managed resource version"
-* meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific ActivityDefinitionPortal instance."
+* meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific WofBaseActivityDefinition instance."
 * meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
 
 
@@ -28,7 +28,7 @@ Description: "Base profile of wof ActivityDefinition"
 * title insert Obligation($wof-portal-client-actor, #SHALL:handle)
 * status 1..1 MS
 * status ^short = "Publication status of the service concept"
-* status ^definition = "The lifecycle status of the ActivityDefinitionPortal definition, for example whether the service concept is active."
+* status ^definition = "The lifecycle status of the WofBaseActivityDefinition definition, for example whether the service concept is active."
 * status insert Obligation($wof-portal-server-actor, #SHALL:populate)
 * date 1..1 MS //bort?
 * date ^short = "Business version date for the definition"

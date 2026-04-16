@@ -12,13 +12,19 @@ Description: "Base profile of wof PractitionerRole"
   * ^short = "Resource identifier"
   * ^definition = "Unique identifier for this PractitionerRolePortal resource instance."
 
-* meta.profile
-  * ^short = "Profile conformance declarations"
-  * ^definition = "Asserts the profile(s) this resource conforms to."
+* meta.profile 1..* MS
+* meta.profile ^short = "Profile declaration for this portal resource"
+* meta.profile ^definition = "Identifies that the resource conforms to WofBasePractitionerRole so clients can safely process it as the WOF Portal service concept profile."
+* meta.profile insert Obligation($wof-portal-server-actor, #SHALL:populate)
+* meta.versionId 0..1
+* meta.versionId MS
+* meta.versionId ^short = "Server-managed resource version"
+* meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific WofBasePractitionerRole instance."
+* meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
 
 * active 1..1
   * ^short = "Whether this practitioner role is active"
-  * ^definition = "Indicates whether this PractitionerRolePortal is currently active and available for booking, offers, and service-specific configuration."
+  * ^definition = "Indicates whether this WofBasePractitionerRole is currently active and available for booking, offers, and service-specific configuration."
 
 * code 1..*
   * ^short = "Role code"

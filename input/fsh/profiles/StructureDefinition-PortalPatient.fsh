@@ -7,6 +7,9 @@ Description: "Representation of a patient in Wof-portal public API system."
 * id MS
 * id ^short = "Internal identifier"
 
+* meta.profile ^definition = "Identifies that the resource conforms to PortalPatient so clients can safely process it as the WOF Portal service concept profile."
+* meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific PortalPatient instance."
+
 * extension contains PortalConsentToMarketing named consentToMarketing 0..1
 
 // Corresponds to PersonalNumber + PersonalNumberSystem

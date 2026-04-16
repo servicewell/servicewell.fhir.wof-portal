@@ -8,7 +8,16 @@ Description: "Base profile of wof Appointment. Inherits IHE Scheduling Appointme
 * ^url = "https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-appointment"
 
 
-* meta.profile 1..*
+* meta.profile 1..* MS
+* meta.profile ^short = "Profile declaration for this portal resource"
+* meta.profile ^definition = "Identifies that the resource conforms to WofBaseAppointment so clients can safely process it as the WOF Portal service concept profile."
+* meta.profile insert Obligation($wof-portal-server-actor, #SHALL:populate)
+* meta.versionId 0..1
+* meta.versionId MS
+* meta.versionId ^short = "Server-managed resource version"
+* meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific WofBaseAppointment instance."
+* meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
+
 * serviceType 
 * identifier 1..* MS
 * status 1..1
