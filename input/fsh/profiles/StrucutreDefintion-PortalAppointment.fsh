@@ -9,6 +9,8 @@ Appointment representation of a booked visit.
  This profile is to be used in a patient context and where the appointment status is anything other than '#proposed'.
 
 """
+* meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific PortalAppointment instance."
+* meta.profile ^definition = "Identifies that the resource conforms to PortalAppointment so clients can safely process it as the WOF Portal service concept profile."
 
 
 * identifier 1..* MS
@@ -54,8 +56,8 @@ Appointment representation of a booked visit.
 
 * comment 0..1 MS
 
-* extension contains WofConnectCharacteristic named characteristic 0..1
-* extension contains WofConnectAppointmentUpdate named appointmentUpdate 0..1
+* extension contains WofBaseAppointmentCharacteristic named characteristic 0..1
+* extension contains WofBaseAppointmentUpdate named appointmentUpdate 0..1
 * extension contains ActivityDefinitionReference named activityDefinitionReference 0..1
 
 
