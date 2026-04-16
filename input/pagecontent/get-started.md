@@ -247,7 +247,7 @@ The recommended usage is therefore:
 --- 
 
 
-### FHIR interactions
+### Portal defined interactions
 <table class="grid">
   <thead>
     <tr>
