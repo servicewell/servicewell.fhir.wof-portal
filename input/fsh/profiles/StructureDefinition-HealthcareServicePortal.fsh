@@ -75,7 +75,8 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * identifier contains businessIdentifier 0..1 MS
 * identifier[businessIdentifier].type.coding.code = #RI
 * identifier[businessIdentifier].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
-
+* identifier[businessIdentifier].system MS
+* identifier[businessIdentifier].value MS
 
 
 * implicitRules 0..0

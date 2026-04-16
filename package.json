@@ -10,8 +10,7 @@
     "4.0.1"
   ],
   "dependencies": {
-    "ihe.iti.scheduling": "1.0.0",
-    "servicewell.fhir.wof-connect": "0.1.1"
+    "ihe.iti.scheduling": "1.0.0"
   },
   "keywords": [
     "wof",

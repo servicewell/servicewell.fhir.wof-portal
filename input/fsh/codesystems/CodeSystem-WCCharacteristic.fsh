@@ -1,7 +1,7 @@
 CodeSystem: WCCharacteristic
 Id: wc-characteristic
 Title: "WOF-Base Characteristic"
-Description: "WOF-Connect CodeSystem for Characteristic for the source PMS system - used in WOF-Connect HealthcareService.characteristic"
+Description: "WOF-Base CodeSystem for Characteristic for the source PMS system - used in WOF-Base HealthcareService.characteristic"
 * ^url = "http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wc-characteristic"
 * ^status = #active
 * ^content = #complete
