@@ -28,8 +28,6 @@ Usage: #inline
 * end = "2026-04-14T14:45:00+00:00"
 * participant[0].actor = Reference(PractitionerRole/7476f314-8b67-4efe-8364-115cee61f32a) "Tannpleier Lars Jansen"
 * participant[=].status = #accepted
-* participant[+].actor = Reference(ActivityDefinition/348eeb27-0e1a-4337-9f21-4e84dc5a3fd9) "Tannrens"
-* participant[=].status = #accepted
 * requestedPeriod.start = "2026-04-14T14:15:00+00:00"
 * requestedPeriod.end = "2026-04-14T14:45:00+00:00"
 
@@ -48,8 +46,6 @@ Usage: #inline
 * start = "2026-04-14T14:45:00+00:00"
 * end = "2026-04-14T15:15:00+00:00"
 * participant[0].actor = Reference(PractitionerRole/7476f314-8b67-4efe-8364-115cee61f32a) "Tannpleier Lars Jansen"
-* participant[=].status = #accepted
-* participant[+].actor = Reference(ActivityDefinition/348eeb27-0e1a-4337-9f21-4e84dc5a3fd9) "Tannrens"
 * participant[=].status = #accepted
 * requestedPeriod.start = "2026-04-14T14:45:00+00:00"
 * requestedPeriod.end = "2026-04-14T15:15:00+00:00"

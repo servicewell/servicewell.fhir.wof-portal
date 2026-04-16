@@ -23,7 +23,7 @@ Usage: #definition
 * affectsState = true       // Write operation
 * base = "https://profiles.ihe.net/ITI/Scheduling/OperationDefinition/appointment-book"
 
-* outputProfile = Canonical(ihe-sched-avail-bundle) // IHE ITI Scheduling Bundle Profile
+* outputProfile = Canonical(PortalFindAppointmentBundle) // IHE ITI Scheduling Bundle Profile
 
 // in: Appointment request (create/modify/cancel)
 * parameter[+].name = #appointment

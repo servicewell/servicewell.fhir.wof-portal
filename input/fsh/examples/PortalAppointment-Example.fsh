@@ -11,8 +11,16 @@ Description: "Example portal appointment with healthcare service, practitioner r
 * identifier[sourceSystemIdentifier].value = "apt-001"
 * status = #booked
 * extension[characteristic].extension[workflow].extension[deviceBookingAvailable].valueBoolean = true
+* extension[characteristic].extension[scheduling].extension[minChangeHours].valueInteger = 24
+* extension[characteristic].extension[scheduling].extension[webReschedulingCountAllowed].valueInteger = 2
+* extension[characteristic].extension[scheduling].extension[schedulingAvailability].valueCodeableConcept.coding.system = "http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wc-characteristic"
+* extension[characteristic].extension[scheduling].extension[schedulingAvailability].valueCodeableConcept.coding.code = #scheduling-accepts-cancellation
+* extension[characteristic].extension[scheduling].extension[confirmationViaSms].valueCodeableConcept.coding.system = "http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wc-characteristic"
+* extension[characteristic].extension[scheduling].extension[confirmationViaSms].valueCodeableConcept.coding.code = #send-confirmation-by-sms
 * extension[appointmentUpdate].extension[canBeRescheduled].valueBoolean = true
 * extension[appointmentUpdate].extension[canBeCancelled].valueBoolean = true
+* extension[appointmentUpdate].extension[webReschedulingCount].valueInteger = 1
+* extension[activityDefinitionReference].valueReference = Reference(ActivityDefinition/dental-examination)
 * serviceType.coding.system = $service-type-id
 * serviceType.coding.code = #DENTALEX
 * serviceType.coding.display = "Dental Examination"
