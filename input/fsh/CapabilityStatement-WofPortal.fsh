@@ -84,21 +84,21 @@ Client → WOF-PORTAL:
     %% HealthcareService
     Client ->> Portal: GET {{base}}/fhir/HealthcareService
     Client ->> Portal: GET {{base}}/fhir/HealthcareService/{{healthcareServiceId}}
-    Client ->> Portal: GET {{base}}/fhir/HealthcareService/{{healthcareServiceId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includePractitionerRolePortal={{includePR}}
+    Client ->> Portal: GET {{base}}/fhir/HealthcareService/{{healthcareServiceId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{boolean}}<br/>&includePractitionerRolePortal={{boolean}}
 
     %% Root operation
-    Client ->> Portal: GET {{base}}/fhir/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includeHealthcareServicePortal={{includeHS}}<br/>&includePractitionerRolePortal={{includePR}}
+    Client ->> Portal: GET {{base}}/fhir/$get-offers-context<br/>?includeActivityDefinitionPortal={{boolean}}<br/>&includeHealthcareServicePortal={{boolean}}<br/>&includePractitionerRolePortal={{boolean}}
 
     %% ActivityDefinition
     Client ->> Portal: GET {{base}}/fhir/ActivityDefinition
     Client ->> Portal: GET {{base}}/fhir/ActivityDefinition/{{activityDefinitionId}}
-    Client ->> Portal: GET {{base}}/fhir/ActivityDefinition/{{activityDefinitionId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includeHealthcareServicePortal={{includeHS}}<br/>&includePractitionerRolePortal={{includePR}}
+    Client ->> Portal: GET {{base}}/fhir/ActivityDefinition/{{activityDefinitionId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{boolean}}<br/>&includeHealthcareServicePortal={{boolean}}<br/>&includePractitionerRolePortal={{boolean}}
     Client ->> Portal: GET {{base}}/fhir/ActivityDefinition/{{activityDefinitionId}}/$get-offers-context
 
     %% PractitionerRole
     Client ->> Portal: GET {{base}}/fhir/PractitionerRole
     Client ->> Portal: GET {{base}}/fhir/PractitionerRole/{{practitionerRoleId}}
-    Client ->> Portal: GET {{base}}/fhir/PractitionerRole/{{practitionerRoleId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{includeAD}}<br/>&includeHealthcareServicePortal={{includeHS}}<br/>&includePractitionerRolePortal={{includePR}}
+    Client ->> Portal: GET {{base}}/fhir/PractitionerRole/{{practitionerRoleId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{boolean}}<br/>&includeHealthcareServicePortal={{boolean}}<br/>&includePractitionerRolePortal={{boolean}}
 
     %% Catalog resources
     Client ->> Portal: GET {{base}}/fhir/Location
@@ -130,12 +130,23 @@ It does not expand or modify the formal FHIR conformance rules.
 * rest.resource[=].documentation = "Represents shared service concepts identified by code."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
+* rest.resource[=].operation[+].name = "get-offers-context"
+* rest.resource[=].operation[=].definition = Canonical(GetOffersContext)
+* rest.resource[=].operation[=].documentation = "Returns enriched offer context for presentation and selection.  
+ Invoked as [base]/ActivityDefinition/[id]/$get-offers-context"
+
+
 
 * rest.resource[+].type = #HealthcareService
 * rest.resource[=].profile = Canonical(HealthcareServicePortal)
 * rest.resource[=].documentation = "Represents where healthcare services are performed."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
+* rest.resource[=].operation[+].name = "get-offers-context"
+* rest.resource[=].operation[=].definition = Canonical(GetOffersContext)
+* rest.resource[=].operation[=].documentation = "Returns enriched offer context for presentation and selection.  
+Invoked as [base]/HealthcareService/[id]/$get-offers-context"
+
 
 * rest.resource[+].type = #PractitionerRole
 * rest.resource[=].profile = Canonical(PractitionerRolePortal)
@@ -145,7 +156,10 @@ It does not expand or modify the formal FHIR conformance rules.
 * rest.resource[=].searchParam[+].name = "service"
 * rest.resource[=].searchParam[=].type = #reference
 * rest.resource[=].searchParam[=].documentation = "Filter by PractitionerRole.service (Reference to HealthcareService)."
-
+* rest.resource[=].operation[+].name = "get-offers-context"
+* rest.resource[=].operation[=].definition = Canonical(GetOffersContext)
+* rest.resource[=].operation[=].documentation = "Returns enriched offer context for presentation and selection.  
+Invoked as [base]/PractitionerRole/[id]/$get-offers-context"
 
 * rest.resource[+].type = #Patient
 * rest.resource[=].profile[+] = Canonical(PortalPatient)
@@ -218,7 +232,7 @@ Supports filtering by actor (e.g., HealthcareService/{id}) and IHE Scheduling op
 // Declare canonical operations exposed by WOF Portal
 * rest.operation[+].name = "getOffersContext"
 * rest.operation[=].definition = Canonical(GetOffersContext)
-* rest.operation[=].documentation = "Returns enriched offer context for presentation and selection."
+* rest.operation[=].documentation = "Returns enriched offer context for presentation and selection. Invoked as [base]/$get-offers-context"
 
 
 
