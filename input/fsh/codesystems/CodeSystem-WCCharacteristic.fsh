@@ -2,7 +2,7 @@ CodeSystem: WCCharacteristic
 Id: wc-characteristic
 Title: "WOF-Base Characteristic"
 Description: "WOF-Base CodeSystem for Characteristic for the source PMS system - used in WOF-Base HealthcareService.characteristic"
-* ^url = "http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wc-characteristic"
+* ^url = "http://canonical.fhir.link/servicewell/wof-connect/CodeSystem/wc-characteristic"
 * ^status = #active
 * ^content = #complete
 * ^experimental = false
@@ -26,7 +26,7 @@ Title: "WOF-Base ScheduleCharacteristic"
 Description: "WOF-Base ValueSet for schedule Characteristic for the source PMS system - used in WOF-Base HealthcareService.characteristic"
 * ^status = #active
 * ^experimental = false
-* ^url  = "http://canonical.fhir.link/servicewell/wof-base/ValueSet/wc-characteristic-schedule"
+* ^url  = "http://canonical.fhir.link/servicewell/wof-connect/ValueSet/wc-characteristic-schedule"
 
 * WCCharacteristic#scheduling-accepts-cancellation
 * WCCharacteristic#scheduling-accepts-new
@@ -38,7 +38,7 @@ Title: "WOF-Base Booking Confirmation Characteristic"
 Description: "WOF-Base ValueSet for booking confirmation Characteristic for the source PMS system - used in WOF-Base HealthcareService.characteristic"
 * ^status = #active
 * ^experimental = false
-* ^url = "http://canonical.fhir.link/servicewell/wof-base/ValueSet/wc-characteristic-booking-confirmation"
+* ^url = "http://canonical.fhir.link/servicewell/wof-connect/ValueSet/wc-characteristic-booking-confirmation"
 
 * WCCharacteristic#send-confirmation-by-sms
 * WCCharacteristic#send-confirmation-by-email

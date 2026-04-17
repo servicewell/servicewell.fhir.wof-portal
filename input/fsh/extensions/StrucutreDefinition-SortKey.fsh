@@ -3,6 +3,8 @@ Id: ext-sort-key
 Title: "Sort Key"
 Description: "Sort order key for Location."
 
+* ^url = "http://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/ext-sort-key"
+
 * ^status = #active
 * ^context[0].type = #element
 * ^context[0].expression = "Location"

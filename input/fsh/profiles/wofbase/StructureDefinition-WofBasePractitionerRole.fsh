@@ -5,6 +5,8 @@ Title: "Wof Base PractitionerRole"
 Description: "Base profile of wof PractitionerRole"
 
 * ^url = "https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-practitioner-role"
+* ^abstract = true
+
 
 * ^status = #active
 

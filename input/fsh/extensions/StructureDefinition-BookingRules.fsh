@@ -6,7 +6,7 @@ Container extension for booking rules that govern cancellation, rescheduling, ag
 
 This extension is designed to be reusable across multiple WOF Portal resources, including healthcare services and organization-level configurations such as service providers.
 """
-
+* ^url = "http://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/ext-booking-rules"
 * ^status = #active
 * ^context[0].type = #element
 * ^context[0].expression = "HealthcareService"

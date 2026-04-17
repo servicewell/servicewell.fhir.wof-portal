@@ -6,7 +6,7 @@ Description: "Service types used across PMS adapters."
 * ^content = #fragment
 * ^experimental = false
 * ^valueSet = Canonical(VsServiceType)
-* ^url = "http://canonical.fhir.link/servicewell/wof-base/CodeSystem/cs-service-type"
+* ^url = "http://canonical.fhir.link/servicewell/wof-connect/CodeSystem/cs-service-type"
 
 * #akut "Akut"
 * #undersokning "Undersökning"
@@ -18,6 +18,6 @@ Title: "WOF Connect Service Types"
 Description: "Full ValueSet for WOF Connect service types used across PMS adapters."
 * ^status = #active
 * ^experimental = false
-* ^url = "http://canonical.fhir.link/servicewell/wof-base/ValueSet/vs-service-type"
+* ^url = "http://canonical.fhir.link/servicewell/wof-connect/ValueSet/vs-service-type"
 
 * include codes from system CSServiceType

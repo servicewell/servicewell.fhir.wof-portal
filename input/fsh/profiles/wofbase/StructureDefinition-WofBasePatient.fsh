@@ -5,6 +5,7 @@ Title: "Wof Base Patient"
 Description: "Base profile of wof Patient"
 
 * ^url = "https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-patient"
+* ^abstract = true
 
 
 * id MS

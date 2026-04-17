@@ -56,9 +56,11 @@ Appointment representation of a booked visit.
 
 * comment 0..1 MS
 
-* extension contains WofBaseAppointmentCharacteristic named characteristic 0..1
+* extension contains WofBaseCharacteristic named characteristic 0..1
 * extension contains WofBaseAppointmentUpdate named appointmentUpdate 0..1
 * extension contains ActivityDefinitionReference named activityDefinitionReference 0..1
+
+* extension[activityDefinitionReference] insert Obligation($wof-portal-server-actor, #SHALL:handle)
 
 * extension[characteristic].extension[scheduling].extension[childPatientThreshold] 0..1 MS
 * extension[characteristic].extension[scheduling].extension[minChangeHours] 0..1 MS
@@ -89,5 +91,5 @@ Appointment representation of a booked visit.
 * basedOn 0..0
 
 * extension contains PortalConsentToMarketing named consentToMarketing 0..1 MS
-* extension[consentToMarketing] insert Obligation($wof-portal-server-actor, #SHOULD:populate)
+* extension[consentToMarketing] insert Obligation($wof-portal-server-actor, #SHALL:handle)
 
