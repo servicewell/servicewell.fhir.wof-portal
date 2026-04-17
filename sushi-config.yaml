@@ -93,21 +93,21 @@ parameters:
   special-url:
     - http://portal.wof.purified.link/fhir/StructureDefinition/LocationArea
     - http://portal.wof.purified.link/fhir/StructureDefinition/extConsentToMarketing
-    - http://canonical.fhir.link/servicewell/wof-base/CodeSystem/cs-service-type
-    - http://canonical.fhir.link/servicewell/wof-base/ValueSet/vs-service-type
-    - http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wc-characteristic
-    - http://canonical.fhir.link/servicewell/wof-base/ValueSet/wc-characteristic-schedule
-    - http://canonical.fhir.link/servicewell/wof-base/ValueSet/wc-characteristic-sms
-    - http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wof-personal-number-system
-    - http://canonical.fhir.link/servicewell/wof-base/ValueSet/wof-personal-number-system-vs
-    - http://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-appointment-update
-    - http://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-appointment-characteristic
-    - http://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-list-reference
-    - https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-activity-definition
-    - https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-appointment
-    - https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-healthcare-service
-    - https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-patient
-    - https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-practitioner-role
+    - http://canonical.fhir.link/servicewell/wof-connect/CodeSystem/cs-service-type
+    - http://canonical.fhir.link/servicewell/wof-connect/ValueSet/vs-service-type
+    - http://canonical.fhir.link/servicewell/wof-connect/CodeSystem/wc-characteristic
+    - http://canonical.fhir.link/servicewell/wof-connect/ValueSet/wc-characteristic-schedule
+    - http://canonical.fhir.link/servicewell/wof-connect/ValueSet/wc-characteristic-sms
+    - http://canonical.fhir.link/servicewell/wof-connect/CodeSystem/wof-personal-number-system
+    - http://canonical.fhir.link/servicewell/wof-connect/ValueSet/wof-personal-number-system-vs
+    - http://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-appointment-update
+    - http://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wofconnect-characteristic
+    - http://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-list-reference
+    - https://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-activity-definition
+    - https://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-appointment
+    - https://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-healthcare-service
+    - https://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-patient
+    - https://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-practitioner-role
 
 #   validation: [allow-any-extensions, no-broken-links]
 #

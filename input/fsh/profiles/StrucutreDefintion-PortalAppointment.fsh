@@ -66,7 +66,8 @@ Appointment representation of a booked visit.
 * extension[characteristic].extension[scheduling].extension[minChangeHours] 0..1 MS
 * extension[characteristic].extension[scheduling].extension[webReschedulingCountAllowed] 0..1 MS
 * extension[characteristic].extension[scheduling].extension[schedulingAvailability] 0..1 MS
-* extension[characteristic].extension[scheduling].extension[confirmationViaSms] 0..1 MS
+* extension[characteristic].extension[scheduling].extension[bookingConfirmation] 0..1 MS
+* extension[characteristic].extension[scheduling].extension[bookingConfirmation].valueCoding.code MS
 
 
 // ---- Explicitly prohibited elements (not used in this profile) ----
