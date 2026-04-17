@@ -11,6 +11,9 @@ jobs:
   trigger-pipeline:
     runs-on: ubuntu-latest
     steps:
+      - name: Install Azure DevOps CLI extension
+        run: az extension add --name azure-devops
+
       - name: Trigger Azure DevOps pipeline
         run: |
           az devops configure --defaults organization="$ADO_ORGANIZATION" project="$ADO_PROJECT"
