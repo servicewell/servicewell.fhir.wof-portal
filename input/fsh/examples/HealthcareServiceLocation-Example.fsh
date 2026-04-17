@@ -9,7 +9,6 @@ Description: "Example contained location payload for a HealthcareServicePortal r
 * address.use = #work
 * address.text = "Slottskajen 38"
 * address.city = "Stockholm"
-* physicalType = urn:oid:2.16.840.1.113883.4.642.3.328#si
 * physicalType.text = "Site"
 * position.longitude = 18.068457
 * position.latitude = 59.327026
