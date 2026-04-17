@@ -19,8 +19,12 @@ Description: "Information about web rescheduling and whether the appointment can
 * extension[webReschedulingCount].value[x] only integer
 * extension[webReschedulingCount].valueInteger 1..1
 
+* extension[canBeRescheduled] ^short = "Whether rescheduling is currently allowed"
+* extension[canBeRescheduled] ^definition = "Indicates whether the appointment can be rescheduled at the current time according to applicable rules."
 * extension[canBeRescheduled].value[x] only boolean
 * extension[canBeRescheduled].valueBoolean 1..1
 
+* extension[canBeCancelled] ^short = "Whether cancellation is currently allowed"
+* extension[canBeCancelled] ^definition = "Indicates whether the appointment can be cancelled at the current time according to applicable rules."
 * extension[canBeCancelled].value[x] only boolean
 * extension[canBeCancelled].valueBoolean 1..1

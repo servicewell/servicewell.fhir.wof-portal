@@ -54,6 +54,8 @@ Appointment representation of an available appointment.
 * participant[practitionerRole].actor only Reference(PractitionerRolePortal)
 
 * extension contains ActivityDefinitionReference named activityDefinitionReference 1..1
+* extension[activityDefinitionReference] ^short = "Reference to related service definition"
+* extension[activityDefinitionReference] ^definition = "Reference to the ActivityDefinition that represents the service concept for this appointment."
 
 
 

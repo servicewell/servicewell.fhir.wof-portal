@@ -27,6 +27,9 @@ Description: """Composite extension structuring key characteristics for Healthca
     workflow 0..1 and
     security 0..1 
 
+* extension[scheduling] ^short = "Scheduling capability container"
+* extension[scheduling] ^definition = "Container for scheduling rules and booking availability capabilities."
+
 * extension[scheduling].extension 0..*
 
 * extension[scheduling].extension contains
@@ -63,12 +66,16 @@ Description: """Composite extension structuring key characteristics for Healthca
 * extension[scheduling].extension[schedulingAvailability].valueCodeableConcept.coding.code from VsWCCharacteristicSchedule (required)
 
 * extension[scheduling].extension[bookingConfirmation].value[x] only Coding
+* extension[scheduling].extension[bookingConfirmation].valueCoding ^short = "Booking confirmation method"
+* extension[scheduling].extension[bookingConfirmation].valueCoding ^definition = "Specifies how booking confirmations are delivered, for example by SMS or email."
 * extension[scheduling].extension[bookingConfirmation].valueCoding.system 1..1
 * extension[scheduling].extension[bookingConfirmation].valueCoding.system = "http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wc-characteristic" (exactly)
 * extension[scheduling].extension[bookingConfirmation].valueCoding.code from VsWCCharacteristicBookingConfirmation (required)
 
 
 // ----- Workflow -----
+* extension[workflow] ^short = "Workflow capability container"
+* extension[workflow] ^definition = "Container for capabilities related to booking workflow and source-system entity support."
 * extension[workflow].extension 0..*
 
 // Tre underslices i API
@@ -90,6 +97,8 @@ Description: """Composite extension structuring key characteristics for Healthca
 
 
 // ----- Security (container) -----
+* extension[security] ^short = "Security capability container"
+* extension[security] ^definition = "Container for security and authentication-related requirements."
 * extension[security].extension 0..*
 
 // Tre underslices i Security
@@ -100,3 +109,4 @@ Description: """Composite extension structuring key characteristics for Healthca
 * extension[security].extension[requiresNativeIdPLogin].value[x] only boolean
 * extension[security].extension[requiresNativeIdPLogin].valueBoolean  0..1
 * extension[security].extension[requiresNativeIdPLogin].valueBoolean  ^short = "Identity provider used for patient login (e.g., BankID)."
+* extension[security].extension[requiresNativeIdPLogin].valueBoolean  ^definition = "Indicates whether login is expected to use a native external identity provider flow, such as BankID."
