@@ -1,0 +1,38 @@
+name: IG Publish
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  trigger-devops-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Azure DevOps Pipeline
+        run: |
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            "https://dev.azure.com/servicewell/wof-portal/_apis/pipelines/ig-publish-template/runs?api-version=7.1" \
+            -H "Authorization: Basic $(echo -n ":${{ secrets.AZURE_DEVOPS_PAT }}" | base64)" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "resources": {
+                "repositories": {
+                  "self": {
+                    "refName": "refs/heads/main"
+                  }
+                }
+              }
+            }')
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+          BODY=$(echo "$RESPONSE" | sed '$d')
+
+          echo "$BODY" | jq . 2>/dev/null || echo "$BODY"
+
+          if [ "$HTTP_CODE" -lt 200 ] || [ "$HTTP_CODE" -ge 300 ]; then
+            echo "::error::Azure DevOps API returned HTTP $HTTP_CODE"
+            exit 1
+          fi
+
+          echo "Pipeline triggered successfully (HTTP $HTTP_CODE)"
