@@ -35,7 +35,6 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * physicalType ^short = "Physical type of the care location"
 * physicalType ^definition = "Describes the kind of physical place represented by this contained location, for example a site."
 * physicalType.coding.code = #si
-* physicalType.coding.system = "http://terminology.hl7.org/CodeSystem/location-physical-type"
 * position 0..1
 * position ^short = "Geographic coordinates of the care location"
 * position ^definition = "Optional geographic coordinates for the location where care is delivered."
