@@ -61,7 +61,7 @@ Usage: #inline
 * address.use = #work
 * address.text = "Sandvikas gate 55"
 * address.city = "Sandvika"
-* physicalType = urn:oid:2.16.840.1.113883.4.642.3.328#si
+* physicalType.coding.code = #si
 * physicalType.text = "Site"
 * position.longitude = 10.52313
 * position.latitude = 59.89162

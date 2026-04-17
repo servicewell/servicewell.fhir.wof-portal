@@ -34,7 +34,7 @@ Description: """Composite extension structuring key characteristics for Healthca
     minChangeHours 0..1 and
     webReschedulingCountAllowed 0..1 and
     schedulingAvailability 0..1 and 
-    confirmationViaSms 0..1
+    bookingConfirmation 0..1
 
 // childPatientThreshold
 * extension[scheduling].extension[childPatientThreshold].value[x] only integer
@@ -62,10 +62,10 @@ Description: """Composite extension structuring key characteristics for Healthca
 * extension[scheduling].extension[schedulingAvailability].valueCodeableConcept.coding.code 1..1
 * extension[scheduling].extension[schedulingAvailability].valueCodeableConcept.coding.code from VsWCCharacteristicSchedule (required)
 
-* extension[scheduling].extension[confirmationViaSms].value[x] only CodeableConcept
-* extension[scheduling].extension[confirmationViaSms].valueCodeableConcept.coding.system 1..1
-* extension[scheduling].extension[confirmationViaSms].valueCodeableConcept.coding.system = "http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wc-characteristic" (exactly)
-* extension[scheduling].extension[confirmationViaSms].valueCodeableConcept.coding.code from VsWCCharacteristicSms (required)
+* extension[scheduling].extension[bookingConfirmation].value[x] only Coding
+* extension[scheduling].extension[bookingConfirmation].valueCoding.system 1..1
+* extension[scheduling].extension[bookingConfirmation].valueCoding.system = "http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wc-characteristic" (exactly)
+* extension[scheduling].extension[bookingConfirmation].valueCoding.code from VsWCCharacteristicBookingConfirmation (required)
 
 
 // ----- Workflow -----

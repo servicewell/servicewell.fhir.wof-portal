@@ -15,8 +15,8 @@ Description: "Example portal appointment with healthcare service, practitioner r
 * extension[characteristic].extension[scheduling].extension[webReschedulingCountAllowed].valueInteger = 2
 * extension[characteristic].extension[scheduling].extension[schedulingAvailability].valueCodeableConcept.coding.system = "http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wc-characteristic"
 * extension[characteristic].extension[scheduling].extension[schedulingAvailability].valueCodeableConcept.coding.code = #scheduling-accepts-cancellation
-* extension[characteristic].extension[scheduling].extension[confirmationViaSms].valueCodeableConcept.coding.system = "http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wc-characteristic"
-* extension[characteristic].extension[scheduling].extension[confirmationViaSms].valueCodeableConcept.coding.code = #send-confirmation-by-sms
+* extension[characteristic].extension[scheduling].extension[bookingConfirmation].valueCoding.system = "http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wc-characteristic"
+* extension[characteristic].extension[scheduling].extension[bookingConfirmation].valueCoding.code = #send-confirmation-by-sms
 * extension[appointmentUpdate].extension[canBeRescheduled].valueBoolean = true
 * extension[appointmentUpdate].extension[canBeCancelled].valueBoolean = true
 * extension[appointmentUpdate].extension[webReschedulingCount].valueInteger = 1
