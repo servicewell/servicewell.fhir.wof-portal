@@ -4,8 +4,8 @@ Title: "WOF Personal Number Identifier Systems"
 Description: "Allowed identifier.system values for national personal numbers used in WOF Connect."
 * ^status = #active
 * ^content = #fragment
-* ^valueSet = Canonical(http://canonical.fhir.link/servicewell/wof-base/ValueSet/wof-personal-number-system-vs)
-* ^url = "http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wof-personal-number-system"
+* ^valueSet = Canonical(http://canonical.fhir.link/servicewell/wof-connect/ValueSet/wof-personal-number-system-vs)
+* ^url = "http://canonical.fhir.link/servicewell/wof-connect/CodeSystem/wof-personal-number-system"
 
 * #urn:oid:2.16.578.1.12.4.1.4.1 "Norwegian National Identity Number (assigned to residents registered in the National Population Register)"
 * #urn:oid:2.16.578.1.12.4.1.4.2 "Norwegian Temporary Identity Number (D-number)"
@@ -22,7 +22,7 @@ Id: wof-personal-number-system-vs
 Title: "Allowed Personal Number Identifier Systems"
 Description: "ValueSet containing allowed identifier.system values for national personal numbers."
 * ^status = #active
-* ^url = "http://canonical.fhir.link/servicewell/wof-base/ValueSet/wof-personal-number-system-vs"
+* ^url = "http://canonical.fhir.link/servicewell/wof-connect/ValueSet/wof-personal-number-system-vs"
 
 * include codes from system WofPersonalNumberSystemCS
 

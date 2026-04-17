@@ -1,7 +1,7 @@
 // ===== Parent container extension =====
-Extension: WofBaseAppointmentCharacteristic
+Extension: WofBaseCharacteristic
 Id: wof-base-appointment-characteristic
-Title: "Appointment Characteristics"
+Title: "Service Characteristics"
 Description: """Composite extension structuring key characteristics for HealthcareService and Appointment.
  Contains three main areas: 
  - 'scheduling' (booking rules and availability), 
@@ -10,7 +10,7 @@ Description: """Composite extension structuring key characteristics for Healthca
  
  Enables standardized and machine-readable communication of clinic booking policies, API capabilities, and security level."""
 * ^status = #active
-* ^url = "http://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-appointment-characteristic"
+* ^url = "http://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wofconnect-characteristic"
 
 // Var extensionen får sitta
 * ^context[0].type = #element

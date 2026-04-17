@@ -6,6 +6,7 @@ Description: "Base profile of wof Appointment. Inherits IHE Scheduling Appointme
 
 
 * ^url = "https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-appointment"
+* ^abstract = true
 
 
 * meta.profile 1..* MS

@@ -6,6 +6,7 @@ Description: "Base profile of wof HealthcareService"
 
 
 * ^url = "https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-healthcare-service"
+* ^abstract = true
 
 
 * ^status = #active

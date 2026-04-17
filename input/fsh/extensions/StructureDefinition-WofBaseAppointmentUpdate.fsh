@@ -5,7 +5,7 @@ Description: "Information about web rescheduling and whether the appointment can
 * ^status = #draft
 * ^context.type = #element
 * ^context.expression = "Appointment"
-* ^url = "http://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-appointment-update"
+* ^url = "http://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wofconnect-appointment-update"
 
 * value[x] 0..0
 * extension 1..*

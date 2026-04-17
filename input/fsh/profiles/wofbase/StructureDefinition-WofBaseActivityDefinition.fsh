@@ -2,10 +2,10 @@ Profile: WofBaseActivityDefinition
 Parent: ActivityDefinition
 Id: wof-base-activity-definition
 Title: "Wof Base ActivityDefinition"
-Description: "Base profile of wof ActivityDefinition"
+Description: """Base profile of wof ActivityDefinition"""
 
 * ^url = "https://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-activity-definition"
-
+* ^abstract = true
 
 // Allowed root elements first
 * meta 1..1
