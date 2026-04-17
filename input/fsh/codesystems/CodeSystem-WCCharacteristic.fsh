@@ -13,9 +13,11 @@ Description: "WOF-Base CodeSystem for Characteristic for the source PMS system -
   * #scheduling-accepts-new "Scheduling Accepts New" "Indicates that the service accepts new bookings via booking API."
   * #scheduling-accepts-reschedule "Scheduling Accepts Reschedule" "Indicates that the service accepts rescheduling via booking API."
 
-* #sms-confirmation "Grouping SMS Confirmation Codes"
+* #booking-confirmation "Grouping Booking Confirmation Codes"
   * #send-confirmation-by-sms "Send booking confirmation by SMS" "Indicates that the patient wants a booking confirmations by SMS."
-  * #no-confirmation-by-sms "No SMS confirmation" "Indicates that the patient does not want a booking confirmations by SMS."
+  * #send-confirmation-by-email "Send booking confirmation by Email" "Indicates that the patient wants a booking confirmations by Email."
+  * #send-confirmation-by-email-and-sms "Send booking confirmation by Email and SMS" "Indicates that the patient wants a booking confirmations by both Email and SMS."
+  * #no-booking-confirmation "No booking confirmation" "Indicates that the patient does not want a booking confirmation."
 
 
 ValueSet: VsWCCharacteristicSchedule
@@ -30,13 +32,15 @@ Description: "WOF-Base ValueSet for schedule Characteristic for the source PMS s
 * WCCharacteristic#scheduling-accepts-new
 * WCCharacteristic#scheduling-accepts-reschedule
 
-ValueSet: VsWCCharacteristicSms
-Id:  wc-characteristic-sms
-Title: "WOF-Base SMS Characteristic"
-Description: "WOF-Base ValueSet for SMS Characteristic for the source PMS system - used in WOF-Base HealthcareService.characteristic"
+ValueSet: VsWCCharacteristicBookingConfirmation
+Id:  wc-characteristic-booking-confirmation
+Title: "WOF-Base Booking Confirmation Characteristic"
+Description: "WOF-Base ValueSet for booking confirmation Characteristic for the source PMS system - used in WOF-Base HealthcareService.characteristic"
 * ^status = #active
 * ^experimental = false
-* ^url = "http://canonical.fhir.link/servicewell/wof-base/ValueSet/wc-characteristic-sms"
+* ^url = "http://canonical.fhir.link/servicewell/wof-base/ValueSet/wc-characteristic-booking-confirmation"
 
 * WCCharacteristic#send-confirmation-by-sms
-* WCCharacteristic#no-confirmation-by-sms
+* WCCharacteristic#send-confirmation-by-email
+* WCCharacteristic#send-confirmation-by-email-and-sms
+* WCCharacteristic#no-booking-confirmation
