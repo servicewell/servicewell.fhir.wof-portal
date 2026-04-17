@@ -1,0 +1,25 @@
+name: IG Publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      organization: ${{ steps.detect-org.outputs.organization }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect organization from sushi-config
+        id: detect-org
+        run: |
+          ORG=$(yq '.id' sushi-config.yaml | cut -d'.' -f1)
+          echo "organization=$ORG" >> "$GITHUB_OUTPUT"
+
+  publish:
+    needs: setup
+    uses: servicewell/servicewell.fhir.landingzone/.github/workflows/ig-publish-template.yaml@main
+    with:
+      organization: ${{ needs.setup.outputs.organization }}
