@@ -1,4 +1,4 @@
-name: IG Publish
+name: Trigger IG Publish
 
 on:
   release:
@@ -8,24 +8,24 @@ permissions:
   contents: read
 
 jobs:
-  setup:
+  trigger-pipeline:
     runs-on: ubuntu-latest
-    outputs:
-      organization: ${{ steps.detect-org.outputs.organization }}
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Install yq
-        uses: mikefarah/yq@v4
-
-      - name: Detect organization from sushi-config
-        id: detect-org
+      - name: Trigger Azure DevOps pipeline
         run: |
-          ORG=$(yq '.id' sushi-config.yaml | cut -d'.' -f1)
-          echo "organization=$ORG" >> "$GITHUB_OUTPUT"
+          az devops configure --defaults organization="$ADO_ORGANIZATION" project="$ADO_PROJECT"
 
-  publish:
-    needs: setup
-    uses: servicewell/servicewell.fhir.landingzone/.github/workflows/ig-publish-template.yaml@main
-    with:
-      organization: ${{ needs.setup.outputs.organization }}
+          PIPELINE_ID=$(az pipelines list --name "$ADO_PIPELINE_NAME" --query "[0].id" -o tsv)
+
+          if [ -z "$PIPELINE_ID" ]; then
+            echo "::error::Pipeline '$ADO_PIPELINE_NAME' not found"
+            exit 1
+          fi
+
+          echo "Triggering pipeline '$ADO_PIPELINE_NAME' (ID: $PIPELINE_ID)..."
+          az pipelines run --id "$PIPELINE_ID"
+        env:
+          AZURE_DEVOPS_EXT_PAT: ${{ secrets.ADO_PAT }}
+          ADO_ORGANIZATION: ${{ vars.ADO_ORGANIZATION }}
+          ADO_PROJECT: ${{ vars.ADO_PROJECT }}
+          ADO_PIPELINE_NAME: ${{ vars.ADO_PIPELINE_NAME }}
