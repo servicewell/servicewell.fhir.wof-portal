@@ -1,65 +1,65 @@
 CodeSystem: PortalOrganizationSettings
 Id: portal-organization-settings
-Title: "Portal Organization Settings"
-Description: "Code system for organization-level portal display settings and grouped rule options."
+Title: "Organizational Settings"
+Description: "Code system for organization-level display settings and grouped rule options."
 
 * ^status = #active
 * ^content = #complete
 * ^experimental = false
 * ^hierarchyMeaning = #grouped-by
 
-* #banner-text-position "Banner Text Position"
-  * #top-left
-  * #top-right
-  * #bottom-left
-  * #bottom-right
+* #banner-text-position "Banner Text Position" "Only for grouping codes. Not intended to be selectable."
+  * #top-left "Top Left" "Display banner text in the top-left position of the banner."
+  * #top-right "Top Right" "Display banner text in the top-right position of the banner."
+  * #bottom-left "Bottom Left" "Display banner text in the bottom-left position of the banner."
+  * #bottom-right "Bottom Right" "Display banner text in the bottom-right position of the banner."
 
-* #show-clinic-image-rule
-  * #show-clinic-image
-  * #show-clinic-map
-  * #dont-show-image
+* #show-clinic-image-rule "Clinic Image Rule" "Only for grouping codes. Not intended to be selectable."
+  * #show-clinic-image "Show Clinic Image" "Display the clinic image in the view."
+  * #show-clinic-map "Show Clinic Map" "Display an interactive map of the clinic's position instead of a clinic image."
+  * #dont-show-image "Do Not Show Image" "Do not display either a clinic image or a map of the clinic's position."
 
-* #show-practitioner-avatar-rule
-  * #show-practitioner-avatar
-  * #dont-show-practitioner-avatar
+* #show-practitioner-avatar-rule "Practitioner Avatar Rule" "Only for grouping codes. Not intended to be selectable."
+  * #show-practitioner-avatar "Show Practitioner Avatar" "Display the practitioner's avatar in the view."
+  * #dont-show-practitioner-avatar "Do Not Show Practitioner Avatar" "Do not display the practitioner's avatar in the view."
 
-* #show-price-rule
-  * #always-show-price
-  * #never-show-price
+* #show-price-rule "Price Display Rule" "Only for grouping codes. Not intended to be selectable."
+  * #always-show-price "Always Show Price" "Always display price information in the view."
+  * #never-show-price "Never Show Price" "Never display price information in the view."
 
 
 ValueSet: VsPortalOrganizationSettingsBannerTextPosition
 Id: vs-portal-organization-settings-banner-text-position
-Title: "Portal Banner Text Positions"
-Description: "Allowed banner text position values for organization portal settings."
+Title: "Organizational Banner Text Positions"
+Description: "Organizational settings for banner text positions."
 * ^status = #active
 * ^experimental = false
 
-* include codes from system PortalOrganizationSettings where concept is-a #banner-text-position
+* include codes from system PortalOrganizationSettings where concept descendent-of #banner-text-position
 
 ValueSet: VsPortalOrganizationSettingsClinicImageRule
 Id: vs-portal-organization-settings-clinic-image-rule
-Title: "Portal Clinic Image Rules"
-Description: "Allowed clinic image display rules for organization portal settings."
+Title: "Organizational Clinic Image Rules"
+Description: "Organizational settings for clinic image display rules."
 * ^status = #active
 * ^experimental = false
 
-* include codes from system PortalOrganizationSettings where concept is-a #show-clinic-image-rule
+* include codes from system PortalOrganizationSettings where concept descendent-of #show-clinic-image-rule
 
 ValueSet: VsPortalOrganizationSettingsPractitionerAvatarRule
 Id: vs-portal-organization-settings-practitioner-avatar-rule
-Title: "Portal Practitioner Avatar Rules"
-Description: "Allowed practitioner avatar display rules for organization portal settings."
+Title: "Organizational Practitioner Avatar Rules"
+Description: "Organizational settings for practitioner avatar display rules."
 * ^status = #active
 * ^experimental = false
 
-* include codes from system PortalOrganizationSettings where concept is-a #show-practitioner-avatar-rule
+* include codes from system PortalOrganizationSettings where concept descendent-of #show-practitioner-avatar-rule
 
 ValueSet: VsPortalOrganizationSettingsPriceRule
 Id: vs-portal-organization-settings-price-rule
-Title: "Portal Price Display Rules"
-Description: "Allowed price display rules for organization portal settings."
+Title: "Organizational Price Display Rules"
+Description: "Organizational settings for price display rules."
 * ^status = #active
 * ^experimental = false
 
-* include codes from system PortalOrganizationSettings where concept is-a #show-price-rule
+* include codes from system PortalOrganizationSettings where concept descendent-of #show-price-rule

@@ -305,5 +305,5 @@ How to interpret priority:
 
 ---
 
-You can find the complete resource list in the [Artifacts section](./artifacts.html)
+**You'll find the complete list of resources and can read more in the** [Artifacts section](./artifacts.html)
 

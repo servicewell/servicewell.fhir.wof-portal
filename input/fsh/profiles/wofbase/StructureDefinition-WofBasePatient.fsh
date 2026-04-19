@@ -26,13 +26,11 @@ Description: "Base profile of wof Patient"
 
 * identifier ^slicing.discriminator[0].type = #value
 * identifier ^slicing.discriminator[0].path = "type.text"
-
 * identifier ^slicing.rules = #open
 
-* identifier contains personalNumber 1..1 MS
+* identifier contains personalNumber 1..1 and sourceSystemIdentifier 0..1 MS
 
 * identifier.type insert Obligation($wof-portal-client-actor, #SHOULD:ignore)
-* identifier contains sourceSystemIdentifier 0..1 MS
 * identifier[personalNumber] ^short = "National personal number for the patient"
 * identifier[personalNumber].type.coding.code = #PN
 * identifier[personalNumber].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"

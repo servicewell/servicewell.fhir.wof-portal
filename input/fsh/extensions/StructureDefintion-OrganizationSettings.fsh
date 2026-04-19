@@ -39,19 +39,19 @@ These settings control what portal information and UI elements should be shown f
 * extension[showPricesAtBookingConfirmation].valueCode from VsPortalOrganizationSettingsPriceRule (required)
 
 * extension[showPractitionerAvatar] ^short = "Whether practitioner avatars are shown"
-* extension[showPractitionerAvatar] ^definition = "Indicates whether practitioner profile images or avatars should be shown in portal views."
+* extension[showPractitionerAvatar] ^definition = "Indicates whether practitioner profile images or avatars should be shown."
 * extension[showPractitionerAvatar].value[x] only code
 * extension[showPractitionerAvatar].valueCode 1..1 MS
 * extension[showPractitionerAvatar].valueCode from VsPortalOrganizationSettingsPractitionerAvatarRule (required)
 
 * extension[showClinicImage] ^short = "Whether clinic images are shown"
-* extension[showClinicImage] ^definition = "Indicates whether clinic or unit images should be shown in the portal."
+* extension[showClinicImage] ^definition = "Indicates whether clinic or unit images should be shown."
 * extension[showClinicImage].value[x] only code
 * extension[showClinicImage].valueCode 1..1 MS
 * extension[showClinicImage].valueCode from VsPortalOrganizationSettingsClinicImageRule (required)
 
 * extension[showClinicSearchField] ^short = "Whether clinic search is available"
-* extension[showClinicSearchField] ^definition = "Indicates whether the portal should expose a search field for finding clinics or units."
+* extension[showClinicSearchField] ^definition = "Indicates whether a search field for finding clinics or units should be exposed."
 * extension[showClinicSearchField].value[x] only boolean
 * extension[showClinicSearchField].valueBoolean 1..1 MS
 
