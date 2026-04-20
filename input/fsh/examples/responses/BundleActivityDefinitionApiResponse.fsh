@@ -1,8 +1,10 @@
 Alias: $csServiceType = http://portal.wof.purified.link/fhir/CodeSystem/csServiceType
 
-Instance: ce19bf58-76af-4f56-bf92-f225bef946cb
+Instance: 2ce87083-b05e-4174-a476-ed8611736c67
 InstanceOf: Bundle
 Usage: #example
+Title: "ActivityDefinition Search Response"
+Description: "API response returning a searchset Bundle of ActivityDefinition resources."
 * type = #searchset
 * total = 5
 * entry[0].fullUrl = "http://api-no.wellonfhir.se/demo/1.0/R4/fhir/ActivityDefinition/b1c8d4ab-f160-4d05-86b4-2185400e6c92"
@@ -70,21 +72,6 @@ Usage: #inline
 * code = $csServiceType#kampanje "Kampanje"
 * code.text = "Undersøkelse med røntgenbilder og airflow rens"
 
-Instance: 348eeb27-0e1a-4337-9f21-4e84dc5a3fd9
-InstanceOf: ActivityDefinitionPortal
-Usage: #inline
-* meta.versionId = "1"
-* meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/activity-definition-portal"
-* extension.url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-sort-key"
-* extension.valueInteger = 1
-* name = "Tannrens"
-* title = "Tannrens"
-* status = #active
-* date = "2025-09-29"
-* description = "Tannrens hos tannpleier"
-* kind = #ServiceRequest
-* code = $csServiceType#tannrens "Tannrens"
-* code.text = "Tannrens hos tannpleier"
 
 Instance: 05909f92-e86b-436f-8fdb-8c45ef03e11b
 InstanceOf: ActivityDefinitionPortal
