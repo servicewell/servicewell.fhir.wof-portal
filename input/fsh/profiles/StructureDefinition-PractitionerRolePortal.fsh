@@ -1,5 +1,5 @@
 Profile: PractitionerRolePortal
-Parent: PractitionerRole
+Parent: WofBasePractitionerRole
 Id: practitioner-role-portal
 Title: "PractitionerRolePortal"
 Description: """
@@ -8,3 +8,82 @@ Description: """
 It answers the question: _“In which role, at which service location, and under which financial responsibility does this practitioner perform services?”_
 
 """
+
+* ^status = #active
+
+
+
+* id 1..1
+  * ^short = "Resource identifier"
+  * ^definition = "Unique identifier for this PractitionerRolePortal resource instance."
+
+* meta.profile
+  * ^short = "Profile conformance declarations"
+  * ^definition = "Asserts the profile(s) this resource conforms to."
+
+* meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific PractitionerRolePortal instance."
+
+
+* active 1..1
+  * ^short = "Whether this practitioner role is active"
+  * ^definition = "Indicates whether this PractitionerRolePortal is currently active and available for booking, offers, and service-specific configuration."
+
+* code 1..*
+  * ^short = "Role code"
+  * ^definition = "The role(s) the practitioner performs in this context, e.g., the type of clinical or administrative function."
+
+* specialty 0..*
+  * ^short = "Clinical specialty"
+  * ^definition = "The clinical specialty of the practitioner in this role, used to categorize the type of care delivered."
+
+* practitioner 1..1
+  * ^short = "The individual practitioner"
+  * ^definition = "Identifier-based binding to the Practitioner logical model performing services in this role. Practitioner is not exposed as a standalone API resource in WOF Portal. Identifier systems are governed under the WofPortalIdentifierSystemRoot namespace."
+* practitioner.reference 0..0
+* practitioner.identifier 1..1
+  * ^short = "Identifier for the practitioner"
+  * ^definition = "Identifier-based reference to the Practitioner concept in the source system. See EndpointIdentifierSystemForPractitioner for expected identifier.system values."
+* practitioner.display 1..1
+  * ^short = "Display name of the practitioner"
+  * ^definition = "The human-readable name of the practitioner, used for display purposes."
+
+* healthcareService 1..1
+  * ^short = "Service location where this role is performed"
+  * ^definition = "Reference to the HealthcareServicePortal where this practitioner performs services in this role. A practitioner may work at multiple HealthcareServicePortals but each practitioner-healthcareservice relation makes the practitionerrole unique."
+* healthcareService.reference 0..1
+  * ^short = "Literal reference to the HealthcareService resource"
+  * ^definition = "A relative or absolute URL to the HealthcareService resource."
+* healthcareService.display 0..1
+  * ^short = "Display name of the healthcare service"
+  * ^definition = "The human-readable name of the service location, used for display purposes."
+
+* organization 1..1
+  * ^short = "Binding to the billing organization"
+  * ^definition = "Identifier-based binding to the BillingOrganization logical model that is financially responsible for services performed in this role. BillingOrganization is not exposed as a standalone API resource in WOF Portal. Identifier systems are governed under the WofPortalIdentifierSystemRoot namespace."
+* organization.reference 0..0
+* organization.identifier 1..1
+  * ^short = "Identifier for the billing organization"
+  * ^definition = "Identifier-based reference to the BillingOrganization concept in the source system. See EndpointIdentifierSystemForBillingOrganization for expected identifier.system values."
+* organization.display 0..1
+  * ^short = "Display name of the billing organization"
+  * ^definition = "The human-readable name of the billing organization, used for display purposes."
+* organization.type 0..0
+
+* extension[binaryReference].valueReference 0..1 MS
+* extension[PractitionerRoleDescription].valueString 0..1 MS
+
+* contained 0..*
+  * ^short = "Contained Binary resources"
+  * ^definition = "Inline Binary resources, typically used to carry image data (e.g., practitioner photo) referenced via the binaryReference extension."
+
+// ---- Explicitly prohibited elements (not used in this profile) ----
+* implicitRules 0..0
+* modifierExtension 0..0
+* identifier 0..0
+* period 0..0
+* location 0..0
+* telecom 0..0
+* availableTime 0..0
+* notAvailable 0..0
+* availabilityExceptions 0..0
+* endpoint 0..0

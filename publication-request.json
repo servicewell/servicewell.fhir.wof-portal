@@ -1,14 +1,17 @@
 {
    "package-id" : "servicewell.fhir.wof-portal",
-   "version" : "0.1.0",
-   "path" : "http://canonical.fhir.link/servicewell/wof-portal/0.1.0",
+   "version" : "1.0.0",
+   "path" : "https://canonical.fhir.link/servicewell/wof-portal/1.0.0",
    "mode" : "milestone",
-   "status" : "draft",
-   "sequence" : "Pre-Release",
-   "desc" : "Initial pre-release of WOF Portal IG.",
+   "status" : "release",
+   "sequence" : "V1 Release",
+   "desc" : "Initial release of WOF Portal public API.",
    "first" : true,
-   "title" : "WOF Portal Implementation Guide",
-   "ci-build" : "https://build.fhir.org/ig/servicewell/servicewell.fhir.wof-portal",
-   "category" : "Infrastructure",
-   "introduction" : "Implementation Guide for WOF Portal made by Service Well."
+   "title" : "Wof Portal Public API",
+   "ci-build" : "https://build.fhir.org/ig/servicewell/servicewell.fhir.wof-portal/branches/main",
+   "registry-description" : "This IG defines the ServiceWell WOF Portal public API in FHIR, including the core structures and terminology needed for consistent integrations. This is the initial release (v1.0.0) and represents the first public version of the specification",
+   "registry-country" : "SE",
+   "registry-authority" : "Service Well AB",
+   "category" : "Appointment Booking Service",
+   "introduction" : "This Implementation Guide describes Service Well’s WOF Portal for online appointment booking. It provides a shared foundation for presenting services and availability, so patients can book care more easily and providers can reduce manual administration. The intent is to improve access to care through a consistent, trustworthy booking experience."
 }

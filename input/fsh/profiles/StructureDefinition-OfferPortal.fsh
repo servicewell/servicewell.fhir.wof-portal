@@ -9,6 +9,18 @@ It answers the question: _“Which service can be booked, by whom, and where —
 
 """
 
+
+* meta.profile 1..* MS
+* meta.profile ^short = "Profile declaration for this portal resource"
+* meta.profile ^definition = "Identifies that the resource conforms to OfferPortal so clients can safely process it as the WOF Portal service concept profile."
+* meta.profile insert Obligation($wof-portal-server-actor, #SHALL:populate)
+* meta.versionId 0..1
+* meta.versionId MS
+* meta.versionId ^short = "Server-managed resource version"
+* meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific OfferPortal instance."
+* meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
+
+* obeys offer-portal-offline-reason
 // -------------------- SLICE: parameter by name --------------------
 * parameter ^slicing.discriminator[0].type = #value
 * parameter ^slicing.discriminator[0].path = "name"
@@ -29,7 +41,9 @@ It answers the question: _“Which service can be booked, by whom, and where —
     practitionerRole 1..1 and
     duration 0..1 and
     price 0..1 and
-    bookingUrl 0..1
+    bookingUrl 0..1 and
+    isOnline 1..1 and
+    offlineReason 0..1
 
 // ---- activityDefinition ----
 * parameter[offering].part[activityDefinition].name = "activityDefinition" (exactly)
@@ -54,3 +68,17 @@ It answers the question: _“Which service can be booked, by whom, and where —
 // ---- bookingUrl ----
 * parameter[offering].part[bookingUrl].name = "bookingUrl" (exactly)
 * parameter[offering].part[bookingUrl].value[x] only url
+
+//------ endpoint status -----
+* parameter[offering].part[isOnline].name = "isOnline" (exactly)
+* parameter[offering].part[isOnline].value[x] only boolean
+
+//------ offline status reason -----
+* parameter[offering].part[offlineReason].name = "offlineReason" (exactly)
+* parameter[offering].part[offlineReason].value[x] only string
+
+// -------------------- INVARIANTS --------------------
+Invariant: offer-portal-offline-reason
+Description: "If isOnline is false, offlineReason must have a value."
+Severity: #error
+Expression: "parameter.where(name='offering').all(part.where(name='isOnline').value.ofType(boolean) = false implies (part.where(name='offlineReason').exists() and part.where(name='offlineReason').value.exists()))"

@@ -1,0 +1,81 @@
+@startuml
+title WOF Portal — IHE ITI Scheduling Flow
+
+skinparam sequenceArrowThickness 2
+skinparam sequenceGroupBorderThickness 1
+skinparam noteBorderColor #888888
+skinparam noteBackgroundColor #FFFFEE
+
+actor Patient
+boundary "Portal\n(Scheduling Client)" as Client
+control "WOF Portal Server\n(Scheduling Server)" as Server
+
+== 1. Pre-booking Context (WOF Portal custom) ==
+
+note over Client,Server
+  Operation loads booking content quickly so the patient can choose
+  what to book, with whom, and where, avoiding multiple round trips
+end note
+
+Client -> Server : POST [base]/ActivityDefinition/{id}/$get-offers-context\n(includeActivityDefinitionPortal, includeHealthcareServicePortal, includePractitionerRolePortal)
+Server --> Client : 200 OK — **BundleOffersContextPortal** (searchset)\n ├─ ActivityDefinitionPortal  (what is being booked)\n ├─ HealthcareServicePortal    (where)\n ├─ PractitionerRolePortal     (who)\n └─ OfferPortal                (combination + booking rules)
+
+Patient <-- Client : Displays treatments, clinics, practitioners
+Patient -> Client : Selects ActivityDefinition + HealthcareService\n + PractitionerRole (via OfferPortal)
+
+== 2. Find Available Times — $find ==
+
+note over Client,Server
+  Find Potential Appointments
+  Returns **proposed** Appointments (status = proposed).
+end note
+
+Client -> Server : POST [base]/Appointment/$find\n(start, end, healthcareService, practitionerRole, visit-type, ...)
+Server --> Client : 200 OK — **WofConnectFindAppointment Bundle** (searchset)\n └─ AppointmentPortal[*]  status = **proposed**
+
+Patient <-- Client : Displays available times
+
+opt Patient selects a time
+  Patient -> Client : Selects time (AppointmentPortal.id)
+end
+
+== 3a. Book Appointment — $book CREATE ==
+
+note over Client,Server
+  Book selected Appointment
+  appointment.id = absent/new, then status = pending → CREATE
+end note
+
+Client -> Server : POST [base]/Appointment/$book\n(appointment: AppointmentPortal {status=pending}, patient-resource, comment?)
+Server --> Client : 200 OK — **ihe-sched-avail-bundle**\n └─ AppointmentPortal  status = **booked**
+
+Patient <-- Client : Booking confirmed
+
+== 3b. Modify Appointment — $book MODIFY ==
+
+note over Client,Server
+  appointment.id = existing, status = booked → MODIFY
+end note
+
+Client -> Server : POST [base]/Appointment/$book\n(appointment: AppointmentPortal {id=existing, status=booked, updated details})
+Server --> Client : 200 OK — **ihe-sched-avail-bundle**\n └─ AppointmentPortal  status = **booked** (updated)
+
+Patient <-- Client : Modification confirmed
+
+== 3c. Cancel Appointment — $book CANCEL ==
+
+note over Client,Server
+  appointment.id = existing, status = cancelled → CANCEL
+end note
+
+Client -> Server : POST [base]/Appointment/$book\n(appointment: AppointmentPortal {id=existing, status=cancelled})
+Server --> Client : 200 OK — **ihe-sched-avail-bundle**\n └─ AppointmentPortal  status = **cancelled**
+
+Patient <-- Client : Cancellation confirmed
+
+== Error Handling (all operations) ==
+
+Client -> Server : POST [base]/Appointment/$book or $find
+Server --> Client : 4xx/5xx — **OperationOutcome**
+
+@enduml

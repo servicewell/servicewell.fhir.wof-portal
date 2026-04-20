@@ -5,14 +5,15 @@
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 id: servicewell.fhir.wof-portal
 canonical: https://canonical.fhir.link/servicewell/wof-portal
-name: Wof Portal IG
-title: Wof Portal
-description: Service Well's Wof portal - A Practical Blueprint for Upgrading Dental Care
-status: draft # draft | active | retired | unknown
-version: 0.1.0
+name: Wof Portal ITB 
+title: ITB - Online appointment booking service 
+description: Service Well's online appointment booking service - A Practical Blueprint for Upgrading Dental Care
+status: active # draft | active | retired | unknown
+version: 1.0.0
 fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
+language: en-US
 copyrightYear: 2025+
-releaseLabel: ci-build [WIP]
+releaseLabel:  Initial Release
 # license: CC0-1.0 # https://www.hl7.org/fhir/valueset-spdx-license.html
 # jurisdiction: urn:iso:std:iso:3166#US "United States of America" # https://www.hl7.org/fhir/valueset-jurisdiction.html
 publisher:
@@ -25,7 +26,6 @@ publisher:
 #
 dependencies:
   ihe.iti.scheduling: 1.0.0
-  servicewell.fhir.wof-connect: current
 #   hl7.fhir.us.core: 3.1.0
 #   hl7.fhir.us.mcode:
 #     id: mcode
@@ -56,14 +56,14 @@ dependencies:
 pages:
   index.md:
     title: Home
-  itb.md:
-    title: ITB
-  infowell.md:
-    title: Infowell
-  kundnojdhet.md:
-    title: Kundnöjdhet
-  varva-en-van.md:
-    title: Värva en vän
+  get-started.md:
+    title: Getting Started - Using the WOF Portal ITB FHIR API
+#  infowell.md:
+#    title: Infowell
+#  kundnojdhet.md:
+#    title: Kundnöjdhet
+#  varva-en-van.md:
+#    title: Värva en vän
   #overview.md:
   #  title: Overview
   #getting-started.md:
@@ -88,8 +88,27 @@ pages:
 # For parameters defined by the FHIR Tools IG see:
 # http://build.fhir.org/ig/FHIR/fhir-tools-ig/branches/master/CodeSystem-ig-parameters.html
 #
-# parameters:
-#   excludettl: true
+parameters:
+  excludettl: true
+  special-url:
+    - http://portal.wof.purified.link/fhir/StructureDefinition/LocationArea
+    - http://portal.wof.purified.link/fhir/StructureDefinition/extConsentToMarketing
+    - http://canonical.fhir.link/servicewell/wof-connect/CodeSystem/cs-service-type
+    - http://canonical.fhir.link/servicewell/wof-connect/ValueSet/vs-service-type
+    - http://canonical.fhir.link/servicewell/wof-connect/CodeSystem/wc-characteristic
+    - http://canonical.fhir.link/servicewell/wof-connect/ValueSet/wc-characteristic-schedule
+    - http://canonical.fhir.link/servicewell/wof-connect/ValueSet/wc-characteristic-sms
+    - http://canonical.fhir.link/servicewell/wof-connect/CodeSystem/wof-personal-number-system
+    - http://canonical.fhir.link/servicewell/wof-connect/ValueSet/wof-personal-number-system-vs
+    - http://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-appointment-update
+    - http://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wofconnect-characteristic
+    - http://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-list-reference
+    - https://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-activity-definition
+    - https://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-appointment
+    - https://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-healthcare-service
+    - https://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-patient
+    - https://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wof-connect-practitioner-role
+
 #   validation: [allow-any-extensions, no-broken-links]
 #
 # ╭────────────────────────────────────────────menu.xml────────────────────────────────────────────╮
@@ -102,13 +121,12 @@ pages:
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
   Home: index.html
-  Products:
-    ITB: itb.html
-    Infowell: infowell.html
-    Kundnöjdhet: kundnojdhet.html
-    Värva en vän: varva-en-van.html
+  Get Started: get-started.html
+#  Infowell: infowell.html
+#  Kundnöjdhet: kundnojdhet.html
+#  Värva en vän: varva-en-van.html
   Artifacts: artifacts.html
-  OpenAPI: /openapi/swagger.html?spec=../output/WOFPortalCapabilityStatement.openapi.json
+#  OpenAPI: /openapi/swagger.html?spec=../output/WOFPortalCapabilityStatement.openapi.json
 
 # ╭───────────────────────────Less Common Implementation Guide Properties──────────────────────────╮
 # │  Uncomment the properties below to configure additional properties on the ImplementationGuide  │
@@ -119,12 +137,12 @@ menu:
 # contact directly and follow the format outlined in the ImplementationGuide resource and
 # ContactDetail.
 #
-# contact:
-#   - name: Bob Smith
-#     telecom:
-#       - system: email # phone | fax | email | pager | url | sms | other
-#         value: bobsmith@example.org
-#         use: work
+contact:
+   - name: Service well
+     telecom:
+       - system: email # phone | fax | email | pager | url | sms | other
+         value: info@servicewell.se
+         use: work
 #
 #
 # The global property corresponds to the IG.global property, but it
@@ -159,7 +177,15 @@ menu:
 #     better option (see below).
 # The following are simple examples to demonstrate what this might
 # look like:
-#
+
+resources:
+  Bundle/119d41e8-a9f6-41f1-8841-0c4a50c136ff:
+    name: GetOfferingsResponse — only references
+    description: Example of the GetOfferingsResponseBundle without entries for referenced resources
+    exampleCanonical: https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/offer-portal
+  # Omit examples outside of examples/responses/
+
+
 # resources:
 #   Patient/my-example-patient:
 #     name: My Example Patient
