@@ -3,7 +3,7 @@
    "version" : "1.0.0",
    "path" : "https://canonical.fhir.link/servicewell/wof-portal/1.0.0",
    "mode" : "milestone",
-   "status" : "draft",
+   "status" : "release",
    "sequence" : "V1 Release",
    "desc" : "Initial release of WOF Portal public API.",
    "first" : true,
