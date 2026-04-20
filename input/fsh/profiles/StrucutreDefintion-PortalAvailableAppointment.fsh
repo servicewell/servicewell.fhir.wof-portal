@@ -59,7 +59,6 @@ Appointment representation of an available appointment.
 
 
 
-
 // ---- Explicitly prohibited elements (not used in this profile) ----
 * implicitRules 0..0
 * modifierExtension 0..0

@@ -66,7 +66,6 @@ Appointment representation of a booked visit.
 * extension[appointmentUpdate] ^definition = "Current rescheduling and cancellation state for the appointment, including web rescheduling count."
 * extension[activityDefinitionReference] ^short = "Reference to related activity definition"
 * extension[activityDefinitionReference] ^definition = "Reference to the ActivityDefinition that represents the service concept for this appointment."
-
 * extension[activityDefinitionReference] insert Obligation($wof-portal-server-actor, #SHALL:handle)
 
 * extension[characteristic].extension[scheduling].extension[childPatientThreshold] 0..1 MS
