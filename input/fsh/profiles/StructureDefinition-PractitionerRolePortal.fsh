@@ -69,7 +69,8 @@ It answers the question: _“In which role, at which service location, and under
   * ^definition = "The human-readable name of the billing organization, used for display purposes."
 * organization.type 0..0
 
-
+* extension[binaryReference].valueReference 0..1 MS
+* extension[PractitionerRoleDescription].valueString 0..1 MS
 
 * contained 0..*
   * ^short = "Contained Binary resources"

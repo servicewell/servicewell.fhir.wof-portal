@@ -44,8 +44,10 @@ The following diagram illustrates outbound API calls from a patient-facing clien
 to the WOF Portal Proxy. It represents actual usage patterns and supported interactions.
 
 Theres currently two domains for our dev-api:  
-- api.wellonfhir.se/{{tenant}}/1.0/R4      - Swedish developmnent environment
-- api-no.wellonfhir.se/{{tenant}}/1.0/R4   - Norwegian development environment
+```
+- **api.wellonfhir.se/{{tenant}}/1.0/R4**      - Swedish developmnent environment
+- **api-no.wellonfhir.se/{{tenant}}/1.0/R4**   - Norwegian development environment
+```
 
 <small> tenant is a stable identifier for the organization</small>
 
@@ -125,7 +127,6 @@ It does not expand or modify the formal FHIR conformance rules.
 * rest.mode = #server
 
 * rest.resource[+].type = #ActivityDefinition
-* rest.resource[=].profile = Canonical(ActivityDefinitionPortal)
 * rest.resource[=].supportedProfile[+] = Canonical(ActivityDefinitionPortal)
 * rest.resource[=].documentation = "Represents shared service concepts identified by code."
 * rest.resource[=].interaction[+].code = #read
@@ -138,7 +139,7 @@ It does not expand or modify the formal FHIR conformance rules.
 
 
 * rest.resource[+].type = #HealthcareService
-* rest.resource[=].profile = Canonical(HealthcareServicePortal)
+* rest.resource[=].supportedProfile = Canonical(HealthcareServicePortal)
 * rest.resource[=].documentation = "Represents where healthcare services are performed."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
@@ -149,7 +150,7 @@ Invoked as [base]/HealthcareService/[id]/$get-offers-context"
 
 
 * rest.resource[+].type = #PractitionerRole
-* rest.resource[=].profile = Canonical(PractitionerRolePortal)
+* rest.resource[=].supportedProfile = Canonical(PractitionerRolePortal)
 * rest.resource[=].documentation = "Represents practitioners acting in specific operational and financial contexts."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
@@ -162,7 +163,7 @@ Invoked as [base]/HealthcareService/[id]/$get-offers-context"
 Invoked as [base]/PractitionerRole/[id]/$get-offers-context"
 
 * rest.resource[+].type = #Patient
-* rest.resource[=].profile[+] = Canonical(PortalPatient)
+* rest.resource[=].supportedProfile[+] = Canonical(PortalPatient)
 * rest.resource[=].supportedProfile[+] = "http://hl7.se/fhir/ig/base/StructureDefinition/SEBasePatient"
 * rest.resource[=].documentation = "Represents patients within the WOF Portal, conforming to the PortalPatient profile."
 * rest.resource[=].interaction[+].code = #read

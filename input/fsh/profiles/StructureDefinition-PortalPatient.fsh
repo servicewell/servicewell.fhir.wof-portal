@@ -16,6 +16,8 @@ Description: "Representation of a patient in Wof-portal public API system."
 
 // Corresponds to PersonalNumber + PersonalNumberSystem
 * identifier.type insert Obligation($wof-portal-client-actor, #SHOULD:ignore)
+* identifier.use 0..0
+* identifier[personalNumber].use 0..0
 
 // Corresponds to MobilePhone + Email
 * telecom 0..*

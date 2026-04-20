@@ -47,7 +47,7 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * physicalType.coding.code 0..1
 * physicalType.coding.code ^short = "Code for the area type"
 * physicalType.coding.code ^definition = "The code value that identifies the physical type of the area."
-
+* physicalType.coding.code from PhysicalTypeWofVS
 * extension contains SortKey named sortKey 0..1
 * extension[sortKey] ^short = "Portal-specific sort key"
 * extension[sortKey] ^definition = "Sort key used to order the LocationArea consistently in portal presentation."

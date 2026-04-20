@@ -1,10 +1,11 @@
 Extension: ActivityDefinitionReference
 Id: activity-definition-reference
-Title: "ActivityDefinition Reference"
-Description: "References the ActivityDefinition that an appointment instance is based on."
+Title: "ActivityDefinitionReference"
+Description: """A reference to an ActivityDefinition that describes the type of activity or service associated with an Appointment.   
+This extension allows linking an Appointment to a formal definition of the activity being performed, enabling structured representation of the intended service or procedure."""
 Context: Appointment
 
-* value[x] only Reference(ActivityDefinition)
-* value[x] ^short = "Reference to related ActivityDefinition"
-* value[x] ^definition = "Points to the ActivityDefinition resource that defines the service concept for the appointment."
 * valueReference 1..1
+* valueReference ^short = "Reference to an ActivityDefinition"
+* valueReference ^definition = "A reference to the ActivityDefinition that formally defines the type of activity or service to be performed in the context of this Appointment."
+* value[x] only Reference(ActivityDefinitionPortal)

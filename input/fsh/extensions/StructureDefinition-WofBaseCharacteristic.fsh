@@ -37,7 +37,7 @@ Description: """Composite extension structuring key characteristics for Healthca
     minChangeHours 0..1 and
     webReschedulingCountAllowed 0..1 and
     schedulingAvailability 0..1 and 
-    bookingConfirmation 0..1
+    bookingConfirmation 0..*
 
 // childPatientThreshold
 * extension[scheduling].extension[childPatientThreshold].value[x] only integer

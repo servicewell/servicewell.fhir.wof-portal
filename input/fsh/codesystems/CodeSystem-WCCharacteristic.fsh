@@ -8,12 +8,12 @@ Description: "WOF-Base CodeSystem for Characteristic for the source PMS system -
 * ^experimental = false
 * ^hierarchyMeaning = #grouped-by
 
-* #scheduling-accepts "Grouping Scheduling Accepts Codes"
+* #scheduling-accepts "Grouping Scheduling Accepts Codes" "Only for grouping codes. Not intended to use."
   * #scheduling-accepts-cancellation "Scheduling Accepts Cancellation" "Indicates that the service accepts cancellations via booking API."
   * #scheduling-accepts-new "Scheduling Accepts New" "Indicates that the service accepts new bookings via booking API."
   * #scheduling-accepts-reschedule "Scheduling Accepts Reschedule" "Indicates that the service accepts rescheduling via booking API."
 
-* #booking-confirmation "Grouping Booking Confirmation Codes"
+* #booking-confirmation "Grouping Booking Confirmation Codes" "Only for grouping codes. Not intended to use."
   * #send-confirmation-by-sms "Send booking confirmation by SMS" "Indicates that the patient wants a booking confirmations by SMS."
   * #send-confirmation-by-email "Send booking confirmation by Email" "Indicates that the patient wants a booking confirmations by Email."
   * #send-confirmation-by-email-and-sms "Send booking confirmation by Email and SMS" "Indicates that the patient wants a booking confirmations by both Email and SMS."
@@ -23,7 +23,7 @@ Description: "WOF-Base CodeSystem for Characteristic for the source PMS system -
 ValueSet: VsWCCharacteristicSchedule
 Id:  wc-characteristic-schedule 
 Title: "WOF-Base ScheduleCharacteristic"
-Description: "WOF-Base ValueSet for schedule Characteristic for the source PMS system - used in WOF-Base HealthcareService.characteristic"
+Description: "WOF-Base ValueSet for schedule Characteristic for the source PMS system - used in HealthcareService.characteristic"
 * ^status = #active
 * ^experimental = false
 * ^url  = "http://canonical.fhir.link/servicewell/wof-connect/ValueSet/wc-characteristic-schedule"
@@ -35,7 +35,7 @@ Description: "WOF-Base ValueSet for schedule Characteristic for the source PMS s
 ValueSet: VsWCCharacteristicBookingConfirmation
 Id:  wc-characteristic-booking-confirmation
 Title: "WOF-Base Booking Confirmation Characteristic"
-Description: "WOF-Base ValueSet for booking confirmation Characteristic for the source PMS system - used in WOF-Base HealthcareService.characteristic"
+Description: "WOF-Base ValueSet for booking confirmation Characteristic for the source PMS system - used in HealthcareService.characteristic"
 * ^status = #active
 * ^experimental = false
 * ^url = "http://canonical.fhir.link/servicewell/wof-connect/ValueSet/wc-characteristic-booking-confirmation"
