@@ -69,7 +69,7 @@ Description: """Base profile of wof ActivityDefinition"""
 
 * extension contains SortKey named sortKey 0..1
 * extension[sortKey] ^short = "Portal-specific sort key"
-* extension[sortKey] ^definition = "Sort key used to order the service concept consistently in portal presentation."
+* extension[sortKey] ^definition = "Sort key used to order resources consistently in portal presentation."
 * extension contains Campaigns named campaigns 0..1
 * extension[campaigns] ^short = "Campaign identifiers for the service"
 * extension[campaigns] ^definition = "Campaign identifiers associated with the service concept, represented as repeated campaign codes."
@@ -119,6 +119,8 @@ Description: "Container extension for repeated campaign identifiers."
 * ^context.type = #element
 * ^context.expression = "ActivityDefinition"
 * extension contains campaign 0..*
+* extension[campaign] ^short = "Campaign identifier"
+* extension[campaign] ^definition = "A campaign code associated with the service concept. The extension may repeat to represent multiple campaigns."
 * extension[campaign].value[x] only code
 * value[x] 0..0
 

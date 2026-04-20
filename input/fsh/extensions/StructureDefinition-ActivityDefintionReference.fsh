@@ -5,7 +5,8 @@ Description: """A reference to an ActivityDefinition that describes the type of 
 This extension allows linking an Appointment to a formal definition of the activity being performed, enabling structured representation of the intended service or procedure."""
 Context: Appointment
 
+* extension 0..0
+* value[x] only Reference(ActivityDefinitionPortal)
 * valueReference 1..1
 * valueReference ^short = "Reference to an ActivityDefinition"
 * valueReference ^definition = "A reference to the ActivityDefinition that formally defines the type of activity or service to be performed in the context of this Appointment."
-* value[x] only Reference(ActivityDefinitionPortal)

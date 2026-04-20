@@ -11,6 +11,8 @@ Description: "Representation of a patient in Wof-portal public API system."
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific PortalPatient instance."
 
 * extension contains PortalConsentToMarketing named consentToMarketing 0..1
+* extension[consentToMarketing] ^short = "Patient consent to marketing"
+* extension[consentToMarketing] ^definition = "Indicates whether the patient has provided consent to receive marketing-related communication."
 
 // Corresponds to PersonalNumber + PersonalNumberSystem
 * identifier.type insert Obligation($wof-portal-client-actor, #SHOULD:ignore)

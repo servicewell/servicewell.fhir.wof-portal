@@ -60,6 +60,12 @@ Appointment representation of a booked visit.
 * extension contains WofBaseAppointmentUpdate named appointmentUpdate 0..1
 * extension contains ActivityDefinitionReference named activityDefinitionReference 0..1
 
+* extension[characteristic] ^short = "Service and booking characteristics"
+* extension[characteristic] ^definition = "Structured characteristics describing scheduling, workflow, and security capabilities for the appointment context."
+* extension[appointmentUpdate] ^short = "Current appointment update status"
+* extension[appointmentUpdate] ^definition = "Current rescheduling and cancellation state for the appointment, including web rescheduling count."
+* extension[activityDefinitionReference] ^short = "Reference to related activity definition"
+* extension[activityDefinitionReference] ^definition = "Reference to the ActivityDefinition that represents the service concept for this appointment."
 * extension[activityDefinitionReference] insert Obligation($wof-portal-server-actor, #SHALL:handle)
 
 * extension[characteristic].extension[scheduling].extension[childPatientThreshold] 0..1 MS
@@ -91,5 +97,7 @@ Appointment representation of a booked visit.
 * basedOn 0..0
 
 * extension contains PortalConsentToMarketing named consentToMarketing 0..1 MS
+* extension[consentToMarketing] ^short = "Patient consent to marketing"
+* extension[consentToMarketing] ^definition = "Indicates whether the patient has provided consent to receive marketing-related communication."
 * extension[consentToMarketing] insert Obligation($wof-portal-server-actor, #SHALL:handle)
 

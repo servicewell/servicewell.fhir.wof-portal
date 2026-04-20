@@ -71,6 +71,11 @@ Description: "Base profile of wof PractitionerRole"
 * extension contains PractitionerRoleDescription named description 0..1
 * extension contains BinaryReference named binaryReference 0..1
 
+* extension[description] ^short = "Practitioner role presentation text"
+* extension[description] ^definition = "Human-readable descriptive text for the practitioner role, intended for portal display."
+* extension[binaryReference] ^short = "Reference to contained practitioner image"
+* extension[binaryReference] ^definition = "Reference to a contained Binary resource, typically used for practitioner photos."
+
 * contained 0..*
   * ^short = "Contained Binary resources"
   * ^definition = "Inline Binary resources, typically used to carry image data (e.g., practitioner photo) referenced via the binaryReference extension."
@@ -94,7 +99,7 @@ Description: "Base profile of wof PractitionerRole"
 Extension: PractitionerRoleDescription
 Id: ext-practitionerrole-description
 Title: "PractitionerRole Description"
-Description: "Description of the practitioner role."
+Description: "Human-readable descriptive text for a practitioner role, used in portal presentation."
 
 * ^status = #active
 * ^context.type = #element
@@ -107,7 +112,7 @@ Description: "Description of the practitioner role."
 Extension: BinaryReference
 Id: ext-binary-reference
 Title: "Binary Reference"
-Description: "Reference to a contained Binary resource."
+Description: "Reference to a contained Binary resource, used for practitioner images."
 
 * ^status = #active
 * ^context.type = #element

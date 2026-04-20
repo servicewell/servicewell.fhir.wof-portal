@@ -9,7 +9,7 @@ Description: "Sort order key for Location."
 * ^context[0].type = #element
 * ^context[0].expression = "Location"
 * ^context[1].type = #element
-* ^context[1].expression = "ActivityDefinition"
+* ^context[1].expression = "WofBaseActivityDefinition"
 
 * value[x] only integer
 * value[x] ^short = "Sort order key"
