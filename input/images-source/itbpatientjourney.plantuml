@@ -1,5 +1,5 @@
 @startuml
-title <size:24>Example</size>\n<size:18>Patient booking journey</size>
+title Patient booking journey
 
 actor Patient
 boundary ITB
@@ -7,77 +7,33 @@ control Auth
 database "EHR" as JS
 boundary "Patientportal" as Portal
 
-group 1. Select clinic and/or treatment (implementation-defined order)
-  alt Clinic first
-    Patient -> ITB : Select clinic filter
-    ITB -> JS : Get matching treatments
-    JS --> ITB : Treatments
-  else Treatment first
-    Patient -> ITB : Select treatment filter
-    ITB -> JS : Get matching clinics
-    JS --> ITB : Clinics
-  else Progressive refinement
-    Patient -> ITB : Refine clinic + treatment filters
-    ITB -> JS : Refresh filtered clinics/treatments
-    JS --> ITB : Updated filtered options
-  end
+Patient -> ITB : Choose clinic
+ITB -> JS : Get treatments & availability
+JS --> ITB : Treatments + availability
+
+opt Optional campaign code
+  Patient -> ITB : Enter campaign code
+  ITB -> JS : Validate campaign code
+  JS --> ITB : OK / Invalid
 end
 
-group 2. Optional promo/campaign code
-  alt Manual code entry
-    Patient -> ITB : Enter promo code
-  else Campaign link / auto-applied code
-    ITB -> ITB : Read code from URL/system context
-  end
-  ITB -> JS : Apply/validate campaign code
-  JS --> ITB : Filter/highlight context OR invalid code
-end
+Patient -> ITB : Choose treatment
+ITB -> JS : Get practitioners & times
+JS --> ITB : Practitioners + times
 
-group 3. Select practitioner
-  ITB -> JS : Get practitioners for selected clinic+treatment
-  JS --> ITB : Practitioner list
-  Patient -> ITB : Select practitioner
-end
+Patient -> ITB : Choose practitioner & time
 
-group 4. Select date and time
-  loop Per relevant practitioner
-    ITB -> JS : Find availability ($find)
-    JS --> ITB : Proposed appointment times
-  end
-  alt Grouped by practitioner
-    ITB --> Patient : Show slots per practitioner
-  else Aggregated time view
-    ITB --> Patient : Show unique times with available practitioners
-  end
-  Patient -> ITB : Select appointment time
-end
+Patient -> ITB : Confirm booking (log in)
+ITB -> Auth : Authenticate
+Auth --> ITB : Auth OK
 
-group 5. Review and confirm booking
-  ITB --> Patient : Show summary (clinic, treatment, practitioner, time)
-  Patient -> ITB : Accept terms and continue
-  opt Patient identification
-    ITB -> Auth : Authenticate (BankID or equivalent)
-    Auth --> ITB : Auth OK
-  end
-end
+ITB -> JS : Create booking
+JS --> ITB : Booking saved
+ITB --> Patient : Booking confirmed
 
-group 6. Booking confirmation
-  ITB -> JS : Create booking ($book)
-  JS --> ITB : Booking saved
-  ITB --> Patient : Booking confirmation
-end
-
-group 7. View and manage bookings (separate flow)
-  Patient -> Portal : Open "My bookings"
-  Portal -> JS : Get existing/upcoming bookings
-  JS --> Portal : Bookings
-  Portal --> Patient : Show bookings
-  opt Allowed by clinic rules + implementation
-    Patient -> Portal : Request reschedule/cancel
-    Portal -> JS : Update booking
-    JS --> Portal : Booking updated
-    Portal --> Patient : Update result
-  end
-end
+Patient -> Portal : Open "My bookings"
+Portal -> JS : Get bookings
+JS --> Portal : Bookings
+Portal --> Patient : Show booking
 
 @enduml

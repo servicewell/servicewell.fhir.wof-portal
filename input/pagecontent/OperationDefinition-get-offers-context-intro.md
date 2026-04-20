@@ -1,13 +1,3 @@
-<blockquote style="background-color: #428bca3d; border-left: 4px solid #428bca; padding: 10px; margin: 5px; border-radius: 8px;" markdown="1">
-
-<span style="font-size:1.0em;font-weight;">**NOTE**</span>
-
-- **Operation name:** **`getOffersContext`**
-- **Operation usage:** **`$get-offers-context`**
-
-</blockquote>
-
-
 ## What this operation is NOT
 `$getOffersContext` does **not** answer:
 - Whether a practitioner is working right now
@@ -27,20 +17,25 @@ Those concerns belong to downstream availability/slot endpoints.
 - No Slot calculation
 - No guarantee that all returned practitioners are currently working
 
+
+## Operation name
+- Operation: **`$getOffersContext`**
+
+
 ## Endpoints
 The operation can be exposed at (at least) the following levels:
 
 - System:  
-  `GET /fhir/$get-offers-context`
+  `GET /fhir/$getOffersContext`
 
 - ActivityDefinition scope:  
-  `GET /fhir/ActivityDefinition/{id}/$get-offers-context`
+  `GET /fhir/ActivityDefinition/{id}/$getOffersContext`
 
 - HealthcareService scope:  
-  `GET /fhir/HealthcareService/{id}/$get-offers-context`
+  `GET /fhir/HealthcareService/{id}/$getOffersContext`
 
 - PractitionerRole scope:  
-  `GET /fhir/PractitionerRole/{id}/$get-offers-context`
+  `GET /fhir/PractitionerRole/{id}/$getOffersContext`
 
 > The server may return different subsets depending on the endpoint and/or query parameters, but the response is always a Bundle.
 
@@ -85,7 +80,7 @@ We use a profiled Bundle so that:
 
 
 ## Typical client usage
-1. Call `$get-offers-context` for a scope (e.g. an ActivityDefinition).
+1. Call `$getOffersContext` for a scope (e.g. an ActivityDefinition).
 2. Parse the Bundle and build in-memory maps:
    - `ActivityDefinition` by id
    - `HealthcareService` by id

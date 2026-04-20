@@ -1,7 +1,3 @@
-CI published at https://build.fhir.org/ig/servicewell/servicewell.fhir.wof-portal/branches/initial-setup-refinement/index.html
-
-
-
 # Introduction 
 TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
 

@@ -1,76 +1,87 @@
 ---
-title: ITB - Online booking
+title: Wof Portal
+--- 
+
+<small> Welcome to the **WOF Portal** FHIR Implementation Guide published by [Service Well AB](https://servicewell.se). </small>
+
+Most dental care chains grow through acquisitions — but end up stuck with different patient record systems, manual reporting, and a fragmented patient journey.
+
+Service Well is the shared foundation that turns a group of clinics into a true chain. We create a common platform for booking, follow-up, customer satisfaction, and growth — regardless of which patient record systems the clinics use.
+
+That means shared KPIs, a consistent patient journey, and rapid integration of new clinics, without system replacements and without loss of production.
+
+With Service Well, you can grow faster — and manage the business as one cohesive operation.
+
 ---
 
-ITB is Service Well’s central solution for online bookings designed for healthcare organizations operating with **multiple Patient Management Systems (PMS / EHRs).**. It integrates with all electronic health record (EHR) systems, giving you a unified patient-facing frontend and a shared back office for administration. The result is a seamless patient journey, regardless of which clinic the patient visits.
+This guide describes the WOF Portal API — its capabilities, authentication model, data schemas, and operational considerations — so that integrators and developers can build reliable, secure integrations.
 
-In practice, this means the clinics are experienced as one provider rather than separate units. Management can centrally control appointment availability, bookable treatments, and optimize capacity utilization. Use Service Well’s tailored interface—or let your web agency build on top of our open API.
+--- 
 
+###  What is Service Well Portal?
 
-👉 One booking flow. Many systems. Many clinics. One seamless patient experience.
+**Service Well Portal** is a unified API designed for healthcare organizations operating with **multiple Patient Management Systems (PMS / EHRs).**
+
+It provides a single, consistent integration point between internal clinical systems and **consumer-facing digital services,** without requiring those services to know which journal system is used behind the scenes.
+
+👉 One API. Many systems. Many Instances. One consistent experience.
 
 ---
 
 <span style="font-size:1.4em;font-weight;">The Problem We Solve</span>
 
-Large healthcare groups and chains typically face the same booking challenges:
+Large healthcare groups and chains typically face the same challenges:
 
-- Different PMS / EHR systems with different scheduling APIs
-- Multiple PMS / EHR instances across clinics
-- Inconsistent booking flows and availability models
-- Custom booking integrations per journal system
-- Long lead times to launch or update online booking
-- A fragmented patient experience — every clinic feels like a different provider
+- Differnt PMS / EHR systems in parallel
+- Multiple PMS / EHR instances systems in parallel
+- Inconsistent APIs and data models
+- High integration costs per system
+- Long lead times for new digital services
+- Fragmented patient and customer experiences
+Each new web service, booking client, or partner integration often becomes a custom project per journal system.
 
-Each new booking client, website, or partner integration often becomes a custom project per journal system.
+---
+
+<span style="font-size:1.4em;font-weight;">The Solution: A Common API Layer</span>
+
+Service Well Portal provides a **shared API layer** that:
+
+- Abstracts differences between journal systems
+- Centralizes mapping, routing, and business rules
+- Exposes a stable contract to external consumers
+- Scales to new PMS systems without breaking existing integrations
+
+External consumers integrate **once**, not once per system.
 
 ---
 
-<span style="font-size:1.4em;font-weight;">The Solution: Unified Online Booking</span>
-
-WofPortal ITB provides a **shared booking layer** that:
-
-- Abstracts scheduling differences between journal systems
-- Offers a patient-facing booking interface and a shared backoffice
-- Exposes a stable FHIR-based API for custom or third-party frontends
-- Scales to new PMS systems and clinics without breaking existing integrations
-
-Patients and integrators interact with **one booking API** — not one per system.
-
----
- 
 ### Our value proposition
-With WofPortal ITB, organizations gain:
+With Service Well Portal, organizations gain:
 
-- 🚀 Faster rollout of online booking to new clinics
-- 🔁 One booking flow reused across the entire chain
-- 🔌 Reduced dependency on individual PMS vendors
+- 🚀 Faster time-to-market for digital services
+- 🔁 Reusable integrations across the entire organization
+- 🔌 Reduced vendor lock-in
 - 📉 Lower integration and maintenance costs
-- 🎯 A consistent patient booking experience — every clinic feels like one provider
+- 🎯 A consistent patient and customer experience
 
 ---
 
+<span style="font-size:1.3em;">[Read more](./overview.html)</span> or <span style="font-size:1.3em;">👉[get started right away!]()</span>
 
-<span style="font-size:1.3em;font-style:italic;">What it is</span>
+### Our products:
+* **[WofPortal ITB](itb.html)** -  is the web/online booking solution ("Internet appointment booking") in the WofPortal ecosystem.
+  > <small> It lets patients book (and often also reschedule or cancel) appointments via mobile or computer. The bookings are synced with the electronic health record (EHR) system so that clinicians always see the correct appointments. </small>
 
-<span style="font-size:1.4em;font-weight;"> Patient interface for booking</span>
+* **[Infowell](infowell.html)** -  short description
+  > <small> long description </small>
 
-* The patient can book appointments themselves via mobile/computer, as well as reschedule/cancel.
-* 'Patient portal' with “My bookings” (upcoming/previous), and the ability to manage bookings when permitted.
+* **[Kundnöjdhet](kundnojdhet.html)** -  short description.
+  > <small> long description </small>
 
-Typical patient journey: choose clinic → (optional campaign code) → choose treatment → choose practitioner & time → confirm by logging in. E.g with BankID/Vipps.
+* **[Värva en vän](varva-en-van.html)** -  short description
+  > <small> long description </small>
 
 
-<span style="font-size:1.4em;font-weight;"> Backoffice (administrative interface)</span>
+### Technical framework & design
+Wof Portal is built on FHIR R4 (v4.0.1) and tailored to dental care needs, informed by 15+ years of dental domain experience and implemented through FHIR constraints and extensions. It uses the standard FHIR RESTful API for integration and data exchange.
 
-A shared backoffice where you control what is shown and what can be booked.
-In the backoffice you can, among other things:
-
-* Manage clinics, configure clinics that should not be bookable online or optional link to external booking.
-* Manage treatments (services): create, edit, archive/activate.
-* Manage selectable practitioners linked to clinic in the patient view.
-* Configure SMS templates and choose to send SMS on booking/rescheduling.
-* Configure booking rules (e.g. age, minimum advance notice, rules for rescheduling/cancellation).
-* Control price display, images/banner, and various information/text fields shown in the patient interface.
-
-[Get started](./get-started.html)

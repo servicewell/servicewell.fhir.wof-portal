@@ -6,12 +6,12 @@ Usage: #definition
 * name = "GetOffersContext"
 * title = "$getOffersContext — Booking Content Context"
 * kind = #operation
-* code = #get-offers-context
+* code = #getOffersContext
 * system = true
-* type = false
+* type = true
 * instance = true
 * description = """
-`$get-offers-context` is a **read-oriented** FHIR operation designed to let a frontend **quickly populate booking content** so a patient can choose *what* to book and *with whom/where* — without needing multiple round-trips.  
+`$getOffersContext` is a **read-oriented** FHIR operation designed to let a frontend **quickly populate booking content** so a patient can choose *what* to book and *with whom/where* — without needing multiple round-trips.  
 It may include ActivityDefinitionPortal, HealthcareServicePortal, PractitionerRolePortal and OfferPortal.  
 It MUST NOT include Schedule, Slot, or bookable time slots.  
 

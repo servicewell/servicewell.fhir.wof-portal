@@ -7,8 +7,10 @@ Usage: #definition
 * name = "WOFPortalCapabilityStatement"
 * title = "WOF Portal Capability Statement"
 * date = "2026-02-02T12:00:00+00:00"
-* description = "This CapabilityStatement defines the canonical domain model and API principles of the **WOF Portal** owned and operated by Service Well AB."
+* description = "This CapabilityStatement defines the canonical domain model and API principles of the **WOF Portal**"
 * purpose = """
+This CapabilityStatement defines the canonical domain model and API principles of the **WOF Portal**,
+owned and operated by Service Well.
 
 **IHE Scheduling:** This server instantiates *IHE.Scheduling.server* (v1.0.0).
 
@@ -29,8 +31,9 @@ Usage: #definition
 
 ## Offer and availability principles
 - **Offer** represents a computed, context-specific view combining ActivityDefinition,
-    HealthcareService, and PractitionerRole.
+  HealthcareService, and PractitionerRole.
 - Offer is intended for presentation and selection, not for scheduling.
+- **Schedule** represents planned working time and SHALL NOT be treated as bookable availability.
 - Actual bookability requires downstream slot or availability checks.
 
 ## Integration principle
@@ -43,71 +46,53 @@ This CapabilityStatement documents the canonical behavior of the WOF Portal API.
 The following diagram illustrates outbound API calls from a patient-facing client
 to the WOF Portal Proxy. It represents actual usage patterns and supported interactions.
 
-Theres currently two domains for our dev-api:  
-```
-- **api.wellonfhir.se/{{tenant}}/1.0/R4**      - Swedish developmnent environment
-- **api-no.wellonfhir.se/{{tenant}}/1.0/R4**   - Norwegian development environment
-```
-
-<small> tenant is a stable identifier for the organization</small>
-
-Both Requires [authentication](./get-started.html#authentication-and-security)
-
 
 Client → WOF-PORTAL:
 
 <style>
-    .mermaid {
-        min-height: 640px;
-        width: 100%;
-        max-width: 1600px;
-        margin: 0 auto;
-    }
-
-    .mermaid svg {
-        width: 100%;
-        height: auto;
-    }
+  .mermaid {
+    min-height: 600px;
+  }
 </style>
 
 ```mermaid
-%%{init: {'theme':'neutral','securityLevel':'loose','fontFamily':'Inter, Arial, sans-serif','sequence': {'diagramMarginX': 30, 'diagramMarginY': 20, 'actorMargin': 220, 'width': 180, 'messageMargin': 32, 'mirrorActors': false, 'wrap': true}}}%%sequenceDiagram
-    participant Client as Scheduling Client
-    participant Auth as Auth Endpoint
-    participant Portal as WOF Portal API
+sequenceDiagram
+    participant Client as Patient Client
+    participant Portal as WOF Portal Proxy
+    participant Endpoint as Tenant Endpoint
 
-    Note over Client,Portal: base = {{baseUrl}}/{{tenant}}/{{apiVersion}}/R4
+    %% Organization (ServiceProvider / Care context)
+    Client ->> Portal: GET portal/fhir/Organization
+    Client ->> Portal: GET portal/fhir/Organization/{id}?_summary={true|false}
+    Client ->> Portal: GET portal/fhir/Organization?identifier={tenantIdentifier}&_summary={true|false}
 
-    %% System token (from DemoOris.rest)
-    Client ->> Auth: POST {{base}}/auth/system-token
-    Note over Client,Auth: Header: X-ApiKey {{apiKey}}
-    Auth -->> Client: access_token (system)
+    %% Patient (endpoint-scoped)
+    Client ->> Endpoint: GET {endpointId}/fhir/Patient
 
-    %% HealthcareService
-    Client ->> Portal: GET {{base}}/fhir/HealthcareService
-    Client ->> Portal: GET {{base}}/fhir/HealthcareService/{{healthcareServiceId}}
-    Client ->> Portal: GET {{base}}/fhir/HealthcareService/{{healthcareServiceId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{boolean}}<br/>&includePractitionerRolePortal={{boolean}}
+    %% Appointment (portal + endpoint)
+    Client ->> Portal: GET portal/fhir/Appointment
+    Client ->> Endpoint: GET {endpointId}/fhir/Appointment/{id}
+    Client ->> Endpoint: GET {endpointId}/fhir/Appointment?actor=HealthcareService/{healthcareServiceId}
 
-    %% Root operation
-    Client ->> Portal: GET {{base}}/fhir/$get-offers-context<br/>?includeActivityDefinitionPortal={{boolean}}<br/>&includeHealthcareServicePortal={{boolean}}<br/>&includePractitionerRolePortal={{boolean}}
+    %% IHE Scheduling
+    Client ->> Endpoint: GET {endpointId}/fhir/Appointment/$find
+    Client ->> Endpoint: POST {endpointId}/fhir/Appointment/$book
 
-    %% ActivityDefinition
-    Client ->> Portal: GET {{base}}/fhir/ActivityDefinition
-    Client ->> Portal: GET {{base}}/fhir/ActivityDefinition/{{activityDefinitionId}}
-    Client ->> Portal: GET {{base}}/fhir/ActivityDefinition/{{activityDefinitionId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{boolean}}<br/>&includeHealthcareServicePortal={{boolean}}<br/>&includePractitionerRolePortal={{boolean}}
-    Client ->> Portal: GET {{base}}/fhir/ActivityDefinition/{{activityDefinitionId}}/$get-offers-context
+    %% HealthcareService (portal-scoped)
+    Client ->> Portal: GET portal/fhir/HealthcareService
+    Client ->> Portal: GET portal/fhir/HealthcareService/{id}
 
-    %% PractitionerRole
-    Client ->> Portal: GET {{base}}/fhir/PractitionerRole
-    Client ->> Portal: GET {{base}}/fhir/PractitionerRole/{{practitionerRoleId}}
-    Client ->> Portal: GET {{base}}/fhir/PractitionerRole/{{practitionerRoleId}}/$get-offers-context<br/>?includeActivityDefinitionPortal={{boolean}}<br/>&includeHealthcareServicePortal={{boolean}}<br/>&includePractitionerRolePortal={{boolean}}
+    %% Location (Areas)
+    Client ->> Portal: GET portal/fhir/Location?physicalType={AreaLiteral}
 
-    %% Catalog resources
-    Client ->> Portal: GET {{base}}/fhir/Location
-    Client ->> Portal: GET {{base}}/fhir/Organization
+    %% PractitionerRole (portal-scoped)
+    Client ->> Portal: GET portal/fhir/PractitionerRole
+    Client ->> Portal: GET portal/fhir/PractitionerRole?service=HealthcareService/{healthcareServiceId}
+    Client ->> Portal: GET portal/fhir/PractitionerRole/{practitionerRoleId}
 
-    %% IHE Scheduling find 
-    Client ->> Portal: GET {{base}}/fhir/Appointment/$find<br/>?start={{find_start}}&end={{find_end}}<br/>&visit-type={{visitTypeSystem}}|{{visitTypeCode}}<br/>&healthcareService=HealthcareService/{{healthcareServiceId}}<br/>&practitionerRole=PractitionerRole/{{practitionerRoleId}}
+    %% ActivityDefinition (portal-scoped)
+    Client ->> Portal: GET portal/fhir/ActivityDefinition
+    Client ->> Portal: GET portal/fhir/ActivityDefinition/{id}
 ```
 
 This diagram is informational and documents expected client usage.
@@ -115,7 +100,6 @@ It does not expand or modify the formal FHIR conformance rules.
 """
 
 * kind = #capability
-* software.name = "WOF Portal"
 * fhirVersion = #4.0.1
 * format[+] = #json
 * format[+] = #xml
@@ -127,54 +111,40 @@ It does not expand or modify the formal FHIR conformance rules.
 * rest.mode = #server
 
 * rest.resource[+].type = #ActivityDefinition
-* rest.resource[=].supportedProfile[+] = Canonical(ActivityDefinitionPortal)
+* rest.resource[=].profile = Canonical(ActivityDefinitionPortal)
 * rest.resource[=].documentation = "Represents shared service concepts identified by code."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
-* rest.resource[=].operation[+].name = "get-offers-context"
-* rest.resource[=].operation[=].definition = Canonical(GetOffersContext)
-* rest.resource[=].operation[=].documentation = "Returns enriched offer context for presentation and selection.  
- Invoked as [base]/ActivityDefinition/[id]/$get-offers-context"
-
-
 
 * rest.resource[+].type = #HealthcareService
-* rest.resource[=].supportedProfile = Canonical(HealthcareServicePortal)
+* rest.resource[=].profile = Canonical(HealthcareServicePortal)
 * rest.resource[=].documentation = "Represents where healthcare services are performed."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
-* rest.resource[=].operation[+].name = "get-offers-context"
-* rest.resource[=].operation[=].definition = Canonical(GetOffersContext)
-* rest.resource[=].operation[=].documentation = "Returns enriched offer context for presentation and selection.  
-Invoked as [base]/HealthcareService/[id]/$get-offers-context"
-
 
 * rest.resource[+].type = #PractitionerRole
-* rest.resource[=].supportedProfile = Canonical(PractitionerRolePortal)
+* rest.resource[=].profile = Canonical(PractitionerRolePortal)
 * rest.resource[=].documentation = "Represents practitioners acting in specific operational and financial contexts."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
 * rest.resource[=].searchParam[+].name = "service"
 * rest.resource[=].searchParam[=].type = #reference
 * rest.resource[=].searchParam[=].documentation = "Filter by PractitionerRole.service (Reference to HealthcareService)."
-* rest.resource[=].operation[+].name = "get-offers-context"
-* rest.resource[=].operation[=].definition = Canonical(GetOffersContext)
-* rest.resource[=].operation[=].documentation = "Returns enriched offer context for presentation and selection.  
-Invoked as [base]/PractitionerRole/[id]/$get-offers-context"
+
 
 * rest.resource[+].type = #Patient
-* rest.resource[=].supportedProfile[+] = Canonical(PortalPatient)
 * rest.resource[=].supportedProfile[+] = "http://hl7.se/fhir/ig/base/StructureDefinition/SEBasePatient"
-* rest.resource[=].documentation = "Represents patients within the WOF Portal, conforming to the PortalPatient profile."
+* rest.resource[=].documentation = "Represents patients within the WOF Portal, conforming to the Swedish base patient profile."
 * rest.resource[=].interaction[+].code = #read
 * rest.resource[=].interaction[+].code = #search-type
 * rest.resource[=].searchParam[+].name = "identifier"
 * rest.resource[=].searchParam[=].type = #token
-* rest.resource[=].searchParam[=].documentation = "Search by personal number using system|value."
+* rest.resource[=].searchParam[=].documentation = "Use system fro,m se base profile Http://"
 
 
 * rest.resource[+].type = #Organization
 * rest.resource[=].supportedProfile[+] = Canonical(ServiceProviderPortal)
+* rest.resource[=].supportedProfile[+] = Canonical(BillingOrganizationPortal)
 * rest.resource[=].documentation = """
 Organizations in WOF Portal MAY conform to multiple profiles, representing different organizational roles.
 
@@ -200,28 +170,8 @@ but profile-based filtering is not required for lookup by id or identifier.
 * rest.resource[=].searchParam[=].type = #token
 * rest.resource[=].searchParam[=].documentation = "Search by organization number using system|value."
 
-* rest.resource[+].type = #Appointment
-* rest.resource[=].supportedProfile[+] = Canonical(PortalAppointment)
-* rest.resource[=].supportedProfile[+] = Canonical(PortalAvailableAppointment)
-* rest.resource[=].documentation = """
-Appointment access in WOF Portal.
-
-- `PortalAppointment` — represents a booked appointment in a patient context.
-- `PortalAvailableAppointment` — represents an available appointment returned by `$find`.
-
-Supports filtering by actor (e.g., HealthcareService/{id}) and IHE Scheduling operations.
-"""
-* rest.resource[=].interaction[+].code = #read
-* rest.resource[=].interaction[+].code = #search-type
-* rest.resource[=].searchParam[+].name = "actor"
-* rest.resource[=].searchParam[=].type = #reference
-* rest.resource[=].searchParam[=].documentation = "Filter appointments by participant actor (e.g., HealthcareService/{id})."
-* rest.resource[=].operation[+].name = "find"
-* rest.resource[=].operation[=].definition = Canonical(FindAppointments)
-* rest.resource[=].operation[=].documentation = "Search for available appointment opportunities using $find (IHE ITI Scheduling)."
-* rest.resource[=].operation[+].name = "book"
-* rest.resource[=].operation[=].definition = Canonical(BookAppointment)
-* rest.resource[=].operation[=].documentation = "Create, modify, or cancel an appointment using $book (IHE ITI Scheduling)."
+* rest.resource[+].type = #Schedule
+* rest.resource[=].documentation = "Represents planned working time, not bookable availability."
 
 * rest.resource[+].type = #Location
 * rest.resource[=].documentation = "Portal-scoped locations used as areas. Supported interaction: search."
@@ -233,7 +183,7 @@ Supports filtering by actor (e.g., HealthcareService/{id}) and IHE Scheduling op
 // Declare canonical operations exposed by WOF Portal
 * rest.operation[+].name = "getOffersContext"
 * rest.operation[=].definition = Canonical(GetOffersContext)
-* rest.operation[=].documentation = "Returns enriched offer context for presentation and selection. Invoked as [base]/$get-offers-context"
+* rest.operation[=].documentation = "Returns enriched offer context for presentation and selection."
 
 
 
