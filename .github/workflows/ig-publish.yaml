@@ -1,0 +1,162 @@
+name: IG Publish
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish-via-azure-devops-template:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Detect organization from sushi-config
+        id: detect_org
+        shell: bash
+        run: |
+          set -euo pipefail
+          ORG="$(awk -F': *' '/^id:/{print $2; exit}' sushi-config.yaml | cut -d'.' -f1)"
+          if [ -z "$ORG" ]; then
+            echo "Unable to detect organization from sushi-config.yaml id" >&2
+            exit 1
+          fi
+          echo "organization=$ORG" >> "$GITHUB_OUTPUT"
+          echo "Detected organization: $ORG"
+
+      - name: Queue Azure DevOps run (template-backed)
+        id: queue_run
+        shell: bash
+        env:
+          AZDO_ORG_URL: ${{ vars.AZDO_ORG_URL }}
+          AZDO_PROJECT: ${{ vars.AZDO_PROJECT }}
+          AZDO_PIPELINE_ID: ${{ vars.AZDO_PIPELINE_ID }}
+          AZDO_PAT: ${{ secrets.AZDO_PAT }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${AZDO_ORG_URL}" ] || [ -z "${AZDO_PROJECT}" ] || [ -z "${AZDO_PIPELINE_ID}" ]; then
+            echo "Missing one or more required GitHub Variables: AZDO_ORG_URL, AZDO_PROJECT, AZDO_PIPELINE_ID" >&2
+            exit 1
+          fi
+
+          if [ -z "${AZDO_PAT}" ]; then
+            echo "Missing required GitHub Secret: AZDO_PAT" >&2
+            exit 1
+          fi
+
+          REPO_REF="${GITHUB_REF}"
+
+          cat > azure-pipeline-override.yaml <<'YAML'
+          trigger: none
+
+          resources:
+            repositories:
+              - repository: PublishTemplate
+                name: swts/servicewell.fhir.landingzone
+                type: git
+                ref: refs/heads/task/el/build-agent
+                endpoint: cross-project-connection
+
+          pool:
+            name: 'Implementation Guide Build Pool'
+
+          jobs:
+            - job: SetupPublish
+              steps:
+                - checkout: self
+                  persistCredentials: true
+
+                - script: |
+                    ORG=$(yq '.id' /azp/_work/1/s/sushi-config.yaml | cut -d'.' -f1)
+                    echo "##vso[task.setvariable variable=org]$ORG"
+                  displayName: Detect organization from sushi-config
+
+                - template: ".azure-pipelines/ig-templates/ig-publish-template.yaml@PublishTemplate"
+                  parameters:
+                    organization: $(org)
+          YAML
+
+          REQUEST_BODY="$(jq -n \
+            --arg refName "$REPO_REF" \
+            --rawfile yml azure-pipeline-override.yaml \
+            '{
+              resources: {
+                repositories: {
+                  self: {
+                    refName: $refName
+                  }
+                }
+              },
+              yamlOverride: $yml
+            }')"
+
+          API_URL="${AZDO_ORG_URL}/${AZDO_PROJECT}/_apis/pipelines/${AZDO_PIPELINE_ID}/runs?api-version=7.1"
+          RESPONSE="$(curl -sS -w '\n%{http_code}' \
+            -u ":${AZDO_PAT}" \
+            -H "Content-Type: application/json" \
+            -X POST \
+            -d "$REQUEST_BODY" \
+            "$API_URL")"
+
+          HTTP_CODE="$(echo "$RESPONSE" | tail -n1)"
+          RESPONSE_BODY="$(echo "$RESPONSE" | sed '$d')"
+
+          if [ "$HTTP_CODE" -lt 200 ] || [ "$HTTP_CODE" -ge 300 ]; then
+            echo "Azure DevOps queue failed with HTTP ${HTTP_CODE}" >&2
+            echo "$RESPONSE_BODY"
+            exit 1
+          fi
+
+          RUN_ID="$(echo "$RESPONSE_BODY" | jq -r '.id')"
+          RUN_URL="$(echo "$RESPONSE_BODY" | jq -r '._links.web.href // empty')"
+
+          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+            echo "Azure DevOps run id missing in response" >&2
+            echo "$RESPONSE_BODY"
+            exit 1
+          fi
+
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          echo "run_url=$RUN_URL" >> "$GITHUB_OUTPUT"
+          echo "Queued Azure DevOps run: $RUN_ID"
+          if [ -n "$RUN_URL" ]; then
+            echo "Run URL: $RUN_URL"
+          fi
+
+      - name: Wait for Azure DevOps run completion
+        shell: bash
+        env:
+          AZDO_ORG_URL: ${{ vars.AZDO_ORG_URL }}
+          AZDO_PROJECT: ${{ vars.AZDO_PROJECT }}
+          AZDO_PIPELINE_ID: ${{ vars.AZDO_PIPELINE_ID }}
+          AZDO_PAT: ${{ secrets.AZDO_PAT }}
+          RUN_ID: ${{ steps.queue_run.outputs.run_id }}
+        run: |
+          set -euo pipefail
+
+          STATUS_URL="${AZDO_ORG_URL}/${AZDO_PROJECT}/_apis/pipelines/${AZDO_PIPELINE_ID}/runs/${RUN_ID}?api-version=7.1"
+          echo "Monitoring Azure DevOps run ${RUN_ID}"
+
+          while true; do
+            STATUS_JSON="$(curl -sS -u ":${AZDO_PAT}" "$STATUS_URL")"
+            STATE="$(echo "$STATUS_JSON" | jq -r '.state')"
+            RESULT="$(echo "$STATUS_JSON" | jq -r '.result // empty')"
+
+            echo "State: ${STATE} | Result: ${RESULT:-pending}"
+
+            if [ "$STATE" = "completed" ]; then
+              if [ "$RESULT" = "succeeded" ]; then
+                echo "Azure DevOps run completed successfully"
+                exit 0
+              fi
+              echo "Azure DevOps run failed with result: ${RESULT}" >&2
+              exit 1
+            fi
+
+            sleep 20
+          done
