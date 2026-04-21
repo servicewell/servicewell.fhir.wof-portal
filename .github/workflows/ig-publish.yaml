@@ -76,7 +76,7 @@ jobs:
             '{
               resources: {
                 repositories: {
-                  self: {
+                  IGSource: {
                     refName: $refName
                   }
                 }
