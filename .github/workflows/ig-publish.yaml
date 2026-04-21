@@ -69,6 +69,7 @@ jobs:
           AZDO_PROJECT: ${{ vars.AZDO_PROJECT }}
           AZDO_PIPELINE_ID: ${{ vars.AZDO_PIPELINE_ID }}
           AZDO_ACCESS_TOKEN: ${{ steps.azdo_token.outputs.access_token }}
+          ORG: ${{ steps.detect_org.outputs.organization }}
         run: |
           set -euo pipefail
 
@@ -84,39 +85,9 @@ jobs:
 
           REPO_REF="${GITHUB_REF}"
 
-          cat > azure-pipeline-override.yaml <<'YAML'
-          trigger: none
-
-          resources:
-            repositories:
-              - repository: PublishTemplate
-                name: swts/servicewell.fhir.landingzone
-                type: git
-                ref: refs/heads/task/el/build-agent
-                endpoint: cross-project-connection
-
-          pool:
-            name: 'Implementation Guide Build Pool'
-
-          jobs:
-            - job: SetupPublish
-              steps:
-                - checkout: self
-                  persistCredentials: true
-
-                - script: |
-                    ORG=$(yq '.id' /azp/_work/1/s/sushi-config.yaml | cut -d'.' -f1)
-                    echo "##vso[task.setvariable variable=org]$ORG"
-                  displayName: Detect organization from sushi-config
-
-                - template: ".azure-pipelines/ig-templates/ig-publish-template.yaml@PublishTemplate"
-                  parameters:
-                    organization: $(org)
-          YAML
-
           REQUEST_BODY="$(jq -n \
             --arg refName "$REPO_REF" \
-            --rawfile yml azure-pipeline-override.yaml \
+            --arg org "$ORG" \
             '{
               resources: {
                 repositories: {
@@ -125,7 +96,11 @@ jobs:
                   }
                 }
               },
-              yamlOverride: $yml
+              variables: {
+                org: {
+                  value: $org
+                }
+              }
             }')"
 
           API_URL="${AZDO_ORG_URL}/${AZDO_PROJECT}/_apis/pipelines/${AZDO_PIPELINE_ID}/runs?api-version=7.1"
