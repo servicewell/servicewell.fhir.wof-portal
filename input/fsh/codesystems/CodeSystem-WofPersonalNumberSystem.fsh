@@ -15,6 +15,7 @@ Description: "Allowed identifier.system values for national personal numbers use
 * #urn:oid:1.2.752.129.2.1.3.1 "Swedish Personal Identity Number"
 * #urn:oid:1.2.752.129.2.1.3.3 "Swedish Coordination Number"
 * #http://electronichealth.se/identifier/personnummer "Swedish national personal number identifier (HTTP URI)"
+* #HNR "A locally assigned H-nummer" "A locally assigned H-nummer. If this identifier is used, information about the assigner is mandatory. Merk at lokale hjelpenummer (H-nummer) for pasient ikke garanterer at kombinasjonen system og value er gir unik identifikasjon, siden disse tildeles på lokalt i det enkelte kliniske fagsystem. Felles nasjonale hjelpenummer utstedt av tjenesten for felles hjelpenummer er imidlertid unike i Norge (og globalt unike i kombinasjon med system)."
 
 
 ValueSet: WofPersonalNumberSystemVS
