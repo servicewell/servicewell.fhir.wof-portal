@@ -39,19 +39,6 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           allow-no-subscriptions: true
 
-      - name: Detect organization from sushi-config
-        id: detect_org
-        shell: bash
-        run: |
-          set -euo pipefail
-          ORG="$(awk -F': *' '/^id:/{print $2; exit}' sushi-config.yaml | cut -d'.' -f1)"
-          if [ -z "$ORG" ]; then
-            echo "Unable to detect organization from sushi-config.yaml id" >&2
-            exit 1
-          fi
-          echo "organization=$ORG" >> "$GITHUB_OUTPUT"
-          echo "Detected organization: $ORG"
-
       - name: Get Azure DevOps token
         id: azdo_token
         shell: bash
@@ -69,7 +56,6 @@ jobs:
           AZDO_PROJECT: ${{ vars.AZDO_PROJECT }}
           AZDO_PIPELINE_ID: ${{ vars.AZDO_PIPELINE_ID }}
           AZDO_ACCESS_TOKEN: ${{ steps.azdo_token.outputs.access_token }}
-          ORG: ${{ steps.detect_org.outputs.organization }}
         run: |
           set -euo pipefail
 
@@ -87,18 +73,12 @@ jobs:
 
           REQUEST_BODY="$(jq -n \
             --arg refName "$REPO_REF" \
-            --arg org "$ORG" \
             '{
               resources: {
                 repositories: {
                   self: {
                     refName: $refName
                   }
-                }
-              },
-              variables: {
-                org: {
-                  value: $org
                 }
               }
             }')"
