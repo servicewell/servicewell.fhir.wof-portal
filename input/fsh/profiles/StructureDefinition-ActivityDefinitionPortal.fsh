@@ -81,11 +81,14 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * code.text 0..1
 * code insert Obligation($wof-portal-server-actor, #SHALL:populate)
 
+* subtitle 0..1 MS
+* subtitle ^short = "A subtitle that complements the main title of the activity definition."
+* subtitle ^definition = "An optional subtitle that can be used for a longer title description of the service concept."
+
 
 * implicitRules 0..0
 * language 0..0
 * identifier 0..0
-* subtitle 0..0
 * experimental 0..0
 * subject[x] 0..0
 * useContext 0..0
