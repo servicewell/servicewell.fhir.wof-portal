@@ -16,7 +16,7 @@ Appointment representation of a booked visit.
 * identifier 1..* MS
 * identifier.type insert Obligation($wof-portal-client-actor, #SHOULD:ignore)
 * identifier ^slicing.discriminator[0].type = #value
-* identifier ^slicing.discriminator[0].path = "type.text"
+* identifier ^slicing.discriminator[0].path = "type.coding.code"
 * identifier ^slicing.rules = #open
 * identifier contains sourceSystemIdentifier 1..1 MS
 * identifier[sourceSystemIdentifier].type.text = "source systems appointment concept"
@@ -25,6 +25,8 @@ Appointment representation of a booked visit.
 * identifier[sourceSystemIdentifier].system ^definition = "See [EndpointIdentifierSystemForAppointment](./NamingSystem-EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
 * identifier[sourceSystemIdentifier].value 1..1 MS
 * identifier[sourceSystemIdentifier].value ^short = "Source systems identifier for the appointment"
+* identifier[sourceSystemIdentifier].type.coding.code = #sourcesystem-identifier
+* identifier[sourceSystemIdentifier].type.coding.code MS
 
 * participant 3..3
 
