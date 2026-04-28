@@ -77,7 +77,6 @@ Description: """Base profile of wof ActivityDefinition"""
 * implicitRules 0..0
 * language 0..0
 * identifier 0..0
-* subtitle 0..0
 * experimental 0..0
 * subject[x] 0..0
 * useContext 0..0
