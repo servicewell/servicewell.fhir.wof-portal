@@ -28,6 +28,25 @@ Appointment representation of a booked visit.
 * identifier[sourceSystemIdentifier].type.coding.code = #sourcesystem-identifier
 * identifier[sourceSystemIdentifier].type.coding.code MS
 
+
+* supportingInformation ^slicing.discriminator.type = #value
+* supportingInformation ^slicing.discriminator.path = "$this"
+* supportingInformation ^slicing.rules = #open
+* supportingInformation ^slicing.description = ""
+* supportingInformation ^slicing.ordered = false
+
+* supportingInformation contains deviceId 0..1 MS
+* supportingInformation[deviceId] ^short = "Identifies the chair or treatment unit required for the booking when a specific device must be used."
+* supportingInformation[deviceId] ^definition = "Used when the appointment must be booked against a specific chair or treatment unit. If the practitioner is tied to a specific chair at the time of booking, this information shall be included here. The identifier.value is a logical reference to the unique identifier of that chair or treatment unit."
+
+* supportingInformation[deviceId].identifier.value 1..1 MS
+* supportingInformation[deviceId].identifier.value ^short = "Logical reference to the unique identifier of the required chair or treatment unit."
+* supportingInformation[deviceId].identifier.value ^definition = "The logical reference to the unique identifier of the chair or treatment unit that must be used for the appointment booking."
+* supportingInformation[deviceId].identifier.use 0..0
+* supportingInformation[deviceId].reference 0..0
+* supportingInformation[deviceId].display 0..0
+
+
 * participant 3..3
 
 * participant ^slicing.discriminator.type = #value
@@ -91,7 +110,6 @@ Appointment representation of a booked visit.
 * reasonReference 0..0
 * priority 0..0
 * description 0..0
-* supportingInformation 0..0
 * minutesDuration 0..0
 * slot 0..0
 * created 0..0
