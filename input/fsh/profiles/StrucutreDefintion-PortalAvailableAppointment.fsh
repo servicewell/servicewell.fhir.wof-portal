@@ -27,7 +27,7 @@ Appointment representation of an available appointment.
 * identifier[sourceSystemIdentifier].value ^short = "Source systems identifier for the appointment"
 * identifier[slot-id].system = "http://canonical.fhir.link/servicewell/wof-connect/identifiercodesystem/slot-id"
 * identifier[slot-id].value  1..1 MS
-* identifier[slot-id].type.text = "Identifier-based reference to the Slot resource that represents this available appointment in the source system."
+* identifier[slot-id].type.text = "id for the available slot"
 
 
 * supportingInformation ^slicing.discriminator.type = #value
