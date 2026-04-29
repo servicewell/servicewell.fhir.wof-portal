@@ -14,19 +14,16 @@ Appointment representation of a booked visit.
 
 
 * identifier 1..* MS
-* identifier.type insert Obligation($wof-portal-client-actor, #SHOULD:ignore)
-* identifier ^slicing.discriminator[0].type = #value
-* identifier ^slicing.discriminator[0].path = "type.coding.code"
-* identifier ^slicing.rules = #open
-* identifier contains sourceSystemIdentifier 1..1 MS
-* identifier[sourceSystemIdentifier].type.text = "source systems appointment concept"
-* identifier[sourceSystemIdentifier].system 1..1 MS
-* identifier[sourceSystemIdentifier].system ^short = "Identifier-based reference to the Appointment concept in the source system."
-* identifier[sourceSystemIdentifier].system ^definition = "See [EndpointIdentifierSystemForAppointment](./NamingSystem-EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
-* identifier[sourceSystemIdentifier].value 1..1 MS
-* identifier[sourceSystemIdentifier].value ^short = "Source systems identifier for the appointment"
-* identifier[sourceSystemIdentifier].type.coding.code = #sourcesystem-identifier
-* identifier[sourceSystemIdentifier].type.coding.code MS
+* identifier ^short = "Must include at least one identifier that identifies the bookable time slot in the source system. Endpoint specific."
+* identifier.system 1..1 MS
+* identifier.system ^short = "Pattern from namingsystem EndpointIdentifierSystemForAppointment"
+* identifier.system ^definition = "See [EndpointIdentifierSystemForAppointment](./NamingSystem-EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
+* identifier.value 1..1 MS
+* identifier.value ^short = "The source system's id for the available slot"
+* identifier.system ^example[0].label = "uri"
+* identifier.system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment/serviceO-12345"
+* identifier.value ^example[0].label = "value"
+* identifier.value ^example[0].valueString = "apt-2024-00142"
 
 
 * supportingInformation ^slicing.discriminator.type = #value
