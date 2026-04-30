@@ -21,19 +21,19 @@ Appointment representation of an available appointment.
 * identifier ^slicing.ordered = false
 
 
-* identifier contains slot-id 1..1 MS
-* identifier[slot-id].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
-* identifier[slot-id].type.coding.code = #FILL
-* identifier[slot-id].system obeys paa-idsys
-* identifier[slot-id].system 1..1 MS
-* identifier[slot-id].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForSlotId"
-* identifier[slot-id].system ^definition = "See [EndpointIdentifierSystemForSlotId](./NamingSystem-EndpointIdentifierSystemForSlotId.html) for expected identifier.system values."
-* identifier[slot-id].value 1..1 MS
-* identifier[slot-id].value ^short = "The source system's id for the available slot"
-* identifier[slot-id].system ^example[0].label = "uri"
-* identifier[slot-id].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-slot-id/serviceO-12345"
-* identifier[slot-id].value ^example[0].label = "value"
-* identifier[slot-id].value ^example[0].valueString = "slot-2024-00142"
+* identifier contains sourceSlot-id 1..1 MS
+* identifier[sourceSlot-id].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
+* identifier[sourceSlot-id].type.coding.code = #FILL
+* identifier[sourceSlot-id].system obeys paa-idsys
+* identifier[sourceSlot-id].system 1..1 MS
+* identifier[sourceSlot-id].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForSlotId"
+* identifier[sourceSlot-id].system ^definition = "See [EndpointIdentifierSystemForSlotId](./NamingSystem-EndpointIdentifierSystemForSlotId.html) for expected identifier.system values."
+* identifier[sourceSlot-id].value 1..1 MS
+* identifier[sourceSlot-id].value ^short = "The source system's id for the available slot"
+* identifier[sourceSlot-id].system ^example[0].label = "uri"
+* identifier[sourceSlot-id].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-slot-id/serviceO-12345"
+* identifier[sourceSlot-id].value ^example[0].label = "value"
+* identifier[sourceSlot-id].value ^example[0].valueString = "slot-2024-00142"
 
 
 * supportingInformation ^slicing.discriminator.type = #value
