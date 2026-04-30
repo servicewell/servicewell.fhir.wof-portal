@@ -24,7 +24,7 @@ Appointment representation of an available appointment.
 * identifier contains slot-id 1..1 MS
 * identifier[slot-id].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[slot-id].type.coding.code = #FILL
-* identifier[slot-id].system obeys pba-idsys
+* identifier[slot-id].system obeys paa-idsys
 * identifier[slot-id].system 1..1 MS
 * identifier[slot-id].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForSlotId"
 * identifier[slot-id].system ^definition = "See [EndpointIdentifierSystemForSlotId](./NamingSystem-EndpointIdentifierSystemForSlotId.html) for expected identifier.system values."
