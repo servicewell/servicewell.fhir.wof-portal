@@ -13,17 +13,27 @@ Appointment representation of an available appointment.
 * meta.profile ^definition = "Identifies that the resource conforms to PortalAvailableAppointment so clients can safely process it as the WOF Portal service concept profile."
 
 
-* identifier 1..* MS
 * identifier ^short = "Must include at least one identifier that identifies the bookable time slot in the source system. Endpoint specific."
-* identifier.system 1..1 MS
-* identifier.system ^short = "Pattern from namingsystem EndpointIdentifierSystemForAppointment"
-* identifier.system ^definition = "See [EndpointIdentifierSystemForAppointment](./NamingSystem-EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
-* identifier.value 1..1 MS
-* identifier.value ^short = "The source system's id for the available slot"
-* identifier.system ^example[0].label = "uri"
-* identifier.system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment/serviceO-12345"
-* identifier.value ^example[0].label = "value"
-* identifier.value ^example[0].valueString = "apt-2024-00142"
+* identifier ^slicing.discriminator.type = #value
+* identifier ^slicing.discriminator.path = "type.coding.code"
+* identifier ^slicing.rules = #open
+* identifier ^slicing.description = ""
+* identifier ^slicing.ordered = false
+
+
+* identifier contains slot-id 1..1 MS
+* identifier[slot-id].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
+* identifier[slot-id].type.coding.code = #FILL
+* identifier[slot-id].system obeys pba-idsys
+* identifier[slot-id].system 1..1 MS
+* identifier[slot-id].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForSlotId"
+* identifier[slot-id].system ^definition = "See [EndpointIdentifierSystemForSlotId](./NamingSystem-EndpointIdentifierSystemForSlotId.html) for expected identifier.system values."
+* identifier[slot-id].value 1..1 MS
+* identifier[slot-id].value ^short = "The source system's id for the available slot"
+* identifier[slot-id].system ^example[0].label = "uri"
+* identifier[slot-id].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-slot-id/serviceO-12345"
+* identifier[slot-id].value ^example[0].label = "value"
+* identifier[slot-id].value ^example[0].valueString = "slot-2024-00142"
 
 
 * supportingInformation ^slicing.discriminator.type = #value

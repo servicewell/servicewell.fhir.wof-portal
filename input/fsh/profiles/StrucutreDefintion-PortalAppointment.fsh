@@ -12,18 +12,27 @@ Appointment representation of a booked visit.
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific PortalAppointment instance."
 * meta.profile ^definition = "Identifies that the resource conforms to PortalAppointment so clients can safely process it as the WOF Portal service concept profile."
 
-
-* identifier 1..* MS
 * identifier ^short = "Must include at least one identifier that identifies the bookable time slot in the source system. Endpoint specific."
-* identifier.system 1..1 MS
-* identifier.system ^short = "Pattern from namingsystem EndpointIdentifierSystemForAppointment"
-* identifier.system ^definition = "See [EndpointIdentifierSystemForAppointment](./NamingSystem-EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
-* identifier.value 1..1 MS
-* identifier.value ^short = "The source system's id for the available slot"
-* identifier.system ^example[0].label = "uri"
-* identifier.system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment/serviceO-12345"
-* identifier.value ^example[0].label = "value"
-* identifier.value ^example[0].valueString = "apt-2024-00142"
+* identifier ^slicing.discriminator.type = #value
+* identifier ^slicing.discriminator.path = "type.coding.code"
+* identifier ^slicing.rules = #open
+* identifier ^slicing.description = ""
+* identifier ^slicing.ordered = false
+
+
+* identifier contains sourceAppointmentId 1..1 MS
+* identifier[sourceAppointmentId].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
+* identifier[sourceAppointmentId].type.coding.code = #FILL
+* identifier[sourceAppointmentId].system 1..1 MS
+* identifier[sourceAppointmentId].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForAppointment"
+* identifier[sourceAppointmentId].system ^definition = "See [EndpointIdentifierSystemForAppointment](./NamingSystem-EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
+* identifier[sourceAppointmentId].system obeys pba-idsys
+* identifier[sourceAppointmentId].value 1..1 MS
+* identifier[sourceAppointmentId].value ^short = "The source system's id for the available slot"
+* identifier[sourceAppointmentId].system ^example[0].label = "uri"
+* identifier[sourceAppointmentId].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment/serviceO-12345"
+* identifier[sourceAppointmentId].value ^example[0].label = "value"
+* identifier[sourceAppointmentId].value ^example[0].valueString = "apt-2024-00142"
 
 
 * supportingInformation ^slicing.discriminator.type = #value
@@ -117,4 +126,3 @@ Appointment representation of a booked visit.
 * extension[consentToMarketing] ^short = "Patient consent to marketing"
 * extension[consentToMarketing] ^definition = "Indicates whether the patient has provided consent to receive marketing-related communication."
 * extension[consentToMarketing] insert Obligation($wof-portal-server-actor, #SHALL:handle)
-
