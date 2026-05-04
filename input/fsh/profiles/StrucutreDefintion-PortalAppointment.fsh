@@ -31,12 +31,12 @@ Appointment representation of a booked visit.
 * identifier[sourceAppointmentId].value 1..1 MS
 * identifier[sourceAppointmentId].value ^short = "The source system's id for the booked appointment"
 * identifier[sourceAppointmentId].system ^example[0].label = "Wof Portal"
-* identifier[sourceAppointmentId].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment/serviceO-12345"
+* identifier[sourceAppointmentId].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment/550e8400-e29b-41d4-a716-446655440000"
 * identifier[sourceAppointmentId].value ^example[0].label = "Wof Portal"
 * identifier[sourceAppointmentId].value ^example[0].valueString = "apt-2024-00142"
 * identifier[sourceAppointmentId].use 0..0
 
-* identifier[sourceSlot-id] ^short = "Used only when modifying an existing appointment | id for chosen slot when appointment is rebooked"
+* identifier[sourceSlot-id] ^short = "Used only when modifying an existing appointment | id for chosen slot when appointment is rescheduled"
 * identifier[sourceSlot-id].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForSlotId"
 * identifier[sourceSlot-id].system ^definition = "See [EndpointIdentifierSystemForSlotId](./NamingSystem-EndpointIdentifierSystemForSlotId.html) for expected identifier.system values."
 * identifier[sourceSlot-id].system obeys paa-idsys

@@ -32,7 +32,7 @@ Appointment representation of an available appointment.
 * identifier[sourceSlot-id].value 1..1 MS
 * identifier[sourceSlot-id].value ^short = "The source system's id for the available slot"
 * identifier[sourceSlot-id].system ^example[0].label = "Wof Portal"
-* identifier[sourceSlot-id].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-slot-id/serviceO-12345"
+* identifier[sourceSlot-id].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-slot-id/550e8400-e29b-41d4-a716-446655440000"
 * identifier[sourceSlot-id].value ^example[0].label = "Wof Portal"
 * identifier[sourceSlot-id].value ^example[0].valueString = "slot-2024-00142"
 
