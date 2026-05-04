@@ -10,7 +10,7 @@ Description: """Composite extension structuring key characteristics for Healthca
  
  Enables standardized and machine-readable communication of clinic booking policies, API capabilities, and security level."""
 * ^status = #active
-* ^url = "http://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/wofconnect-characteristic"
+* ^url = "http://canonical.fhir.link/servicewell/wof-base/StructureDefinition/wof-base-appointment-characteristic"
 
 // Var extensionen får sitta
 * ^context[0].type = #element

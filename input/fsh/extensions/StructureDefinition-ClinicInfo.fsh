@@ -4,8 +4,6 @@ Id: ext-clinic-info
 Title: "Clinic Info"
 Description: "Container extension for clinic information shown in the portal."
 
-* ^url = "http://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/ext-clinic-info"
-
 
 * ^status = #active
 * ^context.type = #element
