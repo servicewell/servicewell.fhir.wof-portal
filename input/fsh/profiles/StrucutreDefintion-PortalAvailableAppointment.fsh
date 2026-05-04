@@ -22,6 +22,7 @@ Appointment representation of an available appointment.
 
 
 * identifier contains sourceSlot-id 1..1 MS
+* identifier[sourceSlot-id] ^short = "The bookable time slot in the source system. Endpoint specific."
 * identifier[sourceSlot-id].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[sourceSlot-id].type.coding.code = #FILL
 * identifier[sourceSlot-id].system obeys paa-idsys
