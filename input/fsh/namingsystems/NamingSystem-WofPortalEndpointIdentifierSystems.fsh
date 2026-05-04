@@ -52,6 +52,21 @@ Pattern: `https://canonical.fhir.link/servicewell/wof-portal/identifier-system/e
 * uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment"
 
 
+Instance: EndpointIdentifierSystemForSlotId
+InstanceOf: NamingSystem
+Usage: #definition
+* name = "EndpointIdentifierSystemForSlotId"
+* status = #active
+* kind = #root
+* date = "2026-04-29"
+* description = """Root identifier namespace for Slot source-system primary keys per endpoint.  
+Pattern: `https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-slot-id/{endpointId}`"""
+* uniqueId[0].type = #uri
+* uniqueId[0].preferred = true
+* uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-slot-id"
+
+
+
 Instance: EndpointIdentifierSystemForPatient
 InstanceOf: NamingSystem
 Usage: #definition
