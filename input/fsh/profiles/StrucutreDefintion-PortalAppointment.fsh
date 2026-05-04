@@ -20,7 +20,7 @@ Appointment representation of a booked visit.
 * identifier ^slicing.ordered = false
 
 
-* identifier contains sourceAppointmentId 1..1 MS
+* identifier contains sourceAppointmentId 1..1 MS and sourceSlot-id 0..1 MS
 * identifier[sourceAppointmentId].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[sourceAppointmentId].type.coding.code = #FILL
 * identifier[sourceAppointmentId].system 1..1 MS
@@ -29,10 +29,22 @@ Appointment representation of a booked visit.
 * identifier[sourceAppointmentId].system obeys pba-idsys
 * identifier[sourceAppointmentId].value 1..1 MS
 * identifier[sourceAppointmentId].value ^short = "The source system's id for the available slot"
-* identifier[sourceAppointmentId].system ^example[0].label = "uri"
+* identifier[sourceAppointmentId].system ^example[0].label = "General"
 * identifier[sourceAppointmentId].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment/serviceO-12345"
-* identifier[sourceAppointmentId].value ^example[0].label = "value"
+* identifier[sourceAppointmentId].value ^example[0].label = "General"
 * identifier[sourceAppointmentId].value ^example[0].valueString = "apt-2024-00142"
+* identifier[sourceAppointmentId].use 0..0
+
+* identifier[sourceSlot-id] ^short = "Used only when modifying an existing appointment | id for chosen slot when appointment is rebooked"
+* identifier[sourceSlot-id].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForSlotId"
+* identifier[sourceSlot-id].system ^definition = "See [EndpointIdentifierSystemForSlotId](./NamingSystem-EndpointIdentifierSystemForSlotId.html) for expected identifier.system values."
+* identifier[sourceSlot-id].system obeys paa-idsys
+* identifier[sourceSlot-id].value 1..1 MS
+* identifier[sourceSlot-id].value ^short = "The source system's id for the available slot"
+* identifier[sourceSlot-id].use 0..0
+* identifier[sourceSlot-id].type.coding.code = #PLAC
+* identifier[sourceSlot-id].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
+
 
 
 * supportingInformation ^slicing.discriminator.type = #value
