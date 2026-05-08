@@ -5,6 +5,10 @@ Title: "HealthcareService Response"
 Description: "API response containing a single HealthcareServicePortal instance with clinic info, booking rules, and contained Location."
 * meta.versionId = "1"
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/healthcare-service-portal"
+* identifier[0].type.coding.code = #FILL
+* identifier[0].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[0].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-healthcareservice/efaad744-9faa-4075-8aa9-bb03aad9291b"
+* identifier[0].value = "svc-2a2af34c"
 * contained[0] = adressId
 * contained[+] = 773cc131-574b-4e86-9abd-552d0d25be27
 * extension[0].extension[0].url = "urlPlaceholder"

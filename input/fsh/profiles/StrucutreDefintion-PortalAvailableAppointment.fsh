@@ -26,6 +26,7 @@ Appointment representation of an available appointment.
 * identifier[sourceSlot-id].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[sourceSlot-id].type.coding.code = #FILL
 * identifier[sourceSlot-id].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
+* identifier[sourceSlot-id].type.coding.system  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[sourceSlot-id].system obeys appointment-idsys-2
 * identifier[sourceSlot-id].system 1..1 MS
 * identifier[sourceSlot-id].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForSlotId"
@@ -64,6 +65,7 @@ Appointment representation of an available appointment.
 * supportingInformation[deviceId].identifier.type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * supportingInformation[deviceId].identifier.type.coding.code = #FILL
 * supportingInformation[deviceId].identifier.type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
+* supportingInformation[deviceId].identifier.type.coding.system  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * supportingInformation[deviceId].identifier.use 0..0
 * supportingInformation[deviceId].reference 0..0
 * supportingInformation[deviceId].display 0..0

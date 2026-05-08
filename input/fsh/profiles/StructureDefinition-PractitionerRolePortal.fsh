@@ -35,6 +35,7 @@ It answers the question: _“In which role, at which service location, and under
 * identifier[sourceId].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[sourceId].type.coding.code = #FILL
 * identifier[sourceId].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
+* identifier[sourceId].type.coding.system  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[sourceId].system 1..1 MS
 * identifier[sourceId].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForPractitionerRole"
 * identifier[sourceId].system ^definition = "See [EndpointIdentifierSystemForPractitionerRole](./NamingSystem-EndpointIdentifierSystemForPractitionerRole.html) for expected identifier.system values."

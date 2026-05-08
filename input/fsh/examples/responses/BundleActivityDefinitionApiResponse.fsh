@@ -28,6 +28,10 @@ InstanceOf: ActivityDefinitionPortal
 Usage: #inline
 * meta.versionId = "1"
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/activity-definition-portal"
+* identifier[0].type.coding.code = #FILL
+* identifier[0].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[0].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-activitydefinition/efaad744-9faa-4075-8aa9-bb03aad9291b"
+* identifier[0].value = "actdef-b1c8d4ab"
 * extension.url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-sort-key"
 * extension.valueInteger = 4
 * name = "Konsultasjon Invisalign"
@@ -42,6 +46,10 @@ InstanceOf: ActivityDefinitionPortal
 Usage: #inline
 * meta.versionId = "1"
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/activity-definition-portal"
+* identifier[0].type.coding.code = #FILL
+* identifier[0].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[0].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-activitydefinition/efaad744-9faa-4075-8aa9-bb03aad9291b"
+* identifier[0].value = "actdef-7e26aef8"
 * extension.url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-sort-key"
 * extension.valueInteger = 2
 * name = "Undersøkelse"
@@ -58,6 +66,10 @@ InstanceOf: ActivityDefinitionPortal
 Usage: #inline
 * meta.versionId = "1"
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/activity-definition-portal"
+* identifier[0].type.coding.code = #FILL
+* identifier[0].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[0].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-activitydefinition/efaad744-9faa-4075-8aa9-bb03aad9291b"
+* identifier[0].value = "actdef-bab44769"
 * extension[0].url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-sort-key"
 * extension[=].valueInteger = 3
 * extension[+].extension.url = "campaign"
@@ -78,6 +90,10 @@ InstanceOf: ActivityDefinitionPortal
 Usage: #inline
 * meta.versionId = "1"
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/activity-definition-portal"
+* identifier[0].type.coding.code = #FILL
+* identifier[0].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[0].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-activitydefinition/efaad744-9faa-4075-8aa9-bb03aad9291b"
+* identifier[0].value = "actdef-05909f92"
 * extension.url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-sort-key"
 * extension.valueInteger = 0
 * name = "Akutt"

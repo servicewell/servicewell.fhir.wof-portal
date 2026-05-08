@@ -25,6 +25,7 @@ Appointment representation of a booked visit.
 * identifier[sourceAppointmentId].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[sourceAppointmentId].type.coding.code = #FILL
 * identifier[sourceAppointmentId].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
+* identifier[sourceAppointmentId].type.coding.system  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[sourceAppointmentId].system 1..1 MS
 * identifier[sourceAppointmentId].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForAppointment"
 * identifier[sourceAppointmentId].system ^definition = "See [EndpointIdentifierSystemForAppointment](./NamingSystem-EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
@@ -40,6 +41,7 @@ Appointment representation of a booked visit.
 * identifier[sourceSlot-id] ^short = "Used only when modifying an existing appointment | id for chosen slot when appointment is rescheduled"
 * identifier[sourceSlot-id].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[sourceSlot-id].type.coding.code = #PLAC
+* identifier[sourceSlot-id].type.coding.system  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[sourceSlot-id].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
 * identifier[sourceSlot-id].system 1..1 MS
 * identifier[sourceSlot-id].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForSlotId"
@@ -80,6 +82,7 @@ Appointment representation of a booked visit.
 * supportingInformation[deviceId].identifier.type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * supportingInformation[deviceId].identifier.type.coding.code = #FILL
 * supportingInformation[deviceId].identifier.type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
+* supportingInformation[deviceId].identifier.type.coding.system  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * supportingInformation[deviceId].identifier.use 0..0
 * supportingInformation[deviceId].reference 0..0
 * supportingInformation[deviceId].display 0..0

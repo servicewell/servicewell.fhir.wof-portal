@@ -39,6 +39,7 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * identifier[sourceId].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[sourceId].type.coding.code = #FILL
 * identifier[sourceId].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
+* identifier[sourceId].type.coding.system  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[sourceId].system 1..1 MS
 * identifier[sourceId].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForActivityDefinition"
 * identifier[sourceId].system ^definition = "See [EndpointIdentifierSystemForActivityDefinition](./NamingSystem-EndpointIdentifierSystemForActivityDefinition.html) for expected identifier.system values."

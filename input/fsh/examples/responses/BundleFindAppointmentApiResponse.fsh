@@ -26,10 +26,10 @@ Instance: 001-2026-04-20T081000-B544-E472-R12  //innehåller egentligen ':' -> i
 InstanceOf: PortalAvailableAppointment
 Usage: #inline
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/portal-available-appointment"
-* identifier[0].system = "http://canonical.fhir.link/servicewell/wof-connect/identifiercodesystem/slot-id"
+* identifier[0].type.coding.code = #FILL
+* identifier[=].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[=].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-slot-id/efaad744-9faa-4075-8aa9-bb03aad9291b"
 * identifier[=].value = "001-2026-04-20T081000-B544-E472-R12"   //innehåller egentligen ':' -> invalid
-* identifier[+].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment"
-* identifier[=].value = "efaad744-9faa-4075-8aa9-bb03aad9291b"
 * status = #proposed
 * serviceType = $csServiceType#tannrens "Tannrens"
 * start = "2026-04-20T06:10:00+00:00"
@@ -47,10 +47,10 @@ Instance: 001-2026-04-20T084000-B544-E472-R12  //innehåller egentligen ':' -> i
 InstanceOf: PortalAvailableAppointment
 Usage: #inline
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/portal-available-appointment"
-* identifier[0].system = "http://canonical.fhir.link/servicewell/wof-connect/identifiercodesystem/slot-id"
+* identifier[0].type.coding.code = #FILL
+* identifier[=].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[=].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-slot-id/efaad744-9faa-4075-8aa9-bb03aad9291b"
 * identifier[=].value = "001-2026-04-20T084000-B544-E472-R12"   //innehåller egentligen ':' -> invalid
-* identifier[+].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment"
-* identifier[=].value = "efaad744-9faa-4075-8aa9-bb03aad9291b"
 * status = #proposed
 * serviceType = $csServiceType#tannrens "Tannrens"
 * start = "2026-04-20T06:40:00+00:00"
@@ -68,10 +68,10 @@ Instance: 001-2026-04-20T091000-B544-E472-R12 //innehåller egentligen ':' -> in
 InstanceOf: PortalAvailableAppointment
 Usage: #inline
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/portal-available-appointment"
-* identifier[0].system = "http://canonical.fhir.link/servicewell/wof-connect/identifiercodesystem/slot-id"
+* identifier[0].type.coding.code = #FILL
+* identifier[=].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[=].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-slot-id/efaad744-9faa-4075-8aa9-bb03aad9291b"
 * identifier[=].value = "001-2026-04-20T091000-B544-E472-R12"  //innehåller egentligen ':' -> invalid
-* identifier[+].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment"
-* identifier[=].value = "efaad744-9faa-4075-8aa9-bb03aad9291b"
 * status = #proposed
 * serviceType = $csServiceType#tannrens "Tannrens"
 * start = "2026-04-20T07:10:00+00:00"
@@ -89,10 +89,10 @@ Instance: 001-2026-04-20T094000-B544-E472-R12 //innehåller egentligen ':' -> in
 InstanceOf: PortalAvailableAppointment
 Usage: #inline
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/portal-available-appointment"
-* identifier[0].system = "http://canonical.fhir.link/servicewell/wof-connect/identifiercodesystem/slot-id"
+* identifier[0].type.coding.code = #FILL
+* identifier[=].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[=].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-slot-id/efaad744-9faa-4075-8aa9-bb03aad9291b"
 * identifier[=].value = "001-2026-04-20T094000-B544-E472-R12"  //innehåller egentligen ':' -> invalid
-* identifier[+].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment"
-* identifier[=].value = "efaad744-9faa-4075-8aa9-bb03aad9291b"
 * status = #proposed
 * serviceType = $csServiceType#tannrens "Tannrens"
 * start = "2026-04-20T07:40:00+00:00"

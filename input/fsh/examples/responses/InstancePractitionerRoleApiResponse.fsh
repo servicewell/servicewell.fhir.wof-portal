@@ -6,6 +6,10 @@ Usage: #example
 Title: "PractitionerRole Response"
 Description: "API response of a single PractitionerRolePortal instance with contained Binary avatar."
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/practitioner-role-portal"
+* identifier[0].type.coding.code = #FILL
+* identifier[0].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[0].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner-role/efaad744-9faa-4075-8aa9-bb03aad9291b"
+* identifier[0].value = "pr-7476f314"
 * contained = e4a6a8c3-cd71-45fc-89ef-b0d8a5758019
 * extension[0].url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-practitionerrole-description"
 * extension[=].valueString = "Lars er en dyktig tannpleier med stor interesse for forebyggende tannhelse og pasientomsorg. Han møter alle med et smil og skaper en trygg og behagelig atmosfære under behandlingen. Lars er spesielt opptatt av å hjelpe pasientene med gode rutiner for daglig tannstell, slik at de kan bevare et sunt og vakkert smil livet ut."

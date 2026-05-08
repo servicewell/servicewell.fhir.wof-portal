@@ -139,6 +139,10 @@ InstanceOf: HealthcareServicePortal
 Usage: #inline
 * meta.versionId = "1"
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/healthcare-service-portal"
+* identifier[0].type.coding.code = #FILL
+* identifier[0].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[0].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-healthcareservice/fc580e7c-7fd8-4acd-92e9-42cb052763d4"
+* identifier[0].value = "svc-ae8d0770"
 * contained[0].resourceType = "Location"
 * contained[=].id = "adressId"
 * contained[=].meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/healthcare-service-location"
@@ -214,6 +218,10 @@ InstanceOf: ActivityDefinitionPortal
 Usage: #inline
 * meta.versionId = "1"
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/activity-definition-portal"
+* identifier[0].type.coding.code = #FILL
+* identifier[0].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[0].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-activitydefinition/efaad744-9faa-4075-8aa9-bb03aad9291b"
+* identifier[0].value = "actdef-348eeb27"
 * extension.url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-sort-key"
 * extension.valueInteger = 1
 * name = "Tannrens"
@@ -229,6 +237,10 @@ Instance: e0454fdc-43f0-4031-a7f8-24ab45afbbba
 InstanceOf: PractitionerRolePortal
 Usage: #inline
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/practitioner-role-portal"
+* identifier[0].type.coding.code = #FILL
+* identifier[0].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[0].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner-role/efaad744-9faa-4075-8aa9-bb03aad9291b"
+* identifier[0].value = "pr-e0454fdc"
 * contained.resourceType = "Binary"
 * contained.id = "4d0ac407-2af9-45b4-aaf2-91dc3d0e8562"
 * contained.contentType = #image/jpeg
@@ -258,6 +270,10 @@ Instance: f2f123f1-3e1f-46df-be91-541745dcac06
 InstanceOf: PractitionerRolePortal
 Usage: #inline
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/practitioner-role-portal"
+* identifier[0].type.coding.code = #FILL
+* identifier[0].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[0].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner-role/fc580e7c-7fd8-4acd-92e9-42cb052763d4"
+* identifier[0].value = "pr-f2f123f1"
 * contained.resourceType = "Binary"
 * contained.id = "aae42a82-776e-4d2e-9f01-610a15603c80"
 * contained.contentType = #image/jpeg
@@ -281,6 +297,10 @@ Instance: b8e45897-b42f-42f5-801c-d334528e3776
 InstanceOf: PractitionerRolePortal
 Usage: #inline
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/practitioner-role-portal"
+* identifier[0].type.coding.code = #FILL
+* identifier[0].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[0].system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner-role/fc580e7c-7fd8-4acd-92e9-42cb052763d4"
+* identifier[0].value = "pr-b8e45897"
 * contained.resourceType = "Binary"
 * contained.id = "1db1fbd9-8e0a-4146-a850-3c6b12be278e"
 * contained.contentType = #image/jpeg
