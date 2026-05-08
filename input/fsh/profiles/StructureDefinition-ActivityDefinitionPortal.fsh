@@ -27,6 +27,30 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific ActivityDefinitionPortal instance."
 * meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
 
+* identifier ^slicing.discriminator.type = #value
+* identifier ^slicing.discriminator.path = "type.coding.code"
+* identifier ^slicing.rules = #open
+* identifier ^slicing.description = ""
+* identifier ^slicing.ordered = false
+
+* identifier 1..* MS
+* identifier contains sourceId 1..1 MS
+* identifier[sourceId] ^short = "Used to identify the activity definition in the source system"
+* identifier[sourceId].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
+* identifier[sourceId].type.coding.code = #FILL
+* identifier[sourceId].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
+* identifier[sourceId].system 1..1 MS
+* identifier[sourceId].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForActivityDefinition"
+* identifier[sourceId].system ^definition = "See [EndpointIdentifierSystemForActivityDefinition](./NamingSystem-EndpointIdentifierSystemForActivityDefinition.html) for expected identifier.system values."
+* identifier[sourceId].system obeys activitydefinition-idsys-1
+* identifier[sourceId].system ^example[0].label = "Wof Portal"
+* identifier[sourceId].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-activitydefinition/550e8400-e29b-41d4-a716-446655440000"
+* identifier[sourceId].value 1..1 MS
+* identifier[sourceId].value ^short = "The source system's id for the activity definition"
+* identifier[sourceId].value ^example[0].label = "Wof Portal"
+* identifier[sourceId].value ^example[0].valueString = "actdef-2024-00142"
+* identifier[sourceId].use 0..0
+
 * title 1..1 MS
 * title ^short = "Human-readable title for the service"
 * title ^definition = "The user-facing title used to present the service concept in search results, booking flows, and other portal views."
@@ -88,7 +112,6 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 
 * implicitRules 0..0
 * language 0..0
-* identifier 0..0
 * experimental 0..0
 * subject[x] 0..0
 * useContext 0..0

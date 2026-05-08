@@ -67,6 +67,21 @@ Pattern: `https://canonical.fhir.link/servicewell/wof-portal/identifier-system/e
 
 
 
+Instance: EndpointIdentifierSystemForDeviceId
+InstanceOf: NamingSystem
+Usage: #definition
+* name = "EndpointIdentifierSystemForDeviceId"
+* status = #active
+* kind = #root
+* date = "2026-04-29"
+* description = """Root identifier namespace for Device source-system primary keys per endpoint.  
+Pattern: `https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-device-id/{endpointId}`"""
+* uniqueId[0].type = #uri
+* uniqueId[0].preferred = true
+* uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-device-id"
+
+
+
 Instance: EndpointIdentifierSystemForPatient
 InstanceOf: NamingSystem
 Usage: #definition
@@ -80,3 +95,47 @@ Pattern: `https://canonical.fhir.link/servicewell/wof-portal/identifier-system/e
 * uniqueId[0].preferred = true
 * uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-patient"
 
+
+
+Instance: EndpointIdentifierSystemForActivityDefinition
+InstanceOf: NamingSystem
+Usage: #definition
+* name = "EndpointIdentifierSystemForActivityDefinition"
+* status = #active
+* kind = #root
+* date = "2026-05-01"
+* description = """Root identifier namespace for ActivityDefinition source-system primary keys per endpoint.  
+Pattern: `https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-activitydefinition/{endpointId}`"""
+* uniqueId[0].type = #uri
+* uniqueId[0].preferred = true
+* uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-activitydefinition"
+
+
+
+Instance: EndpointIdentifierSystemForHealthcareService
+InstanceOf: NamingSystem
+Usage: #definition
+* name = "EndpointIdentifierSystemForHealthcareService"
+* status = #active
+* kind = #root
+* date = "2026-05-01"
+* description = """Root identifier namespace for HealthcareService source-system primary keys per endpoint.  
+Pattern: `https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-healthcareservice/{endpointId}`"""
+* uniqueId[0].type = #uri   
+* uniqueId[0].preferred = true
+* uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-healthcareservice"
+
+
+
+Instance: EndpointIdentifierSystemForPractitionerRole
+InstanceOf: NamingSystem
+Usage: #definition
+* name = "EndpointIdentifierSystemForPractitionerRole"
+* status = #active
+* kind = #root
+* date = "2026-05-01"
+* description = """Root identifier namespace for PractitionerRole source-system primary keys per endpoint.
+Pattern: `https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner-role/{endpointId}`"""
+* uniqueId[0].type = #uri
+* uniqueId[0].preferred = true
+* uniqueId[0].value = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner-role"

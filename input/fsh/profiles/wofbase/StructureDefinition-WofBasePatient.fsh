@@ -25,10 +25,10 @@ Description: "Base profile of wof Patient"
 // Corresponds to PersonalNumber + PersonalNumberSystem
 
 * identifier ^slicing.discriminator[0].type = #value
-* identifier ^slicing.discriminator[0].path = "type.text"
+* identifier ^slicing.discriminator[0].path = "type.coding.code"
 * identifier ^slicing.rules = #open
 
-* identifier contains personalNumber 1..1 and sourceSystemIdentifier 0..1 MS
+* identifier contains personalNumber 1..1
 
 * identifier.type insert Obligation($wof-portal-client-actor, #SHOULD:ignore)
 * identifier[personalNumber] ^short = "National personal number for the patient"

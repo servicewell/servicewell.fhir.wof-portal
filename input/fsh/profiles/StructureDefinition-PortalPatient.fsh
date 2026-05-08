@@ -19,6 +19,24 @@ Description: "Representation of a patient in Wof-portal public API system."
 * identifier.use 0..0
 * identifier[personalNumber].use 0..0
 
+* identifier 1..* MS
+* identifier contains sourceId 1..1 MS
+* identifier[sourceId] ^short = "Used to identify the patient in the source system"
+* identifier[sourceId].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
+* identifier[sourceId].type.coding.code = #FILL
+* identifier[sourceId].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
+* identifier[sourceId].system 1..1 MS
+* identifier[sourceId].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForPatient"
+* identifier[sourceId].system ^definition = "See [EndpointIdentifierSystemForPatient](./NamingSystem-EndpointIdentifierSystemForPatient.html) for expected identifier.system values."
+* identifier[sourceId].system obeys patient-idsys-1
+* identifier[sourceId].system ^example[0].label = "Wof Portal"
+* identifier[sourceId].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-patient/550e8400-e29b-41d4-a716-446655440000"
+* identifier[sourceId].value 1..1 MS
+* identifier[sourceId].value ^short = "The source system's id for the patient"
+* identifier[sourceId].value ^example[0].label = "Wof Portal"
+* identifier[sourceId].value ^example[0].valueString = "pat-2024-00142"
+* identifier[sourceId].use 0..0
+
 // Corresponds to MobilePhone + Email
 * telecom 0..*
 * telecom ^slicing.discriminator[0].type = #value

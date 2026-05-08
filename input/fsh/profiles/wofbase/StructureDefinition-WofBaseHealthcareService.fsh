@@ -88,7 +88,6 @@ Description: "Base profile of wof HealthcareService"
 * serviceProvisionCode 0..0
 * eligibility 0..0
 * program 0..0
-
 * communication 0..0
 * referralMethod 0..0
 * appointmentRequired 0..0

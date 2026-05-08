@@ -61,7 +61,7 @@ Description: """Composite extension structuring key characteristics for Healthca
 * extension[scheduling].extension[schedulingAvailability].valueCodeableConcept 1..1
 * extension[scheduling].extension[schedulingAvailability].valueCodeableConcept ^short = "Clinic-level scheduling capabilities, such as cancellation and rescheduling availability."
 * extension[scheduling].extension[schedulingAvailability].valueCodeableConcept.coding.system 1..1
-* extension[scheduling].extension[schedulingAvailability].valueCodeableConcept.coding.system = "http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wc-characteristic" (exactly)
+* extension[scheduling].extension[schedulingAvailability].valueCodeableConcept.coding.system = Canonical(wc-characteristic) (exactly)
 * extension[scheduling].extension[schedulingAvailability].valueCodeableConcept.coding.code 1..1
 * extension[scheduling].extension[schedulingAvailability].valueCodeableConcept.coding.code from VsWCCharacteristicSchedule (required)
 
@@ -69,7 +69,7 @@ Description: """Composite extension structuring key characteristics for Healthca
 * extension[scheduling].extension[bookingConfirmation].valueCoding ^short = "Booking confirmation method"
 * extension[scheduling].extension[bookingConfirmation].valueCoding ^definition = "Specifies how booking confirmations are delivered, for example by SMS or email."
 * extension[scheduling].extension[bookingConfirmation].valueCoding.system 1..1
-* extension[scheduling].extension[bookingConfirmation].valueCoding.system = "http://canonical.fhir.link/servicewell/wof-base/CodeSystem/wc-characteristic" (exactly)
+* extension[scheduling].extension[bookingConfirmation].valueCoding.system = Canonical(wc-characteristic) (exactly)
 * extension[scheduling].extension[bookingConfirmation].valueCoding.code from VsWCCharacteristicBookingConfirmation (required)
 
 

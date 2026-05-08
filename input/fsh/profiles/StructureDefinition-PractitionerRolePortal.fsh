@@ -23,6 +23,29 @@ It answers the question: _“In which role, at which service location, and under
 
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific PractitionerRolePortal instance."
 
+* identifier ^slicing.discriminator.type = #value
+* identifier ^slicing.discriminator.path = "type.coding.code"
+* identifier ^slicing.rules = #open
+* identifier ^slicing.description = ""
+* identifier ^slicing.ordered = false
+
+* identifier 1..* MS
+* identifier contains sourceId 1..1 MS
+* identifier[sourceId] ^short = "Used to identify the practitioner role in the source system"
+* identifier[sourceId].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
+* identifier[sourceId].type.coding.code = #FILL
+* identifier[sourceId].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
+* identifier[sourceId].system 1..1 MS
+* identifier[sourceId].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForPractitionerRole"
+* identifier[sourceId].system ^definition = "See [EndpointIdentifierSystemForPractitionerRole](./NamingSystem-EndpointIdentifierSystemForPractitionerRole.html) for expected identifier.system values."
+* identifier[sourceId].system obeys practitionerrole-idsys-1
+* identifier[sourceId].system ^example[0].label = "Wof Portal"
+* identifier[sourceId].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner-role/550e8400-e29b-41d4-a716-446655440000"
+* identifier[sourceId].value 1..1 MS
+* identifier[sourceId].value ^short = "The source system's id for the practitioner role"
+* identifier[sourceId].value ^example[0].label = "Wof Portal"
+* identifier[sourceId].value ^example[0].valueString = "pr-2024-00142"
+* identifier[sourceId].use 0..0
 
 * active 1..1
   * ^short = "Whether this practitioner role is active"
@@ -79,7 +102,6 @@ It answers the question: _“In which role, at which service location, and under
 // ---- Explicitly prohibited elements (not used in this profile) ----
 * implicitRules 0..0
 * modifierExtension 0..0
-* identifier 0..0
 * period 0..0
 * location 0..0
 * telecom 0..0

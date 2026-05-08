@@ -22,6 +22,33 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific HealthcareServicePortal instance."
 * meta.profile ^definition = "Identifies that the resource conforms to HealthcareServicePortal so clients can safely process it as the WOF Portal service concept profile."
 
+* identifier ^slicing.discriminator.type = #value
+* identifier ^slicing.discriminator.path = "type.coding.code"
+* identifier ^slicing.rules = #open
+* identifier ^slicing.description = ""
+* identifier ^slicing.ordered = false
+
+* identifier 1..* MS
+* identifier contains businessIdentifier 0..1 MS and sourceId 1..1 MS
+* identifier[businessIdentifier].type.coding.code = #RI
+* identifier[businessIdentifier].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[businessIdentifier].system MS
+* identifier[businessIdentifier].value MS
+* identifier[sourceId] ^short = "Used to identify the healthcare service in the source system"
+* identifier[sourceId].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
+* identifier[sourceId].type.coding.code = #FILL
+* identifier[sourceId].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
+* identifier[sourceId].system 1..1 MS
+* identifier[sourceId].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForHealthcareService"
+* identifier[sourceId].system ^definition = "See [EndpointIdentifierSystemForHealthcareService](./NamingSystem-EndpointIdentifierSystemForHealthcareService.html) for expected identifier.system values."
+* identifier[sourceId].system obeys healthcareservice-idsys-1
+* identifier[sourceId].value 1..1 MS
+* identifier[sourceId].value ^short = "The source system's id for the healthcare service"
+* identifier[sourceId].system ^example[0].label = "Wof Portal"
+* identifier[sourceId].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-healthcareservice/550e8400-e29b-41d4-a716-446655440000"
+* identifier[sourceId].value ^example[0].label = "Wof Portal"
+* identifier[sourceId].value ^example[0].valueString = "svc-2024-00142"
+* identifier[sourceId].use 0..0
 
 * providedBy only Reference(ServiceProviderPortal)
 * providedBy ^short = "Organization responsible for the healthcare service"
@@ -67,16 +94,6 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * contained 0..*
 * contained ^short = "Contained resources used by the healthcare service"
 * contained ^definition = "Inline resources, such as a location, that are packaged together with the healthcare service example or representation."
-
-* identifier ^slicing.discriminator.type = #value
-* identifier ^slicing.discriminator.path = "system"
-* identifier ^slicing.rules = #open
-
-* identifier contains businessIdentifier 0..1 MS
-* identifier[businessIdentifier].type.coding.code = #RI
-* identifier[businessIdentifier].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
-* identifier[businessIdentifier].system MS
-* identifier[businessIdentifier].value MS
 
 
 * implicitRules 0..0

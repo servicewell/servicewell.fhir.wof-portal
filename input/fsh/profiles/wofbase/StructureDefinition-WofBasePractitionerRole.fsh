@@ -89,7 +89,6 @@ Description: "Base profile of wof PractitionerRole"
 // ---- Explicitly prohibited elements (not used in this profile) ----
 * implicitRules 0..0
 * modifierExtension 0..0
-* identifier 0..0
 * location 0..0
 * telecom 0..0
 * availableTime 0..0

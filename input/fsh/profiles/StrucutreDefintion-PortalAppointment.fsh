@@ -19,37 +19,45 @@ Appointment representation of a booked visit.
 * identifier ^slicing.description = ""
 * identifier ^slicing.ordered = false
 
-
+* identifier 1..* MS
 * identifier contains sourceAppointmentId 1..1 MS and sourceSlot-id 0..1 MS
 * identifier[sourceAppointmentId] ^short = "Used to identify the booked appointment in the source system"
 * identifier[sourceAppointmentId].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[sourceAppointmentId].type.coding.code = #FILL
+* identifier[sourceAppointmentId].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
 * identifier[sourceAppointmentId].system 1..1 MS
 * identifier[sourceAppointmentId].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForAppointment"
 * identifier[sourceAppointmentId].system ^definition = "See [EndpointIdentifierSystemForAppointment](./NamingSystem-EndpointIdentifierSystemForAppointment.html) for expected identifier.system values."
-* identifier[sourceAppointmentId].system obeys pba-idsys
-* identifier[sourceAppointmentId].value 1..1 MS
-* identifier[sourceAppointmentId].value ^short = "The source system's id for the booked appointment"
+* identifier[sourceAppointmentId].system obeys appointment-idsys-1
 * identifier[sourceAppointmentId].system ^example[0].label = "Wof Portal"
 * identifier[sourceAppointmentId].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-appointment/550e8400-e29b-41d4-a716-446655440000"
+* identifier[sourceAppointmentId].value 1..1 MS
+* identifier[sourceAppointmentId].value ^short = "The source system's id for the booked appointment"
 * identifier[sourceAppointmentId].value ^example[0].label = "Wof Portal"
 * identifier[sourceAppointmentId].value ^example[0].valueString = "apt-2024-00142"
 * identifier[sourceAppointmentId].use 0..0
 
 * identifier[sourceSlot-id] ^short = "Used only when modifying an existing appointment | id for chosen slot when appointment is rescheduled"
+* identifier[sourceSlot-id].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
+* identifier[sourceSlot-id].type.coding.code = #PLAC
+* identifier[sourceSlot-id].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
+* identifier[sourceSlot-id].system 1..1 MS
 * identifier[sourceSlot-id].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForSlotId"
 * identifier[sourceSlot-id].system ^definition = "See [EndpointIdentifierSystemForSlotId](./NamingSystem-EndpointIdentifierSystemForSlotId.html) for expected identifier.system values."
-* identifier[sourceSlot-id].system obeys paa-idsys
+* identifier[sourceSlot-id].system obeys appointment-idsys-2
+* identifier[sourceSlot-id].system ^example[0].label = "Wof Portal"
+* identifier[sourceSlot-id].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-slot-id/550e8400-e29b-41d4-a716-446655440000"
 * identifier[sourceSlot-id].value 1..1 MS
 * identifier[sourceSlot-id].value ^short = "The source system's id for the available slot"
+* identifier[sourceSlot-id].value ^example[0].label = "Wof Portal"
+* identifier[sourceSlot-id].value ^example[0].valueString = "slot-2024-00142"
 * identifier[sourceSlot-id].use 0..0
-* identifier[sourceSlot-id].type.coding.code = #PLAC
-* identifier[sourceSlot-id].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 
 
+* supportingInformation 0..* MS
 
 * supportingInformation ^slicing.discriminator.type = #value
-* supportingInformation ^slicing.discriminator.path = "$this"
+* supportingInformation ^slicing.discriminator.path = "identifier.type.coding.code"
 * supportingInformation ^slicing.rules = #open
 * supportingInformation ^slicing.description = ""
 * supportingInformation ^slicing.ordered = false
@@ -57,10 +65,21 @@ Appointment representation of a booked visit.
 * supportingInformation contains deviceId 0..1 MS
 * supportingInformation[deviceId] ^short = "Identifies the chair or treatment unit required for the booking when a specific device must be used."
 * supportingInformation[deviceId] ^definition = "Used when the appointment must be booked against a specific chair or treatment unit. If the practitioner is tied to a specific chair at the time of booking, this information shall be included here. The identifier.value is a logical reference to the unique identifier of that chair or treatment unit."
-
+* supportingInformation[deviceId].identifier 1..1 MS
+* supportingInformation[deviceId].identifier.system 1..1 MS
+* supportingInformation[deviceId].identifier.system ^short = "Pattern from namingsystem EndpointIdentifierSystemForDeviceId"
+* supportingInformation[deviceId].identifier.system ^definition = "See [EndpointIdentifierSystemForDeviceId](./NamingSystem-EndpointIdentifierSystemForDeviceId.html) for expected identifier.system values."
+* supportingInformation[deviceId].identifier.system obeys device-idsys-1
+* supportingInformation[deviceId].identifier.system ^example[0].label = "Wof Portal"
+* supportingInformation[deviceId].identifier.system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-device-id/550e8400-e29b-41d4-a716-446655440000"
 * supportingInformation[deviceId].identifier.value 1..1 MS
 * supportingInformation[deviceId].identifier.value ^short = "Logical reference to the unique identifier of the required chair or treatment unit."
 * supportingInformation[deviceId].identifier.value ^definition = "The logical reference to the unique identifier of the chair or treatment unit that must be used for the appointment booking."
+* supportingInformation[deviceId].identifier.value ^example[0].label = "Wof Portal"
+* supportingInformation[deviceId].identifier.value ^example[0].valueString = "8be4df61-93ca-11d2-aa0d-00e098032b8c"
+* supportingInformation[deviceId].identifier.type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
+* supportingInformation[deviceId].identifier.type.coding.code = #FILL
+* supportingInformation[deviceId].identifier.type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
 * supportingInformation[deviceId].identifier.use 0..0
 * supportingInformation[deviceId].reference 0..0
 * supportingInformation[deviceId].display 0..0
@@ -99,6 +118,7 @@ Appointment representation of a booked visit.
 * extension contains WofBaseCharacteristic named characteristic 0..1
 * extension contains WofBaseAppointmentUpdate named appointmentUpdate 0..1
 * extension contains ActivityDefinitionReference named activityDefinitionReference 0..1
+* extension contains PortalConsentToMarketing named consentToMarketing 0..1 MS
 
 * extension[characteristic] ^short = "Service and booking characteristics"
 * extension[characteristic] ^definition = "Structured characteristics describing scheduling, workflow, and security capabilities for the appointment context."
@@ -114,6 +134,10 @@ Appointment representation of a booked visit.
 * extension[characteristic].extension[scheduling].extension[schedulingAvailability] 0..1 MS
 * extension[characteristic].extension[scheduling].extension[bookingConfirmation] 0..1 MS
 * extension[characteristic].extension[scheduling].extension[bookingConfirmation].valueCoding.code MS
+
+* extension[consentToMarketing] ^short = "Patient consent to marketing"
+* extension[consentToMarketing] ^definition = "Indicates whether the patient has provided consent to receive marketing-related communication."
+* extension[consentToMarketing] insert Obligation($wof-portal-server-actor, #SHALL:handle)
 
 
 // ---- Explicitly prohibited elements (not used in this profile) ----
@@ -134,8 +158,3 @@ Appointment representation of a booked visit.
 * created 0..0
 * patientInstruction 0..0
 * basedOn 0..0
-
-* extension contains PortalConsentToMarketing named consentToMarketing 0..1 MS
-* extension[consentToMarketing] ^short = "Patient consent to marketing"
-* extension[consentToMarketing] ^definition = "Indicates whether the patient has provided consent to receive marketing-related communication."
-* extension[consentToMarketing] insert Obligation($wof-portal-server-actor, #SHALL:handle)

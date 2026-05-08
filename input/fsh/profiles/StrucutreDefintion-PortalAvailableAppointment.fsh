@@ -20,25 +20,28 @@ Appointment representation of an available appointment.
 * identifier ^slicing.description = ""
 * identifier ^slicing.ordered = false
 
-
+* identifier 1..* MS
 * identifier contains sourceSlot-id 1..1 MS
 * identifier[sourceSlot-id] ^short = "The bookable time slot in the source system. Endpoint specific."
 * identifier[sourceSlot-id].type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
 * identifier[sourceSlot-id].type.coding.code = #FILL
-* identifier[sourceSlot-id].system obeys paa-idsys
+* identifier[sourceSlot-id].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
+* identifier[sourceSlot-id].system obeys appointment-idsys-2
 * identifier[sourceSlot-id].system 1..1 MS
 * identifier[sourceSlot-id].system ^short = "Pattern from namingsystem EndpointIdentifierSystemForSlotId"
 * identifier[sourceSlot-id].system ^definition = "See [EndpointIdentifierSystemForSlotId](./NamingSystem-EndpointIdentifierSystemForSlotId.html) for expected identifier.system values."
-* identifier[sourceSlot-id].value 1..1 MS
-* identifier[sourceSlot-id].value ^short = "The source system's id for the available slot"
 * identifier[sourceSlot-id].system ^example[0].label = "Wof Portal"
 * identifier[sourceSlot-id].system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-slot-id/550e8400-e29b-41d4-a716-446655440000"
+* identifier[sourceSlot-id].value 1..1 MS
+* identifier[sourceSlot-id].value ^short = "The source system's id for the available slot"
 * identifier[sourceSlot-id].value ^example[0].label = "Wof Portal"
 * identifier[sourceSlot-id].value ^example[0].valueString = "slot-2024-00142"
 
 
+* supportingInformation 0..* MS
+
 * supportingInformation ^slicing.discriminator.type = #value
-* supportingInformation ^slicing.discriminator.path = "$type"
+* supportingInformation ^slicing.discriminator.path = "identifier.type.coding.code"
 * supportingInformation ^slicing.rules = #open
 * supportingInformation ^slicing.description = ""
 * supportingInformation ^slicing.ordered = false
@@ -46,13 +49,23 @@ Appointment representation of an available appointment.
 * supportingInformation contains deviceId 0..1 MS
 * supportingInformation[deviceId] ^short = "Identifies the chair or treatment unit required for the booking when a specific device must be used."
 * supportingInformation[deviceId] ^definition = "Used when the appointment must be booked against a specific chair or treatment unit. If the practitioner is tied to a specific chair at the time of booking, this information shall be included here. The identifier.value is a logical reference to the unique identifier of that chair or treatment unit."
-
+* supportingInformation[deviceId].identifier 1..1 MS
+* supportingInformation[deviceId].identifier.system 1..1 MS
+* supportingInformation[deviceId].identifier.system ^short = "Pattern from namingsystem EndpointIdentifierSystemForDeviceId"
+* supportingInformation[deviceId].identifier.system ^definition = "See [EndpointIdentifierSystemForDeviceId](./NamingSystem-EndpointIdentifierSystemForDeviceId.html) for expected identifier.system values."
+* supportingInformation[deviceId].identifier.system obeys device-idsys-1
+* supportingInformation[deviceId].identifier.system ^example[0].label = "Wof Portal"
+* supportingInformation[deviceId].identifier.system ^example[0].valueUri = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-device-id/550e8400-e29b-41d4-a716-446655440000"
 * supportingInformation[deviceId].identifier.value 1..1 MS
 * supportingInformation[deviceId].identifier.value ^short = "Logical reference to the unique identifier of the required chair or treatment unit."
 * supportingInformation[deviceId].identifier.value ^definition = "The logical reference to the unique identifier of the chair or treatment unit that must be used for the appointment booking."
+* supportingInformation[deviceId].identifier.value ^example[0].label = "Wof Portal"
+* supportingInformation[deviceId].identifier.value ^example[0].valueString = "8be4df61-93ca-11d2-aa0d-00e098032b8c"
+* supportingInformation[deviceId].identifier.type.coding.code  insert Obligation($wof-portal-client-actor, #MAY:ignore)
+* supportingInformation[deviceId].identifier.type.coding.code = #FILL
+* supportingInformation[deviceId].identifier.type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203" (exactly)
 * supportingInformation[deviceId].identifier.use 0..0
 * supportingInformation[deviceId].reference 0..0
-* supportingInformation[deviceId].type = #Device
 * supportingInformation[deviceId].display 0..0
 
 
@@ -70,15 +83,17 @@ Appointment representation of an available appointment.
 * requestedPeriod.start 1..1
 * requestedPeriod.end 1..1
 
-* participant ^slicing.discriminator.type = #type
-* participant ^slicing.discriminator.path = "actor.resolve()"
+* participant ^slicing.discriminator.type = #value
+* participant ^slicing.discriminator.path = "actor.type"
 * participant ^slicing.rules = #open
 * participant ^slicing.description = ""
 * participant ^slicing.ordered = false
 
 * participant contains healthcareService 0..1 MS and practitionerRole 0..1 MS
 * participant[healthcareService].actor only Reference(HealthcareServicePortal)
+* participant[healthcareService].actor.type = #HealthcareService
 * participant[practitionerRole].actor only Reference(PractitionerRolePortal)
+* participant[practitionerRole].actor.type = #PractitionerRole
 
 * extension contains ActivityDefinitionReference named activityDefinitionReference 1..1
 * extension[activityDefinitionReference] ^short = "Reference to related service definition"
