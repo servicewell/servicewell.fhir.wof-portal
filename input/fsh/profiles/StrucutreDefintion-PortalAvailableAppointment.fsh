@@ -112,10 +112,8 @@ Appointment representation of an available appointment.
 * serviceCategory 0..0
 * specialty 0..0
 * appointmentType 0..0
-* reasonCode 0..0
 * reasonReference 0..0
 * priority 0..0
-* description 0..0
 * minutesDuration 0..0
 * slot 0..0
 * created 0..0
