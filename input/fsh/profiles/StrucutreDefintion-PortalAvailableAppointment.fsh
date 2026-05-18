@@ -65,8 +65,8 @@ Appointment representation of an available appointment.
 * requestedPeriod.start 1..1
 * requestedPeriod.end 1..1
 
-* participant ^slicing.discriminator.type = #type
-* participant ^slicing.discriminator.path = "actor.resolve()"
+* participant ^slicing.discriminator.type = #profile
+* participant ^slicing.discriminator.path = "actor"
 * participant ^slicing.rules = #open
 * participant ^slicing.description = ""
 * participant ^slicing.ordered = false
