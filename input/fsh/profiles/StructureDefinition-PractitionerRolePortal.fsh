@@ -11,8 +11,6 @@ It answers the question: _“In which role, at which service location, and under
 
 * ^status = #active
 
-
-
 * id 1..1
   * ^short = "Resource identifier"
   * ^definition = "Unique identifier for this PractitionerRolePortal resource instance."
@@ -72,7 +70,7 @@ It answers the question: _“In which role, at which service location, and under
 * extension[binaryReference].valueReference 0..1 MS
 * extension[PractitionerRoleDescription].valueString 0..1 MS
 
-* contained 0..*
+* contained 0..* MS
   * ^short = "Contained Binary resources"
   * ^definition = "Inline Binary resources, typically used to carry image data (e.g., practitioner photo) referenced via the binaryReference extension."
 

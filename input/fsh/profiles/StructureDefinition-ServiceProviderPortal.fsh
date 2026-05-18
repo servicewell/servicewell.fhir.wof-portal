@@ -20,6 +20,10 @@ It answers the question: _“Which organization owns the configuration, endpoint
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific ServiceProviderPortal instance."
 * meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
 
+* extension contains OrganizationSettings named organizationSettings 0..1  
+* extension[organizationSettings] ^short = "Organization-level settings that apply to all clinics managed by this provider"
+* extension[organizationSettings] ^definition = "Settings that apply to the entire organization, affecting all clinics under its management."
+
 // ---- Explicitly prohibited elements (not used in this profile) ----
 * implicitRules 0..0
 * modifierExtension 0..0

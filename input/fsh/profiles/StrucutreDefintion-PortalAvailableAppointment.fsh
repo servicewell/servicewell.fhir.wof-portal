@@ -65,15 +65,17 @@ Appointment representation of an available appointment.
 * requestedPeriod.start 1..1
 * requestedPeriod.end 1..1
 
-* participant ^slicing.discriminator.type = #type
-* participant ^slicing.discriminator.path = "actor.resolve()"
+* participant ^slicing.discriminator.type = #profile
+* participant ^slicing.discriminator.path = "actor"
 * participant ^slicing.rules = #open
 * participant ^slicing.description = ""
 * participant ^slicing.ordered = false
 
 * participant contains healthcareService 0..1 MS and practitionerRole 0..1 MS
 * participant[healthcareService].actor only Reference(HealthcareServicePortal)
+* participant[healthcareService].actor.type = #HealthcareService
 * participant[practitionerRole].actor only Reference(PractitionerRolePortal)
+* participant[practitionerRole].actor.type = #PractitionerRole
 
 * extension contains ActivityDefinitionReference named activityDefinitionReference 1..1
 * extension[activityDefinitionReference] ^short = "Reference to related service definition"

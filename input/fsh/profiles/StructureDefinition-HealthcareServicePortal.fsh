@@ -22,6 +22,8 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific HealthcareServicePortal instance."
 * meta.profile ^definition = "Identifies that the resource conforms to HealthcareServicePortal so clients can safely process it as the WOF Portal service concept profile."
 
+* contained 0..* 
+* contained ^short = "Contained resource used to carry the binary data for photo"
 
 * providedBy only Reference(ServiceProviderPortal)
 * providedBy ^short = "Organization responsible for the healthcare service"
