@@ -73,7 +73,9 @@ Appointment representation of an available appointment.
 
 * participant contains healthcareService 0..1 MS and practitionerRole 0..1 MS
 * participant[healthcareService].actor only Reference(HealthcareServicePortal)
+* participant[healthcareService].actor.type = #HealthcareService
 * participant[practitionerRole].actor only Reference(PractitionerRolePortal)
+* participant[practitionerRole].actor.type = #PractitionerRole
 
 * extension contains ActivityDefinitionReference named activityDefinitionReference 1..1
 * extension[activityDefinitionReference] ^short = "Reference to related service definition"
