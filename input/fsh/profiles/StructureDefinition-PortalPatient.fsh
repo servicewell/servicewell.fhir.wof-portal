@@ -9,6 +9,9 @@ Description: "Representation of a patient in Wof-portal public API system."
 
 * meta.profile ^definition = "Identifies that the resource conforms to PortalPatient so clients can safely process it as the WOF Portal service concept profile."
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific PortalPatient instance."
+* meta.versionId 0..1 MS
+* meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
+
 
 * extension contains PortalConsentToMarketing named consentToMarketing 0..1
 * extension[consentToMarketing] ^short = "Patient consent to marketing"

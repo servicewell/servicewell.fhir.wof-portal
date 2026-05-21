@@ -10,6 +10,8 @@ Appointment representation of a booked visit.
 
 """
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific PortalAppointment instance."
+* meta.versionId 0..1 MS
+* meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
 * meta.profile ^definition = "Identifies that the resource conforms to PortalAppointment so clients can safely process it as the WOF Portal service concept profile."
 
 
