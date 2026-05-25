@@ -179,7 +179,7 @@ The system token represents the consumer integration and is intended for integra
 Patient authentication is performed using OpenID Connect through Service Well’s Keycloak servers. Depending on market and environment, Service Well provides access to the applicable national BankID solution, for example Norwegian BankID in Norway and Swedish BankID in Sweden.
 
 For the current sandbox setup, the consumer should use the following OIDC configuration.
-##### OIDC configuration
+##### OIDC configuration (Norwegian)
 
 Well-known/discovery:
 ```
