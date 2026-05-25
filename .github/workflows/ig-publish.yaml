@@ -4,29 +4,49 @@ on:
   workflow_dispatch:
 
 permissions:
+  id-token: write
   contents: read
 
 jobs:
+  sushi-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install SUSHI
+        run: npm install -g fsh-sushi
+
+      - name: Compile with SUSHI
+        run: sushi
+
   publish-via-azure-devops-template:
+    needs: sushi-check
     runs-on: ubuntu-latest
     timeout-minutes: 120
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          allow-no-subscriptions: true
 
-      - name: Detect organization from sushi-config
-        id: detect_org
+      - name: Get Azure DevOps token
+        id: azdo_token
         shell: bash
         run: |
-          set -euo pipefail
-          ORG="$(awk -F': *' '/^id:/{print $2; exit}' sushi-config.yaml | cut -d'.' -f1)"
-          if [ -z "$ORG" ]; then
-            echo "Unable to detect organization from sushi-config.yaml id" >&2
-            exit 1
-          fi
-          echo "organization=$ORG" >> "$GITHUB_OUTPUT"
-          echo "Detected organization: $ORG"
+          ACCESS_TOKEN="$(az account get-access-token \
+            --resource 499b84ac-1321-427f-aa17-267ca6975798 \
+            --query accessToken -o tsv)"
+          echo "access_token=$ACCESS_TOKEN" >> "$GITHUB_OUTPUT"
 
       - name: Queue Azure DevOps run (template-backed)
         id: queue_run
@@ -35,7 +55,7 @@ jobs:
           AZDO_ORG_URL: ${{ vars.AZDO_ORG_URL }}
           AZDO_PROJECT: ${{ vars.AZDO_PROJECT }}
           AZDO_PIPELINE_ID: ${{ vars.AZDO_PIPELINE_ID }}
-          AZDO_PAT: ${{ secrets.AZDO_PAT }}
+          AZDO_ACCESS_TOKEN: ${{ steps.azdo_token.outputs.access_token }}
         run: |
           set -euo pipefail
 
@@ -44,60 +64,28 @@ jobs:
             exit 1
           fi
 
-          if [ -z "${AZDO_PAT}" ]; then
-            echo "Missing required GitHub Secret: AZDO_PAT" >&2
+          if [ -z "${AZDO_ACCESS_TOKEN}" ]; then
+            echo "Missing Azure DevOps access token from 'azdo_token' step" >&2
             exit 1
           fi
 
           REPO_REF="${GITHUB_REF}"
 
-          cat > azure-pipeline-override.yaml <<'YAML'
-          trigger: none
-
-          resources:
-            repositories:
-              - repository: PublishTemplate
-                name: swts/servicewell.fhir.landingzone
-                type: git
-                ref: refs/heads/task/el/build-agent
-                endpoint: cross-project-connection
-
-          pool:
-            name: 'Implementation Guide Build Pool'
-
-          jobs:
-            - job: SetupPublish
-              steps:
-                - checkout: self
-                  persistCredentials: true
-
-                - script: |
-                    ORG=$(yq '.id' /azp/_work/1/s/sushi-config.yaml | cut -d'.' -f1)
-                    echo "##vso[task.setvariable variable=org]$ORG"
-                  displayName: Detect organization from sushi-config
-
-                - template: ".azure-pipelines/ig-templates/ig-publish-template.yaml@PublishTemplate"
-                  parameters:
-                    organization: $(org)
-          YAML
-
           REQUEST_BODY="$(jq -n \
             --arg refName "$REPO_REF" \
-            --rawfile yml azure-pipeline-override.yaml \
             '{
               resources: {
                 repositories: {
-                  self: {
+                  IGSource: {
                     refName: $refName
                   }
                 }
-              },
-              yamlOverride: $yml
+              }
             }')"
 
           API_URL="${AZDO_ORG_URL}/${AZDO_PROJECT}/_apis/pipelines/${AZDO_PIPELINE_ID}/runs?api-version=7.1"
           RESPONSE="$(curl -sS -w '\n%{http_code}' \
-            -u ":${AZDO_PAT}" \
+            -H "Authorization: Bearer ${AZDO_ACCESS_TOKEN}" \
             -H "Content-Type: application/json" \
             -X POST \
             -d "$REQUEST_BODY" \
@@ -134,7 +122,7 @@ jobs:
           AZDO_ORG_URL: ${{ vars.AZDO_ORG_URL }}
           AZDO_PROJECT: ${{ vars.AZDO_PROJECT }}
           AZDO_PIPELINE_ID: ${{ vars.AZDO_PIPELINE_ID }}
-          AZDO_PAT: ${{ secrets.AZDO_PAT }}
+          AZDO_ACCESS_TOKEN: ${{ steps.azdo_token.outputs.access_token }}
           RUN_ID: ${{ steps.queue_run.outputs.run_id }}
         run: |
           set -euo pipefail
@@ -143,7 +131,7 @@ jobs:
           echo "Monitoring Azure DevOps run ${RUN_ID}"
 
           while true; do
-            STATUS_JSON="$(curl -sS -u ":${AZDO_PAT}" "$STATUS_URL")"
+            STATUS_JSON="$(curl -sS -H "Authorization: Bearer ${AZDO_ACCESS_TOKEN}" "$STATUS_URL")"
             STATE="$(echo "$STATUS_JSON" | jq -r '.state')"
             RESULT="$(echo "$STATUS_JSON" | jq -r '.result // empty')"
 
