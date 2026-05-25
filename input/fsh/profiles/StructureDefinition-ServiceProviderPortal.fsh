@@ -26,7 +26,7 @@ It answers the question: _“Which organization owns the configuration, endpoint
 * identifier ^slicing.description = ""
 * identifier ^slicing.ordered = false
 
-* identifier contains MobileFormTenant 1..1 MS and NameAsCode 1..1 MS
+* identifier contains MobileFormTenant 0..1 MS and NameAsCode 0..1 MS
 
 * identifier[MobileFormTenant].system 1..1 MS
 * identifier[MobileFormTenant].system = "http://ki.purified.link/wof-mobileform/fhir/CodeSystem/MobileFormTenantsCs"
@@ -46,7 +46,7 @@ It answers the question: _“Which organization owns the configuration, endpoint
 
 * contained ^short = "Used for carrying banner image"
 
-* extension contains extBannerImage named bannerImageExtension 0..1 MS and OrganizationSettings named organizationSettings 1..1 MS
+* extension contains extBannerImage named bannerImageExtension 0..1 MS and OrganizationSettings named organizationSettings 0..1 MS
 
 
 // ---- Explicitly prohibited elements (not used in this profile) ----
