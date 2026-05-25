@@ -27,12 +27,18 @@ Description: "Representation of a patient in Wof-portal public API system."
 * telecom ^slicing.discriminator[0].type = #value
 * telecom ^slicing.discriminator[0].path = "system"
 * telecom ^slicing.rules = #open
-* telecom contains mobilePhone 0..1 MS and email 0..1 MS
+* telecom contains mobilePhone 1..1 MS and email 0..1 MS
+* telecom[mobilePhone] ^short = "Patient's mobile phone number, used for sms confirmation"
 * telecom[mobilePhone].system = #phone (exactly)
 * telecom[mobilePhone] obeys portal-mobile-or-empty-use
 * telecom[mobilePhone].value 1..1 MS
 * telecom[email].system = #email (exactly)
 * telecom[email].value 1..1 MS
+
+* name 1..1
+* name.family 1..1 MS
+* name.given 1..1 MS 
+* name.text 1..1 MS
 
 // ---- Explicitly prohibited elements (not used in this profile) ----
 * implicitRules 0..0
