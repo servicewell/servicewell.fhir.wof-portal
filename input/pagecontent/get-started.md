@@ -176,7 +176,9 @@ The system token represents the consumer integration and is intended for integra
 
 #### Patient authentication
 
-Patient authentication is performed using OpenID Connect through Service Well’s Keycloak servers. Depending on market and environment, Service Well provides access to the applicable national BankID solution, for example Norwegian BankID in Norway and Swedish BankID in Sweden.
+Patient authentication is performed using OpenID Connect. Depending on market and environment, Service Well provides access to the applicable e-identification solution.
+For example, but not limited to Norwegian BankID or Vipps in Norway and Swedish BankID in Sweden. Other providers can be activated.
+
 
 For the current sandbox setup, the consumer should use the following OIDC configuration.
 ##### OIDC configuration (Norwegian)
@@ -205,11 +207,11 @@ _Client ID and client secret is provided by Service well after contact. **To get
 The consumer should use the Authorization Code Flow with PKCE.
 `response_type=code`
 
-To route the user directly to Norwegian BankID, include the following Keycloak identity provider hint in the authorization request: `kc_idp_hint={providedCriiptoHint} `
+To route the user directly to Norwegian BankID, include the following identity provider hint in the authorization request: `kc_idp_hint={providedHint} `
 
 
 ##### Scopes
-The basic OIDC scope required for login is `openid`, and to recceive user/profile claims, the consumer should also request: `wof-profile`.
+The basic OIDC scope required for login is `openid`, and to receive user/profile claims, the consumer should also request: `wof-profile`.
 
 The client is configured with the following scopes as default:
 ```
@@ -219,7 +221,7 @@ PortalAccess
 Because PortalAccess is configured as a default scope, it does not need to be included explicitly in the authorization request.  
 In addition to the basic login scopes, the consumer should request the optional scopes required for the API resources and operations that the application needs access to. 
 
-The following scope can be requested:
+The following scopes can be requested:
 
 **Available scopes:**
  - patient/Patient.read
@@ -248,14 +250,18 @@ The consumer must also understand how patient context is established after authe
 Although the same client configuration may support both system authentication and patient authentication, these flows produce different tokens for different authorization contexts.
 
 ##### Example authorization request
-The following example starts an OIDC login using Authorization Code Flow with PKCE and routes the user directly to Norwegian BankID:
+The following example starts an OIDC Authorization Code Flow with PKCE and uses kc_idp_hint to route the user directly to the configured identity provider.
 ```
 GET https://portalauth-no.wellonfhir.se/realms/PortalNO-Dev/protocol/openid-connect/auth
-  ?client_id={{ clientid }}
-  &redirect_uri={{ registered_redirect_uri }}
+  ?client_id={{ client_id }}
+  &redirect_uri={{ url_encoded_registered_redirect_uri }}
   &response_type=code
   &scope=openid%20wof-profile%20patient%2FAppointment.read
-  &kc_idp_hint=CriiptoNO-orisdental
+  &kc_idp_hint={{ providerHint }}
+  &code_challenge={{ pkce_code_challenge }}
+  &code_challenge_method=S256
+  &state={{ random_state }}
+  [&nonce={{ random_nonce }}]
   ```
 
 ##### Patient-authorized calls
