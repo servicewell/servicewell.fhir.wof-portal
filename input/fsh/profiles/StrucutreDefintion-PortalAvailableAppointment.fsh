@@ -31,7 +31,7 @@ Appointment representation of an available appointment.
 * identifier[slot-id].value  1..1 MS
 * identifier[slot-id].type.text = "id for the available slot"
 
-* status = #proposed
+* status from AvailableAppointmentStatuses (required)
 * serviceType 1..*
 * serviceType.coding 1..*
 * serviceType.coding.system 1..1

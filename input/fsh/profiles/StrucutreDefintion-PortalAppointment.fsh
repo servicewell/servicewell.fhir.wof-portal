@@ -56,6 +56,8 @@ Appointment representation of a booked visit.
 * participant[patient].actor only Reference(PortalPatient)
 * participant[patient].actor.reference 0..0 MS
 
+* status from BookedAppointmentStatuses (required)
+
 * comment 0..1 MS
 
 * extension contains WofBaseCharacteristic named characteristic 0..1
