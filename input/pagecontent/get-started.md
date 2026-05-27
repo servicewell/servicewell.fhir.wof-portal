@@ -3,7 +3,7 @@ This guide is written for **customers/partners** who want to integrate with the 
 ### Scope & user journey
 This section describes an **example booking journey** for a consumer-facing application using the Public API. The exact user interface, data-loading strategy, and order of steps are determined by the implementer.
 
-For example, some consumers may load clinics, treatments, and practitioners progressively as the patient makes selections, while others may preload this information using available API operations such as $get-offer-context. The API supports different implementation patterns.
+For example, some consumers may load clinics, treatments, and practitioners progressively as the patient makes selections, while others may preload this information using available API operations such as $get-offers-context. The API supports different implementation patterns.
 <div style="display:flex; gap:2rem; align-items:flex-start;">
   <div style="flex:1; min-width:0;">
     <p><strong>1. Select clinic and/or treatment</strong><br/>The booking journey typically starts with the patient selecting a clinic, a treatment, or both. Clinics and treatments can be used as filters for each other, and the order in which they are presented is up to the implementer.</p>
@@ -181,7 +181,7 @@ For example, but not limited to Norwegian BankID or Vipps in Norway and Swedish 
 
 
 For the current sandbox setup, the consumer should use the following OIDC configuration.
-##### OIDC configuration (Norwegian)
+##### OIDC configuration (Norway)
 
 Well-known/discovery:
 ```
@@ -202,7 +202,7 @@ Client secret:
 Provided separately through secure sharing
 ```
 
-_Client ID and client secret is provided by Service well after contact. **To get you client values contact support@servicewell.se**_
+_Client ID and client secret are provided by Service Well after contact. **To get your client values, contact support@servicewell.se**_
 
 The consumer should use the Authorization Code Flow with PKCE.
 `response_type=code`
@@ -235,7 +235,7 @@ The following scopes can be requested:
  - system/$find.read
  - system/$get-offers-context.read 
 
-**Requied scopes:**
+**Required scopes:**
  - openid
  - wof-profile
  - PortalAccess
@@ -310,11 +310,11 @@ The recommended usage is therefore:
   </tbody>
 </table>
 
-Simple (unordered)flow explanation:
+Simple (unordered) flow explanation:
 
-* Get booking context (`$getOffersContext`)  <br>Consumer  client loads the booking context needed to drive the bookingflow. The request can be altered to include services, where it can be booked, by which practitioner and the relationship between them.
+* Get booking context (`$getOffersContext`)  <br>Consumer client loads the booking context needed to drive the booking flow. The request can be altered to include services, where it can be booked, by which practitioner, and the relationship between them.
 
-* Find available times (`$find`)  <br>The consumer client request available appointments whithin the specified search criterias and time frame options in a given time range and receives proposed appointments. In the current API version, availability is retrieved per practitioner, so practitioner information must be available before calling $find. This is aligned with the IHE "Find Potential Appointments" interaction.
+* Find available times (`$find`)  <br>The consumer client requests available appointments within the specified search criteria and time frame options in a given time range and receives proposed appointments. In the current API version, availability is retrieved per practitioner, so practitioner information must be available before calling $find. This is aligned with the IHE "Find Potential Appointments" interaction.
 
 * Book an appointment (`$book` create)  <br>After the patient selects a proposed time (appointment), the consumer application submits a $book request to create the booking. In this implementation, the request must always contain the full Appointment resource representing the appointment to be booked.
 
@@ -322,7 +322,7 @@ Simple (unordered)flow explanation:
 
 * Cancel an appointment (`$book` cancel)  <br>If the patient cancels an appointment, the same $book operation is also used to cancel an existing appointment. To cancel a booking, the consumer application submits the full Appointment resource for the existing booking with the appropriate cancellation status set. On success, the API returns the cancelled appointment. In IHE Scheduling, cancellation is one of the defined trigger cases for $book, rather than a separate operation.
 
-* Error handling  <br>If something fails in `$find` or `$book` and a request cannot be fullfilled, the API returns an `OperationOutcome` with error details.
+* Error handling  <br>If something fails in `$find` or `$book` and a request cannot be fulfilled, the API returns an `OperationOutcome` with error details.
 
 **NOTE***
 For `$book`, a successful response returns a Bundle containing a single Appointment resource and may also include an OperationOutcome with supplemental information. An unsuccessful `$book` response returns only an OperationOutcome in the response Bundle.
