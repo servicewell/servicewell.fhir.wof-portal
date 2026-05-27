@@ -17,4 +17,4 @@ Description: "Value set for allowed appointment statuses in WOF when an appointm
 * ^status = #active
 
 * include http://hl7.org/fhir/appointmentstatus#booked "The appointment is confirmed to occur at the specified date/time. | A successful book response returns status #booked." 
-* include http://hl7.org/fhir/appointmentstatus#cancelled "Used in the $book operation payload to request cancellation of an appointment"
+* include http://hl7.org/fhir/appointmentstatus#cancelled "Used in the $book operation payload to request cancellation of an appointment | If a $book request with status #cancelled is successful, the response returns an Appointment with status #cancelled."
