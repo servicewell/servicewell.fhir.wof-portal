@@ -1,0 +1,2 @@
+To be able to use this operation the customer must use a "patient-token", i.e the patient must be signed in.
+ To get a patient token the client must resolve the [OIDC process](./get-started.html#patient-authentication). 

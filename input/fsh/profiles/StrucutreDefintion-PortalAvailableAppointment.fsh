@@ -10,6 +10,8 @@ Appointment representation of an available appointment.
 * meta.profile = Canonical(PortalAvailableAppointment)
 
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific PortalAvailableAppointment instance."
+* meta.versionId 0..1 MS
+* meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
 * meta.profile ^definition = "Identifies that the resource conforms to PortalAvailableAppointment so clients can safely process it as the WOF Portal service concept profile."
 
 
@@ -29,7 +31,7 @@ Appointment representation of an available appointment.
 * identifier[slot-id].value  1..1 MS
 * identifier[slot-id].type.text = "id for the available slot"
 
-* status = #proposed
+* status from AvailableAppointmentStatuses (required)
 * serviceType 1..*
 * serviceType.coding 1..*
 * serviceType.coding.system 1..1
