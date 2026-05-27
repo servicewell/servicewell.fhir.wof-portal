@@ -1,5 +1,6 @@
 
-## Documentation update 2026-05-27
+**Documentation update 2026-05-27**
+
 - Created `bannerImageExtension` and added a sliced identifier for `ServiceProvider`.
 - Added `HS.meta.versionId`.
 - Added `meta.versionId` to additional profiles.
