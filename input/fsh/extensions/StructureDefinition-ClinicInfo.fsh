@@ -12,7 +12,8 @@ Description: "Container extension for clinic information shown in the portal."
 * ^context.expression = "HealthcareService"
 
 * extension contains
-    urlPlaceholder 0..1 and
+    urlPlaceholder 1..1 and
+    hasExternalBooking 1..1 and
     directions 0..1 and
     parking 0..1 and
     about 0..1 and
@@ -22,6 +23,10 @@ Description: "Container extension for clinic information shown in the portal."
 * extension[urlPlaceholder] ^short = "URL-friendly clinic key"
 * extension[urlPlaceholder] ^definition = "A URL-safe placeholder or slug for the clinic, typically used in portal route paths or links."
 * extension[urlPlaceholder].value[x] only string
+
+* extension[hasExternalBooking] ^short = "Indicates if the clinic has external booking"
+* extension[hasExternalBooking] ^definition = "Flag indicating whether the clinic uses an external booking system, which may affect how booking is handled in the portal."
+* extension[hasExternalBooking].value[x] only boolean
 
 * extension[directions] ^short = "Directions to the clinic"
 * extension[directions] ^definition = "Patient-facing text describing how to find or reach the clinic."
