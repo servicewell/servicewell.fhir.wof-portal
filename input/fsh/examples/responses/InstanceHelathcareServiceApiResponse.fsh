@@ -19,6 +19,8 @@ Description: "API response containing a single HealthcareServicePortal instance 
 * extension[=].extension[=].valueString = "Norsk og engelsk"
 * extension[=].extension[+].url = "bookingSummaryInformationText"
 * extension[=].extension[=].valueString = "Ved uteblitt besøk eller sent avbestilt time belastes et gebyr på <b>500 kroner</b>."
+* extension[=].extension[+].url = "hasExternalBooking"
+* extension[=].extension[=].valueBoolean = false
 * extension[=].url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-clinic-info"
 * extension[+].extension[0].url = "allowCancellationAfterRegistrationHours"
 * extension[=].extension[=].valueInteger = 1
