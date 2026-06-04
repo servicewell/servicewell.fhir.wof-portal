@@ -1,11 +1,11 @@
 {
    "package-id" : "servicewell.fhir.wof-portal",
    "version" : "1.0.1",
-   "path" : "https://canonical.fhir.link/servicewell/wof-portal/1.0.0",
+   "path" : "http://canonical.fhir.link/servicewell/wof-portal/1.0.0",
    "mode" : "technical-correction",
    "status" : "update",
    "sequence" : "V1 Release",
    "desc" : "Updated documentation for Portal public API.",
    "first" : false,
-   "changes": "https://canonical.fhir.link/servicewell/wof-portal/ChangeLog.html"
+   "changes": "http://canonical.fhir.link/servicewell/wof-portal/ChangeLog.html"
 }

@@ -2,8 +2,8 @@
   "name": "servicewell.fhir.wof-portal",
   "version": "1.0.1",
   "type": "IG",
-  "canonical": "https://canonical.fhir.link/servicewell/wof-portal",
-  "url": "https://canonical.fhir.link/servicewell/wof-portal/ImplementationGuide/servicewell.fhir.wof-portal",
+  "canonical": "http://canonical.fhir.link/servicewell/wof-portal",
+  "url": "http://canonical.fhir.link/servicewell/wof-portal/ImplementationGuide/servicewell.fhir.wof-portal",
   "title": "WOF Portal Implementation Guide",
   "description": "Implementation Guide for WOF Portal made by Service Well.",
   "fhirVersions": [
