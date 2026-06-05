@@ -77,8 +77,8 @@ Appointment representation of a booked visit.
 
 * comment 0..1 MS
 
-* extension contains WofBaseCharacteristic named characteristic 0..1
-* extension contains WofBaseAppointmentUpdate named appointmentUpdate 0..1
+* extension contains Characteristic named characteristic 0..1
+* extension contains AppointmentUpdate named appointmentUpdate 0..1
 * extension contains ActivityDefinitionReference named activityDefinitionReference 0..1
 
 * extension[characteristic] ^short = "Service and booking characteristics"
