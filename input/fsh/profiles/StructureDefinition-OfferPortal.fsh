@@ -72,6 +72,8 @@ It answers the question: _“Which service can be booked, by whom, and where —
 //------ endpoint status -----
 * parameter[offering].part[isOnline].name = "isOnline" (exactly)
 * parameter[offering].part[isOnline].value[x] only boolean
+* parameter[offering].part[isOnline] ^short = "Indicates if the endpoint is currently online and available for booking"
+
 
 //------ offline status reason -----
 * parameter[offering].part[offlineReason].name = "offlineReason" (exactly)

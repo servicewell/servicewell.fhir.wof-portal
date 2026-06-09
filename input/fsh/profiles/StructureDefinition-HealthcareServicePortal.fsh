@@ -42,6 +42,7 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * telecom 0..*
 * telecom ^short = "Portal contact details for the healthcare service"
 * telecom ^definition = "Contact points such as phone, URL, or email used to reach the healthcare service."
+* telecom obeys xHs-tele-url
 * telecom.system 0..1
 * telecom.system ^short = "Type of contact point"
 * telecom.system ^definition = "The contact point system, for example phone, url, or email."
@@ -49,8 +50,8 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * telecom.use ^short = "Usage context for the contact point"
 * telecom.use ^definition = "The intended usage for the contact point, such as work."
 * telecom.value 0..1
-* telecom.value ^short = "Actual contact value"
-* telecom.value ^definition = "The phone number, URL, or email address for the contact point."
+* telecom.value ^short = "Actual contact value | If the clinic is externally booked via another online service, the URL may be provided here and only here"
+* telecom.value ^definition = "The phone number, URL, or email address for the contact point. If the clinic is externally booked via another online service, the URL may be provided here and only here"
 * telecom.rank 0..1
 * telecom.rank ^short = "Priority order of contact points"
 * telecom.rank ^definition = "Specifies the preferred order in which the listed contact points should be used."
