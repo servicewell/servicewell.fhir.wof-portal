@@ -1,24 +1,29 @@
 Alias: $csServiceType = http://portal.wof.purified.link/fhir/CodeSystem/csServiceType
 Alias: $csPractitionerRole = http://portal.wof.purified.link/fhir/CodeSystem/csPractitionerRole
+Alias: $vsPractitionerRole = http://portal.wof.purified.link/fhir/ValueSet/vsPractitionerRole
 
 Instance: ActivityDefinitionGetOffersContextWInclude
 InstanceOf: BundleOffersContextPortal
 Usage: #example
-Title: "GetOffersContext Response — with included resources"
-Description: "API response for $getOffersContext on a ActivityDefinition returning offerings with included HealthcareService, ActivityDefinition, and PractitionerRole resources."
 * type = #searchset
-* total = 11
+* total = 14
 * entry[0].fullUrl = "http://api-no.wellonfhir.se/demo/1.0/R4/fhir/Parameters/2506f2c2-c4ca-4e30-b7bf-361a91ee7e71"
 * entry[=].resource = 2506f2c2-c4ca-4e30-b7bf-361a91ee7e71
 * entry[=].search.mode = #match
 * entry[+].fullUrl = "http://api-no.wellonfhir.se/demo/1.0/R4/fhir/Parameters/0afcfe81-590d-421d-8d16-6bbfc9f21b57"
 * entry[=].resource = 0afcfe81-590d-421d-8d16-6bbfc9f21b57
 * entry[=].search.mode = #match
+* entry[+].fullUrl = "http://api-no.wellonfhir.se/demo/1.0/R4/fhir/Parameters/8e75aaa3-8c15-4263-9e1c-317128e918f5"
+* entry[=].resource = 8e75aaa3-8c15-4263-9e1c-317128e918f5
+* entry[=].search.mode = #match
 * entry[+].fullUrl = "http://api-no.wellonfhir.se/demo/1.0/R4/fhir/Parameters/7611df12-31e5-432e-85ff-e2723ed1139d"
 * entry[=].resource = 7611df12-31e5-432e-85ff-e2723ed1139d
 * entry[=].search.mode = #match
 * entry[+].fullUrl = "http://api-no.wellonfhir.se/demo/1.0/R4/fhir/Parameters/607a2db3-4c4a-4572-81b0-8f0e826fa181"
 * entry[=].resource = 607a2db3-4c4a-4572-81b0-8f0e826fa181
+* entry[=].search.mode = #match
+* entry[+].fullUrl = "http://api-no.wellonfhir.se/demo/1.0/R4/fhir/HealthcareService/9663821b-d098-4aed-886a-2da00460e9e0"
+* entry[=].resource = 9663821b-d098-4aed-886a-2da00460e9e0
 * entry[=].search.mode = #match
 * entry[+].fullUrl = "http://api-no.wellonfhir.se/demo/1.0/R4/fhir/HealthcareService/ae8d0770-71a8-4da7-83cb-5658c369dd78"
 * entry[=].resource = ae8d0770-71a8-4da7-83cb-5658c369dd78
@@ -35,6 +40,9 @@ Description: "API response for $getOffersContext on a ActivityDefinition returni
 * entry[+].fullUrl = "http://api-no.wellonfhir.se/demo/1.0/R4/fhir/PractitionerRole/e0454fdc-43f0-4031-a7f8-24ab45afbbba"
 * entry[=].resource = e0454fdc-43f0-4031-a7f8-24ab45afbbba
 * entry[=].search.mode = #match
+* entry[+].fullUrl = "http://api-no.wellonfhir.se/demo/1.0/R4/fhir/PractitionerRole/1e012804-4c5f-4f8a-b679-3edb34b11213"
+* entry[=].resource = 1e012804-4c5f-4f8a-b679-3edb34b11213
+* entry[=].search.mode = #match
 * entry[+].fullUrl = "http://api-no.wellonfhir.se/demo/1.0/R4/fhir/PractitionerRole/f2f123f1-3e1f-46df-be91-541745dcac06"
 * entry[=].resource = f2f123f1-3e1f-46df-be91-541745dcac06
 * entry[=].search.mode = #match
@@ -45,6 +53,8 @@ Description: "API response for $getOffersContext on a ActivityDefinition returni
 Instance: 2506f2c2-c4ca-4e30-b7bf-361a91ee7e71
 InstanceOf: OfferPortal
 Usage: #inline
+* meta.versionId = "1"
+* meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/offer-portal"
 * parameter.name = "offering"
 * parameter.part[0].name = "activityDefinition"
 * parameter.part[=].valueReference = Reference(348eeb27-0e1a-4337-9f21-4e84dc5a3fd9) "Tannrens"
@@ -62,12 +72,16 @@ Usage: #inline
 * parameter.part[=].valueString = "30"
 * parameter.part[+].name = "price"
 * parameter.part[=].valueString = "fra 560,-"
+* parameter.part[+].name = "bookingUrl"
+* parameter.part[=].valueUrl = "/fhir/Appointment/$find?start=2026-06-08&end=2026-06-15&visit-type=http://portal.wof.purified.link/fhir/CodeSystem/csServiceType|tannrens&healthcareService=HealthcareService/2a2af34c-31d2-4b15-aa4b-59f6a559bc5e&practitionerRole=PractitionerRole/7476f314-8b67-4efe-8364-115cee61f32a"
 * parameter.part[+].name = "isOnline"
 * parameter.part[=].valueBoolean = true
 
 Instance: 0afcfe81-590d-421d-8d16-6bbfc9f21b57
 InstanceOf: OfferPortal
 Usage: #inline
+* meta.versionId = "1"
+* meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/offer-portal"
 * parameter.name = "offering"
 * parameter.part[0].name = "activityDefinition"
 * parameter.part[=].valueReference = Reference(348eeb27-0e1a-4337-9f21-4e84dc5a3fd9) "Tannrens"
@@ -85,12 +99,43 @@ Usage: #inline
 * parameter.part[=].valueString = "30"
 * parameter.part[+].name = "price"
 * parameter.part[=].valueString = "fra 560,-"
+* parameter.part[+].name = "bookingUrl"
+* parameter.part[=].valueUrl = "/fhir/Appointment/$find?start=2026-06-08&end=2026-06-15&visit-type=http://portal.wof.purified.link/fhir/CodeSystem/csServiceType|tannrens&healthcareService=HealthcareService/2a2af34c-31d2-4b15-aa4b-59f6a559bc5e&practitionerRole=PractitionerRole/e0454fdc-43f0-4031-a7f8-24ab45afbbba"
+* parameter.part[+].name = "isOnline"
+* parameter.part[=].valueBoolean = true
+
+Instance: 8e75aaa3-8c15-4263-9e1c-317128e918f5
+InstanceOf: OfferPortal
+Usage: #inline
+* meta.versionId = "1"
+* meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/offer-portal"
+* parameter.name = "offering"
+* parameter.part[0].name = "activityDefinition"
+* parameter.part[=].valueReference = Reference(348eeb27-0e1a-4337-9f21-4e84dc5a3fd9) "Tannrens"
+* parameter.part[+].name = "healthcareService"
+* parameter.part[=].valueReference = Reference(9663821b-d098-4aed-886a-2da00460e9e0) "Service-O Trondheim"
+* parameter.part[+].name = "practitionerRole"
+* parameter.part[=].valueReference = Reference(1e012804-4c5f-4f8a-b679-3edb34b11213) "Tannpleier Ruth-Ellen Brubakken"
+* parameter.part[+].name = "visit-type"
+* parameter.part[=].valueString = "http://portal.wof.purified.link/fhir/CodeSystem/csServiceType|tannrens"
+* parameter.part[+].name = "practitioner"
+* parameter.part[=].valueString = "473"
+* parameter.part[+].name = "organization"
+* parameter.part[=].valueString = "562"
+* parameter.part[+].name = "duration"
+* parameter.part[=].valueString = "30"
+* parameter.part[+].name = "price"
+* parameter.part[=].valueString = "800"
+* parameter.part[+].name = "bookingUrl"
+* parameter.part[=].valueUrl = "/fhir/Appointment/$find?start=2026-06-08&end=2026-06-15&visit-type=http://portal.wof.purified.link/fhir/CodeSystem/csServiceType|tannrens&healthcareService=HealthcareService/9663821b-d098-4aed-886a-2da00460e9e0&practitionerRole=PractitionerRole/1e012804-4c5f-4f8a-b679-3edb34b11213"
 * parameter.part[+].name = "isOnline"
 * parameter.part[=].valueBoolean = true
 
 Instance: 7611df12-31e5-432e-85ff-e2723ed1139d
 InstanceOf: OfferPortal
 Usage: #inline
+* meta.versionId = "1"
+* meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/offer-portal"
 * parameter.name = "offering"
 * parameter.part[0].name = "activityDefinition"
 * parameter.part[=].valueReference = Reference(348eeb27-0e1a-4337-9f21-4e84dc5a3fd9) "Tannrens"
@@ -108,12 +153,16 @@ Usage: #inline
 * parameter.part[=].valueString = "30"
 * parameter.part[+].name = "price"
 * parameter.part[=].valueString = "fra 500,-"
+* parameter.part[+].name = "bookingUrl"
+* parameter.part[=].valueUrl = "/fhir/Appointment/$find?start=2026-06-08&end=2026-06-15&visit-type=http://portal.wof.purified.link/fhir/CodeSystem/csServiceType|tannrens&healthcareService=HealthcareService/ae8d0770-71a8-4da7-83cb-5658c369dd78&practitionerRole=PractitionerRole/f2f123f1-3e1f-46df-be91-541745dcac06"
 * parameter.part[+].name = "isOnline"
 * parameter.part[=].valueBoolean = true
 
 Instance: 607a2db3-4c4a-4572-81b0-8f0e826fa181
 InstanceOf: OfferPortal
 Usage: #inline
+* meta.versionId = "1"
+* meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/offer-portal"
 * parameter.name = "offering"
 * parameter.part[0].name = "activityDefinition"
 * parameter.part[=].valueReference = Reference(348eeb27-0e1a-4337-9f21-4e84dc5a3fd9) "Tannrens"
@@ -131,8 +180,69 @@ Usage: #inline
 * parameter.part[=].valueString = "30"
 * parameter.part[+].name = "price"
 * parameter.part[=].valueString = "fra 500,-"
+* parameter.part[+].name = "bookingUrl"
+* parameter.part[=].valueUrl = "/fhir/Appointment/$find?start=2026-06-08&end=2026-06-15&visit-type=http://portal.wof.purified.link/fhir/CodeSystem/csServiceType|tannrens&healthcareService=HealthcareService/ae8d0770-71a8-4da7-83cb-5658c369dd78&practitionerRole=PractitionerRole/b8e45897-b42f-42f5-801c-d334528e3776"
 * parameter.part[+].name = "isOnline"
 * parameter.part[=].valueBoolean = true
+
+Instance: 9663821b-d098-4aed-886a-2da00460e9e0
+InstanceOf: HealthcareServicePortal
+Usage: #inline
+* meta.versionId = "1"
+* meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/healthcare-service-portal"
+* contained[0].resourceType = "Location"
+* contained[=].id = "adressId"
+* contained[=].meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/healthcare-service-location"
+* contained[=].address.use = #work
+* contained[=].physicalType = urn:oid:2.16.840.1.113883.4.642.3.328#si
+* contained[=].physicalType.text = "Site"
+* contained[=].partOf.reference = "#8f2bf0c7-05b3-4e75-b3a6-6913286c4c07"
+* contained[+].resourceType = "Location"
+* contained[=].id = "8f2bf0c7-05b3-4e75-b3a6-6913286c4c07"
+* contained[=].meta.profile = "http://portal.wof.purified.link/fhir/StructureDefinition/LocationArea"
+* contained[=].status = #active
+* contained[=].name = "Nordpolen"
+* contained[=].physicalType = urn:oid:2.16.840.1.113883.4.642.3.328#area
+* contained[=].physicalType.text = "Area"
+* contained[+].resourceType = "Organization"
+* contained[=].id = "773cc131-574b-4e86-9abd-552d0d25be27"
+* contained[=].meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/service-provider-portal"
+* contained[=].name = "Service-O-Norway"
+* extension[0].extension[0].url = "urlPlaceholder"
+* extension[=].extension[=].valueString = "trondheimtest"
+* extension[=].extension[+].url = "hasExternalBooking"
+* extension[=].extension[=].valueBoolean = false
+* extension[=].url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-clinic-info"
+* extension[+].extension[0].url = "allowCancellationAfterRegistrationHours"
+* extension[=].extension[=].valueInteger = 1
+* extension[=].extension[+].url = "allowCancellationRemainingHours"
+* extension[=].extension[=].valueInteger = 48
+* extension[=].extension[+].url = "allowRescheduleAfterRegistrationHours"
+* extension[=].extension[=].valueInteger = 1
+* extension[=].extension[+].url = "allowRescheduleRemainingHours"
+* extension[=].extension[=].valueInteger = 24
+* extension[=].extension[+].url = "cancellationAllowed"
+* extension[=].extension[=].valueBoolean = true
+* extension[=].extension[+].url = "reschedulingAllowed"
+* extension[=].extension[=].valueBoolean = true
+* extension[=].extension[+].url = "minimumPatientAgeYears"
+* extension[=].extension[=].valuePositiveInt = 18
+* extension[=].extension[+].url = "minimumAdvanceBookingMinutes"
+* extension[=].extension[=].valueInteger = 15
+* extension[=].url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-booking-rules"
+* active = true
+* providedBy = Reference(773cc131-574b-4e86-9abd-552d0d25be27) "Service-O-Norway"
+* location = Reference(adressId)
+* name = "Service-O Trondheim"
+* telecom[0].system = #phone
+* telecom[=].use = #work
+* telecom[=].rank = 1
+* telecom[+].system = #url
+* telecom[=].use = #work
+* telecom[=].rank = 2
+* telecom[+].system = #email
+* telecom[=].use = #work
+* telecom[=].rank = 1
 
 Instance: ae8d0770-71a8-4da7-83cb-5658c369dd78
 InstanceOf: HealthcareServicePortal
@@ -155,7 +265,8 @@ Usage: #inline
 * contained[=].name = "Service-O-Norway"
 * extension[0].extension[0].url = "urlPlaceholder"
 * extension[=].extension[=].valueString = "oslo"
-* extension[=].extension[+].url = "directions"
+* extension[=].extension[+].url = "hasExternalBooking"
+* extension[=].extension[=].valueBoolean = false
 * extension[=].extension[+].url = "parking"
 * extension[=].extension[=].valueString = "Gode parkeringsmuligheter rett ved klinikken. Vi har to ladestolper og tilbyr gratis lading mens du er på besøk."
 * extension[=].extension[+].url = "about"
@@ -183,11 +294,9 @@ Usage: #inline
 * extension[=].extension[=].valueInteger = 15
 * extension[=].url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-booking-rules"
 * active = true
-* providedBy.reference = Organization/#773cc131-574b-4e86-9abd-552d0d25be27 "Service-O-Norway"
+* providedBy = Reference(773cc131-574b-4e86-9abd-552d0d25be27) "Service-O-Norway"
 * location = Reference(adressId)
 * name = "Service-O Oslo"
-* photo.contentType = #image/png
-* photo.data = "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"
 * telecom[0].system = #phone
 * telecom[=].value = "+4710102020"
 * telecom[=].use = #work
@@ -208,7 +317,6 @@ Usage: #inline
 * availableTime.availableStartTime = "07:30:00"
 * availableTime.availableEndTime = "18:00:00"
 
-
 Instance: 348eeb27-0e1a-4337-9f21-4e84dc5a3fd9
 InstanceOf: ActivityDefinitionPortal
 Usage: #inline
@@ -222,12 +330,13 @@ Usage: #inline
 * date = "2025-09-29"
 * description = "Tannrens hos tannpleier"
 * kind = #ServiceRequest
-* code = $csServiceType#tannrens "Tannrens"
+* code = $csServiceType#tannrens
 * code.text = "Tannrens hos tannpleier"
 
 Instance: e0454fdc-43f0-4031-a7f8-24ab45afbbba
 InstanceOf: PractitionerRolePortal
 Usage: #inline
+* meta.versionId = "1"
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/practitioner-role-portal"
 * contained.resourceType = "Binary"
 * contained.id = "4d0ac407-2af9-45b4-aaf2-91dc3d0e8562"
@@ -238,10 +347,10 @@ Usage: #inline
 * extension[+].url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-binary-reference"
 * extension[=].valueReference = Reference(4d0ac407-2af9-45b4-aaf2-91dc3d0e8562)
 * active = true
-* practitioner.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitionerefaad744-9faa-4075-8aa9-bb03aad9291b"
+* practitioner.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner/efaad744-9faa-4075-8aa9-bb03aad9291b"
 * practitioner.identifier.value = "472"
 * practitioner.display = "Tannlege Ola Nordmann"
-* organization.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-billingorganizationefaad744-9faa-4075-8aa9-bb03aad9291b"
+* organization.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-billingorganization/efaad744-9faa-4075-8aa9-bb03aad9291b"
 * organization.identifier.value = "544"
 * organization.display = "Tannlege Jon Olav Flakne"
 * code[0] = $csPractitionerRole#orthodontist "Kjeveortoped"
@@ -254,9 +363,26 @@ Usage: #inline
 * code[=].text = "Endodontist"
 * healthcareService = Reference(2a2af34c-31d2-4b15-aa4b-59f6a559bc5e) "Service-O Sandvika"
 
+Instance: 1e012804-4c5f-4f8a-b679-3edb34b11213
+InstanceOf: PractitionerRolePortal
+Usage: #inline
+* meta.versionId = "1"
+* meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/practitioner-role-portal"
+* active = true
+* practitioner.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner/fc580e7c-7fd8-4acd-92e9-42cb052763d4"
+* practitioner.identifier.value = "473"
+* practitioner.display = "Tannpleier Ruth-Ellen Brubakken"
+* organization.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-billingorganization/fc580e7c-7fd8-4acd-92e9-42cb052763d4"
+* organization.identifier.value = "562"
+* organization.display = "Tannpleier Ruth-Ellen Brubakken"
+* code = $vsPractitionerRole#hygienist "Tannpleier"
+* code.text = "Tannpleier"
+* healthcareService = Reference(9663821b-d098-4aed-886a-2da00460e9e0) "Service-O Trondheim"
+
 Instance: f2f123f1-3e1f-46df-be91-541745dcac06
 InstanceOf: PractitionerRolePortal
 Usage: #inline
+* meta.versionId = "1"
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/practitioner-role-portal"
 * contained.resourceType = "Binary"
 * contained.id = "aae42a82-776e-4d2e-9f01-610a15603c80"
@@ -267,10 +393,10 @@ Usage: #inline
 * extension[+].url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-binary-reference"
 * extension[=].valueReference = Reference(aae42a82-776e-4d2e-9f01-610a15603c80)
 * active = true
-* practitioner.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitionerfc580e7c-7fd8-4acd-92e9-42cb052763d4"
+* practitioner.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner/fc580e7c-7fd8-4acd-92e9-42cb052763d4"
 * practitioner.identifier.value = "548"
 * practitioner.display = "Tannpleier Maria Olsen"
-* organization.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-billingorganizationfc580e7c-7fd8-4acd-92e9-42cb052763d4"
+* organization.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-billingorganization/fc580e7c-7fd8-4acd-92e9-42cb052763d4"
 * organization.identifier.value = "558"
 * organization.display = "Tannlege Ulf Müller-Henneberg"
 * code = $csPractitionerRole#hygienist "Tannpleier"
@@ -280,6 +406,7 @@ Usage: #inline
 Instance: b8e45897-b42f-42f5-801c-d334528e3776
 InstanceOf: PractitionerRolePortal
 Usage: #inline
+* meta.versionId = "1"
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/practitioner-role-portal"
 * contained.resourceType = "Binary"
 * contained.id = "1db1fbd9-8e0a-4146-a850-3c6b12be278e"
@@ -290,10 +417,10 @@ Usage: #inline
 * extension[+].url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-binary-reference"
 * extension[=].valueReference = Reference(1db1fbd9-8e0a-4146-a850-3c6b12be278e)
 * active = true
-* practitioner.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitionerfc580e7c-7fd8-4acd-92e9-42cb052763d4"
+* practitioner.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-practitioner/fc580e7c-7fd8-4acd-92e9-42cb052763d4"
 * practitioner.identifier.value = "472"
 * practitioner.display = "Tannpleier Anne Johansen"
-* organization.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-billingorganizationfc580e7c-7fd8-4acd-92e9-42cb052763d4"
+* organization.identifier.system = "https://canonical.fhir.link/servicewell/wof-portal/identifier-system/endpoint-identifier-system-for-billingorganization/fc580e7c-7fd8-4acd-92e9-42cb052763d4"
 * organization.identifier.value = "561"
 * organization.display = "Tannpleier Laila Rindal-Flatlie"
 * code[0] = $csPractitionerRole#dentist "Tannlege"

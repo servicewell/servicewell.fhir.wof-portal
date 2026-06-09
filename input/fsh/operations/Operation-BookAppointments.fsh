@@ -23,10 +23,11 @@ Usage: #definition
 * affectsState = true       // Write operation
 * base = "https://profiles.ihe.net/ITI/Scheduling/OperationDefinition/appointment-book"
 
-* outputProfile = Canonical(PortalFindAppointmentBundle) // IHE ITI Scheduling Bundle Profile
+// wrong profile, currently no profile for the bundle response from this operation. OUT is set to 'bundle'
+//* outputProfile = Canonical(PortalFindAppointmentBundle) // IHE ITI Scheduling Bundle Profile
 
 // in: Appointment request (create/modify/cancel)
-* parameter[+].name = #appointment
+* parameter[+].name = #appointment-resource
 * parameter[=].use = #in
 * parameter[=].min = 1
 * parameter[=].max = "1"
@@ -46,23 +47,21 @@ The Appointment to be created, modified, or cancelled.
   - Appointment.status is 'cancelled'
 """
 // in: appointment reference (alternative to full resource for create/modify/cancel) - IHE ITI
-* parameter[+].name = #appointment-reference
-* parameter[=].use = #in
-* parameter[=].min = 0
-* parameter[=].max = "1"
-* parameter[=].documentation = "A resource id for one of proposed Appointments returned by a prior $find operation (e.g., Resource/1234).  References can be to an absolute URL, but servers only perform this operation on their own appointments."
-* parameter[=].type = #Reference
-* parameter[=].targetProfile = Canonical(PortalAppointment) 
+//* parameter[+].name = #appointment-reference
+//* parameter[=].use = #in
+//* parameter[=].min = 0
+//* parameter[=].max = "1"
+//* parameter[=].documentation = "A resource id for one of proposed Appointments returned by a prior $find operation (e.g., Resource/1234).  References can be to an absolute URL, but servers only perform this operation on their own appointments."
+//* parameter[=].type = #Reference
+//* parameter[=].targetProfile = Canonical(PortalAppointment) 
 
-// in: patient resource- IHE ITI
-* parameter[+].name = #patient-identifier
+* parameter[+].name = #patient-resource
 * parameter[=].use = #in
 * parameter[=].min = 1
-* parameter[=].max = "*"
-* parameter[=].documentation = """The Patient is identified by their personal number.  | SHOULD be an identifier system from a national FHIR Patient profile. """
-* parameter[=].type = #Identifier
-
-
+* parameter[=].max = "1"
+* parameter[=].documentation = "Patient resource for whom the appointment is being booked, modified, or cancelled."
+* parameter[=].type = #Patient
+* parameter[=].targetProfile = Canonical(PortalPatient) 
 
 // in: booking comment - IHE ITI
 * parameter[+].name = #comment

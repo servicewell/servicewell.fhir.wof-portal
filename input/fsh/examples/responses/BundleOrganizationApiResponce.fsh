@@ -10,7 +10,7 @@ Description: "API response returning a searchset Bundle of Organization resource
 * entry.search.mode = #match
 
 Instance: 773cc131-574b-4e86-9abd-552d0d25be27
-InstanceOf: Organization
+InstanceOf: ServiceProviderPortal
 Usage: #inline
 * meta.extension.extension.url = "created"
 * meta.extension.extension.valueDateTime = "2025-06-24T11:39:55.797+02:00"

@@ -3,7 +3,7 @@ This guide is written for **customers/partners** who want to integrate with the 
 ### Scope & user journey
 This section describes an **example booking journey** for a consumer-facing application using the Public API. The exact user interface, data-loading strategy, and order of steps are determined by the implementer.
 
-For example, some consumers may load clinics, treatments, and practitioners progressively as the patient makes selections, while others may preload this information using available API operations such as $get-offer-context. The API supports different implementation patterns.
+For example, some consumers may load clinics, treatments, and practitioners progressively as the patient makes selections, while others may preload this information using available API operations such as $get-offers-context. The API supports different implementation patterns.
 <div style="display:flex; gap:2rem; align-items:flex-start;">
   <div style="flex:1; min-width:0;">
     <p><strong>1. Select clinic and/or treatment</strong><br/>The booking journey typically starts with the patient selecting a clinic, a treatment, or both. Clinics and treatments can be used as filters for each other, and the order in which they are presented is up to the implementer.</p>
@@ -176,17 +176,52 @@ The system token represents the consumer integration and is intended for integra
 
 #### Patient authentication
 
-Patient authentication is based on OpenID Connect (OIDC).
+Patient authentication is performed using OpenID Connect. Depending on market and environment, Service Well provides access to the applicable e-identification solution.
+For example, but not limited to Norwegian BankID or Vipps in Norway and Swedish BankID in Sweden. Other providers can be activated.
 
-For endpoints that require patient authentication, the consumer must authenticate the patient through the configured OIDC flow and obtain a patient access token from the identity provider.
 
-To support patient sign-in, the consumer must be configured with the required OIDC settings, including:
+For the current sandbox setup, the consumer should use the following OIDC configuration.
+##### OIDC configuration (Norway)
 
-- OIDC issuer URL
-- `client_id`
-- `client_secret`, where applicable for confidential clients
-- registered `redirect_uri` values, provided by the consumer and registered by Service Well
-- required scopes to request during authentication.
+Well-known/discovery:
+```
+https://portalauth-no.wellonfhir.se/realms/PortalNO-Dev/.well-known/openid-configuration
+```
+Authority/Issuer:
+```
+https://portalauth-no.wellonfhir.se/realms/PortalNO-Dev
+```
+
+<br>
+
+```
+Client ID:
+Customer oriented client-ID
+
+Client secret:
+Provided separately through secure sharing
+```
+
+_Client ID and client secret are provided by Service Well after contact. **To get your client values, contact support@servicewell.se**_
+
+The consumer should use the Authorization Code Flow with PKCE.
+`response_type=code`
+
+To route the user directly to Norwegian BankID, include the following identity provider hint in the authorization request: `kc_idp_hint={providedHint} `
+
+
+##### Scopes
+The basic OIDC scope required for login is `openid`, and to receive user/profile claims, the consumer should also request: `wof-profile`.
+
+The client is configured with the following scopes as default:
+```
+openid
+PortalAccess
+```
+Because PortalAccess is configured as a default scope, it does not need to be included explicitly in the authorization request.  
+In addition to the basic login scopes, the consumer should request the optional scopes required for the API resources and operations that the application needs access to. 
+
+The following scopes can be requested:
 
 **Available scopes:**
  - patient/Patient.read
@@ -200,7 +235,7 @@ To support patient sign-in, the consumer must be configured with the required OI
  - system/$find.read
  - system/$get-offers-context.read 
 
-**Requied scopes:**
+**Required scopes:**
  - openid
  - wof-profile
  - PortalAccess
@@ -213,6 +248,21 @@ The consumer must also understand how patient context is established after authe
 - through a dedicated endpoint, for example a `patient`-style endpoint
 
 Although the same client configuration may support both system authentication and patient authentication, these flows produce different tokens for different authorization contexts.
+
+##### Example authorization request
+The following example starts an OIDC Authorization Code Flow with PKCE and uses kc_idp_hint to route the user directly to the configured identity provider.
+```
+GET https://portalauth-no.wellonfhir.se/realms/PortalNO-Dev/protocol/openid-connect/auth
+  ?client_id={{ client_id }}
+  &redirect_uri={{ url_encoded_registered_redirect_uri }}
+  &response_type=code
+  &scope=openid%20wof-profile%20patient%2FAppointment.read
+  &kc_idp_hint={{ providerHint }}
+  &code_challenge={{ pkce_code_challenge }}
+  &code_challenge_method=S256
+  &state={{ random_state }}
+  [&nonce={{ random_nonce }}]
+  ```
 
 ##### Patient-authorized calls
 
@@ -260,11 +310,11 @@ The recommended usage is therefore:
   </tbody>
 </table>
 
-Simple (unordered)flow explanation:
+Simple (unordered) flow explanation:
 
-* Get booking context (`$getOffersContext`)  <br>Consumer  client loads the booking context needed to drive the bookingflow. The request can be altered to include services, where it can be booked, by which practitioner and the relationship between them.
+* Get booking context (`$getOffersContext`)  <br>Consumer client loads the booking context needed to drive the booking flow. The request can be altered to include services, where it can be booked, by which practitioner, and the relationship between them.
 
-* Find available times (`$find`)  <br>The consumer client request available appointments whithin the specified search criterias and time frame options in a given time range and receives proposed appointments. In the current API version, availability is retrieved per practitioner, so practitioner information must be available before calling $find. This is aligned with the IHE "Find Potential Appointments" interaction.
+* Find available times (`$find`)  <br>The consumer client requests available appointments within the specified search criteria and time frame options in a given time range and receives proposed appointments. In the current API version, availability is retrieved per practitioner, so practitioner information must be available before calling $find. This is aligned with the IHE "Find Potential Appointments" interaction.
 
 * Book an appointment (`$book` create)  <br>After the patient selects a proposed time (appointment), the consumer application submits a $book request to create the booking. In this implementation, the request must always contain the full Appointment resource representing the appointment to be booked.
 
@@ -272,7 +322,7 @@ Simple (unordered)flow explanation:
 
 * Cancel an appointment (`$book` cancel)  <br>If the patient cancels an appointment, the same $book operation is also used to cancel an existing appointment. To cancel a booking, the consumer application submits the full Appointment resource for the existing booking with the appropriate cancellation status set. On success, the API returns the cancelled appointment. In IHE Scheduling, cancellation is one of the defined trigger cases for $book, rather than a separate operation.
 
-* Error handling  <br>If something fails in `$find` or `$book` and a request cannot be fullfilled, the API returns an `OperationOutcome` with error details.
+* Error handling  <br>If something fails in `$find` or `$book` and a request cannot be fulfilled, the API returns an `OperationOutcome` with error details.
 
 **NOTE***
 For `$book`, a successful response returns a Bundle containing a single Appointment resource and may also include an OperationOutcome with supplemental information. An unsuccessful `$book` response returns only an OperationOutcome in the response Bundle.
