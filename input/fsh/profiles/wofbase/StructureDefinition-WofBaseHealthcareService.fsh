@@ -67,7 +67,7 @@ Description: "Base profile of wof HealthcareService"
 * contained ^short = "Contained resources used by the healthcare service"
 * contained ^definition = "Inline resources, such as a location, that are packaged together with the healthcare service example or representation."
 
-* extension contains ClinicInfo named clinicInfo 0..1
+* extension contains ClinicInfo named clinicInfo 1..1
 * extension[clinicInfo] ^short = "Grouped clinic presentation information"
 * extension[clinicInfo] ^definition = "Portal-specific clinic information such as URL placeholder, directions, parking, about text, spoken languages, and booking summary information text."
 

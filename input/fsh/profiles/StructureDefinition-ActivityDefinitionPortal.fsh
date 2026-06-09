@@ -86,6 +86,11 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * subtitle ^definition = "An optional subtitle that can be used for a longer title description of the service concept."
 
 
+* subtitle 0..1 MS
+* subtitle ^short = "A subtitle that complements the main title of the activity definition."
+* subtitle ^definition = "An optional subtitle that can be used for a longer title description of the service concept."
+
+
 * implicitRules 0..0
 * language 0..0
 * identifier 0..0

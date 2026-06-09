@@ -20,6 +20,8 @@ This profile intentionally constrains base FHIR to define a stable and testable 
 * id ^short = "Stable logical identifier for the healthcare service"
 * id ^definition = "The logical id of this HealthcareServicePortal resource. It identifies the specific care offering location instance within the portal."
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific HealthcareServicePortal instance."
+* meta.versionId 0..1 MS
+* meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
 * meta.profile ^definition = "Identifies that the resource conforms to HealthcareServicePortal so clients can safely process it as the WOF Portal service concept profile."
 
 * contained 0..* 

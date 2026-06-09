@@ -20,7 +20,8 @@ It answers the question: _“In which role, at which service location, and under
   * ^definition = "Asserts the profile(s) this resource conforms to."
 
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific PractitionerRolePortal instance."
-
+* meta.versionId 0..1 MS
+* meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
 
 * active 1..1
   * ^short = "Whether this practitioner role is active"

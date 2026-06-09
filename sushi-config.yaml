@@ -9,11 +9,11 @@ name: Wof Portal ITB
 title: ITB - Online appointment booking service 
 description: Service Well's online appointment booking service - A Practical Blueprint for Upgrading Dental Care
 status: active # draft | active | retired | unknown
-version: 1.0.0
+version: 1.0.1
 fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 language: en-US
 copyrightYear: 2025+
-releaseLabel:  Initial Release
+releaseLabel:  Documentation update
 # license: CC0-1.0 # https://www.hl7.org/fhir/valueset-spdx-license.html
 # jurisdiction: urn:iso:std:iso:3166#US "United States of America" # https://www.hl7.org/fhir/valueset-jurisdiction.html
 publisher:
@@ -26,6 +26,7 @@ publisher:
 #
 dependencies:
   ihe.iti.scheduling: 1.0.0
+#  servicewell.fhir.wof-base: dev
 #   hl7.fhir.us.core: 3.1.0
 #   hl7.fhir.us.mcode:
 #     id: mcode
@@ -58,6 +59,9 @@ pages:
     title: Home
   get-started.md:
     title: Getting Started - Using the WOF Portal ITB FHIR API
+  ChangeLog.md:
+    title: Change Log
+    omit-from-menu: true
 #  infowell.md:
 #    title: Infowell
 #  kundnojdhet.md:

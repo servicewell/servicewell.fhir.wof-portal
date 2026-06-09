@@ -4,24 +4,20 @@ Id: ext-clinic-info
 Title: "Clinic Info"
 Description: "Container extension for clinic information shown in the portal."
 
-* ^url = "http://canonical.fhir.link/servicewell/wof-connect/StructureDefinition/ext-clinic-info"
-
-
 * ^status = #active
 * ^context.type = #element
 * ^context.expression = "HealthcareService"
 
 * extension contains
-    urlPlaceholder 0..1 and
     directions 0..1 and
     parking 0..1 and
     about 0..1 and
     spokenLanguages 0..1 and
-    bookingSummaryInformationText 0..1
+    bookingSummaryInformationText 0..1 and
+    hasExternalBooking 1..1 and
+    urlPlaceholder 1..1
 
-* extension[urlPlaceholder] ^short = "URL-friendly clinic key"
-* extension[urlPlaceholder] ^definition = "A URL-safe placeholder or slug for the clinic, typically used in portal route paths or links."
-* extension[urlPlaceholder].value[x] only string
+    
 
 * extension[directions] ^short = "Directions to the clinic"
 * extension[directions] ^definition = "Patient-facing text describing how to find or reach the clinic."
@@ -43,5 +39,13 @@ Description: "Container extension for clinic information shown in the portal."
 * extension[bookingSummaryInformationText] ^definition = "Text shown in booking summary views."
 * extension[bookingSummaryInformationText].value[x] only string
 
-* value[x] 0..0
+* extension[hasExternalBooking] ^short = "Indicates if the clinic is booked through an external service"
+* extension[hasExternalBooking] ^definition = "Indicates whether the clinic uses an external booking system and is therefore not directly bookable through the portal."
+* extension[hasExternalBooking].value[x] only boolean
+* extension[hasExternalBooking].value[x] 1..1
 
+* extension[urlPlaceholder] ^short = "A short unique URL-friendly representation for a specific clinic"
+* extension[urlPlaceholder] ^definition = "A URL-safe placeholder or slug for the clinic, typically used in portal route paths or links."
+* extension[urlPlaceholder].value[x] only string
+
+* value[x] 0..0

@@ -7,20 +7,16 @@ Description: "API response containing a single HealthcareServicePortal instance 
 * meta.profile = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/healthcare-service-portal"
 * contained[0] = adressId
 * contained[+] = 773cc131-574b-4e86-9abd-552d0d25be27
-* extension[0].extension[0].url = "urlPlaceholder"
-* extension[=].extension[=].valueString = "sandvika"
-* extension[=].extension[+].url = "directions"
-* extension[=].extension[=].valueString = "Klinikken ligger vakkert til ved vannet. Ta buss nummer 5 for å komme hit på enklest mulig måte."
-* extension[=].extension[+].url = "parking"
-* extension[=].extension[=].valueString = "Det kan være vanskelig å finne parkering rett i nærheten av klinikken. Prøv å komme deg hit på en annen måte."
-* extension[=].extension[+].url = "about"
-* extension[=].extension[=].valueString = "En helt ny klinikk med det nyeste innen tannhelse. Gode tilpasninger for deg som har spesielle behov. Her jobber 3 tannleger og 1 tannpleier sammen med 3 tannhelsesekretærer."
-* extension[=].extension[+].url = "spokenLanguages"
-* extension[=].extension[=].valueString = "Norsk og engelsk"
-* extension[=].extension[+].url = "bookingSummaryInformationText"
-* extension[=].extension[=].valueString = "Ved uteblitt besøk eller sent avbestilt time belastes et gebyr på <b>500 kroner</b>."
-* extension[=].url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-clinic-info"
-* extension[+].extension[0].url = "allowCancellationAfterRegistrationHours"
+* extension[clinicInfo].url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-clinic-info"
+* extension[clinicInfo].extension[directions].valueString = "Klinikken ligger vakkert til ved vannet. Ta buss nummer 5 for å komme hit på enklest mulig måte."
+* extension[clinicInfo].extension[parking].valueString = "Det kan være vanskelig å finne parkering rett i nærheten av klinikken. Prøv å komme deg hit på en annen måte."
+* extension[clinicInfo].extension[about].valueString = "En helt ny klinikk med det nyeste innen tannhelse. Gode tilpasninger for deg som har spesielle behov. Her jobber 3 tannleger og 1 tannpleier sammen med 3 tannhelsesekretærer."
+* extension[clinicInfo].extension[spokenLanguages].valueString = "Norsk og engelsk"
+* extension[clinicInfo].extension[bookingSummaryInformationText].valueString = "Ved uteblitt besøk eller sent avbestilt time belastes et gebyr på <b>500 kroner</b>."
+* extension[clinicInfo].extension[hasExternalBooking].valueBoolean = false
+* extension[clinicInfo].extension[urlPlaceholder].valueString = "sandvika"
+* extension[+].url = "https://canonical.fhir.link/servicewell/wof-portal/StructureDefinition/ext-booking-rules"
+* extension[=].extension[0].url = "allowCancellationAfterRegistrationHours"
 * extension[=].extension[=].valueInteger = 1
 * extension[=].extension[+].url = "allowCancellationRemainingHours"
 * extension[=].extension[=].valueInteger = 48

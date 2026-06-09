@@ -20,6 +20,35 @@ It answers the question: _“Which organization owns the configuration, endpoint
 * meta.versionId ^definition = "The technical resource version supplied by the server for change tracking of this specific ServiceProviderPortal instance."
 * meta.versionId insert Obligation($wof-portal-server-actor, #SHALL:populate)
 
+* identifier ^slicing.discriminator.type = #value
+* identifier ^slicing.discriminator.path = "system"
+* identifier ^slicing.rules = #open
+* identifier ^slicing.description = ""
+* identifier ^slicing.ordered = false
+
+* identifier contains MobileFormTenant 0..1 MS and NameAsCode 0..1 MS
+
+* identifier[MobileFormTenant].system 1..1 MS
+* identifier[MobileFormTenant].system = "http://ki.purified.link/wof-mobileform/fhir/CodeSystem/MobileFormTenantsCs"
+* identifier[MobileFormTenant].system insert Obligation($wof-portal-server-actor, #SHALL:populate)
+* identifier[MobileFormTenant].value 1..1 MS
+* identifier[NameAsCode].system 1..1 MS
+* identifier[NameAsCode].system = "http://portal.wof.purified.link/fhir/CodeSystem/nameAsCode"
+* identifier[NameAsCode].system insert Obligation($wof-portal-server-actor, #SHALL:populate)
+* identifier[NameAsCode].value 1..1 MS
+
+* identifier[MobileFormTenant].use 0..0
+* identifier[MobileFormTenant].type 0..0
+* identifier[MobileFormTenant].period 0..0
+* identifier[NameAsCode].use 0..0
+* identifier[NameAsCode].type 0..0
+* identifier[NameAsCode].period 0..0
+
+* contained ^short = "Used for carrying banner image"
+
+* extension contains extBannerImage named bannerImageExtension 0..1 MS and OrganizationSettings named organizationSettings 0..1 MS
+
+
 * extension contains OrganizationSettings named organizationSettings 0..1  
 * extension[organizationSettings] ^short = "Organization-level settings that apply to all clinics managed by this provider"
 * extension[organizationSettings] ^definition = "Settings that apply to the entire organization, affecting all clinics under its management."
